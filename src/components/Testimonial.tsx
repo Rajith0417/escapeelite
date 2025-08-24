@@ -12,7 +12,7 @@ export default function Testimonial() {
             autoPlay
             loop
             muted
-            className="w-full"
+            className="w-full rounded-2xl"
           />
         </div>
         

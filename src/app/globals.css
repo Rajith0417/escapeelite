@@ -29,3 +29,27 @@ body {
   /* font-family: 'Sora', sans-serif; */
   font-family: var(--font-sora);
 }
+
+.font-sora {
+  font-family: var(--font-sora);
+}
+
+.font-montserrat {
+  font-family: var(--font-montserrat);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  background: white;
+  border-radius: 50%;
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 10px !important;
+  font-weight: bold;
+  color: #38424B;
+}
+

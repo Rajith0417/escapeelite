@@ -19,7 +19,7 @@ export default function Footer() {
               className="w-[360px] h-auto"
             />
 
-            <div className="text-sm">We Accept:</div>
+            <div className="">We Accept:</div>
 
             <Image
               src="/images/cards.png"

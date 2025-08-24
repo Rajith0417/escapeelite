@@ -2,9 +2,9 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import Image from "next/image";
 import { Navigation, Pagination } from "swiper/modules";
 import AttractionCard from "./AttractionCard";
+import "swiper/css/navigation";
 
 const attractions = [
   {
@@ -43,6 +43,17 @@ export default function Attractions() {
               clickable: true,
             }}
             navigation={true}
+            breakpoints={{
+              0: {
+                slidesPerView: 1, // ✅ mobile
+              },
+              640: {
+                slidesPerView: 2, // ✅ tablet
+              },
+              1024: {
+                slidesPerView: 3, // ✅ desktop
+              },
+            }}
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
