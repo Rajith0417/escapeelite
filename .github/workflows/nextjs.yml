@@ -5,33 +5,31 @@ on:
     branches:
       - main   # 👈 Change if your default branch is 'master'
 
+permissions:
+  contents: write   # 👈 REQUIRED so the action can push to gh-pages
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout repo
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20   # Next.js 15 works well with Node 18/20
+          node-version: 20
           cache: npm
 
-      # 3. Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # 4. Build Next.js for static export
       - name: Build Next.js
         run: npm run build
 
-      # 5. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          publish_dir: ./ou_
