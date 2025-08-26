@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function InfoSection() {
   return (
     <section className="py-16">
-      <div className="container px-5 mx-auto flex flex-col items-center justify-between gap-6 md: px-auto flex-row">
-        <div className="flex-1 text-gray-800 leading-relaxed uppercase text-xl font-normal tracking-wide">
+      <div className="container px-5 mx-auto flex flex-col-reverse items-center justify-between gap-6 md: md:px-auto md:flex-row">
+        <div className="flex-1 text-gray-800 leading-relaxed uppercase text-xl font-normal tracking-wide text-center md:text-left">
           <p>
             We specialise in tailormade holidays to Sri Lanka, holidays to
             India, holidays to Maldives, holidays to Seychelles, holidays to

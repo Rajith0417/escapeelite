@@ -25,7 +25,7 @@ export default function BookingSteps() {
       <h2 className="text-5xl font-medium mb-24 text-gray-800">
         Booking Your Travel With Us Is Easy
       </h2>
-      <div className="grid md:grid-cols-3 gap-8 container mx-auto">
+      <div className="grid md:grid-cols-3 gap-8 container mx-auto px-5 md:px-0">
         {steps.map((s, index) => (
           <div key={index} className="border-solid border border-[#ECECEC] rounded-xl p-6 flex flex-col items-center bg-[#EFF7FF]">
             <Image

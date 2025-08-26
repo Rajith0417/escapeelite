@@ -9,31 +9,30 @@ interface HolidayCardProps {
 
 function HolidayCard({img, title, location}: HolidayCardProps) {
   return (
-    <>
-      <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
+    <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+      <div className="absolute top-0 left-0 z-10 w-full h-full bg-gradient-to-b from-transparent via-black/30 to-black"></div>
       <Image
         src={img}
-        alt="Tea plantations"
-        layout="fill"
-        objectFit="cover"
-        className="rounded-xl"
+        alt={title}
+        fill
+        className="object-cover rounded-xl"
       />
-      <div className="z-20 absolute bottom-5 text-center w-full text-black">
-        <div className="flex flex-row justify-center text-xl">
-          <p className="mr-4">{title}</p>
-          <a href="">
+      <div className="absolute bottom-5 left-0 right-0 z-20 text-center text-white">
+        <div className="flex items-center justify-center space-x-2 mb-1">
+          <p className="text-lg font-semibold">{title}</p>
+          <a href="#" className="hover:scale-110 transition-transform">
             <Image
               src="/icons/arrow.svg"
-              alt=""
-              width={24}
-              height={24}
-              className=""
+              alt="View details"
+              width={20}
+              height={20}
+              className="filter invert"
             />
           </a>
         </div>
-        <p>{location}</p>
+        <p className="text-sm text-gray-200">{location}</p>
       </div>
-    </>
+    </div>
   );
 }
 

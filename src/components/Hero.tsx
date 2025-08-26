@@ -13,14 +13,9 @@ export default function Hero() {
       </div>
       <div className="continer px-16 z-10 md:hidden">
         <h2 className="text-4xl md:text-4xl font-medium mb-4 text-center">
-          Welcome to Escape Elite
+          Welcome to Escape Elite!
         </h2>
       </div>
-      {/* <div className="z-10 w-1/2">
-        <p className="text-lg md:text-xl mb-6">
-          Get Your Free Custom Itinerary in 2 Minutes!
-        </p>
-      </div> */}
     </section>
   );
 }

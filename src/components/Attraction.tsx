@@ -32,8 +32,8 @@ const attractions = [
 
 export default function Attractions() {
   return (
-    <section id="attractions" className="py-16 bg-gray-50">
-      <div className="container mx-auto text-center">
+    <section id="attractions" className="py-16">
+      <div className="container text-center mx-auto px-5 md:px-0">
         <h3 className="text-3xl font-medium mb-12 text-gray-800">Popular Attractions</h3>
         <div className="width-full">
           <Swiper
