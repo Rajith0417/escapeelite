@@ -4,19 +4,19 @@ import Quote from "./Quote";
 export default function Testimonial() {
   return (
     <section className="py-16">
-      <div className="container mx-auto text-center flex items-center">
-        <div className="pr-6 w-1/2">
+      <div className="container mx-5 md:mx-auto text-center gap-15 flex items-center flex-col md:flex-row">
+        <div className="w-full md:pr-6 md:w-1/2">
           <video
             src="/demo.mp4"
             controls
             autoPlay
             loop
             muted
-            className="w-full rounded-2xl"
+            className="mx-5 w-[calc(100%-40px)] rounded-2xl"
           />
         </div>
         
-        <div className="w-1/2">
+        <div className="w-full md:w-1/2">
           <Quote/>
         </div>
       </div>

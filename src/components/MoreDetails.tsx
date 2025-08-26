@@ -27,7 +27,7 @@ const moreDetails = [
 export default function MoreDetails() {
   return (
     <section className='py-24'>
-        <div className="container mx-auto flex justify-between gap-16">
+        <div className="container flex flex-col gap-10 md:flex-row  md:gap-16 md:mx-auto md:justify-between">
         {moreDetails.map((s, index) => (
           <div key={index} className="flex flex-col items-center text-center">
             <Image

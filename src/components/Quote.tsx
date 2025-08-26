@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Quote() {
   return (
-    <div className="flex flex-row gap-4 pr-12 relative border-solid border-2 border-[#5E95CD] rounded-[50px] pt-5 pl-3">
+    <div className="flex mx-5 md:mx-0 flex-row gap-4 pr-12 relative border-solid border-2 border-[#5E95CD] rounded-[50px] pt-5 pl-3">
       <Image
         src="/icons/quote.svg"
         alt="quote"

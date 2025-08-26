@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function InfoSection() {
   return (
     <section className="py-16">
-      <div className="container mx-auto flex items-center justify-between gap-6">
+      <div className="container px-5 mx-auto flex flex-col items-center justify-between gap-6 md: px-auto flex-row">
         <div className="flex-1 text-gray-800 leading-relaxed uppercase text-xl font-normal tracking-wide">
           <p>
             We specialise in tailormade holidays to Sri Lanka, holidays to
