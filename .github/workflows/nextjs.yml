@@ -3,27 +3,33 @@ name: Deploy Next.js 15 to GitHub Pages
 on:
   push:
     branches:
-      - main  # or master
+      - main   # 👈 Change if your default branch is 'master'
 
 jobs:
-  build-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout repo
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # 2. Setup Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20   # Next.js 15 works well with Node 18/20
+          cache: npm
 
+      # 3. Install dependencies
       - name: Install dependencies
         run: npm install
 
-      - name: Build and Export Next.js
-        run: npm run deploy
+      # 4. Build Next.js for static export
+      - name: Build Next.js
+        run: npm run build
 
+      # 5. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
