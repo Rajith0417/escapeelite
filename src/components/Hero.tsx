@@ -1,12 +1,20 @@
 import React from "react";
 import ImageGallery from "./ImageGallery";
+import Image from "next/image";
 
 export default function Hero() {
   return (
     <section
       id="home"
-      className="h-screen bg-cover bg-center flex flex-col md:flex-row items-center text-white text-center bg-[url(/banners/image9.png)]"
+      className="h-screen flex flex-col md:flex-row items-center text-white text-center]"
     >
+      <Image
+        src="banners/image9.png"
+        alt=""
+        width={0}
+        height={0}
+        className="absolute w-full h-full object-fill"
+      />
       <div className="absolute z-0 inset-0 bg-black opacity-50"></div>
       <div className="container px-5 mx-auto flex flex-col md:flex-row">
         <div className="hidden float-left z-10 w-full md:w-1/2 md:block pl-16">

@@ -1,10 +1,18 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 
 export default function Destination() {
   return (
-    <section className="relative py-16 bg-[url('/banners/image6.jpg')] bg-cover bg-center text-center">
-      <div className="container mx-auto px-5 md:px-0">
+    <section className="relative text-center overflow-hidden">
+      <Image
+        src="banners/image6.jpg"
+        alt=""
+        width={0}
+        height={0}
+        className="absolute w-full object-contain"
+      />
+      <div className="container py-16 mx-auto px-5 md:px-0">
         <div className="absolute inset-0 bg-black/60 pointer-events-none"></div>
         <div className="relative container mx-auto flex flex-col gap-6">
           <h2 className="text-4xl md:text-4xl font-medium mb-4 text-white">
