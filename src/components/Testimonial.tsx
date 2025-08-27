@@ -7,7 +7,7 @@ export default function Testimonial() {
       <div className="container mx-5 md:mx-auto text-center gap-15 flex items-center flex-col md:flex-row">
         <div className="w-full md:pr-6 md:w-1/2">
           <video
-            src="/demo.mp4"
+            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             controls
             autoPlay
             loop

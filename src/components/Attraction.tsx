@@ -10,21 +10,21 @@ const attractions = [
   {
     title: "Galle Sri Lanka",
     link: "",
-    img: "/banners/image7.png",
+    img: "banners/image7.png",
     paragraph:
       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
   },
   {
     title: "Colombo",
     link: "",
-    img: "/banners/image8.png",
+    img: "banners/image8.png",
     paragraph:
       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
   },
   {
     title: "Kandy Sri Lanka",
     link: "",
-    img: "/banners/image10.png",
+    img: "banners/image10.png",
     paragraph:
       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
   },

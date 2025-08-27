@@ -9,27 +9,27 @@ const holidays = [
   {
     title: "3 Star Holidays",
     location: "Maldives",
-    img: "/banners/image1.png",
+    img: "banners/image1.png",
   },
   {
     title: "Ancient Holidays",
     location: "Sri Lanka",
-    img: "/banners/image2.png",
+    img: "banners/image2.png",
   },
   {
     title: "Beach Holidays",
     location: "Sri Lanka",
-    img: "/banners/image3.png",
+    img: "banners/image3.png",
   },
   {
     title: "Nature Holidays",
     location: "Sri Lanka",
-    img: "/banners/image4.png",
+    img: "banners/image4.png",
   },
   {
     title: "5 Star Holidays",
     location: "Maldives",
-    img: "/banners/image5.png",
+    img: "banners/image5.png",
   },
 ];
 

@@ -17,7 +17,7 @@ export default function InfoSection() {
         </div>
         <div className="flex-1 relative">
           <Image
-            src="/banners/image5.png"
+            src="banners/image5.png"
             alt="Tea plantations"
             width={600}
             height={400}

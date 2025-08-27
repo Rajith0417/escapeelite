@@ -3,22 +3,22 @@ import Image from "next/image";
 
 const moreDetails = [
   {
-    icon: "/icons/sl.svg",
+    icon: "icons/sl.svg",
     title: "We do not outsource",
     more: "Our own operation in Sri Lanka",
   },
   {
-    icon: "/icons/ten.svg",
+    icon: "icons/ten.svg",
     title: "Over 10 year of experience",
     more: "A dedicated travel manager",
   },
   {
-    icon: "/icons/tag.svg",
+    icon: "icons/tag.svg",
     title: "We do not outsource",
     more: "Instant quote online",
   },
   {
-    icon: "/icons/car.svg",
+    icon: "icons/car.svg",
     title: "Personal Vehicle",
     more: "English speaking driving associates",
   },
