@@ -14,7 +14,7 @@ interface HolidayItem {
 
 const dummyHolidays: HolidayItem[] = [
   {
-    imageSrc: "/banners/image6.jpg",
+    imageSrc: "banners/image6.jpg",
     title: "Nature & Wildlife Tours",
     description:
       "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
@@ -23,7 +23,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
-    imageSrc: "/banners/image9.png",
+    imageSrc: "banners/image9.png",
     title: "Yala wildlife, Sigiriya, Central Hills & South beach",
     description:
       "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay central hills & south coast beach  central hills & south coast beach ",
@@ -32,7 +32,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
-    imageSrc: "/banners/image8.png",
+    imageSrc: "banners/image8.png",
     title: "South Coast Beach Explorer",
     description:
       "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
@@ -41,7 +41,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
-    imageSrc: "/banners/image1.png",
+    imageSrc: "banners/image1.png",
     title: "Wilpattu wildlife, Ancient Sri Lanka & Central Hills",
     description:
       "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
@@ -50,7 +50,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
-    imageSrc: "/banners/image6.jpg",
+    imageSrc: "banners/image6.jpg",
     title: "Nature & Wildlife Tours",
     description:
       "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
@@ -59,7 +59,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
-    imageSrc: "/banners/image9.png",
+    imageSrc: "banners/image9.png",
     title: "Yala wildlife, Sigiriya, Central Hills & South beach",
     description:
       "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay central hills & south coast beach  central hills & south coast beach ",
@@ -68,7 +68,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
-    imageSrc: "/banners/image8.png",
+    imageSrc: "banners/image8.png",
     title: "South Coast Beach Explorer",
     description:
       "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
@@ -77,7 +77,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
-    imageSrc: "/banners/image1.png",
+    imageSrc: "banners/image1.png",
     title: "Wilpattu wildlife, Ancient Sri Lanka & Central Hills",
     description:
       "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
