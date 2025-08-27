@@ -74,7 +74,7 @@ export default function FeaturedHolidays() {
           <div className="absolute left-0 z-0 border-white border-solid border-8 w-3xs aspect-[0.9] rounded-xl flex items-center hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
-              src="/banners/image4.png"
+              src="banners/image4.png"
               alt="Tea plantations"
               layout="fill"
               objectFit="cover"
@@ -84,7 +84,7 @@ export default function FeaturedHolidays() {
           <div className="absolute left-1/4 -translate-x-1/4 z-10 border-white border-solid border-8 w-2xs aspect-[0.9] rounded-xl hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
-              src="/banners/image3.png"
+              src="banners/image3.png"
               alt="Tea plantations"
               layout="fill"
               objectFit="cover"
@@ -94,7 +94,7 @@ export default function FeaturedHolidays() {
           <div className="absolute z-20 border-white border-solid border-8 w-xs aspect-[0.9] rounded-xl left-1/2 -translate-x-1/2 hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
-              src="/banners/image9.png"
+              src="banners/image9.png"
               alt="Tea plantations"
               layout="fill"
               objectFit="cover"
@@ -119,7 +119,7 @@ export default function FeaturedHolidays() {
           <div className="absolute left-3/4 -translate-x-3/4 z-10 border-white border-solid border-8 w-2xs aspect-[0.9] rounded-xl hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
-              src="/banners/image2.png"
+              src="banners/image2.png"
               alt="Tea plantations"
               layout="fill"
               objectFit="cover"
@@ -129,7 +129,7 @@ export default function FeaturedHolidays() {
           <div className="absolute left-4/4 -translate-x-4/4 z-0 border-white border-solid border-8 w-3xs aspect-[0.9] rounded-xl hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
-              src="/banners/image1.png"
+              src="banners/image1.png"
               alt="Tea plantations"
               layout="fill"
               objectFit="cover"
