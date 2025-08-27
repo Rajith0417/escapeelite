@@ -5,7 +5,7 @@
   "homepage": "https://rajith0417.github.io/escapeelite",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build && next export", 
+    "build": "next build", 
     "start": "next start",
     "lint": "eslint",
     "predeploy": "npm run build",
