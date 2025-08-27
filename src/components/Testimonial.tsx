@@ -4,8 +4,8 @@ import Quote from "./Quote";
 export default function Testimonial() {
   return (
     <section className="py-16">
-      <div className="container mx-5 md:mx-auto text-center gap-15 flex items-center flex-col md:flex-row">
-        <div className="w-full md:pr-6 md:w-1/2">
+      <div className="container px-5 mx-auto text-center gap-15 flex items-center flex-col md:flex-row">
+        <div className="w-full md:w-1/2">
           <video
             src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             controls
