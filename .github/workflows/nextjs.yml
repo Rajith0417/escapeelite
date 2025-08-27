@@ -3,10 +3,10 @@ name: Deploy Next.js 15 to GitHub Pages
 on:
   push:
     branches:
-      - main   # 👈 Change if your default branch is 'master'
+      - main   # or master, if that's your default branch
 
 permissions:
-  contents: write   # 👈 REQUIRED so the action can push to gh-pages
+  contents: write   # needed to push to gh-pages
 
 jobs:
   build-and-deploy:
@@ -32,4 +32,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./ou_
+          publish_dir: ./out
