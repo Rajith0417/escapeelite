@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="col-span-2 space-y-4">
             {/* Logo */}
             <Image
-              src="/images/logoSL.png"
+              src="images/logoSL.png"
               alt="Logo"
               width={360}
               height={0} // keep some aspect ratio (adjust as needed)
@@ -22,7 +22,7 @@ export default function Footer() {
             <div className="">We Accept:</div>
 
             <Image
-              src="/images/cards.png"
+              src="images/cards.png"
               alt="Logo"
               width={164}
               height={0}   // keep some aspect ratio (adjust as needed)
@@ -127,7 +127,7 @@ export default function Footer() {
                 className="w-8 h-8 flex items-center justify-center hover:bg-pink-700 transition-colors"
               >
                 <Image
-                  src="icons/Instagram.svg"
+                  src="icons/instagram.svg"
                   alt=""
                   width={24}
                   height={24}
