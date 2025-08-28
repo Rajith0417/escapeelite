@@ -82,7 +82,7 @@ export default function Footer() {
             <div className="space-y-2 text-sm">
               <div className="flex items-center space-x-2">
                 <Image
-                  src="/icons/telephoneW.svg"
+                  src="icons/telephoneW.svg"
                   alt=""
                   width={24}
                   height={24}
@@ -92,7 +92,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <Image
-                  src="/icons/mail.svg"
+                  src="icons/mail.svg"
                   alt=""
                   width={24}
                   height={24}
@@ -113,7 +113,7 @@ export default function Footer() {
                 className="w-8 h-8 flex items-center justify-center hover:bg-blue-700 transition-colors"
               >
                 <Image
-                  src="/icons/facebook.svg"
+                  src="icons/facebook.svg"
                   alt=""
                   width={24}
                   height={24}
@@ -127,7 +127,7 @@ export default function Footer() {
                 className="w-8 h-8 flex items-center justify-center hover:bg-pink-700 transition-colors"
               >
                 <Image
-                  src="/icons/Instagram.svg"
+                  src="icons/Instagram.svg"
                   alt=""
                   width={24}
                   height={24}
@@ -141,7 +141,7 @@ export default function Footer() {
                 className="w-8 h-8 flex items-center justify-center hover:bg-blue-800 transition-colors"
               >
                 <Image
-                  src="/icons/linkedIn.svg"
+                  src="icons/linkedIn.svg"
                   alt=""
                   width={24}
                   height={24}
@@ -155,7 +155,7 @@ export default function Footer() {
                 className="w-8 h-8 flex items-center justify-center hover:bg-red-700 transition-colors"
               >
                 <Image
-                  src="/icons/youtube.svg"
+                  src="icons/youtube.svg"
                   alt=""
                   width={24}
                   height={24}
