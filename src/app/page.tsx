@@ -8,6 +8,7 @@ import Hero from "@/components/Hero";
 import InfoSection from "@/components/InfoSection";
 import MoreDetails from "@/components/MoreDetails";
 import TestimonialSection from "@/components/TestimonialSection";
+import ItinerarySection from "@/components/ItinerarySection";
 
 export default function HomePage() {
   return (
@@ -26,6 +27,7 @@ export default function HomePage() {
         onDropdownChange={(val) => console.log(val)}
       />
       <FeaturedAccommodationSection />
+      <ItinerarySection/>
     </>
   );
 }
