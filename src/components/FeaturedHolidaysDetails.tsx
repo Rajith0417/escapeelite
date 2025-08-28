@@ -12,6 +12,13 @@ interface HolidayItem {
   price: string;
 }
 
+type FeaturedHolidaysDetailsProps = {
+  heading?: string;
+  dropdownOptions?: string[];
+  selectedOption?: string;
+  onDropdownChange?: (value: string) => void;
+};
+
 const dummyHolidays: HolidayItem[] = [
   {
     imageSrc: "banners/image6.jpg",
@@ -87,21 +94,31 @@ const dummyHolidays: HolidayItem[] = [
   },
 ];
 
-export default function FeaturedHolidaysDetails() {
+export default function FeaturedHolidaysDetails({
+  heading = "Featured holidays to SRI LANKA",
+  dropdownOptions = ["All Holidays", "Wildlife", "Beaches", "Cultural"],
+  selectedOption,
+  onDropdownChange,
+}: FeaturedHolidaysDetailsProps) {
   return (
     <section className="py-14">
       <div className="container mx-auto px-5 md:px-0">
         {/* Header row */}
         <div className="flex items-center justify-between mb-14">
           <h2 className="text-3xl md:text-3xl text-center md:text-left font-medium text-gray-900">
-            Featured holidays to SRI LANKA
+            {heading}
           </h2>
           <div className="hidden md:block">
-            <select className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 focus:outline-none">
-              <option>All Holidays</option>
-              <option>Wildlife</option>
-              <option>Beaches</option>
-              <option>Cultural</option>
+            <select
+              className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 focus:outline-none"
+              value={selectedOption}
+              onChange={(e) => onDropdownChange?.(e.target.value)}
+            >
+              {dropdownOptions.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -112,7 +129,6 @@ export default function FeaturedHolidaysDetails() {
           spaceBetween={24}
           loop={true}
           wrapperClass="flex"
-          // slideClass="test123"
           pagination={{
             clickable: true,
           }}
@@ -137,15 +153,15 @@ export default function FeaturedHolidaysDetails() {
           {dummyHolidays.map((h, index) => (
             <SwiperSlide key={index} className="!h-auto">
               <div className="h-full">
-              <HolidayCardDetails
-                imageSrc={h.imageSrc}
-                title={h.title}
-                description={h.description}
-                duration={h.duration}
-                season={h.season}
-                price={h.price}
-                onViewMoreHref="#"
-              />
+                <HolidayCardDetails
+                  imageSrc={h.imageSrc}
+                  title={h.title}
+                  description={h.description}
+                  duration={h.duration}
+                  season={h.season}
+                  price={h.price}
+                  onViewMoreHref="#"
+                />
               </div>
             </SwiperSlide>
           ))}

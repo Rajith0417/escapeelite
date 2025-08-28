@@ -19,7 +19,12 @@ export default function HomePage() {
       <MoreDetails/>
       <Attractions/>
       <Destination/>
-      <FeaturedHolidaysDetails/>
+      <FeaturedHolidaysDetails
+        heading="Featured holidays to MALDIVES"
+        dropdownOptions={["All Holidays", "Honeymoon", "Family", "Luxury"]}
+        selectedOption="All Holidays"
+        onDropdownChange={(val) => console.log(val)}
+      />
       <FeaturedAccommodationSection />
     </>
   );
