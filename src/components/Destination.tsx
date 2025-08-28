@@ -10,7 +10,7 @@ export default function Destination() {
         alt=""
         width={0}
         height={0}
-        className="absolute w-full object-contain"
+        className="absolute w-full h-full object-over"
       />
       <div className="container py-16 mx-auto px-5 md:px-0">
         <div className="absolute inset-0 bg-black/60 pointer-events-none"></div>

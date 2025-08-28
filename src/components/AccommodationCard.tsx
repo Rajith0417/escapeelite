@@ -21,7 +21,7 @@ export default function AccommodationCard({
   return (
     <article className="flex flex-col justify-between rounded-3xl bg-white shadow-lg ring-1 ring-black/5 overflow-hidden hover:shadow-xl transition-shadow">
       {/* Image section with overlay tag */}
-      <div className="relative w-full h-64 md:h-72">
+      <div className="relative w-full h-64 md:h-[276px]">
         <Image
           src={imageSrc}
           alt={title}
