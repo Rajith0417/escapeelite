@@ -33,7 +33,7 @@ const holidays = [
   },
 ];
 
-export default function FeaturedHolidays() {
+export default function FeaturedHolidaysSection() {
   return (
     <section className="w-full py-16">
       <div className="container mx-auto px-5 md:px-0">

@@ -53,3 +53,6 @@ body {
   color: #38424B;
 }
 
+.swiper-button-prev, .swiper-button-next {
+  @apply shadow-lg shadow-gray-400;
+}

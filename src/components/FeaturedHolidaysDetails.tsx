@@ -89,14 +89,14 @@ const dummyHolidays: HolidayItem[] = [
 
 export default function FeaturedHolidaysDetails() {
   return (
-    <section className="py-12">
+    <section className="py-14">
       <div className="container mx-auto px-5 md:px-0">
         {/* Header row */}
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900">
+        <div className="flex items-center justify-between mb-14">
+          <h2 className="text-3xl md:text-3xl text-center md:text-left font-medium text-gray-900">
             Featured holidays to SRI LANKA
           </h2>
-          <div>
+          <div className="hidden md:block">
             <select className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 focus:outline-none">
               <option>All Holidays</option>
               <option>Wildlife</option>
@@ -109,8 +109,10 @@ export default function FeaturedHolidaysDetails() {
         {/* Swiper carousel */}
         <Swiper
           slidesPerView={1}
-          spaceBetween={30}
+          spaceBetween={24}
           loop={true}
+          wrapperClass="flex"
+          // slideClass="test123"
           pagination={{
             clickable: true,
           }}
@@ -130,10 +132,11 @@ export default function FeaturedHolidaysDetails() {
             },
           }}
           modules={[Pagination, Navigation]}
-          className="featured-holidays-swiper"
+          className="featured-holidays-swiper123 !p-1"
         >
           {dummyHolidays.map((h, index) => (
-            <SwiperSlide key={index}>
+            <SwiperSlide key={index} className="!h-auto">
+              <div className="h-full">
               <HolidayCardDetails
                 imageSrc={h.imageSrc}
                 title={h.title}
@@ -143,6 +146,7 @@ export default function FeaturedHolidaysDetails() {
                 price={h.price}
                 onViewMoreHref="#"
               />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>

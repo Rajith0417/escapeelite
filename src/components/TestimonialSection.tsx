@@ -1,7 +1,7 @@
 import React from "react";
 import Quote from "./Quote";
 
-export default function Testimonial() {
+export default function TestimonialSection() {
   return (
     <section className="py-16">
       <div className="container px-5 mx-auto text-center gap-15 flex items-center flex-col md:flex-row">
