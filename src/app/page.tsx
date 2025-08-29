@@ -1,6 +1,5 @@
 "use client";
 import Attractions from "@/components/Attraction";
-import Destination from "@/components/Destination";
 import FeaturedAccommodationSection from "@/components/FeaturedAccommodationSection";
 import FeaturedHolidaysSection from "@/components/FeaturedHolidaysSection";
 import FeaturedHolidaysDetails from "@/components/FeaturedHolidaysDetails";
@@ -15,11 +14,10 @@ export default function HomePage() {
     <>
       <Hero/>
       <InfoSection/>
-      <FeaturedHolidaysSection/>
+      {/* <FeaturedHolidaysSection/> */}
       <TestimonialSection/>
       <MoreDetails/>
       <Attractions/>
-      <Destination/>
       <FeaturedHolidaysDetails
         heading="Featured holidays to MALDIVES"
         dropdownOptions={["All Holidays", "Honeymoon", "Family", "Luxury"]}

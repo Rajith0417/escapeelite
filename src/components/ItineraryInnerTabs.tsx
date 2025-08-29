@@ -7,18 +7,18 @@ export interface TabItem {
   content: React.ReactNode;
 }
 
-interface ItineraryTabsProps {
+interface ItineraryInnerTabsProps {
   tabs: TabItem[];
   initialTabId?: string;
 }
 
-export default function ItineraryTabs({ tabs, initialTabId }: ItineraryTabsProps) {
+export default function ItineraryInnerTabs({ tabs, initialTabId }: ItineraryInnerTabsProps) {
   const [active, setActive] = useState<string>(initialTabId || tabs[1]?.id);
 
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="flex items-center justify-center gap-0 rounded-3xl bg-[#F3F4F6] p-2.5 mb-4">
+      <div className="md:hidden flex items-center justify-center gap-0 p-2.5 mb-4 border-solid border-b border-b-[#ECECEC]">
         {tabs.map((t) => {
           const isActive = t.id === active;
           return (
@@ -26,7 +26,7 @@ export default function ItineraryTabs({ tabs, initialTabId }: ItineraryTabsProps
               key={t.id}
               onClick={() => setActive(t.id)}
               className={`px-5 py-2.5 md:px-6 md:py-2 text-sm rounded-2xl transition-colors ${
-                isActive ? "bg-white text-gray-900" : "text-gray-600 hover:text-gray-900"
+                isActive ? "bg-[#F3F4F6] text-gray-900" : "text-gray-900 hover:text-gray-900"
               }`}
             >
               {t.title}

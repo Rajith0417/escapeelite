@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -6,6 +8,7 @@
   --foreground: #171717;
   --font-sora: 'Sora', sans-serif;
   --font-montserrat: 'Montserrat', sans-serif;
+  --font-inter: 'Inter', sans-serif;
 }
 
 @theme inline {
@@ -36,6 +39,14 @@ body {
 
 .font-montserrat {
   font-family: var(--font-montserrat);
+}
+
+.font-inter {
+  font-family: var(--font-inter);
+}
+
+.font-segoe {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .swiper-button-next,
