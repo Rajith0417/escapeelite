@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import Navbar from '@/components/Navbar';
 import BookingSteps from '@/components/BookingSteps';
 import { Sora, Montserrat } from "next/font/google";
+import Destination from '@/components/Destination';
 
 const sora = Sora({
   subsets: ["latin"],
@@ -22,6 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-grow">{children}</main>
+        <Destination/>
         <BookingSteps/>
         <Footer />
       </body>
