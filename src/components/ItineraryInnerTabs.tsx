@@ -18,7 +18,7 @@ export default function ItineraryInnerTabs({ tabs, initialTabId }: ItineraryInne
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="flex items-center justify-center gap-0 p-2.5 mb-4 border-solid border-b border-b-[#ECECEC]">
+      <div className="flex items-center justify-around gap-0 p-2.5 mb-4 border-solid border-b border-b-[#ECECEC]">
         {tabs.map((t) => {
           const isActive = t.id === active;
           return (
