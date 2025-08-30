@@ -3,6 +3,8 @@ import TourMap from "./TourMap";
 import ItineraryTabs, { type TabItem } from "./ItineraryTabs";
 import ItineraryDayCard from "./ItineraryDayCard";
 import { icons } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
 
 export default function ItinerarySection() {
   const days = [
@@ -80,33 +82,50 @@ export default function ItinerarySection() {
       id: "itinerary",
       title: "Itinerary",
       content: (
-        <div className="space-y-4">
-          {days.map((d) => (
-            <ItineraryDayCard key={d.dayNumber} {...d} />
-          ))}
-        </div>
+        <>
+          <div className="hidden md:block space-y-4">
+            {days.map((d) => (
+              <ItineraryDayCard key={d.dayNumber} {...d} />
+            ))}
+          </div>
+          <div className="block md:hidden space-y-4">
+            <Swiper
+              slidesPerView={1}
+              spaceBetween={30}
+              loop={true}
+              pagination={{
+                clickable: true,
+              }}
+              navigation={true}
+              modules={[Pagination, Navigation]}
+              className="mySwiper"
+            >
+              {days.map((day, index) => (
+                <SwiperSlide key={index}>
+                  <ItineraryDayCard key={index} {...day} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </>
       ),
     },
     {
       id: "fineprint",
       title: "Fine Print",
       content: (
-        // <div className="rounded-xl ring-1 ring-gray-200 bg-white p-6 text-sm text-gray-700">
-        //   <p className="mb-3 font-semibold">Important Notes</p>
-        //   <ul className="list-disc pl-5 space-y-1">
-        //     <li>All timings are approximate and subject to local conditions.</li>
-        //     <li>Accommodation is subject to availability; comparable alternatives may be provided.</li>
-        //     <li>Some experiences may be weather dependent.</li>
-        //   </ul>
-        // </div>
         <section className="w-full mt-14">
           {/* Two column section */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Includes */}
             <div className="">
-              <h3 className="bg-blue-50 rounded-lg p-5 text-xl font-semibold mb-4">The price includes</h3>
+              <h3 className="bg-blue-50 rounded-lg p-5 text-xl font-semibold mb-4">
+                The price includes
+              </h3>
               <ul className="space-y-3 font-medium text-base">
-                <li className="border-b border-gray-200 pt-4 pr-5 pb-[30px] pl-5">All Taxes</li>
+                <li className="border-b border-gray-200 pt-4 pr-5 pb-[30px] pl-5">
+                  All Taxes
+                </li>
                 <li className="border-b border-gray-200 pt-4 pr-5 pb-[30px] pl-5">
                   Accommodation in the room category specified
                 </li>
@@ -120,7 +139,9 @@ export default function ItinerarySection() {
                   Personal vehicle &amp; an English speaking associate (driver)
                   throughout the stay
                 </li>
-                <li className=" pt-4 pr-5 pb-[30px] pl-5">A dedicated travel manager</li>
+                <li className=" pt-4 pr-5 pb-[30px] pl-5">
+                  A dedicated travel manager
+                </li>
               </ul>
             </div>
 
@@ -149,7 +170,9 @@ export default function ItinerarySection() {
 
           {/* Travel Insurance Note */}
           <div className="mt-10">
-            <h3 className="bg-blue-50 rounded-lg p-5 text-xl font-semibold mb-3">Travel Insurance</h3>
+            <h3 className="bg-blue-50 rounded-lg p-5 text-xl font-semibold mb-3">
+              Travel Insurance
+            </h3>
             <p className=" text-base font-medium leading-relaxed pt-4 pr-5 pb-[30px] pl-5">
               Your holiday itinerary with Escape Elite does NOT include travel
               insurance and it is your responsibility to ensure you have

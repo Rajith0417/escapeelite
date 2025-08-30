@@ -23,7 +23,7 @@ interface ItineraryDayCardProps {
 
 function Pill({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block whitespace-nowrap rounded-full bg-[#EFF7FF] font-medium px-3 py-1 text-xs text-black">
+    <span className=" font-inter inline-block rounded-full bg-[#EFF7FF] font-medium px-3 py-1 text-xs text-black">
       {children}
     </span>
   );
@@ -79,13 +79,13 @@ export default function ItineraryDayCard({
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 md:gap-4">
             {/* Attractions */}
-            <div className="lg:col-span-2">
-              <h4 className="text-xs font-semibold text-gray-500 mb-2">
+            <div className="col-span-1 lg:col-span-2">
+              <h4 className="text-base lg:text-xs font-semibold text-gray-500 mb-2">
                 Attractions
               </h4>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 px-5 py-4 rounded-lg xl:ring-1 ring-gray-200 items-start md:items-center text-center">
                 {attractions.map((a, i) => (
                   <Pill key={i}>{a}</Pill>
                 ))}
@@ -93,15 +93,15 @@ export default function ItineraryDayCard({
             </div>
 
             {/* Accommodation */}
-            <div className="lg:col-span-4">
-              <h4 className="text-xs font-semibold text-gray-500 mb-2">
+            <div className="col-span-1 lg:col-span-3 text-center">
+              <h4 className="text-base lg:text-xs font-semibold text-gray-500 mb-2">
                 Accommodation
               </h4>
-              <div className="hidden lg:col-span-2 md:grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="hidden lg:col-span-2 xl:grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {(["Superior", "Deluxe", "Luxury"] as const).map((tier) => (
                   <div
                     key={tier}
-                    className="rounded-lg ring-1 ring-gray-200 p-3"
+                    className="rounded-lg ring-1 ring-gray-200 p-2"
                   >
                     <div className="text-center text-[14px] font-medium text-blue-400 mb-2">
                       {tier}
@@ -115,17 +115,17 @@ export default function ItineraryDayCard({
                 ))}
               </div>
 
-              <div className="block md:hidden">
+              <div className="block xl:hidden">
                 <ItineraryInnerTabs tabs={innerTabsItems} />
               </div>
             </div>
 
             {/* Transportation */}
-            <div className="lg:col-span-2">
-              <h4 className="text-xs font-semibold text-gray-500 mb-2">
+            <div className="col-span-1 lg:col-span-2">
+              <h4 className="text-base lg:text-xs font-semibold text-gray-500 mb-2">
                 Transportation
               </h4>
-              <div className="space-y-3 flex flex-col rounded-lg ring-1 ring-gray-200">
+              <div className="space-y-3 flex flex-col rounded-lg xl:ring-1 ring-gray-200">
                 {transportation.map((t, i) => (
                   <div
                     key={i}
