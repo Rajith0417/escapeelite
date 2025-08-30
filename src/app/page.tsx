@@ -8,6 +8,7 @@ import InfoSection from "@/components/InfoSection";
 import MoreDetails from "@/components/MoreDetails";
 import TestimonialSection from "@/components/TestimonialSection";
 import ItinerarySection from "@/components/ItinerarySection";
+import ImageLeftRightSection from "@/components/ImageLeftRightSection";
 
 export default function HomePage() {
   return (
@@ -26,6 +27,7 @@ export default function HomePage() {
       />
       <FeaturedAccommodationSection />
       <ItinerarySection/>
+      <ImageLeftRightSection/>
     </>
   );
 }
