@@ -9,13 +9,14 @@ import MoreDetails from "@/components/MoreDetails";
 import TestimonialSection from "@/components/TestimonialSection";
 import ItinerarySection from "@/components/ItinerarySection";
 import ImageLeftRightSection from "@/components/ImageLeftRightSection";
+import ImageGallery from "@/components/ImageGallery";
 
 export default function HomePage() {
   return (
     <>
-      <Hero/>
-      <InfoSection/>
-      {/* <FeaturedHolidaysSection/> */}
+      <Hero />
+      <InfoSection />
+      {/* <FeaturedHolidaysSection/> -----*/}
       <TestimonialSection/>
       <MoreDetails/>
       <Attractions/>
@@ -27,7 +28,19 @@ export default function HomePage() {
       />
       <FeaturedAccommodationSection />
       <ItinerarySection/>
-      <ImageLeftRightSection/>
+      <section>
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="w-full">
+              <ImageGallery />
+            </div>
+            <div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+      <ImageLeftRightSection />
     </>
   );
 }

@@ -4,6 +4,11 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import Image from "next/image";
 
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+
 function ImageGallery() {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 

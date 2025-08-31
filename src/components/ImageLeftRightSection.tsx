@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import ImageLeftRight from "./ImageLeftRight";
+import Pagination from "./Pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Navigation } from "swiper/modules";
+import "swiper/css/navigation";
 
 export default function ImageLeftRightSection() {
+  const [currentPage, setCurrentPage] = useState(1);
+
   const contents = [
     {
       image: "images/anuradhapura.jpg",
@@ -59,21 +66,96 @@ export default function ImageLeftRightSection() {
       paragraph:
         "The Central Highlands of Sri Lanka is a serial property comprising three component parts: Peak Wilderness Protected Area, Horton Plains National Park and Knuckles Conservation Forest. Its forests are globally important and provide habitat for an exceptional number of endemic species of flora and fauna. The property includes the largest and least disturbed remaining areas of the submontane and montane rain forests of Sri Lanka, which are a global conservation priority on many accounts. They include areas of Sri Lankan montane rain forests considered as a super-hotspot within the Western Ghats and Sri Lanka biodiversity hotspot. More than half of Sri Lanka's endemic vertebrates, half of the country's endemic flowering plants and more than 34% of its endemic trees, shrubs, and herbs are restricted to these diverse montane rain forests and adjoining grassland areas.",
     },
+    {
+      image: "images/anuradhapura.jpg",
+      alt: "Sacred city of Anuradapura2",
+      title: "Sacred city of Anuradapura2",
+      paragraph:
+        "Anuraadapura was 3rd capital of the kingdom of Rajarata after Tambapanni and Upatissa Nuwara. The city, now a UNESCO World Heritage Sites, was the center of Theravada Buddhism for many centuries. Anuradhapura is famous for its well preserved ruins of ancient Sri Lankan civilization. Many places of historical and archaeological interest could be visited. Sri Maha Bodhi ( Sacred Bo-Tree ) was brought as a sapling of the tree under which Prince Siddhartha attained to enlightenment and it is over 2200 years old and is the oldest historically documented tree in the world. Ruwanweliseya (2nd century B.C) is the most famous of all the Dagobas. It originally depicted the perfect 'bubble shape' that modern restoration has not been able to accurately reproduce. 'Samadhi' Buddha statue (4th century AD) is one of the most famous statues, depicting the Buddha in a state of 'Samadhi' or deep meditation Isurumuniya rock temple (3rd century B.C) is well known for its rock carvings",
+    },
+    {
+      image: "images/polonnaruwa.jpg",
+      alt: "Ancient City of Polonnaruwa2",
+      title: "Ancient City of Polonnaruwa2",
+      paragraph:
+        "Polonnaruwa, which was the 2nd capital city of Sri Lanka built in the 11th and 12th centuries AD, and which is a world heritage site. Here you can see the ruins of the Royal Palace, the Gal Viharaya where 4 splendid statues of the Buddha in 'Upright', 'Sedentary' and 'Recumbent' postures carved out of rock could be seen, the Audience Hall, the Lotus Bath, the statue of king Parakramabahu, and e Parakrama Samudraya - a lake built by King Parakramabahu the great. There are also monuments of famous places of worship such as the Shiva Temple, the Lankathilake, the Watadage, the Galpotha, the Kiri Vehera and the remains of a former Temple of the Tooth Relic.",
+    },
+    {
+      image: "images/sigiriya.jpg",
+      alt: "Sigiriya Rock Fortress2",
+      title: "Sigiriya Rock Fortress2",
+      paragraph:
+        "The story of Sigiriya rock fortress is the tale of King Kashyapa who ruled between 477-495 AD. It was the largest and most sophisticated single construction project ever undertaken in ancient Sri Lanka. The ruins of the Sigiriya rock fortress seen today are less than twenty percent of the structures that graced area. The 'Lion Rock' is a citadel of unusual beauty rising 200 meters from the scrub jungle. The rock was the innermost stronghold of the 70 hectare fortified town. A moat, rampart, and extensive gardens including the renowned water gardens ring the base of the rock. Visit the world renowned frescoes of the 'Heavenly Maidens' of Sigiriya, which are in a sheltered pocket of the rock approached by a spiral stairway. These frescoes are painted in earth pigments on plaster.",
+    },
   ];
+
+  const itemsPerPage = 8;
+
+  // Calculate pagination
+  const totalPages = Math.ceil(contents.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentContents = contents.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   return (
     <section>
       <div className="container mx-auto px-5 md:px-0">
-        {contents.map((content, index) => (
-          <ImageLeftRight
-            key={index}
-            img={content.image}
-            alt={content.alt}
-            title={content.title}
-            paragraph={content.paragraph}
-            format={index % 2 === 0 ? "right" : "left"}
-          />
-        ))}
+        <div className="hidden md:block">
+            {currentContents.map((content, index) => (
+                <ImageLeftRight
+                    key={index}
+                    img={content.image}
+                    alt={content.alt}
+                    title={content.title}
+                    paragraph={content.paragraph}
+                    format={index % 2 === 0 ? "right" : "left"}
+                />
+            ))}
+        </div>
+        
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="mt-12 hidden md:block">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        )}
+        <div className="block md:hidden">
+        <Swiper
+                slidesPerView={1}
+                spaceBetween={30}
+                loop={true}
+                // pagination={{
+                // clickable: true,
+                // }}
+                navigation={true}
+                modules={[Navigation]}
+                className="mySwiper"
+            >
+                {contents.map((content, index) => (
+                <SwiperSlide
+                    key={index}
+                    className=" rounded-xl shadow hover:shadow-lg transition overflow-hidden"
+                >
+                    <ImageLeftRight
+                        key={index}
+                        img={content.image}
+                        alt={content.alt}
+                        title={content.title}
+                        paragraph={content.paragraph}
+                        format="right"
+                    />
+                </SwiperSlide>
+                ))}
+            </Swiper>
+        </div>
       </div>
     </section>
   );
