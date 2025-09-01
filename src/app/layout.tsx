@@ -5,6 +5,7 @@ import BookingSteps from '@/components/BookingSteps';
 import Chatbot from '@/components/Chatbot';
 import { Sora, Montserrat } from "next/font/google";
 import Destination from '@/components/Destination';
+import ActionButtons from '@/components/ActionButtons';
 
 const sora = Sora({
   subsets: ["latin"],
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <BookingSteps/>
         <Footer />
         <Chatbot />
+        <ActionButtons/>
       </body>
     </html>
   );
