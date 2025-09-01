@@ -2,6 +2,7 @@ import './globals.css';
 import Footer from '../components/Footer';
 import Navbar from '@/components/Navbar';
 import BookingSteps from '@/components/BookingSteps';
+import Chatbot from '@/components/Chatbot';
 import { Sora, Montserrat } from "next/font/google";
 import Destination from '@/components/Destination';
 
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Destination/>
         <BookingSteps/>
         <Footer />
+        <Chatbot />
       </body>
     </html>
   );

@@ -5,7 +5,7 @@
   "homepage": "https://rajith0417.github.io/escapeelite",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build", 
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "predeploy": "npm run build",
@@ -17,6 +17,7 @@
     "next": "15.5.0",
     "owl.carousel": "^2.3.4",
     "react": "19.1.0",
+    "react-chatbot-kit": "^2.2.2",
     "react-dom": "19.1.0",
     "react-responsive-carousel": "^3.2.23",
     "swiper": "^11.2.10"
@@ -30,9 +31,9 @@
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.5.0",
+    "gh-pages": "^6.0.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.12",
-    "typescript": "^5",
-    "gh-pages": "^6.0.0"
+    "typescript": "^5"
   }
 }
