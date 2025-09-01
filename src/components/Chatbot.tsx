@@ -263,7 +263,7 @@ export default function Chatbot({
         >
           <div className="relative w-[52px] h-[52px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden">
             <Image
-              src="/images/user.png"
+              src="images/user.png"
               alt="chatbot"
               fill
               className="object-cover"
