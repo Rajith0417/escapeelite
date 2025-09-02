@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);
@@ -42,7 +43,7 @@ export default function Navbar() {
           className="h-8 w-auto object-cover"
         />
         <ul className="hidden md:flex space-x-6 font-medium">
-          <li><a href="#home" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Home</a></li>
+          <li><Link href="/" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Home</Link></li>
           <li className="relative" ref={dropdownRef}>
             <button
               onClick={handleDestinationsClick}
@@ -60,24 +61,26 @@ export default function Navbar() {
             </button>
             {isDestinationsOpen && (
               <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg py-2 min-w-[150px] z-50">
-                <button
+                <Link
+                  href="/srilanka"
                   onClick={() => handleDestinationSelect('Sri Lanka')}
                   className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors"
                 >
                   Sri Lanka
-                </button>
-                <button
+                </Link>
+                <Link
+                  href="/maldives"
                   onClick={() => handleDestinationSelect('Maldives')}
                   className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors"
                 >
                   Maldives
-                </button>
+                </Link>
               </div>
             )}
           </li>
-          <li><a href="#resorts" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Hotel Resorts</a></li>
-          <li><a href="#attractions" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Attractions</a></li>
-          <li><a href="#contact" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Contact</a></li>
+          <li><Link href="/hotelResort" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Hotel Resorts</Link></li>
+          <li><Link href="/attractions" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Attractions</Link></li>
+          <li><Link href="/contact" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Contact</Link></li>
         </ul>
       </div>
     </nav>
