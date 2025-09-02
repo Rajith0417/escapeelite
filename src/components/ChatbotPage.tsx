@@ -251,9 +251,9 @@ export default function ChatbotPage({
   return (
     <div className={`  ${className}`}>
       {/* Chat Window */}
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-200 w-full md:w-auto h-auto flex flex-col overflow-hidden">
+        <div className="bg-white rounded-3xl shadow-xl border border-gray-200 w-full md:w-auto h-[680px] flex flex-col overflow-hidden">
           {/* Header */}
-          <div className="bg-[rgba(56,66,75,0.5)] px-4 py-3 flex items-center justify-between">
+          <div className="bg-[#38424B] px-4 py-3 flex items-center justify-between">
             <div className="">
               <Image
                 src="logo.png"
