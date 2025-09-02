@@ -1,7 +1,73 @@
-import React from 'react'
+import ChatbotPage from "@/components/ChatbotPage";
+import Hero from "@/components/Hero";
+import React from "react";
+import Image from "next/image";
+import TestimonialSection from "@/components/TestimonialSection";
 
 export default function Contact() {
   return (
-    <div>Contact</div>
-  )
+    <>
+      <Hero
+        image="banners/image11.png"
+        titleDesktop="get in touch with us"
+        paragraph="Chat with our AI assistant to get instant help with your travel planning, or connect directly with our travel experts for personalized service."
+      />
+      <section>
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="w-full">
+              <ChatbotPage />
+            </div>
+            <div className="w-full flex flex-col gap-12">
+              <div className="flex items-start gap-5">
+                <Image src={"icons/map.svg"} alt={""} width={24} height={24}/>
+                <div>
+                  <h3 className="text-2xl font-normal text-gray-900">
+                    Location
+                  </h3>
+                  <p className="mt-1 text-base font-normal leading-relaxed">
+                    VA Travel Tech
+                    <br />
+                    5 Mackenzie Court
+                    <br />
+                    Madeira Walk, Ascot,
+                    <br />
+                    Berkshire, SL5 OGR,
+                    <br />
+                    United Kingdom
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-5">
+                <Image src={"icons/send.svg"} alt={""} width={24} height={24}/>
+                <div>
+                  <h3 className="text-2xl font-normal text-gray-900">Email</h3>
+                  <p className="mt-1 text-base font-normal">
+                    <a
+                      href="mailto:admin@escapeelite.com"
+                      className="hover:underline"
+                    >
+                      admin@escapeelite.com
+                    </a>
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-5">
+                <Image src={"icons/call.svg"} alt={""} width={24} height={24}/>
+                <div>
+                  <h3 className="text-xl font-normal text-gray-900">Phone</h3>
+                  <p className="mt-1 text-base font-normal">
+                    <a href="tel:+442038921812" className="hover:underline">
+                      +44 20 3892 1812
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <TestimonialSection/>
+    </>
+  );
 }
