@@ -23,7 +23,7 @@ interface ChatbotProps {
   className?: string;
 }
 
-export default function Chatbot({
+export default function ChatbotPage({
   questionnaireId = "f9abbd99-4a16-4ff1-953b-b80bed2f8b28",
   className = "",
 }: ChatbotProps) {
@@ -248,37 +248,10 @@ export default function Chatbot({
     }
   };
 
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-  };
-
   return (
-    <div className={`fixed bottom-22 right-6 md:right-16 ${isOpen ? "left-6 md:left-1/2" : ""} z-50 ${className}`}>
-      {/* Chat Toggle Button */}
-      {!isOpen && (
-        <>
-        <button
-          onClick={toggleChat}
-          className="w-[60px] h-[60px] md:w-[120px] md:h-[120px] cursor-pointer rounded-full shadow-lg transition-all duration-200 hover:scale-105 relative flex items-center justify-center bg-white"
-        >
-          <div className="relative w-[52px] h-[52px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden">
-            <Image
-              src="images/user.png"
-              alt="chatbot"
-              fill
-              className="object-cover"
-            />
-          </div>
-        </button>
-        <div className="shadow-lg absolute bottom-[30px] right-[70px] md:bottom-[60px] md:right-[130px] translate-y-1/2 px-4 py-3 font-normal text-xs md:text-xl rounded-full bg-white whitespace-nowrap">
-          Get Your Holiday Quote in 2 Minutes
-        </div>
-        </>
-      )}
-
+    <div className={`  ${className}`}>
       {/* Chat Window */}
-      {isOpen && (
-        <div className="backdrop-blur-[20px] bg-white/30 rounded-3xl shadow-xl w-full md:w-auto h-[600px] flex flex-col overflow-hidden">
+        <div className="bg-white rounded-3xl shadow-xl border border-gray-200 w-full md:w-auto h-auto flex flex-col overflow-hidden">
           {/* Header */}
           <div className="bg-[rgba(56,66,75,0.5)] px-4 py-3 flex items-center justify-between">
             <div className="">
@@ -290,22 +263,10 @@ export default function Chatbot({
                 className="h-8 w-auto object-cover"
               />
             </div>
-            <button
-              onClick={toggleChat}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
-            >
-              <Image
-                src="icons/closeW.svg"
-                alt="Escape Elite"
-                width={24}
-                height={24}
-                className="cursor-pointer"
-              />
-            </button>
           </div>
 
           {/* Chat Messages */}
-          <div className="flex-1 p-4 overflow-y-auto">
+          <div className="flex-1 p-4 overflow-y-auto bg-white">
             <div className="space-y-4">
               {messages.map((message) => (
                 <div
@@ -324,13 +285,13 @@ export default function Chatbot({
                         height={10}
                         className="w-10 h-10 rounded-full"
                       />
-                      <div className="bg-white text-gray-800 text-sm px-4 py-3 rounded-lg max-w-xs">
+                      <div className="bg-blue-100 text-gray-800 px-4 py-2 rounded-2xl max-w-xs">
                         {message.text}
                       </div>
                     </div>
                   )}
                   {message.sender === "user" && (
-                    <div className="bg-white text-blue-400 px-4 py-3 text-sm rounded-lg max-w-xs">
+                    <div className="border-blue-400 border text-blue-400 px-6 py-2 rounded-full max-w-xs">
                       {message.text}
                     </div>
                   )}
@@ -375,7 +336,7 @@ export default function Chatbot({
                   <button
                     key={option.id}
                     onClick={option.action}
-                    className="text-left border border-white text-white px-4 py-3 rounded-full hover:bg-blue-50 transition-colors text-sm"
+                    className="text-left bg-white border border-blue-400 text-blue-400 px-4 py-3 rounded-full hover:bg-blue-50 transition-colors text-sm"
                   >
                     {option.text}
                   </button>
@@ -439,7 +400,6 @@ export default function Chatbot({
             </div>
           </div> */}
         </div>
-      )}
     </div>
   );
 }

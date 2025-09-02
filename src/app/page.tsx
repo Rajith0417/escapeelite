@@ -10,6 +10,7 @@ import TestimonialSection from "@/components/TestimonialSection";
 import ItinerarySection from "@/components/ItinerarySection";
 import ImageLeftRightSection from "@/components/ImageLeftRightSection";
 import ImageGallery from "@/components/ImageGallery";
+import ChatbotPage from "@/components/ChatbotPage";
 
 export default function HomePage() {
   return (
@@ -35,7 +36,7 @@ export default function HomePage() {
               <ImageGallery />
             </div>
             <div>
-
+              <ChatbotPage questionnaireId="b91db0d7-e9b2-4432-bc19-0c90f894f407" />
             </div>
           </div>
         </div>
