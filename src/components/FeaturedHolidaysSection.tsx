@@ -1,5 +1,6 @@
 "use client";
 import "swiper/css";
+import "swiper/css/navigation";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -59,7 +60,7 @@ export default function FeaturedHolidaysSection() {
                   <p className="mr-4">{s.title}</p>
                   <a href="">
                     <Image
-                      src="/icons/arrow.svg"
+                      src="/icons/arrowRight.svg"
                       alt=""
                       width={24}
                       height={24}
@@ -102,7 +103,7 @@ export default function FeaturedHolidaysSection() {
                 <p className="mr-4">title</p>
                 <a href="">
                   <Image
-                    src="icons/arrow.svg"
+                    src="icons/arrowRight.svg"
                     alt=""
                     width={24}
                     height={24}
