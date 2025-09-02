@@ -1,14 +1,21 @@
 import React from "react";
 import Image from "next/image";
 
-export default function Hero() {
+interface heroProps {
+  image: string,
+  titleDesktop?: string,
+  titleMobile?: string,
+  paragraph?: string
+}
+
+export default function Hero({image, titleDesktop, titleMobile, paragraph}: heroProps) {
   return (
     <section
       id="home"
-      className="relative h-screen"
+      className="relative h-screen md:h-[750px]"
     >
       <Image
-        src="banners/image9.png"
+        src={image}
         alt=""
         fill
         className="object-cover object-center"
@@ -17,14 +24,19 @@ export default function Hero() {
       <div className="container h-full w-full px-5 mx-auto flex flex-col md:flex-row items-center justify-center md:justify-start text-white text-center]">
         <div className="hidden float-left z-10 md:w-1/2 md:block pl-16">
           <h2 className="text-4xl md:text-4xl font-medium mb-4 text-left">
-            We Specialize in Sri Lanka & the Maldives – Get Your Free Custom
-            Itinerary!
+            {titleDesktop}
           </h2>
+          <p>
+            {paragraph}
+          </p>
         </div>
         <div className="px-16 z-10 md:hidden">
           <h2 className="text-4xl md:text-4xl font-medium mb-4 text-center">
-            Welcome to Escape Elite!
+            {titleMobile}
           </h2>
+          <p>
+            {paragraph}
+          </p>
         </div>
       </div>
     </section>
