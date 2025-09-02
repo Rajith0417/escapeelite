@@ -30,7 +30,7 @@ const attractions = [
   },
 ];
 
-export default function Attractions() {
+export default function AttractionsSection() {
   return (
     <section id="attractions" className="py-16">
       <div className="container text-center mx-auto px-5 md:px-0">
