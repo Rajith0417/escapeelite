@@ -322,9 +322,9 @@ export default function FeaturedAccommodationSection() {
 
   return (
     <>
-      <section className="bg-gray-800 relative md:h-1 md:my-24">
+      <section className="bg-gray-800 relative md:h-1 md:mb-24">
         {/* Advanced Search Filters */}
-        <div className="z-10 md:w-3/4 md:absolute md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2">
+        <div className="z-10 bg-white md:w-3/4 md:absolute rounded-lg md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2">
           <AdvancedSearchFilters
             onSearch={handleSearch}
             onFilterChange={handleFilterChange}

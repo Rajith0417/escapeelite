@@ -78,7 +78,7 @@ export default function Navbar() {
               </div>
             )}
           </li>
-          <li><Link href="/hotelResort" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Hotel Resorts</Link></li>
+          <li><Link href="/hotels" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Hotel Resorts</Link></li>
           <li><Link href="/attractions" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Attractions</Link></li>
           <li><Link href="/contact" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Contact</Link></li>
         </ul>
