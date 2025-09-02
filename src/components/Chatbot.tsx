@@ -375,7 +375,7 @@ export default function Chatbot({
                   <button
                     key={option.id}
                     onClick={option.action}
-                    className="text-left border border-white text-white px-4 py-3 rounded-full hover:bg-blue-50 transition-colors text-sm"
+                    className="text-left border border-white text-white px-4 py-[10px] rounded-full hover:bg-blue-50 hover:text-gray-800 transition-colors text-sm"
                   >
                     {option.text}
                   </button>
