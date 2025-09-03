@@ -1,7 +1,11 @@
-"use client";
+"use client"
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+console.log(basePath);
+
 
 export default function Navbar() {
   const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);
@@ -36,7 +40,7 @@ export default function Navbar() {
       <div className="container mx-auto flex justify-between items-center py-4 px-6 border-b-1 border-white border-solid">
         {/* <h1 className="text-xl font-bold text-blue-600"></h1> */}
         <Image
-          src="logo.png"
+          src={`${basePath}/logo.png`}
           alt="Escape Elite"
           width={50}
           height={0}
