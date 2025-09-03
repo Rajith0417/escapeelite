@@ -39,7 +39,7 @@ export default function AccommodationGrid({
           description={accommodation.description}
           rating={accommodation.rating}
           tag={accommodation.tag}
-          onViewDetailsHref={`/accommodation/${accommodation.id}`}
+          onViewDetailsHref={`/hotels/${accommodation.id}`}
         />
       ))}
     </div>
