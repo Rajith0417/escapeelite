@@ -1,5 +1,8 @@
 import React from "react";
 import Image from "next/image";
+import getConfig from "next/config";
+
+const { publicRuntimeConfig } = getConfig();
 
 interface heroProps {
   image: string;
@@ -11,6 +14,7 @@ interface heroProps {
 
 export default function Hero({image, titleDesktop, titleMobile, paragraph, rating}: heroProps) {
 
+  const basePath = publicRuntimeConfig?.basePath || "";
 
   return (
     <section
@@ -18,7 +22,7 @@ export default function Hero({image, titleDesktop, titleMobile, paragraph, ratin
       className="relative h-screen md:h-[750px]"
     >
       <Image
-        src={image}
+        src={`${basePath}${image}`}
         alt=""
         fill
         className="object-cover object-center"
