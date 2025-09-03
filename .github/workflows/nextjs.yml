@@ -27,6 +27,8 @@ jobs:
 
       - name: Build Next.js
         run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /escapeelite
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
