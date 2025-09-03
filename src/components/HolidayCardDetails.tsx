@@ -48,15 +48,15 @@ export default function HolidayCardDetails({
         {/* Meta row - fixed height */}
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-gray-700 text-[15px] mb-4 flex-shrink-0">
           <div className="flex items-center gap-2">
-            <Image src="icons/calender.svg" alt="duration" width={18} height={18} />
+            <Image src="/icons/calender.svg" alt="duration" width={18} height={18} />
             <span>{duration}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Image src="icons/time.svg" alt="season" width={18} height={18} />
+            <Image src="/icons/time.svg" alt="season" width={18} height={18} />
             <span>{season}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Image src="icons/user.svg" alt="price" width={18} height={18} />
+            <Image src="/icons/user.svg" alt="price" width={18} height={18} />
             <span className="font-normal">{price}</span>
             <span className="text-gray-500 text-sm">(Per person)</span>
           </div>

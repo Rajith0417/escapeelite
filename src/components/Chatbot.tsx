@@ -295,7 +295,7 @@ export default function Chatbot({
               className="text-gray-400 hover:text-gray-600 transition-colors"
             >
               <Image
-                src="icons/closeW.svg"
+                src="/icons/closeW.svg"
                 alt="Escape Elite"
                 width={24}
                 height={24}

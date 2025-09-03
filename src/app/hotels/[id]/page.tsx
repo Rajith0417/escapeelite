@@ -22,7 +22,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
   return (
     <>
       <Hero
-        image={'banners/image12.png'}
+        image={'/banners/image12.png'}
         titleDesktop="Heritance Kandalama"
         titleMobile="Heritance Kandalama"
         rating={3}

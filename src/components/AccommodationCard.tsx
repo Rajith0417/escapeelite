@@ -73,8 +73,8 @@ export default function AccommodationCard({
             className="text-gray-500 text-sm hover:text-gray-700 transition-colors flex items-center gap-2"
           >
             Click to view details
-            <Image src={"icons/arrowGray.svg"} alt={""} width={24} height={24} className="block hover:hidden"/>
-            <Image src={"icons/arrowBlue.svg"} alt={""} width={24} height={24} className="hidden hover:block"/>
+            <Image src={"/icons/arrowGray.svg"} alt={""} width={24} height={24} className="block hover:hidden"/>
+            <Image src={"/icons/arrowBlue.svg"} alt={""} width={24} height={24} className="hidden hover:block"/>
           </a>
         </div>
       </div>

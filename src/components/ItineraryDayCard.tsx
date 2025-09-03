@@ -133,7 +133,7 @@ export default function ItineraryDayCard({
                   >
                     <div className="shrink-0 mt-0.5 w-12 h-12 flex justify-center items-center bg-[#EFF7FF] rounded-full">
                       <Image
-                        src={`icons/${t.icon}.svg`}
+                        src={`/icons/${t.icon}.svg`}
                         alt="{t.icon}"
                         width={24}
                         height={24}

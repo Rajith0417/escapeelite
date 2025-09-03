@@ -27,7 +27,7 @@ interface FilterValues {
 const dummyAccommodations: Accommodation[] = [
   {
     id: "1",
-    imageSrc: "banners/image5.png",
+    imageSrc: "/banners/image5.png",
     title: "HERITANCE KANDALAMA",
     description:
       "Heritance Kandalama Is An Architectural Masterpiece By Geoffrey Bawa, Built Overlooking The Eight...",
@@ -39,7 +39,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "2",
-    imageSrc: "banners/image6.jpg",
+    imageSrc: "/banners/image6.jpg",
     title: "HOLIDAY ISLAND",
     description:
       "Experience luxury and comfort at Holiday Island Resort, featuring stunning ocean views and world-class amenities.",
@@ -51,7 +51,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "3",
-    imageSrc: "banners/image7.png",
+    imageSrc: "/banners/image7.png",
     title: "THE KINGSBURY",
     description:
       "Located in the heart of Colombo, The Kingsbury offers premium accommodation with city skyline views.",
@@ -63,7 +63,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "4",
-    imageSrc: "banners/image8.png",
+    imageSrc: "/banners/image8.png",
     title: "SIGIRIYA VILLAGE",
     description:
       "Immerse yourself in the cultural heritage of Sri Lanka at this boutique hotel near the ancient Sigiriya rock.",
@@ -75,7 +75,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "5",
-    imageSrc: "banners/image9.png",
+    imageSrc: "/banners/image9.png",
     title: "YALA SAFARI LODGE",
     description:
       "Experience wildlife up close at this luxury lodge located near Yala National Park.",
@@ -87,7 +87,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "6",
-    imageSrc: "banners/image1.png",
+    imageSrc: "/banners/image1.png",
     title: "ANURADHAPURA HERITAGE",
     description:
       "Discover ancient Sri Lankan history at this heritage hotel in the sacred city of Anuradhapura.",
@@ -99,7 +99,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "7",
-    imageSrc: "banners/image2.png",
+    imageSrc: "/banners/image2.png",
     title: "COLOMBO MARINA",
     description:
       "Modern luxury hotel with marina views, perfect for business and leisure travelers.",
@@ -111,7 +111,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "8",
-    imageSrc: "banners/image3.png",
+    imageSrc: "/banners/image3.png",
     title: "KANDY HILLS RETREAT",
     description:
       "Peaceful mountain retreat offering panoramic views of the Kandy hills and tea plantations.",
@@ -123,7 +123,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "9",
-    imageSrc: "banners/image4.png",
+    imageSrc: "/banners/image4.png",
     title: "GALLE FORT SUITES",
     description:
       "Historic accommodation within the UNESCO World Heritage Galle Fort, blending heritage with luxury.",
@@ -135,7 +135,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "10",
-    imageSrc: "banners/image3.png",
+    imageSrc: "/banners/image3.png",
     title: "KANDY HILLS RETREAT",
     description:
       "Peaceful mountain retreat offering panoramic views of the Kandy hills and tea plantations.",
@@ -147,7 +147,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "11",
-    imageSrc: "banners/image5.png",
+    imageSrc: "/banners/image5.png",
     title: "HERITANCE KANDALAMA",
     description:
       "Heritance Kandalama Is An Architectural Masterpiece By Geoffrey Bawa, Built Overlooking The Eight...",
@@ -159,7 +159,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "12",
-    imageSrc: "banners/image6.jpg",
+    imageSrc: "/banners/image6.jpg",
     title: "HOLIDAY ISLAND",
     description:
       "Experience luxury and comfort at Holiday Island Resort, featuring stunning ocean views and world-class amenities.",
@@ -171,7 +171,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "13",
-    imageSrc: "banners/image7.png",
+    imageSrc: "/banners/image7.png",
     title: "THE KINGSBURY",
     description:
       "Located in the heart of Colombo, The Kingsbury offers premium accommodation with city skyline views.",
@@ -183,7 +183,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "14",
-    imageSrc: "banners/image8.png",
+    imageSrc: "/banners/image8.png",
     title: "SIGIRIYA VILLAGE",
     description:
       "Immerse yourself in the cultural heritage of Sri Lanka at this boutique hotel near the ancient Sigiriya rock.",
@@ -195,7 +195,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "15",
-    imageSrc: "banners/image9.png",
+    imageSrc: "/banners/image9.png",
     title: "YALA SAFARI LODGE",
     description:
       "Experience wildlife up close at this luxury lodge located near Yala National Park.",
@@ -207,7 +207,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "16",
-    imageSrc: "banners/image1.png",
+    imageSrc: "/banners/image1.png",
     title: "ANURADHAPURA HERITAGE",
     description:
       "Discover ancient Sri Lankan history at this heritage hotel in the sacred city of Anuradhapura.",
@@ -219,7 +219,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "17",
-    imageSrc: "banners/image2.png",
+    imageSrc: "/banners/image2.png",
     title: "COLOMBO MARINA",
     description:
       "Modern luxury hotel with marina views, perfect for business and leisure travelers.",
@@ -231,7 +231,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "18",
-    imageSrc: "banners/image3.png",
+    imageSrc: "/banners/image3.png",
     title: "KANDY HILLS RETREAT",
     description:
       "Peaceful mountain retreat offering panoramic views of the Kandy hills and tea plantations.",
@@ -243,7 +243,7 @@ const dummyAccommodations: Accommodation[] = [
   },
   {
     id: "19",
-    imageSrc: "banners/image4.png",
+    imageSrc: "/banners/image4.png",
     title: "GALLE FORT SUITES",
     description:
       "Historic accommodation within the UNESCO World Heritage Galle Fort, blending heritage with luxury.",

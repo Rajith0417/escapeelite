@@ -10,27 +10,27 @@ const holidays = [
   {
     title: "3 Star Holidays",
     location: "Maldives",
-    img: "banners/image1.png",
+    img: "/banners/image1.png",
   },
   {
     title: "Ancient Holidays",
     location: "Sri Lanka",
-    img: "banners/image2.png",
+    img: "/banners/image2.png",
   },
   {
     title: "Beach Holidays",
     location: "Sri Lanka",
-    img: "banners/image3.png",
+    img: "/banners/image3.png",
   },
   {
     title: "Nature Holidays",
     location: "Sri Lanka",
-    img: "banners/image4.png",
+    img: "/banners/image4.png",
   },
   {
     title: "5 Star Holidays",
     location: "Maldives",
-    img: "banners/image5.png",
+    img: "/banners/image5.png",
   },
 ];
 
@@ -60,7 +60,7 @@ export default function FeaturedHolidaysSection() {
                   <p className="mr-4">{s.title}</p>
                   <a href="">
                     <Image
-                      src="/icons/arrowRight.svg"
+                      src="//icons/arrowRight.svg"
                       alt=""
                       width={24}
                       height={24}
@@ -75,7 +75,7 @@ export default function FeaturedHolidaysSection() {
           <div className="absolute left-0 z-0 border-white border-solid border-8 w-[386px] aspect-[0.9] rounded-xl flex items-center hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
-              src="banners/image4.png"
+              src="/banners/image4.png"
               alt="Tea plantations"
               fill
               className="rounded-xl object-cover"
@@ -84,7 +84,7 @@ export default function FeaturedHolidaysSection() {
           <div className="absolute left-1/4 -translate-x-1/4 z-10 border-white border-solid border-8 w-[404px] aspect-[0.9] rounded-xl hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
-              src="banners/image3.png"
+              src="/banners/image3.png"
               alt="Tea plantations"
               fill
               className="rounded-xl object-cover"
@@ -93,7 +93,7 @@ export default function FeaturedHolidaysSection() {
           <div className="absolute z-20 border-white border-solid border-8 w-[440px] aspect-[0.9] rounded-xl left-1/2 -translate-x-1/2 hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
-              src="banners/image9.png"
+              src="/banners/image9.png"
               alt="Tea plantations"
               fill
               className="rounded-xl object-cover"
@@ -103,7 +103,7 @@ export default function FeaturedHolidaysSection() {
                 <p className="mr-4">title</p>
                 <a href="">
                   <Image
-                    src="icons/arrowRight.svg"
+                    src="/icons/arrowRight.svg"
                     alt=""
                     width={24}
                     height={24}
@@ -117,7 +117,7 @@ export default function FeaturedHolidaysSection() {
           <div className="absolute left-3/4 -translate-x-3/4 z-10 border-white border-solid border-8 w-[404px] aspect-[0.9] rounded-xl hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
-              src="banners/image2.png"
+              src="/banners/image2.png"
               alt="Tea plantations"
               fill
               className="rounded-xl object-cover"
@@ -126,7 +126,7 @@ export default function FeaturedHolidaysSection() {
           <div className="absolute left-4/4 -translate-x-4/4 z-0 border-white border-solid border-8 w-[386px] aspect-[0.9] rounded-xl hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
-              src="banners/image1.png"
+              src="/banners/image1.png"
               alt="Tea plantations"
               fill
               className="rounded-xl object-cover"

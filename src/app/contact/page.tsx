@@ -8,7 +8,7 @@ export default function Contact() {
   return (
     <>
       <Hero
-        image="banners/image11.png"
+        image="/banners/image11.png"
         titleDesktop="get in touch with us"
         paragraph="Chat with our AI assistant to get instant help with your travel planning, or connect directly with our travel experts for personalized service."
       />
@@ -20,7 +20,7 @@ export default function Contact() {
             </div>
             <div className="w-full flex flex-col gap-12">
               <div className="flex items-start gap-5">
-                <Image src={"icons/map.svg"} alt={""} width={24} height={24}/>
+                <Image src={"/icons/map.svg"} alt={""} width={24} height={24}/>
                 <div>
                   <h3 className="text-2xl font-normal text-gray-900">
                     Location
@@ -39,7 +39,7 @@ export default function Contact() {
                 </div>
               </div>
               <div className="flex items-start gap-5">
-                <Image src={"icons/send.svg"} alt={""} width={24} height={24}/>
+                <Image src={"/icons/send.svg"} alt={""} width={24} height={24}/>
                 <div>
                   <h3 className="text-2xl font-normal text-gray-900">Email</h3>
                   <p className="mt-1 text-base font-normal">
@@ -53,7 +53,7 @@ export default function Contact() {
                 </div>
               </div>
               <div className="flex items-start gap-5">
-                <Image src={"icons/call.svg"} alt={""} width={24} height={24}/>
+                <Image src={"/icons/call.svg"} alt={""} width={24} height={24}/>
                 <div>
                   <h3 className="text-xl font-normal text-gray-900">Phone</h3>
                   <p className="mt-1 text-base font-normal">

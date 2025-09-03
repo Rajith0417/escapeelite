@@ -22,7 +22,7 @@ function HolidayCard({img, title, location}: HolidayCardProps) {
           <p className="text-lg font-semibold">{title}</p>
           <a href="#" className="hover:scale-110 transition-transform">
             <Image
-              src="icons/arrowRight.svg"
+              src="/icons/arrowRight.svg"
               alt="View details"
               width={20}
               height={20}

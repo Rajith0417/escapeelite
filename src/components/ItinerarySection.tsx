@@ -11,7 +11,7 @@ export default function ItinerarySection() {
     {
       dayNumber: 1,
       city: "COLOMBO",
-      imageSrc: "banners/image10.png",
+      imageSrc: "/banners/image10.png",
       attractions: [
         "Gangaramaya Buddhist Temple",
         "Independence Square",
@@ -34,7 +34,7 @@ export default function ItinerarySection() {
     {
       dayNumber: 2,
       city: "SIGIRIYA",
-      imageSrc: "banners/image7.png",
+      imageSrc: "/banners/image7.png",
       attractions: [
         "Sacred city of Anuradhapura",
         "Sigiriya Rock Fortress",

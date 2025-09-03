@@ -3,17 +3,17 @@ import Image from "next/image";
 
 const steps = [
   {
-    icon: "icons/laptop.svg",
+    icon: "/icons/laptop.svg",
     title: "Global Itineraries at Your Fingertips",
     desc: "Explore tailor-made holiday plans to Sri Lanka, India, Maldives, Seychelles, Mauritius, and beyond – all in one place.",
   },
   {
-    icon: "icons/telephone.svg",
+    icon: "/icons/telephone.svg",
     title: "Talk Travel with an Expert",
     desc: "Call us on +44 20 3892 1812 to start planning your dream escape with one of our destination specialists.",
   },
   {
-    icon: "icons/doc.svg",
+    icon: "/icons/doc.svg",
     title: "Your Dream Trip Starts Here",
     desc: "Discover curated holiday itineraries across Sri Lanka, India, Maldives, Seychelles, Mauritius, and more – right on our website.",
   },

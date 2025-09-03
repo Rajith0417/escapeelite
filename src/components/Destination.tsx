@@ -6,7 +6,7 @@ export default function Destination() {
   return (
     <section className="relative text-center overflow-hidden">
       <Image
-        src="banners/image6.jpg"
+        src="/banners/image6.jpg"
         alt=""
         width={0}
         height={0}
