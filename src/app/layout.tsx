@@ -2,7 +2,7 @@ import './globals.css';
 import Footer from '../components/Footer';
 import Navbar from '@/components/Navbar';
 import BookingSteps from '@/components/BookingSteps';
-import Chatbot from '@/components/Chatbot';
+// import Chatbot from '@/components/Chatbot';
 import { Sora, Montserrat } from "next/font/google";
 import Destination from '@/components/Destination';
 import ActionButtons from '@/components/ActionButtons';
