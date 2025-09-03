@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Destination/>
         <BookingSteps/>
         <Footer />
-        <Chatbot />
+        {/* <Chatbot /> */}
         <ActionButtons/>
       </body>
     </html>

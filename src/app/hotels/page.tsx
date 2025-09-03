@@ -6,7 +6,7 @@ import React from 'react'
 export default function HotelResort() {
   return (
     <>
-      <Hero image={'banners/image9.png'}/>
+      <Hero image={'/banners/image9.png'} titleDesktop='Accommodation'/>
       <FeaturedAccommodationSection />
     </>
   )
