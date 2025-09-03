@@ -1,8 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import getConfig from "next/config";
-
-const { publicRuntimeConfig } = getConfig();
 
 interface heroProps {
   image: string;
@@ -12,9 +9,9 @@ interface heroProps {
   rating?: number;
 }
 
-export default function Hero({image, titleDesktop, titleMobile, paragraph, rating}: heroProps) {
+const basePath = process.env.NODE_ENV === "production" ? "/escapeelite" : "";
 
-  const basePath = publicRuntimeConfig?.basePath || "";
+export default function Hero({image, titleDesktop, titleMobile, paragraph, rating}: heroProps) {
 
   return (
     <section
