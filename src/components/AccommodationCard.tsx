@@ -1,4 +1,8 @@
+"use client"
+
 import Image from "next/image";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 interface AccommodationCardProps {
   imageSrc: string;
@@ -22,7 +26,7 @@ export default function AccommodationCard({
       {/* Image section with overlay tag */}
       <div className="relative w-full h-64 md:h-[276px]">
         <Image
-          src={imageSrc}
+          src={`${basePath}${imageSrc}`}
           alt={title}
           fill
           priority

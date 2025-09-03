@@ -22,7 +22,7 @@ function ActionButtons() {
       {/* Phone button */}
       <button className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
         <Image
-          src={`${basePath}icons/call.svg`}
+          src={`${basePath}/icons/call.svg`}
           alt={"call"}
           width={24}
           height={24}
@@ -32,7 +32,7 @@ function ActionButtons() {
       {/* Chat button */}
       <button className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
         <Image
-          src={`${basePath}icons/chat.svg`}
+          src={`${basePath}/icons/chat.svg`}
           alt={"chat"}
           width={24}
           height={24}
@@ -42,7 +42,7 @@ function ActionButtons() {
       {/* WhatsApp button */}
       <button className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
         <Image
-          src={`${basePath}icons/whatsapp.svg`}
+          src={`${basePath}/icons/whatsapp.svg`}
           alt={"whatsapp"}
           width={24}
           height={24}
