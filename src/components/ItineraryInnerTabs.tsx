@@ -25,7 +25,7 @@ export default function ItineraryInnerTabs({ tabs, initialTabId }: ItineraryInne
             <button
               key={t.id}
               onClick={() => setActive(t.id)}
-              className={`px-5 py-2.5 md:px-6 md:py-2 text-sm rounded-2xl transition-colors ${
+              className={`px-5 py-2.5 md:px-6 md:py-2 lg:px-2 text-sm rounded-2xl transition-colors ${
                 isActive ? "bg-[#F3F4F6] text-gray-900" : "text-gray-900 hover:text-gray-900"
               }`}
             >
