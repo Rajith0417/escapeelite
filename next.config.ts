@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,           // required for static export
   },
+  publicRuntimeConfig: {
+    basePath: isProd ? "/escapeelite" : "",
+  },
 };
 
 export default nextConfig;
