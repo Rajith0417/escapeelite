@@ -6,6 +6,8 @@ import "swiper/css";
 import { Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export default function ImageLeftRightSection() {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -108,7 +110,7 @@ export default function ImageLeftRightSection() {
             {currentContents.map((content, index) => (
                 <ImageLeftRight
                     key={index}
-                    img={content.image}
+                    img={`${basePath}${content.image}`}
                     alt={content.alt}
                     title={content.title}
                     paragraph={content.paragraph}

@@ -2,6 +2,8 @@
 import Image from "next/image";
 import ItineraryInnerTabs, { TabItem } from "./ItineraryInnerTabs";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 interface ItineraryDayCardProps {
   dayNumber: number;
   city: string;
@@ -60,7 +62,7 @@ export default function ItineraryDayCard({
         {/* Left image */}
         <div className="relative aspect-[4/3] md:aspect-auto md:h-[200px] rounded-lg overflow-hidden">
           <Image
-            src={imageSrc}
+            src={`${basePath}${imageSrc}`}
             alt={city}
             fill
             className="object-cover"
@@ -133,7 +135,7 @@ export default function ItineraryDayCard({
                   >
                     <div className="shrink-0 mt-0.5 w-12 h-12 flex justify-center items-center bg-[#EFF7FF] rounded-full">
                       <Image
-                        src={`/icons/${t.icon}.svg`}
+                        src={`${basePath}/icons/${t.icon}.svg`}
                         alt="{t.icon}"
                         width={24}
                         height={24}

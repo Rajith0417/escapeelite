@@ -2,7 +2,6 @@
 import TourMap from "./TourMap";
 import ItineraryTabs, { type TabItem } from "./ItineraryTabs";
 import ItineraryDayCard from "./ItineraryDayCard";
-import { icons } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
