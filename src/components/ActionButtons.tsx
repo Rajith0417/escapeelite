@@ -1,8 +1,9 @@
 "use client";
 
-import React from 'react'
-// import { Phone, MessageCircle, Watch } from "lucide-react";
+import React from "react";
 import Image from "next/image";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 function ActionButtons() {
   return (
@@ -20,20 +21,35 @@ function ActionButtons() {
     >
       {/* Phone button */}
       <button className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
-        <Image src={'/icons/call.svg'} alt={'call'} width={24} height={24}/>
+        <Image
+          src={`${basePath}icons/call.svg`}
+          alt={"call"}
+          width={24}
+          height={24}
+        />
       </button>
 
       {/* Chat button */}
       <button className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
-        <Image src={'/icons/chat.svg'} alt={'chat'} width={24} height={24}/>
+        <Image
+          src={`${basePath}icons/chat.svg`}
+          alt={"chat"}
+          width={24}
+          height={24}
+        />
       </button>
 
       {/* WhatsApp button */}
       <button className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
-        <Image src={'/icons/whatsapp.svg'} alt={'whatsapp'} width={24} height={24}/>
+        <Image
+          src={`${basePath}icons/whatsapp.svg`}
+          alt={"whatsapp"}
+          width={24}
+          height={24}
+        />
       </button>
     </div>
-  )
+  );
 }
 
-export default ActionButtons
+export default ActionButtons;

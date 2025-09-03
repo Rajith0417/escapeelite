@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-800 text-gray-300">
@@ -11,7 +13,7 @@ export default function Footer() {
           <div className="col-span-2 space-y-4">
             {/* Logo */}
             <Image
-              src="/images/logoSL.png"
+              src={`${basePath}/images/logoSL.png`}
               alt="Logo"
               width={360}
               height={0} // keep some aspect ratio (adjust as needed)
@@ -22,7 +24,7 @@ export default function Footer() {
             <div className="">We Accept:</div>
 
             <Image
-              src="/images/cards.png"
+              src={`${basePath}/images/cards.png`}
               alt="Logo"
               width={164}
               height={0}   // keep some aspect ratio (adjust as needed)
@@ -82,7 +84,7 @@ export default function Footer() {
             <div className="space-y-2 text-sm">
               <div className="flex items-center space-x-2">
                 <Image
-                  src="/icons/telephoneW.svg"
+                  src={`${basePath}/icons/telephoneW.svg`}
                   alt=""
                   width={24}
                   height={24}
@@ -92,7 +94,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <Image
-                  src="/icons/mail.svg"
+                  src={`${basePath}/icons/mail.svg`}
                   alt=""
                   width={24}
                   height={24}
@@ -113,7 +115,7 @@ export default function Footer() {
                 className="w-8 h-8 flex items-center justify-center hover:bg-blue-700 transition-colors"
               >
                 <Image
-                  src="/icons/facebook.svg"
+                  src={`${basePath}/icons/facebook.svg`}
                   alt=""
                   width={24}
                   height={24}
@@ -127,7 +129,7 @@ export default function Footer() {
                 className="w-8 h-8 flex items-center justify-center hover:bg-pink-700 transition-colors"
               >
                 <Image
-                  src="/icons/instagram.svg"
+                  src={`${basePath}/icons/instagram.svg`}
                   alt=""
                   width={24}
                   height={24}
@@ -141,7 +143,7 @@ export default function Footer() {
                 className="w-8 h-8 flex items-center justify-center hover:bg-blue-800 transition-colors"
               >
                 <Image
-                  src="/icons/linkedIn.svg"
+                  src={`${basePath}/icons/linkedIn.svg`}
                   alt=""
                   width={24}
                   height={24}
@@ -155,7 +157,7 @@ export default function Footer() {
                 className="w-8 h-8 flex items-center justify-center hover:bg-red-700 transition-colors"
               >
                 <Image
-                  src="/icons/youtube.svg"
+                  src={`${basePath}/icons/youtube.svg`}
                   alt=""
                   width={24}
                   height={24}
