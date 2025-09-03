@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 export default function HotelPage({ params }: HotelPageProps) {
   return (
     <>
-      <Hero image={'/banners/image12.png'} titleDesktop='Heritance Kandalama' titleMobile='Heritance Kandalama'/>
+      <Hero image={'/banners/image12.png'} titleDesktop='Heritance Kandalama' titleMobile='Heritance Kandalama' rating={3}/>
       <section>
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
