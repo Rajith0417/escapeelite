@@ -3,7 +3,7 @@ import Hero from '@/components/Hero';
 import ItinerarySection from '@/components/ItinerarySection';
 
 interface HotelPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>; // 👈 async in Next.js 15
 }
 
 // Required for "output: export"
@@ -16,7 +16,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function HotelPage({ params }: HotelPageProps) {
+export default async function HotelPage({ params }: HotelPageProps) {
+  const { id } = await params; // 👈 must await
+
   return (
     <>
       <Hero
@@ -29,7 +31,7 @@ export default function HotelPage({ params }: HotelPageProps) {
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="w-full">
-              <h1 className="text-2xl font-bold">Hotel ID: {params.id}</h1>
+              <h1 className="text-2xl font-bold">Hotel ID: {id}</h1>
             </div>
             <div>
               <ChatbotPage />
