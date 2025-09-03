@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-console.log(basePath);
-
 
 export default function Navbar() {
   const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);

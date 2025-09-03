@@ -8,11 +8,13 @@ interface AttractionCardProps {
   paragraph: string;
 }
 
+const basePath = process.env.NODE_ENV === "production" ? "/escapeelite" : "";
+
 function AttractionCard(children: AttractionCardProps) {
   return (
     <div className="relative w-full">
       <Image
-        src={children.img}
+        src={`${basePath}${children.img}`}
         alt={children.title}
         width={200}
         height={100}
@@ -25,7 +27,7 @@ function AttractionCard(children: AttractionCardProps) {
         <p className="font-medium text-sm">{children.paragraph}</p>
         <a href="Read More" className="font-semibold block text-base mt-7">Read More
           <Image
-            src="/icons/arrowRight.svg"
+            src={`${basePath}/icons/arrowRight.svg`}
             alt={children.title}
             width={24}
             height={24}

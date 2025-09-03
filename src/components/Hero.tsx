@@ -1,6 +1,8 @@
+"use client"
 import React from "react";
 import Image from "next/image";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 interface heroProps {
   image: string;
   titleDesktop?: string;
@@ -8,8 +10,6 @@ interface heroProps {
   paragraph?: string;
   rating?: number;
 }
-
-const basePath = process.env.NODE_ENV === "production" ? "/escapeelite" : "";
 
 export default function Hero({image, titleDesktop, titleMobile, paragraph, rating}: heroProps) {
 

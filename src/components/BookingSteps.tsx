@@ -1,5 +1,9 @@
+"use client"
+
 import React from "react";
 import Image from "next/image";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const steps = [
   {
@@ -29,7 +33,7 @@ export default function BookingSteps() {
         {steps.map((s, index) => (
           <div key={index} className="border-solid border border-[#ECECEC] rounded-xl p-6 flex flex-col items-center bg-[#EFF7FF]">
             <Image
-              src={s.icon}
+              src={`${basePath}{s.icon}`}
               alt={s.title}
               width={80}
               height={80}
