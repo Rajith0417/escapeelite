@@ -1,4 +1,4 @@
-import ChatbotPage from "@/components/ChatbotPage";
+// import ChatbotPage from "@/components/ChatbotPage";
 import Hero from "@/components/Hero";
 import React from "react";
 import Image from "next/image";
@@ -16,7 +16,7 @@ export default function Contact() {
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="w-full">
-              <ChatbotPage />
+              {/* <ChatbotPage /> */}
             </div>
             <div className="w-full flex flex-col gap-12">
               <div className="flex items-start gap-5">
