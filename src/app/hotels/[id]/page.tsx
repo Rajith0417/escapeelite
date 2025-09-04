@@ -1,6 +1,9 @@
-import ChatbotPage from '@/components/ChatbotPage';
+// import ChatbotPage from '@/components/ChatbotPage';
+import Facilities from '@/components/Facilities';
 import Hero from '@/components/Hero';
-import ItinerarySection from '@/components/ItinerarySection';
+import ImageGallery from '@/components/ImageGallery';
+// import ItinerarySection from '@/components/ItinerarySection';
+import SelectedHotelTabSection from '@/components/SelectedHotelTabSection';
 
 interface HotelPageProps {
   params: Promise<{ id: string }>; // 👈 async in Next.js 15
@@ -19,6 +22,17 @@ export async function generateStaticParams() {
 export default async function HotelPage({ params }: HotelPageProps) {
   const { id } = await params; // 👈 must await
 
+  const categories = [
+    {
+      label: "OUTDOORS",
+      facilities: ["Outdoor fireplace","Picnic area","BBQ facilities (Additional charge)", "Sun terrace", "Terrace", "Garden"]
+    },
+    {
+      label: "INDOORS",
+      facilities: ["2Outdoor fireplace","2Picnic area","BBQ facilities (Additional charge)", "Sun terrace", "Terrace", "Garden"]
+    }
+  ]
+
   return (
     <>
       <Hero
@@ -32,14 +46,26 @@ export default async function HotelPage({ params }: HotelPageProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="w-full">
               <h1 className="text-2xl font-bold">Hotel ID: {id}</h1>
+              <ImageGallery/>
             </div>
             <div>
-              <ChatbotPage />
+              {/* <ChatbotPage /> */}
             </div>
           </div>
         </div>
       </section>
-      <ItinerarySection />
+      <section>
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-col-1 md:grid-cols-5 gap-10 items-start">
+            <div className="col-span-1 md:col-span-3">
+              <SelectedHotelTabSection/>
+            </div>
+            <div className="col-span-1 md:col-span-2">
+              <Facilities title={'Facilities'} categories={categories}/>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
