@@ -69,7 +69,7 @@ export default function AccommodationGrid({
             {accommodations.map((accommodation, index) => (
               <SwiperSlide
                 key={index}
-                className=" rounded-xl shadow hover:shadow-lg transition overflow-hidden"
+                className=" rounded-xl md:shadow-lg transition overflow-hidden"
               >
                 <AccommodationCard
                   key={accommodation.id}
@@ -78,7 +78,7 @@ export default function AccommodationGrid({
                   description={accommodation.description}
                   rating={accommodation.rating}
                   tag={accommodation.tag}
-                  onViewDetailsHref={`/accommodation/${accommodation.id}`}
+                  onViewDetailsHref={`/hotels/${accommodation.id}`}
                 />
               </SwiperSlide>
             ))}

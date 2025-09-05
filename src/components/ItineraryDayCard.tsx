@@ -57,7 +57,7 @@ export default function ItineraryDayCard({
 
 
   return (
-    <article className="rounded-xl ring-1 ring-gray-200 bg-white overflow-hidden">
+    <article className="m-0.5 md:m-0 rounded-xl ring-1 ring-gray-200 bg-white overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 px-5 py-8">
         {/* Left image */}
         <div className="relative aspect-[4/3] md:aspect-auto md:h-[200px] rounded-lg overflow-hidden">

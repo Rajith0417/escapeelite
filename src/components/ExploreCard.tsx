@@ -12,7 +12,7 @@ const basePath = process.env.NODE_ENV === "production" ? "/escapeelite" : "";
 
 function ExploreCard({ id, name, description, image }: ExploreCardProps) {
   return (
-    <div className="flex flex-col w-full bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="flex flex-col w-full bg-white rounded-lg md:shadow-lg overflow-hidden border border-[#ECEBEB]">
       <div className="relative h-48 w-full mb-5">
         <Image src={image} alt={name} fill className="object-cover" />
       </div>
@@ -23,7 +23,7 @@ function ExploreCard({ id, name, description, image }: ExploreCardProps) {
         <p className="text-gray-700 text-base font-semibold mb-6">
           {description}
         </p>
-        <a className="text-blue-400 flex gap-2.5" href={`/attractions/${id}`}>
+        <a className="text-blue-400 hover:text-blue-500 flex gap-2.5" href={`/attractions/${id}`}>
           <span>Explore More</span>
           <Image
             src={`${basePath}/icons/arrowBlue.svg`}

@@ -40,6 +40,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
         titleDesktop="Heritance Kandalama"
         titleMobile="Heritance Kandalama"
         rating={3}
+        fullScreen={false}
       />
       <section>
         <div className="container mx-auto px-4 py-12">

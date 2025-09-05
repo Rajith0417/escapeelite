@@ -22,7 +22,7 @@ export default function AccommodationCard({
   onViewDetailsHref = "#",
 }: AccommodationCardProps) {
   return (
-    <article className="flex flex-col justify-between rounded-3xl bg-white shadow-lg ring-1 ring-black/5 overflow-hidden hover:shadow-xl transition-shadow">
+    <article className="m-0.5 md:m-0 flex flex-col justify-between rounded-3xl bg-white md:shadow-lg ring-1 ring-black/5 overflow-hidden hover:shadow-xl transition-shadow">
       {/* Image section with overlay tag */}
       <div className="relative w-full h-64 md:h-[276px]">
         <Image
@@ -76,8 +76,7 @@ export default function AccommodationCard({
             className="text-gray-500 text-sm hover:text-gray-700 transition-colors flex items-center gap-2"
           >
             Click to view details
-            <Image src={"/icons/arrowGray.svg"} alt={""} width={24} height={24} className="block hover:hidden"/>
-            <Image src={"/icons/arrowBlue.svg"} alt={""} width={24} height={24} className="hidden hover:block"/>
+            <Image src={"/icons/arrowGray.svg"} alt={""} width={24} height={24} className="block"/>
           </a>
         </div>
       </div>

@@ -10,6 +10,7 @@ export default function Contact() {
       <Hero
         image="/banners/image11.png"
         titleDesktop="get in touch with us"
+        titleMobile="get in touch with us"
         paragraph="Chat with our AI assistant to get instant help with your travel planning, or connect directly with our travel experts for personalized service."
       />
       <section>

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react";
 import ImageLeftRight from "./ImageLeftRight";
 import Pagination from "./Pagination";
@@ -104,7 +106,7 @@ export default function ImageLeftRightSection() {
   };
 
   return (
-    <section>
+    <section className="py-15">
       <div className="container mx-auto px-5 md:px-0">
         <div className="hidden md:block">
             {currentContents.map((content, index) => (
@@ -144,7 +146,7 @@ export default function ImageLeftRightSection() {
                 {contents.map((content, index) => (
                 <SwiperSlide
                     key={index}
-                    className=" rounded-xl shadow hover:shadow-lg transition overflow-hidden"
+                    className=" rounded-xl md:shadow-lg transition overflow-hidden"
                 >
                     <ImageLeftRight
                         key={index}

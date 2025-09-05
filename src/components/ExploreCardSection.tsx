@@ -1,10 +1,14 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import ExploreCard from "./ExploreCard";
 import Pagination from "./Pagination";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function ExploreCardSection() {
-    const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
   const cards = [
     {
       id: 1,
@@ -100,27 +104,57 @@ export default function ExploreCardSection() {
   return (
     <section>
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between gap-6">
-          {currentCards.map((card) => (
-            <ExploreCard
-              key={card.id}
-              id={card.id}
-              name={card.name}
-              description={card.description}
-              image={card.image}
-            />
-          ))}
-        </div>
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="mt-12 hidden md:block">
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
+        <div className="hidden md:block">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between gap-6">
+            {currentCards.map((card) => (
+              <ExploreCard
+                key={card.id}
+                id={card.id}
+                name={card.name}
+                description={card.description}
+                image={card.image}
+              />
+            ))}
           </div>
-        )}
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="mt-12 hidden md:block">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </div>
+          )}
+        </div>
+        <div className="block md:hidden">
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={30}
+            loop={true}
+            // pagination={{
+            // clickable: true,
+            // }}
+            navigation={true}
+            modules={[Navigation]}
+            className="mySwiper"
+          >
+            {cards.map((card, index) => (
+              <SwiperSlide
+                key={index}
+                className=" rounded-xl shadow hover:shadow-lg transition overflow-hidden"
+              >
+                <ExploreCard
+                  key={card.id}
+                  id={card.id}
+                  name={card.name}
+                  description={card.description}
+                  image={card.image}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </section>
   );

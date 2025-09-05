@@ -3,7 +3,7 @@ import Quote from "./Quote";
 
 export default function TestimonialSection() {
   return (
-    <section className="py-16">
+    <section className="pt-16 pb-32 md:py-16">
       <div className="container px-5 mx-auto text-center gap-15 flex items-center flex-col md:flex-row">
         <div className="w-full md:w-1/2">
           <video

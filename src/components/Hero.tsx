@@ -9,14 +9,15 @@ interface heroProps {
   titleMobile?: string;
   paragraph?: string;
   rating?: number;
+  fullScreen?: boolean;
 }
 
-export default function Hero({image, titleDesktop, titleMobile, paragraph, rating}: heroProps) {
+export default function Hero({image, titleDesktop, titleMobile, paragraph, rating, fullScreen=true}: heroProps) {
 
   return (
     <section
       id="home"
-      className="relative h-screen md:h-[750px]"
+      className={`relative ${fullScreen ? "h-screen" : "h-[306px] md:h-[700px]"}`}
     >
       <Image
         src={`${basePath}${image}`}
@@ -49,8 +50,8 @@ export default function Hero({image, titleDesktop, titleMobile, paragraph, ratin
         </div>
           )}
         </div>
-        <div className="px-16 z-10 md:hidden">
-          <h2 className="text-4xl md:text-4xl font-medium mb-4 text-center">
+        <div className="px-16 z-10 md:hidden text-center md:text-left">
+          <h2 className="text-4xl md:text-4xl font-medium mb-4">
             {titleMobile}
           </h2>
           <p>
