@@ -1,7 +1,10 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import ExploreCard from "./ExploreCard";
+import Pagination from "./Pagination";
 
 export default function ExploreCardSection() {
+    const [currentPage, setCurrentPage] = useState(1);
   const cards = [
     {
       id: 1,
@@ -57,19 +60,68 @@ export default function ExploreCardSection() {
       name: "Central Highlands of Sri Lanka",
       description:
         "A region of montane rainforests with an exceptionally rich biodiversity",
-      image: "images/highlands.jpg", // You'll need to add this image
+      image: "images/highland.jpg", // You'll need to add this image
+    },
+    {
+      id: 9,
+      name: "Ancient City of Sigiriya",
+      description:
+        "A spectacular rock fortress and palace ruin surrounded by extensive gardens",
+      image: "images/sigiriya.jpg", // You'll need to add this image
+    },
+    {
+      id: 10,
+      name: "Sacred City of Kandy",
+      description:
+        "Home to the Temple of the Tooth Relic, one of Buddhism's most sacred sites",
+      image: "images/kandy.jpg", // You'll need to add this image
+    },
+    {
+      id: 11,
+      name: "Old Town of Galle",
+      description:
+        "A fortified city built by European colonists in South and Southeast Asia",
+      image: "images/galle.jpg", // You'll need to add this image
     },
   ];
 
+  const itemsPerPage = 9;
+
+  // Calculate pagination
+  const totalPages = Math.ceil(cards.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentCards = cards.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <section>
-        <div className="container mx-auto px-4 py-12">
-          <div className="test">
-            {cards.map((card) => (
-                <ExploreCard key={card.id} id={card.id} name={card.name} description={card.description} image={card.image}/>
-            ))}
-          </div>
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between gap-6">
+          {currentCards.map((card) => (
+            <ExploreCard
+              key={card.id}
+              id={card.id}
+              name={card.name}
+              description={card.description}
+              image={card.image}
+            />
+          ))}
         </div>
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="mt-12 hidden md:block">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        )}
+      </div>
     </section>
-  )
+  );
 }
