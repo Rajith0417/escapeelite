@@ -25,12 +25,7 @@ export default function HomePage() {
       <TestimonialSection />
       <MoreDetails />
       <PopularAttractionsSection />
-      <FeaturedHolidaysDetails
-        heading="Featured holidays to MALDIVES"
-        dropdownOptions={["All Holidays", "Honeymoon", "Family", "Luxury"]}
-        selectedOption="All Holidays"
-        onDropdownChange={(val) => console.log(val)}
-      />
+      
       <section>
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

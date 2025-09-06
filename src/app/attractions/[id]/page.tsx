@@ -1,7 +1,5 @@
 import Hero from "@/components/Hero";
 import ImageLeftRightSection from "@/components/ImageLeftRightSection";
-// import ItinerarySection from '@/components/ItinerarySection';
-// import SelectedHotelTabSection from '@/components/SelectedHotelTabSection';
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
