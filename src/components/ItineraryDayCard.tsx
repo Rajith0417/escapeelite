@@ -1,6 +1,9 @@
 "use client";
 import Image from "next/image";
 import ItineraryInnerTabs, { TabItem } from "./ItineraryInnerTabs";
+import Popup from "./Popup";
+import Pill from "./Pill";
+import { useState } from "react";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -23,13 +26,13 @@ interface ItineraryDayCardProps {
   }>;
 }
 
-function Pill({ children }: { children: React.ReactNode }) {
-  return (
-    <span className=" font-inter inline-block rounded-full bg-[#EFF7FF] font-medium px-3 py-1 text-xs text-black">
-      {children}
-    </span>
-  );
-}
+// function Pill({ children }: { children: React.ReactNode }) {
+//   return (
+//     <span className="font-inter inline-block rounded-full bg-[#EFF7FF] font-medium px-3 py-1 text-xs text-black">
+//       {children}
+//     </span>
+//   );
+// }
 
 export default function ItineraryDayCard({
   dayNumber,
@@ -40,17 +43,28 @@ export default function ItineraryDayCard({
   transportation,
 }: ItineraryDayCardProps) {
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedAccommodation, setSelectedAccommodation] = useState("");
+
+  const handlePillClick = (accommodationName: string) => {
+    console.log("handle pill click "+accommodationName);
+    
+    setSelectedAccommodation(accommodationName);
+    setIsPopupOpen(true);
+  };
 
   const innerTabsItems: TabItem[] = (["Superior", "Deluxe", "Luxury"] as const).map(
   (tier) => ({
     id: tier,              // unique id for the tab
     title: tier,           // tab label (Superior, Deluxe, Luxury)
     content: (
+      <>
       <div className="py-4 flex flex-col items-start md:items-center gap-2">
         {accommodation[tier].map((name, idx) => (
-          <Pill key={idx}>{name}</Pill>
+          <Pill key={idx} onClick={() => handlePillClick(name)}>{name}</Pill>
         ))}
       </div>
+      </>
     ),
   })
 );
@@ -159,6 +173,10 @@ export default function ItineraryDayCard({
           </div>
         </div>
       </div>
+      <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
+        <h2 className="text-xl font-bold mb-4">Accommodation Details</h2>
+        <p className="text-gray-700">{selectedAccommodation}</p>
+      </Popup>
     </article>
   );
 }

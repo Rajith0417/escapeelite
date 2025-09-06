@@ -4,20 +4,24 @@ import React, { useState } from "react";
 
 interface PopupProps {
     children: React.ReactNode;
+    isOpen: boolean;
+    onClose: () => void;
 }
 
-function Popup({children}: PopupProps) {
-  const [isOpen, setIsOpen] = useState(false);
+function Popup({children, isOpen, onClose}: PopupProps) {
+  console.log("inside popup");
+  
+  if (!isOpen) return null;
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       {/* Open Button */}
-      <button
+      {/* <button
         onClick={() => setIsOpen(true)}
         className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"
       >
         Open Popup
-      </button>
+      </button> */}
 
       {/* Popup Overlay */}
       {isOpen && (
@@ -26,7 +30,7 @@ function Popup({children}: PopupProps) {
           <div className="bg-white rounded-xl shadow-lg p-6 w-80 relative">
             {children}
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={() => onClose}
               className="text-gray-900 rounded-lg absolute top-5 right-5"
             >
               <Image
