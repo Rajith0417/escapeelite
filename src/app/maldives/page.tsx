@@ -8,7 +8,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 export default function Maldives() {
   return (
     <>
-      <Hero image={`${basePath}/banners/image13.png`} titleDesktop='Explore Sri Lanka Your Way' titleMobile='Explore Sri Lanka Your Way'/>
+      <Hero image={`/banners/image13.png`} titleDesktop='Explore Sri Lanka Your Way' titleMobile='Explore Sri Lanka Your Way'/>
       <ExploreCardSection/>
     </>
   )

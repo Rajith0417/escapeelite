@@ -24,7 +24,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
     return (
         <>
             <Hero
-                image={`${basePath}/banners/image2.png`}
+                image={`/banners/image2.png`}
                 titleDesktop="Nature & Wildlife Tours"
                 titleMobile="Nature & Wildlife Tours"
             />

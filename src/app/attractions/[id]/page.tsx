@@ -23,7 +23,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
   return (
     <>
       <Hero
-        image={`${basePath}/banners/image3.png`}
+        image={`/banners/image3.png`}
         titleDesktop="Unesco World Heritage Sites"
         titleMobile="Unesco World Heritage Sites"
         paragraph="There are eight fabulous locations in Sri Lanka that are considered by UNESCO to be sites of world heritage. These sites are to be preserved."

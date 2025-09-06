@@ -13,7 +13,7 @@ export default function SriLankaPage() {
   return (
     <>
       <Hero
-        image={`${basePath}/banners/image13.png`}
+        image={`/banners/image13.png`}
         titleDesktop="Explore Sri Lanka Your Way"
         titleMobile="Explore Sri Lanka Your Way"
       />
