@@ -101,14 +101,14 @@ export default function Navbar() {
             {isDestinationsOpen && (
               <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg py-2 min-w-[150px] z-50">
                 <Link
-                  href="/srilanka"
+                  href={`${basePath}/sri-lanka`}
                   onClick={() => handleDestinationSelect("Sri Lanka")}
                   className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors"
                 >
                   Sri Lanka
                 </Link>
                 <Link
-                  href="/maldives"
+                  href={`${basePath}/maldives`}
                   onClick={() => handleDestinationSelect("Maldives")}
                   className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors"
                 >
@@ -165,14 +165,14 @@ export default function Navbar() {
             {isDestinationsOpen && (
               <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-lg py-2 min-w-[150px] z-50">
                 <Link
-                  href="/srilanka"
+                  href={`${basePath}/sri-lanka`}
                   onClick={() => handleDestinationSelect('Sri Lanka')}
                   className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors"
                 >
                   Sri Lanka
                 </Link>
                 <Link
-                  href="/maldives"
+                  href={`${basePath}/maldives`}
                   onClick={() => handleDestinationSelect('Maldives')}
                   className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100 transition-colors"
                 >

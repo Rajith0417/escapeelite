@@ -2,8 +2,11 @@
 import HolidayCardDetails from "./HolidayCardDetails";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 interface HolidayItem {
+  id: number;
   imageSrc: string;
   title: string;
   description: string;
@@ -21,6 +24,7 @@ type FeaturedHolidaysDetailsProps = {
 
 const dummyHolidays: HolidayItem[] = [
   {
+    id: 1,
     imageSrc: "/banners/image6.jpg",
     title: "Nature & Wildlife Tours",
     description:
@@ -30,6 +34,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
+    id: 2,
     imageSrc: "/banners/image9.png",
     title: "Yala wildlife, Sigiriya, Central Hills & South beach",
     description:
@@ -39,6 +44,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
+    id: 3,
     imageSrc: "/banners/image8.png",
     title: "South Coast Beach Explorer",
     description:
@@ -48,6 +54,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
+    id: 4,
     imageSrc: "/banners/image1.png",
     title: "Wilpattu wildlife, Ancient Sri Lanka & Central Hills",
     description:
@@ -57,6 +64,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
+    id: 5,
     imageSrc: "/banners/image6.jpg",
     title: "Nature & Wildlife Tours",
     description:
@@ -66,6 +74,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
+    id: 6,
     imageSrc: "/banners/image9.png",
     title: "Yala wildlife, Sigiriya, Central Hills & South beach",
     description:
@@ -75,6 +84,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
+    id: 7,
     imageSrc: "/banners/image8.png",
     title: "South Coast Beach Explorer",
     description:
@@ -84,6 +94,7 @@ const dummyHolidays: HolidayItem[] = [
     price: "£1,440.00",
   },
   {
+    id: 8,
     imageSrc: "/banners/image1.png",
     title: "Wilpattu wildlife, Ancient Sri Lanka & Central Hills",
     description:
@@ -110,7 +121,7 @@ export default function FeaturedHolidaysDetails({
           </h2>
           <div className="hidden md:block">
             <select
-              className="rounded-xl border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 focus:outline-none"
+              className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 focus:outline-none"
               value={selectedOption}
               onChange={(e) => onDropdownChange?.(e.target.value)}
             >
@@ -128,7 +139,7 @@ export default function FeaturedHolidaysDetails({
           slidesPerView={1}
           spaceBetween={24}
           loop={true}
-          wrapperClass="flex"
+          wrapperClass="flex pb-3"
           pagination={{
             clickable: true,
           }}
@@ -139,10 +150,14 @@ export default function FeaturedHolidaysDetails({
               spaceBetween: 20,
             },
             768: {
-              slidesPerView: 3,
+              slidesPerView: 2,
               spaceBetween: 30,
             },
             1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1280: {
               slidesPerView: 4,
               spaceBetween: 30,
             },
@@ -160,7 +175,7 @@ export default function FeaturedHolidaysDetails({
                   duration={h.duration}
                   season={h.season}
                   price={h.price}
-                  onViewMoreHref="#"
+                  onViewMoreHref={`/sri-lanka/${h.id}`}
                 />
               </div>
             </SwiperSlide>

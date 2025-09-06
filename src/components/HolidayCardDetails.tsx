@@ -20,10 +20,10 @@ export default function HolidayCardDetails({
   duration,
   season,
   price,
-  onViewMoreHref = "#",
+  onViewMoreHref,
 }: HolidayCardDetailsProps) {
   return (
-    <article className="m-0.5 md:m-0 flex flex-col h-full rounded-3xl bg-white md:shadow-lg ring-1 ring-black/5 overflow-hidden">
+    <article className="m-0.5 md:m-0 flex flex-col h-full rounded-xl bg-white md:shadow-lg ring-1 ring-black/5 overflow-hidden">
       {/* Top image - fixed height */}
       <div className="relative w-full flex-shrink-0">
         <Image
