@@ -23,7 +23,7 @@ function ExploreCard({ id, name, description, image }: ExploreCardProps) {
         <p className="text-gray-700 text-base font-semibold mb-6">
           {description}
         </p>
-        <a className="text-blue-400 hover:text-blue-500 flex gap-2.5" href={`/attractions/${id}`}>
+        <a className="text-blue-400 hover:text-blue-500 flex gap-2.5" href={`${basePath}/attractions/${id}`}>
           <span>Explore More</span>
           <Image
             src={`${basePath}/icons/arrowBlue.svg`}
