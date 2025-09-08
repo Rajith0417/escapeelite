@@ -50,7 +50,7 @@ export default function Hero({image, titleDesktop, titleMobile, paragraph, ratin
         </div>
           )}
         </div>
-        <div className="px-16 z-10 md:hidden text-center md:text-left">
+        <div className="px-2 md:px-16 z-10 md:hidden text-center md:text-left">
           <h2 className="text-4xl md:text-4xl font-medium mb-4">
             {titleMobile}
           </h2>
