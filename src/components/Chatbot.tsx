@@ -1,6 +1,6 @@
 "use client";
 
-import React, { JSX, ReactNode, useEffect, useState } from "react";
+import React, { JSX, ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import RoomSelection from "./chatbot/RoomSelection";
 
@@ -102,6 +102,7 @@ const Chatbot: React.FC = () => {
       childAges: [] as number[],
     },
   ]);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const START_URL =
     "https://d5ulwibf6e.execute-api.ap-south-1.amazonaws.com/prod/api/v1/questionnaires/start";
@@ -153,6 +154,16 @@ const Chatbot: React.FC = () => {
 
     startChat();
   }, []);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading]);
+
+  const scrollToBottom = () => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  };
 
   // Send answer to /user-responses
   const sendAnswer = async (answer: string): Promise<void> => {
@@ -305,7 +316,8 @@ const Chatbot: React.FC = () => {
         return roomSelection();
       // return <RoomSelection  onSubmit={(payload) => sendAnswer(payload)}/>;
       default:
-        return renderTextInput();
+        // return renderTextInput();
+        return null;
     }
   };
 
@@ -397,7 +409,7 @@ const Chatbot: React.FC = () => {
     };
 
     return (
-      <div className="p-4 border-t bg-gray-50 space-y-6 overflow-scroll">
+      <div className="p-4 space-y-6 overflow-scroll">
         {sliders.map((slider, index) => (
           <div key={slider.id} className="space-y-2">
             <div className="flex justify-between items-center">
@@ -528,7 +540,7 @@ const Chatbot: React.FC = () => {
     };
 
     return (
-      <div className="p-4 border-t bg-gray-50 space-y-4">
+      <div className="p-4 bg-gray-50 space-y-4">
         {textFields.map((field) => (
           <div key={field.id} className="space-y-1">
             {/* <label className="block text-sm font-medium text-gray-700">
@@ -565,7 +577,7 @@ const Chatbot: React.FC = () => {
 
   // Render date picker
   const renderDatePicker = (): JSX.Element => (
-    <div className="p-3 border-t bg-gray-50">
+    <div className="p-3 bg-gray-50">
       <div className="flex flex-col gap-3 items-start space-x-2">
         <input
           type="date"
@@ -607,7 +619,7 @@ const Chatbot: React.FC = () => {
         : currentQuestion?.responseDomain?.options || [];
 
     return (
-      <div className="p-3 border-t bg-gray-50">
+      <div className="p-3 bg-gray-50">
         <div className="flex items-start gap-3 flex-col space-x-2">
           <select
             value={selectedDropdown}
@@ -641,7 +653,7 @@ const Chatbot: React.FC = () => {
 
   // Render chip-style options (MCQ)
   const renderChipOptions = (): JSX.Element => (
-    <div className="p-3 flex flex-wrap gap-2 border-t bg-white">
+    <div className="p-3 flex flex-wrap gap-2 bg-white">
       {options.map((opt, idx) => (
         <button
           key={idx}
@@ -686,7 +698,7 @@ const Chatbot: React.FC = () => {
     );
 
     return (
-      <div className="p-3 border-t bg-gray-50 space-y-4">
+      <div className="p-3 bg-gray-50 space-y-4">
         <p>Number of Rooms (1-10):</p>
         {rooms.map((room, idx) => (
           <div
@@ -785,7 +797,7 @@ const Chatbot: React.FC = () => {
 
   // Render text input (fallback)
   const renderTextInput = (): JSX.Element => (
-    <div className="p-3 border-t bg-gray-50">
+    <div className="p-3 bg-gray-50">
       <div className="flex items-center space-x-2">
         <input
           value={input}
@@ -793,7 +805,7 @@ const Chatbot: React.FC = () => {
           onKeyPress={handleKeyPress}
           placeholder={getInputPlaceholder()}
           disabled={isLoading}
-          className="flex-1 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+          className="flex-1 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:hidden"
         />
         <button
           onClick={handleSubmit}
@@ -808,7 +820,7 @@ const Chatbot: React.FC = () => {
   );
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl border border-gray-200 w-full md:w-auto h-[680px] flex flex-col overflow-hidden">
+    <div className="bg-white rounded-2xl shadow-xl border border-gray-200 w-full md:w-auto h-[680px] flex flex-col overflow-hidden">
       {/* Header */}
       <div className="bg-[#38424B] px-4 py-3 flex items-center justify-between">
         <Image
@@ -821,7 +833,7 @@ const Chatbot: React.FC = () => {
       </div>
 
       {/* Chat messages */}
-      <div className="flex-1 p-4 overflow-y-auto space-y-3">
+      <div ref={messagesContainerRef} className="flex-1 p-4 overflow-y-auto space-y-3">
         {messages.map((message, idx) => (
           <div
             key={idx}
@@ -885,10 +897,9 @@ const Chatbot: React.FC = () => {
             </div>
           </div>
         )}
+        {/* Dynamic input based on question type */}
+        {renderQuestionInput()}
       </div>
-
-      {/* Dynamic input based on question type */}
-      {renderQuestionInput()}
     </div>
   );
 };
