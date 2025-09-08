@@ -84,7 +84,12 @@ interface Message {
   text: string;
 }
 
-const Chatbot: React.FC = () => {
+interface ChatbotProps {
+  chatbotId: string;
+}
+
+// const Chatbot: React.FC = () => {
+function Chatbot ({chatbotId}:ChatbotProps){
   const [messages, setMessages] = useState<Message[]>([]);
   const [options, setOptions] = useState<string[]>([]);
   const [sessionId, setSessionId] = useState<string | null>(null);
@@ -103,6 +108,7 @@ const Chatbot: React.FC = () => {
     },
   ]);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   const START_URL =
     "https://d5ulwibf6e.execute-api.ap-south-1.amazonaws.com/prod/api/v1/questionnaires/start";
@@ -117,7 +123,7 @@ const Chatbot: React.FC = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            questionnaireId: "f9abbd99-4a16-4ff1-953b-b80bed2f8b28",
+            questionnaireId: chatbotId,
             message: "Hello and welcome to Escape Elite!",
           }),
         });
@@ -540,7 +546,7 @@ const Chatbot: React.FC = () => {
     };
 
     return (
-      <div className="p-4 bg-gray-50 space-y-4">
+      <div className="p-4 space-y-4">
         {textFields.map((field) => (
           <div key={field.id} className="space-y-1">
             {/* <label className="block text-sm font-medium text-gray-700">
@@ -577,7 +583,7 @@ const Chatbot: React.FC = () => {
 
   // Render date picker
   const renderDatePicker = (): JSX.Element => (
-    <div className="p-3 bg-gray-50">
+    <div className="p-3">
       <div className="flex flex-col gap-3 items-start space-x-2">
         <input
           type="date"
@@ -619,7 +625,7 @@ const Chatbot: React.FC = () => {
         : currentQuestion?.responseDomain?.options || [];
 
     return (
-      <div className="p-3 bg-gray-50">
+      <div className="p-3">
         <div className="flex items-start gap-3 flex-col space-x-2">
           <select
             value={selectedDropdown}
@@ -698,7 +704,7 @@ const Chatbot: React.FC = () => {
     );
 
     return (
-      <div className="p-3 bg-gray-50 space-y-4">
+      <div className="p-3 space-y-4">
         <p>Number of Rooms (1-10):</p>
         {rooms.map((room, idx) => (
           <div
@@ -797,7 +803,7 @@ const Chatbot: React.FC = () => {
 
   // Render text input (fallback)
   const renderTextInput = (): JSX.Element => (
-    <div className="p-3 bg-gray-50">
+    <div className="p-3">
       <div className="flex items-center space-x-2">
         <input
           value={input}
@@ -824,7 +830,7 @@ const Chatbot: React.FC = () => {
       {/* Header */}
       <div className="bg-[#38424B] px-4 py-3 flex items-center justify-between">
         <Image
-          src="logo.png"
+          src={`${basePath}/logo.png`}
           alt="Escape Elite"
           width={50}
           height={0}
@@ -843,7 +849,7 @@ const Chatbot: React.FC = () => {
             {message.sender === "bot" ? (
               <div className="flex items-start gap-2">
                 <Image
-                  src={"images/user.png"}
+                  src={`${basePath}/images/user.png`}
                   alt={"chatbot"}
                   width={10}
                   height={10}
@@ -856,7 +862,7 @@ const Chatbot: React.FC = () => {
             ) : (
               <div className="flex items-start gap-2 flex-row-reverse">
                 <Image
-                  src={"images/user.png"}
+                  src={`${basePath}/images/user.png`}
                   alt={"chatbot"}
                   width={10}
                   height={10}

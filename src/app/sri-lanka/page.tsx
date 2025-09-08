@@ -1,13 +1,12 @@
 "use client";
 
+import Chatbot from "@/components/Chatbot";
 import FeaturedHolidaysDetails from "@/components/FeaturedHolidaysDetails";
 import Hero from "@/components/Hero";
 import MoreDetails from "@/components/MoreDetails";
 import AttractionsSection from "@/components/PopularAttractionSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import React from "react";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default function SriLankaPage() {
   return (
@@ -33,7 +32,7 @@ export default function SriLankaPage() {
                 reviews we get.
               </p>
             </div>
-            <div>{/* <Chatbot /> */}</div>
+            <div><Chatbot chatbotId={"cda93067-397c-404b-8130-c2e68c403508"} /></div>
           </div>
         </div>
       </section>
