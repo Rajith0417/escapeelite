@@ -60,14 +60,14 @@ function RoomSelection({ onSubmit }: RoomSelectionProps) {
     // };
 
     return (
-        <div className="p-6 bg-gray-900 text-white rounded-xl space-y-6 w-[650px]">
+        <div className="p-6 text-white rounded-xl space-y-6 w-full">
             {/* Room Count */}
-            <div className="space-y-2 w-[220px]">
+            <div className="space-y-2 w-[255px] text-xl font-normal">
                 <label className="block">Number of Rooms (1-10):</label>
                 <select
                     value={rooms.length}
                     onChange={(e) => handleRoomCountChange(Number(e.target.value))}
-                    className="w-full px-4 py-2 rounded-full border border-blue-400 text-blue-400 bg-gray-900 focus:outline-none"
+                    className="w-full px-4 py-2 rounded-full border border-white text-white bg-transparent focus:outline-none"
                 >
                     {Array.from({ length: 10 }, (_, i) => (
                         <option key={i + 1} value={i + 1}>
@@ -80,23 +80,23 @@ function RoomSelection({ onSubmit }: RoomSelectionProps) {
             {/* Room sections */}
             {rooms.map((room, idx) => (
                 <div key={idx} className="space-y-6 flex items-baseline">
-                    <p className="font-semibold w-24">Room {idx + 1}</p>
+                    <p className="font-normal text-xl w-24">Room {idx + 1}</p>
 
                     <div className="flex flex-col gap-5">
                         {/* Adults */}
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between font-normal text-xl">
                             <span className="w-24">Adults</span>
-                            <div className="w-[150px] flex items-center gap-6 px-4 py-2 border border-blue-400 rounded-full">
+                            <div className="w-[160px] flex items-center gap-6 px-4 py-2 border border-white rounded-full">
                                 <button
                                     onClick={() => updateRoom(idx, "adults", room.adults - 1)}
-                                    className="flex justify-center items-center w-6 h-6 bg-gray-900 border border-blue-400 text-blue-400 rounded-full"
+                                    className="flex justify-center items-center w-6 h-6 bg-transparent border border-white text-white rounded-3xl"
                                 >
                                     -
                                 </button>
-                                <span className="text-blue-400">{String(room.adults).padStart(2, "0")}</span>
+                                <span className="text-white">{String(room.adults).padStart(2, "0")}</span>
                                 <button
                                     onClick={() => updateRoom(idx, "adults", room.adults + 1)}
-                                    className="flex justify-center items-center w-6 h-6 bg-blue-400 text-white rounded-full"
+                                    className="flex justify-center items-center w-6 h-6 bg-white text-gray-900 rounded-full"
                                 >
                                     +
                                 </button>
@@ -104,19 +104,19 @@ function RoomSelection({ onSubmit }: RoomSelectionProps) {
                         </div>
 
                         {/* Children */}
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between font-normal text-xl">
                             <span className="w-24">Children</span>
-                            <div className="w-[150px] flex items-center gap-6 px-4 py-2 border border-blue-400 rounded-full">
+                            <div className="w-[160px] flex items-center gap-6 px-4 py-2 border border-white rounded-full">
                                 <button
                                     onClick={() => updateRoom(idx, "children", room.children - 1)}
-                                    className="flex justify-center items-center w-6 h-6 bg-gray-900 border border-blue-400 text-blue-400 rounded-full"
+                                    className="flex justify-center items-center w-6 h-6 bg-transparent border border-white text-white rounded-full"
                                 >
                                     -
                                 </button>
-                                <span className="text-blue-400">{String(room.children).padStart(2, "0")}</span>
+                                <span className="text-white">{String(room.children).padStart(2, "0")}</span>
                                 <button
                                     onClick={() => updateRoom(idx, "children", room.children + 1)}
-                                    className="flex justify-center items-center w-6 h-6 bg-blue-400 text-white rounded-full"
+                                    className="flex justify-center items-center w-6 h-6 bg-white text-gray-900 rounded-full"
                                 >
                                     +
                                 </button>
@@ -127,13 +127,13 @@ function RoomSelection({ onSubmit }: RoomSelectionProps) {
                         {room.children > 0 &&
                             room.childAges.map((age, cIdx) => (
                                 <div key={cIdx} className="flex items-center justify-between">
-                                    <span className="w-24">Child {String(cIdx + 1).padStart(2, "0")}</span>
+                                    <span className="w-24 font-normal text-xl">Child {String(cIdx + 1).padStart(2, "0")}</span>
                                     <select
                                         value={age}
                                         onChange={(e) =>
                                             updateChildAge(idx, cIdx, Number(e.target.value))
                                         }
-                                        className="w-[150px] px-4 py-2 rounded-full border border-blue-400 text-blue-400 bg-gray-900 focus:outline-none"
+                                        className="w-[160px] px-4 py-2 rounded-full border border-white text-white font-normal text-xl bg-transparent focus:outline-none"
                                     >
                                         <option value={0}>-</option>
                                         {Array.from({ length: 17 }, (_, i) => (
@@ -151,7 +151,7 @@ function RoomSelection({ onSubmit }: RoomSelectionProps) {
             {/* Submit */}
             <button
                 onClick={handleSubmit}
-                className="w-auto px-6 py-3 bg-white text-blue-400 rounded-full font-semibold hover:bg-blue-100"
+                className="w-auto px-6 py-3 bg-white text-gray-900 rounded-full font-normal text-xl"
             >
                 Submit
             </button>

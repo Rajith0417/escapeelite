@@ -2,10 +2,10 @@ import './globals.css';
 import Footer from '../components/Footer';
 import Navbar from '@/components/Navbar';
 import BookingSteps from '@/components/BookingSteps';
-// import Chatbot from '@/components/Chatbot';
 import { Sora, Montserrat } from "next/font/google";
 import Destination from '@/components/Destination';
 import ActionButtons from '@/components/ActionButtons';
+import ChatbotMain from '@/components/ChatbotMain';
 
 const sora = Sora({
   subsets: ["latin"],
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Destination/>
         <BookingSteps/>
         <Footer />
-        {/* <Chatbot /> */}
+        <ChatbotMain chatbotId={'f9abbd99-4a16-4ff1-953b-b80bed2f8b28'} />
         <ActionButtons/>
       </body>
     </html>

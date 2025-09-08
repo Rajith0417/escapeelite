@@ -319,8 +319,8 @@ function Chatbot ({chatbotId}:ChatbotProps){
       case "MULTIPLE_FREE_FORM_TEXT":
         return <MultipleFreeFormText />;
       case "ROOM_SELECTION":
-        return roomSelection();
-      // return <RoomSelection  onSubmit={(payload) => sendAnswer(payload)}/>;
+        // return roomSelection();
+      return <RoomSelection  onSubmit={(payload) => sendAnswer(payload)}/>;
       default:
         // return renderTextInput();
         return null;
