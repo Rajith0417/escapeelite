@@ -274,12 +274,17 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
     // Format date for display
     const formatDateForDisplay = (dateString: string): string => {
         const date = new Date(dateString);
-        return date.toLocaleDateString("en-US", {
+        return date.toLocaleDateString("en-CA", {
             year: "numeric",
             month: "long",
             day: "numeric",
         });
     };
+
+    // const formatRoomInfo = (roomData: RoomInfoProps[]) => {
+    //     roomData.map((r, i) => `Room:${i + 1}\nAdults:${r.adults}\nChildren:${r.children}\nChild Ages: ${r.childAges.join(", ") || "None"}`)
+    //     .join("\n\n");
+    // }
 
     // Get minimum date for date picker
     const getMinDate = (): string => {
@@ -326,10 +331,10 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                 return <MultipleFreeFormText />;
             case "ROOM_SELECTION":
                 // return roomSelection();
-                return <RoomSelection  onSubmit={(payload) => sendAnswer(payload)}/>;
+                return <RoomSelection  onSubmit={(payload) => sendAnswer(payload)} isLoading={isLoading}/>;
             default:
-                // return renderTextInput();
-                return null;
+                return renderTextInput();
+                // return null;
         }
     };
 
@@ -421,7 +426,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
         };
 
         return (
-            <div className="p-4 space-y-6 overflow-scroll">
+            !isLoading && <div className="p-4 space-y-6 overflow-scroll">
                 {sliders.map((slider, index) => (
                     <div key={slider.id} className="space-y-2">
                         <div className="flex justify-between items-center">
@@ -455,7 +460,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                 <button
                     onClick={handleSubmit}
                     disabled={isLoading}
-                    className="px-6 py-2.5 bg-white text-black rounded-full border border-white hover:bg-blue-50 disabled:opacity-50"
+                    className="font-normal text-xl px-6 py-2.5 bg-white text-black rounded-full border border-white hover:bg-blue-50 disabled:opacity-50"
                 >
                     {isLoading ? "..." : "Submit"}
                 </button>
@@ -464,7 +469,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
     };
 
     //Render multiple free form text
-    const MultipleFreeFormText = (): JSX.Element => {
+    const MultipleFreeFormText = (): JSX.Element | null => {
         const [formData, setFormData] = useState<Record<string, string>>({});
         const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -552,7 +557,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
         };
 
         return (
-            <div className="p-4 space-y-4">
+            !isLoading ? <div className="p-4 space-y-4">
                 {textFields.map((field) => (
                     <div key={field.id} className="space-y-1">
                         {/* <label className="block text-sm font-medium text-gray-700">
@@ -564,7 +569,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                             value={formData[field.id] || ""}
                             onChange={(e) => handleInputChange(field.id, e.target.value)}
                             placeholder={field.placeholder || ""}
-                            className="w-full px-6 py-2.5 bg-white text-white rounded-[100px] border border-white focus:outline-0"
+                            className="text-xl font-normal w-full px-6 py-2.5 bg-transparent text-white rounded-[100px] border border-white focus:outline-0 placeholder-white"
                             aria-invalid={!!errors[field.id]}
                             aria-describedby={errors[field.id] ? `${field.id}-error` : undefined}
                         />
@@ -579,17 +584,17 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                 <button
                     onClick={handleSubmit}
                     disabled={isLoading}
-                    className="px-6 py-2.5 bg-white text-black rounded-[100px] border border-white disabled:hidden"
+                    className="font-normal text-xl px-6 py-2.5 bg-white text-black rounded-[100px] border border-white disabled:hidden"
                 >
                     {isLoading ? "..." : "Submit"}
                 </button>
-            </div>
+            </div> : null
         );
     };
 
     // Render date picker
-    const renderDatePicker = (): JSX.Element => (
-        <div className="p-3">
+    const renderDatePicker = (): JSX.Element | null => (
+        !isLoading ? <div className="p-3 pl-[50px]">
             <div className="flex flex-col gap-3 items-start space-x-2">
                 <input
                     type="date"
@@ -598,19 +603,19 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     min={getMinDate()}
                     max={getMaxDate()}
                     disabled={isLoading}
-                    className="min-w-1/2 flex-1 px-6 py-2.5 bg-bg-white text-white rounded-full border border-white  focus:border-white disabled:bg-gray-100"
+                    className="min-w-1/2 flex-1 px-6 py-2.5 bg-bg-white text-white rounded-full border border-white  focus:border-white disabled:hidden placeholder-amber-800"
                     aria-label="Select date"
                 />
                 <button
                     onClick={handleDateSubmit}
                     disabled={!selectedDate || isLoading}
-                    className="px-6 py-2.5 bg-white text-black rounded-full border border-white disabled:hidden"
+                    className="font-normal text-xl px-6 py-2.5 bg-white text-black rounded-full border border-white disabled:hidden"
                 >
                     {isLoading ? "..." : "Select"}
                 </button>
             </div>
             {currentQuestion?.responseDomain?.validation?.minDate && (
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-white mt-1">
                     Minimum date:{" "}
                     {formatDateForDisplay(
                         currentQuestion.responseDomain.validation.minDate
@@ -618,7 +623,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                 </p>
             )}
             {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
-        </div>
+        </div> : null
     );
 
     // Render dropdown
@@ -631,13 +636,13 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                 : currentQuestion?.responseDomain?.options || [];
 
         return (
-            <div className="p-3">
+            !isLoading ? <div className="p-3 pl-[50px]">
                 <div className="flex items-start gap-3 flex-col space-x-2">
                     <select
                         value={selectedDropdown}
                         onChange={(e) => setSelectedDropdown(e.target.value)}
                         disabled={isLoading}
-                        className="flex-1 border text-white border-white rounded-[100px] px-6 py-2.5 focus-visible:border-[1px] focus:outline-0 focus:border-white disabled:bg-gray-100"
+                        className="text-xl font-normal flex-1 border text-white border-white rounded-[100px] px-6 py-2.5 focus-visible:border-[1px] focus:outline-0 focus:border-white disabled:bg-gray-100"
                         aria-label="Select from dropdown"
                     >
                         <option value="">Select an option</option>
@@ -650,166 +655,166 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     <button
                         onClick={handleDropdownSubmit}
                         disabled={!selectedDropdown || isLoading}
-                        className="px-4 py-2 border border-white bg-white text-black rounded-[100px] hover:outline-0 disabled:hidden"
+                        className="font-normal text-xl px-4 py-2 border border-white bg-white text-black rounded-[100px] hover:outline-0 disabled:hidden"
                     >
                         {isLoading ? "..." : "Submit"}
                     </button>
                 </div>
                 {currentQuestion?.responseDomain?.validation?.required && (
-                    <p className="text-xs text-gray-500 mt-1">This field is required</p>
+                    <p className="text-xs text-white mt-1">This field is required</p>
                 )}
                 {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
-            </div>
+            </div> : <div></div>
         );
     };
 
     // Render chip-style options (MCQ)
-    const renderChipOptions = (): JSX.Element => (
-        <div className="p-3 flex flex-wrap gap-2">
+    const renderChipOptions = (): JSX.Element | null => (
+        !isLoading ? <div className="p-3 pl-[50px] flex flex-wrap flex-col gap-3 items-start">
             {options.map((opt, idx) => (
                 <button
                     key={idx}
                     onClick={() => sendAnswer(opt)}
                     disabled={isLoading}
-                    className="px-6 py-2.5 bg-transparent text-white rounded-full border border-white text-sm transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
+                    className="px-6 py-2.5 bg-transparent text-white rounded-full border border-white font-normal text-xl transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
                 >
                     {opt}
                 </button>
             ))}
-        </div>
+        </div> : null
     );
 
     //Render room selection
-    const roomSelection = (): JSX.Element => {
-        const updateRoom = (
-            index: number,
-            field: "adults" | "children",
-            value: number
-        ) => {
-            setRooms((prev) => {
-                const updated = [...prev];
-                updated[index][field] = Math.max(0, value); // no negatives
-                if (field === "children") {
-                    updated[index].childAges = Array(value).fill(0);
-                }
-                return updated;
-            });
-        };
+    // const roomSelection = (): JSX.Element | null => {
+    //     const updateRoom = (
+    //         index: number,
+    //         field: "adults" | "children",
+    //         value: number
+    //     ) => {
+    //         setRooms((prev) => {
+    //             const updated = [...prev];
+    //             updated[index][field] = Math.max(0, value); // no negatives
+    //             if (field === "children") {
+    //                 updated[index].childAges = Array(value).fill(0);
+    //             }
+    //             return updated;
+    //         });
+    //     };
 
-        const updateChildAge = (roomIdx: number, childIdx: number, age: number) => {
-            setRooms((prev) => {
-                const updated = [...prev];
-                updated[roomIdx].childAges[childIdx] = age;
-                return updated;
-            });
-        };
+    //     const updateChildAge = (roomIdx: number, childIdx: number, age: number) => {
+    //         setRooms((prev) => {
+    //             const updated = [...prev];
+    //             updated[roomIdx].childAges[childIdx] = age;
+    //             return updated;
+    //         });
+    //     };
 
-        const totalOccupants = rooms.reduce(
-            (acc, r) => acc + r.adults + r.children,
-            0
-        );
+    //     const totalOccupants = rooms.reduce(
+    //         (acc, r) => acc + r.adults + r.children,
+    //         0
+    //     );
 
-        return (
-            <div className="p-3 space-y-4">
-                <p>Number of Rooms (1-10):</p>
-                {rooms.map((room, idx) => (
-                    <div
-                        key={idx}
-                        className="p-3 rounded-lg space-y-3 shadow-sm"
-                    >
-                        <p className="font-semibold">Room {idx + 1}</p>
+    //     return (
+    //         !isLoading ? <div className="p-3 space-y-4">
+    //             <p>Number of Rooms (1-10):</p>
+    //             {rooms.map((room, idx) => (
+    //                 <div
+    //                     key={idx}
+    //                     className="p-3 rounded-lg space-y-3 shadow-sm"
+    //                 >
+    //                     <p className="font-semibold">Room {idx + 1}</p>
 
-                        {/* Adults */}
-                        <div className="flex flex-row items-center space-x-2">
-                            <span className="flex-1">Adults</span>
-                            <div className="w-[145px] flex gap-6 px-6 py-3 items-center border border-white rounded-[100px]">
-                                <button
-                                    onClick={() => updateRoom(idx, "adults", room.adults - 1)}
-                                    className="flex justify-center items-center w-5 h-5 bg-white border border-white text-white rounded-[100%]"
-                                >
-                                    -
-                                </button>
-                                <span className="text-white">{room.adults}</span>
-                                <button
-                                    onClick={() => updateRoom(idx, "adults", room.adults + 1)}
-                                    className="flex justify-center items-center w-5 h-5 bg-blue-400 border border-white text-white rounded-[100%]"
-                                >
-                                    +
-                                </button>
-                            </div>
+    //                     {/* Adults */}
+    //                     <div className="flex flex-row items-center space-x-2">
+    //                         <span className="flex-1">Adults</span>
+    //                         <div className="w-[145px] flex gap-6 px-6 py-3 items-center border border-white rounded-[100px]">
+    //                             <button
+    //                                 onClick={() => updateRoom(idx, "adults", room.adults - 1)}
+    //                                 className="flex justify-center items-center w-5 h-5 bg-white border border-white text-white rounded-[100%]"
+    //                             >
+    //                                 -
+    //                             </button>
+    //                             <span className="text-white">{room.adults}</span>
+    //                             <button
+    //                                 onClick={() => updateRoom(idx, "adults", room.adults + 1)}
+    //                                 className="flex justify-center items-center w-5 h-5 bg-blue-400 border border-white text-white rounded-[100%]"
+    //                             >
+    //                                 +
+    //                             </button>
+    //                         </div>
 
-                        </div>
+    //                     </div>
 
-                        {/* Children */}
-                        <div className="flex items-center space-x-2">
-                            <span className="flex-1">Children</span>
-                            <div className="w-[145px] flex gap-6 px-6 py-3 items-center border border-white rounded-[100px]">
-                                <button
-                                    onClick={() => updateRoom(idx, "children", room.children - 1)}
-                                    className="flex justify-center items-center w-5 h-5 bg-white border border-white text-white rounded-[100%]"
-                                >
-                                    -
-                                </button>
-                                <span>{room.children}</span>
-                                <button
-                                    onClick={() => updateRoom(idx, "children", room.children + 1)}
-                                    className="flex justify-center items-center w-5 h-5 bg-blue-400 border border-white text-white rounded-[100%]"
-                                >
-                                    +
-                                </button>
-                            </div>
+    //                     {/* Children */}
+    //                     <div className="flex items-center space-x-2">
+    //                         <span className="flex-1">Children</span>
+    //                         <div className="w-[145px] flex gap-6 px-6 py-3 items-center border border-white rounded-[100px]">
+    //                             <button
+    //                                 onClick={() => updateRoom(idx, "children", room.children - 1)}
+    //                                 className="flex justify-center items-center w-5 h-5 bg-white border border-white text-white rounded-[100%]"
+    //                             >
+    //                                 -
+    //                             </button>
+    //                             <span>{room.children}</span>
+    //                             <button
+    //                                 onClick={() => updateRoom(idx, "children", room.children + 1)}
+    //                                 className="flex justify-center items-center w-5 h-5 bg-blue-400 border border-white text-white rounded-[100%]"
+    //                             >
+    //                                 +
+    //                             </button>
+    //                         </div>
 
-                        </div>
+    //                     </div>
 
-                        {/* Child Ages */}
-                        {room.children > 0 && (
-                            <div className="flex items-center">
-                                <span className="flex-1 text-sm font-medium">Child Ages</span>
-                                {room.childAges.map((age, cIdx) => (
-                                    <select
-                                        key={cIdx}
-                                        value={age}
-                                        onChange={(e) =>
-                                            updateChildAge(idx, cIdx, parseInt(e.target.value))
-                                        }
-                                        className="w-[145px] border border-white rounded-[100px] px-6 py-3 focus:outline-0"
-                                    >
-                                        <option value={0}>-</option>
-                                        {Array.from({ length: 17 }, (_, i) => (
-                                            <option key={i + 1} value={i + 1}>
-                                                {i + 1}
-                                            </option>
-                                        ))}
-                                    </select>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                ))}
+    //                     {/* Child Ages */}
+    //                     {room.children > 0 && (
+    //                         <div className="flex items-center">
+    //                             <span className="flex-1 text-sm font-medium">Child Ages</span>
+    //                             {room.childAges.map((age, cIdx) => (
+    //                                 <select
+    //                                     key={cIdx}
+    //                                     value={age}
+    //                                     onChange={(e) =>
+    //                                         updateChildAge(idx, cIdx, parseInt(e.target.value))
+    //                                     }
+    //                                     className="w-[145px] border border-white rounded-[100px] px-6 py-3 focus:outline-0"
+    //                                 >
+    //                                     <option value={0}>-</option>
+    //                                     {Array.from({ length: 17 }, (_, i) => (
+    //                                         <option key={i + 1} value={i + 1}>
+    //                                             {i + 1}
+    //                                         </option>
+    //                                     ))}
+    //                                 </select>
+    //                             ))}
+    //                         </div>
+    //                     )}
+    //                 </div>
+    //             ))}
 
-                {/* Summary */}
-                <p className="text-sm text-gray-600">
-                    Total occupants: {totalOccupants}
-                </p>
+    //             {/* Summary */}
+    //             <p className="text-sm text-gray-600">
+    //                 Total occupants: {totalOccupants}
+    //             </p>
 
-                {/* Submit */}
-                <button
-                    onClick={() => {
-                        const payload = JSON.stringify(rooms);
-                        sendAnswer(payload);
-                    }}
-                    disabled={isLoading}
-                    className="px-6 py-2.5 border bg-white border-white text-black rounded-[100px] hover:border-white disabled:hidden"
-                >
-                    {isLoading ? "..." : "Submit"}
-                </button>
-            </div>
-        );
-    };
+    //             {/* Submit */}
+    //             <button
+    //                 onClick={() => {
+    //                     const payload = JSON.stringify(rooms);
+    //                     sendAnswer(payload);
+    //                 }}
+    //                 disabled={isLoading}
+    //                 className="font-normal text-xl px-6 py-2.5 border bg-white border-white text-black rounded-[100px] hover:border-white disabled:hidden"
+    //             >
+    //                 {isLoading ? "..." : "Submit"}
+    //             </button>
+    //         </div> : null
+    //     );
+    // };
 
     // Render text input (fallback)
-    const renderTextInput = (): JSX.Element => (
-        <div className="p-3">
+    const renderTextInput = (): JSX.Element | null => (
+        <div className="p-3 pl-[50px]">
             <div className="flex items-center space-x-2">
                 <input
                     value={input}
@@ -817,12 +822,12 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     onKeyPress={handleKeyPress}
                     placeholder={getInputPlaceholder()}
                     disabled={isLoading}
-                    className="flex-1 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:hidden"
+                    className="text-xl font-normal flex-1 border border-white text-white rounded-full px-4 py-2 focus:outline-0 disabled:hidden placeholder-white"
                 />
                 <button
                     onClick={handleSubmit}
                     disabled={!input.trim() || isLoading}
-                    className="px-4 py-2 bg-blue-500 text-black rounded-full hover:bg-blue-600 disabled:hidden"
+                    className="font-normal text-xl px-4 py-2 bg-white text-black rounded-full disabled:hidden"
                 >
                     {isLoading ? "..." : "Submit"}
                 </button>
@@ -832,7 +837,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
     );
 
     return (
-        <div className={`fixed bottom-22 right-6 md:right-16 ${isOpen ? "left-6 md:left-1/2" : ""} z-50`}>
+        <div className={`fixed bottom-6 md:bottom-16 right-6 md:right-16 ${isOpen ? "left-6 md:left-1/2" : ""} z-50`}>
             {!isOpen && (
                 <>
                     <button
@@ -908,7 +913,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                                             height={10}
                                             className="w-10 h-10 rounded-full"
                                         />
-                                        <div className="font-poppins border-white border whitespace-pre-line text-white px-6 py-2 rounded-full max-w-[75%] text-xl font-normal">
+                                        <div className="bg-white font-poppins border-white border whitespace-pre-line text-blue-400 px-6 py-2 rounded-2xl max-w-[75%] text-xl font-normal">
                                             {message.text.replace(/\\n/g, '\n')}
                                         </div>
                                     </div>
@@ -918,7 +923,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
 
                         {/* Loading indicator */}
                         {isLoading && (
-                            <div className="flex justify-start">
+                            <div className="flex justify-start pl-[50px]">
                                 <div className="px-4 py-2 rounded-2xl bg-gray-200 text-gray-800">
                                     <div className="flex space-x-1">
                                         <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>

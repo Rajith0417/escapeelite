@@ -9,10 +9,11 @@ interface Room {
 
 interface RoomSelectionProps {
   onSubmit: (payload: string) => void;
+  isLoading: boolean;
 }
 
 // const RoomSelection: React.FC<RoomSelectionProps> = ({ onSubmit }) => {
-function RoomSelection({ onSubmit }: RoomSelectionProps) {
+function RoomSelection({ onSubmit, isLoading }: RoomSelectionProps) {
     const [rooms, setRooms] = useState<Room[]>([
         { adults: 2, children: 0, childAges: [] },
     ]);
@@ -47,7 +48,7 @@ function RoomSelection({ onSubmit }: RoomSelectionProps) {
         });
     };
 
-    const updateChildAge = (roomIdx: number, childIdx: number, age: number) => {
+    const updateChildAge = (roomIdx: number, childIdx: number, age: number ) => {
         setRooms((prev) => {
             const updated = [...prev];
             updated[roomIdx].childAges[childIdx] = age;
@@ -60,7 +61,7 @@ function RoomSelection({ onSubmit }: RoomSelectionProps) {
     // };
 
     return (
-        <div className="p-6 text-white rounded-xl space-y-6 w-full">
+        !isLoading && <div className="p-6 text-white rounded-xl space-y-6 w-full">
             {/* Room Count */}
             <div className="space-y-2 w-[255px] text-xl font-normal">
                 <label className="block">Number of Rooms (1-10):</label>
