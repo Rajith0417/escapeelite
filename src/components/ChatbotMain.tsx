@@ -603,7 +603,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     min={getMinDate()}
                     max={getMaxDate()}
                     disabled={isLoading}
-                    className="min-w-1/2 flex-1 px-6 py-2.5 bg-bg-white text-white rounded-full border border-white  focus:border-white disabled:hidden placeholder-amber-800"
+                    className="text-xl font-normal min-w-1/2 flex-1 px-6 py-2.5 bg-bg-white text-white rounded-full border border-white  focus:border-white disabled:hidden placeholder-white"
                     aria-label="Select date"
                 />
                 <button

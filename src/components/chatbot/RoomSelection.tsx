@@ -10,10 +10,11 @@ interface Room {
 interface RoomSelectionProps {
   onSubmit: (payload: string) => void;
   isLoading: boolean;
+  isPage?: boolean;
 }
 
 // const RoomSelection: React.FC<RoomSelectionProps> = ({ onSubmit }) => {
-function RoomSelection({ onSubmit, isLoading }: RoomSelectionProps) {
+function RoomSelection({ onSubmit, isLoading, isPage=false }: RoomSelectionProps) {
     const [rooms, setRooms] = useState<Room[]>([
         { adults: 2, children: 0, childAges: [] },
     ]);
@@ -61,14 +62,14 @@ function RoomSelection({ onSubmit, isLoading }: RoomSelectionProps) {
     // };
 
     return (
-        !isLoading && <div className="p-6 text-white rounded-xl space-y-6 w-full">
+        !isLoading && <div className={`p-6 ${isPage ? 'text-black' : 'text-white'} rounded-xl space-y-6 w-full`}>
             {/* Room Count */}
             <div className="space-y-2 w-[255px] text-xl font-normal">
                 <label className="block">Number of Rooms (1-10):</label>
                 <select
                     value={rooms.length}
                     onChange={(e) => handleRoomCountChange(Number(e.target.value))}
-                    className="w-full px-4 py-2 rounded-full border border-white text-white bg-transparent focus:outline-none"
+                    className={`${isPage ? 'border-black' : 'border-white'} w-full px-4 py-2 rounded-full border bg-transparent focus:outline-none`}
                 >
                     {Array.from({ length: 10 }, (_, i) => (
                         <option key={i + 1} value={i + 1}>
@@ -87,14 +88,14 @@ function RoomSelection({ onSubmit, isLoading }: RoomSelectionProps) {
                         {/* Adults */}
                         <div className="flex items-center justify-between font-normal text-xl">
                             <span className="w-24">Adults</span>
-                            <div className="w-[160px] flex items-center gap-6 px-4 py-2 border border-white rounded-full">
+                            <div className={`${isPage ? 'border-black' : 'border-white'} w-[160px] flex items-center gap-6 px-4 py-2 border rounded-full`}>
                                 <button
                                     onClick={() => updateRoom(idx, "adults", room.adults - 1)}
-                                    className="flex justify-center items-center w-6 h-6 bg-transparent border border-white text-white rounded-3xl"
+                                    className="flex justify-center items-center w-6 h-6 bg-transparent border border-white  rounded-3xl"
                                 >
                                     -
                                 </button>
-                                <span className="text-white">{String(room.adults).padStart(2, "0")}</span>
+                                <span className="">{String(room.adults).padStart(2, "0")}</span>
                                 <button
                                     onClick={() => updateRoom(idx, "adults", room.adults + 1)}
                                     className="flex justify-center items-center w-6 h-6 bg-white text-gray-900 rounded-full"
@@ -107,14 +108,14 @@ function RoomSelection({ onSubmit, isLoading }: RoomSelectionProps) {
                         {/* Children */}
                         <div className="flex items-center justify-between font-normal text-xl">
                             <span className="w-24">Children</span>
-                            <div className="w-[160px] flex items-center gap-6 px-4 py-2 border border-white rounded-full">
+                            <div className={`${isPage ? 'border-black' : 'border-white'} w-[160px] flex items-center gap-6 px-4 py-2 border rounded-full`}>
                                 <button
                                     onClick={() => updateRoom(idx, "children", room.children - 1)}
-                                    className="flex justify-center items-center w-6 h-6 bg-transparent border border-white text-white rounded-full"
+                                    className="flex justify-center items-center w-6 h-6 bg-transparent border border-white rounded-full"
                                 >
                                     -
                                 </button>
-                                <span className="text-white">{String(room.children).padStart(2, "0")}</span>
+                                <span className="">{String(room.children).padStart(2, "0")}</span>
                                 <button
                                     onClick={() => updateRoom(idx, "children", room.children + 1)}
                                     className="flex justify-center items-center w-6 h-6 bg-white text-gray-900 rounded-full"
@@ -134,7 +135,7 @@ function RoomSelection({ onSubmit, isLoading }: RoomSelectionProps) {
                                         onChange={(e) =>
                                             updateChildAge(idx, cIdx, Number(e.target.value))
                                         }
-                                        className="w-[160px] px-4 py-2 rounded-full border border-white text-white font-normal text-xl bg-transparent focus:outline-none"
+                                        className={`${isPage ? 'text-black' : 'text-white'} w-[160px] px-4 py-2 rounded-full border font-normal text-xl bg-transparent focus:outline-none`}
                                     >
                                         <option value={0}>-</option>
                                         {Array.from({ length: 17 }, (_, i) => (
@@ -152,7 +153,7 @@ function RoomSelection({ onSubmit, isLoading }: RoomSelectionProps) {
             {/* Submit */}
             <button
                 onClick={handleSubmit}
-                className="w-auto px-6 py-3 bg-white text-gray-900 rounded-full font-normal text-xl"
+                className={`${isPage ? 'border-blue-400' : 'border-white'} border w-auto px-6 py-3 bg-white text-gray-900 rounded-full font-normal text-xl`}
             >
                 Submit
             </button>
