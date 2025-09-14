@@ -3,7 +3,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { EffectCoverflow, EffectCreative, Navigation, Pagination } from "swiper/modules";
 import HolidayCard from "./HolidayCard";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -34,6 +34,36 @@ const holidays = [
     location: "Maldives",
     img: "/banners/image5.png",
   },
+  {
+    title: "Beach Holidays",
+    location: "Sri Lanka",
+    img: "/banners/image6.jpg",
+  },
+  {
+    title: "Nature Holidays",
+    location: "Sri Lanka",
+    img: "/banners/image7.png",
+  },
+  {
+    title: "5 Star Holidays",
+    location: "Maldives",
+    img: "/banners/image8.png",
+  },
+  {
+    title: "Beach Holidays",
+    location: "Sri Lanka",
+    img: "/banners/image9.png",
+  },
+  {
+    title: "Nature Holidays",
+    location: "Sri Lanka",
+    img: "/banners/image10.png",
+  },
+  {
+    title: "5 Star Holidays",
+    location: "Maldives",
+    img: "/banners/image11.png",
+  },
 ];
 
 export default function FeaturedHolidaysSection() {
@@ -44,17 +74,48 @@ export default function FeaturedHolidaysSection() {
           Featured holidays
         </h2>
         <div className="w-full relative md:flex items-center min-h-[400px] hidden">
-          {/* {holidays.map((s, index) => (
+          <Swiper
+            effect="coverflow"
+            grabCursor={true}
+            centeredSlides={true}
+            slidesPerView={4}
+            initialSlide={3}  
+            coverflowEffect={{
+              rotate: 6,        // how much the slides rotate
+              stretch: 10,        // spacing between slides
+              depth: 200,        // 3D depth
+              modifier: 1,       // multiplier for effect
+              slideShadows: false // remove side shadows
+            }}
+            modules={[EffectCoverflow]}
+            className="w-full max-w-4xl"
+          >
+            {holidays.map((holiday, index) => (
+              <SwiperSlide 
+                className="rounded-xl p-1 text-center bg-white"
+                key={index}
+              >
+                <HolidayCard
+                  img={`${basePath}${holiday.img}`}
+                  title={holiday.title}
+                  location={holiday.location}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        {/* <div className="w-full relative md:flex items-center min-h-[400px] hidden">
+          {holidays.map((s, index) => (
             <div
               key={index}
               className="absolute z-20 border-white border-solid border-8 w-xs aspect-[0.9] rounded-xl left-1/2 -translate-x-1/2 hover:z-30"
             >
               <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
               <Image
-                src={s.img}
+                src={`${basePath}${s.img}`}
                 alt="Tea plantations"
                 fill
-                
+
                 className="rounded-xl"
               />
               <div className="z-20 absolute bottom-5 text-center w-full text-white">
@@ -62,7 +123,7 @@ export default function FeaturedHolidaysSection() {
                   <p className="mr-4">{s.title}</p>
                   <a href="">
                     <Image
-                      src="//icons/arrowRight.svg"
+                      src={`${basePath}/icons/arrowRight.svg`}
                       alt=""
                       width={24}
                       height={24}
@@ -73,7 +134,9 @@ export default function FeaturedHolidaysSection() {
                 <p>{s.location}</p>
               </div>
             </div>
-          ))} */}
+          ))}
+        </div> */}
+        {/* <div className="w-full relative md:flex items-center min-h-[400px] hidden">
           <div className="absolute left-0 z-0 border-white border-solid border-8 w-[386px] aspect-[0.9] rounded-xl flex items-center hover:z-30">
             <div className="rounded-xl absolute top-0 z-10 w-full h-full bg-gradient-to-b from-[transparent] via-[#000000_30%] to-[#000000]"></div>
             <Image
@@ -134,7 +197,7 @@ export default function FeaturedHolidaysSection() {
               className="rounded-xl object-cover"
             />
           </div>
-        </div>
+        </div> */}
         <div className="w-full md:hidden">
           <Swiper
             slidesPerView={1}
@@ -149,9 +212,9 @@ export default function FeaturedHolidaysSection() {
           >
             {holidays.map((holiday, index) => (
               <SwiperSlide key={index}>
-                <HolidayCard 
-                  img={`${basePath}${holiday.img}`} 
-                  title={holiday.title} 
+                <HolidayCard
+                  img={`${basePath}${holiday.img}`}
+                  title={holiday.title}
                   location={holiday.location}
                 />
               </SwiperSlide>
