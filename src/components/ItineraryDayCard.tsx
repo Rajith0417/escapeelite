@@ -103,7 +103,7 @@ export default function ItineraryDayCard({
               </h4>
               <div className="flex flex-wrap gap-2 px-5 py-4 rounded-lg xl:ring-1 ring-gray-200 items-start md:items-center text-center">
                 {attractions.map((a, i) => (
-                  <Pill key={i}>{a}</Pill>
+                  <Pill key={i} onClick={() => handlePillClick(a)}>{a}</Pill>
                 ))}
               </div>
             </div>
@@ -124,7 +124,11 @@ export default function ItineraryDayCard({
                     </div>
                     <div className="flex flex-col items-start md:items-center gap-2">
                       {accommodation[tier].map((name, idx) => (
-                        <Pill key={idx}>{name}</Pill>
+                        <>
+                        {"090"}
+                        <Pill key={idx} onClick={() => handlePillClick(name)}>{name}</Pill>
+                        </>
+                        
                       ))}
                     </div>
                   </div>

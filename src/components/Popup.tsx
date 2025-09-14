@@ -30,7 +30,7 @@ function Popup({children, isOpen, onClose}: PopupProps) {
           <div className="bg-white rounded-xl shadow-lg p-6 w-80 relative">
             {children}
             <button
-              onClick={() => onClose}
+              onClick={() => onClose()}
               className="text-gray-900 rounded-lg absolute top-5 right-5"
             >
               <Image
