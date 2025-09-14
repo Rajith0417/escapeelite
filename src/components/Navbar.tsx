@@ -21,7 +21,7 @@ export default function Navbar() {
       ) {
         setIsDestinationsOpen(false);
       }
-      
+
       // Close mobile dropdown if click is outside (but not if clicking on mobile menu)
       if (
         mobileDropdownRef.current &&
@@ -66,13 +66,15 @@ export default function Navbar() {
   return (
     <nav className="bg-transparent fixed w-full z-60 backdrop-blur-[20px]">
       <div className="relative container mx-auto flex justify-between items-center py-4 px-6 border-b-1 border-white border-solid">
-        <Image
-          src={`${basePath}/logo.png`}
-          alt="Escape Elite"
-          width={50}
-          height={0}
-          className="h-8 w-auto object-cover"
-        />
+        <Link href={`${basePath}/landing-page`}>
+          <Image
+            src={`${basePath}/logo.png`}
+            alt="Escape Elite"
+            width={50}
+            height={0}
+            className="h-8 w-auto object-cover"
+          /></Link>
+
         <button className="lg:hidden" onClick={handleMobileMenuToggle}>
           <Image
             src={`${basePath}/icons/hamberger.svg`}
@@ -101,9 +103,8 @@ export default function Navbar() {
             >
               Destinations
               <svg
-                className={`w-4 h-4 transition-transform ${
-                  isMobileDestinationsOpen ? "rotate-180" : ""
-                }`}
+                className={`w-4 h-4 transition-transform ${isMobileDestinationsOpen ? "rotate-180" : ""
+                  }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -173,10 +174,10 @@ export default function Navbar() {
               className="text-white p-2 border-b-2 border-solid border-transparent hover:border-white flex items-center gap-1"
             >
               Destinations
-              <svg 
-                className={`w-4 h-4 transition-transform ${isDestinationsOpen ? 'rotate-180' : ''}`} 
-                fill="none" 
-                stroke="currentColor" 
+              <svg
+                className={`w-4 h-4 transition-transform ${isDestinationsOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
                 viewBox="0 0 24 24"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
