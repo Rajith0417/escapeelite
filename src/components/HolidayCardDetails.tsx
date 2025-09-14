@@ -80,6 +80,7 @@ export default function HolidayCardDetails({
 
         {/* CTA - push to bottom */}
         <div className="mt-auto">
+          {onViewMoreHref}
           <Link
             href={`${basePath}${onViewMoreHref}`}
             className="inline-flex w-full items-center justify-center rounded-sm bg-gray-900 text-white py-2.5 px-5 text-sm font-semibold hover:bg-gray-800 transition-colors"
