@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -10,7 +11,7 @@ interface HolidayCardDetailsProps {
   duration: string; // e.g., "12 days"
   season: string; // e.g., "Jan-Jun | Oct-Dec"
   price: string; // e.g., "£1,440.00"
-  onViewMoreHref?: string;
+  onViewMoreHref: string;
 }
 
 export default function HolidayCardDetails({
@@ -79,12 +80,12 @@ export default function HolidayCardDetails({
 
         {/* CTA - push to bottom */}
         <div className="mt-auto">
-          <a
-            href={onViewMoreHref}
+          <Link
+            href={`${basePath}${onViewMoreHref}`}
             className="inline-flex w-full items-center justify-center rounded-sm bg-gray-900 text-white py-2.5 px-5 text-sm font-semibold hover:bg-gray-800 transition-colors"
           >
             View More
-          </a>
+          </Link>
         </div>
       </div>
     </article>

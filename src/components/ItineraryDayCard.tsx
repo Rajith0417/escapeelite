@@ -124,11 +124,7 @@ export default function ItineraryDayCard({
                     </div>
                     <div className="flex flex-col items-start md:items-center gap-2">
                       {accommodation[tier].map((name, idx) => (
-                        <>
-                        {"090"}
                         <Pill key={idx} onClick={() => handlePillClick(name)}>{name}</Pill>
-                        </>
-                        
                       ))}
                     </div>
                   </div>
