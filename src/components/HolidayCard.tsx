@@ -30,7 +30,7 @@ function HolidayCard({img, title, location}: HolidayCardProps) {
               alt="View details"
               width={20}
               height={20}
-              className="filter invert"
+              className=""
             />
           </Link>
         </div>
