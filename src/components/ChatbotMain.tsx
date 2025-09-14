@@ -846,7 +846,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     >
                         <div className="relative w-[52px] h-[52px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden">
                             <Image
-                                src="images/user.png"
+                                src={`${basePath}/images/user.png`}
                                 alt="chatbot"
                                 fill
                                 className="object-cover"
