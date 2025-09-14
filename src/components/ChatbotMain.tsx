@@ -676,7 +676,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     key={idx}
                     onClick={() => sendAnswer(opt)}
                     disabled={isLoading}
-                    className="px-6 py-2.5 bg-transparent text-white rounded-full border border-white font-normal text-xl transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
+                    className="text-start px-6 py-2.5 bg-transparent text-white rounded-full border border-white font-normal text-xl transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
                 >
                     {opt}
                 </button>
