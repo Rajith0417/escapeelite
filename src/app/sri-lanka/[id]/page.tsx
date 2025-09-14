@@ -1,3 +1,4 @@
+import Chatbot from "@/components/Chatbot";
 import Hero from "@/components/Hero";
 import ImageGallery from "@/components/ImageGallery";
 import ItinerarySection from "@/components/ItinerarySection";
@@ -34,7 +35,9 @@ export default async function HotelPage({ params }: HotelPageProps) {
                         <div className="w-full">
                             <ImageGallery/>
                         </div>
-                        <div className="w-full"></div>
+                        <div className="w-full">
+                            <Chatbot chatbotId={"cda93067-397c-404b-8130-c2e68c403508"}/>
+                        </div>
                     </div>
                 </div>
             </section>
