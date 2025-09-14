@@ -79,6 +79,7 @@ export default function FeaturedHolidaysSection() {
             centeredSlides={true}
             slidesPerView={4}
             initialSlide={3}  
+            loop={true} 
             coverflowEffect={{
               rotate: 6,        // how much the slides rotate
               stretch: 10,        // spacing between slides
