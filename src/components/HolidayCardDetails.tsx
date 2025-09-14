@@ -83,7 +83,7 @@ export default function HolidayCardDetails({
           {onViewMoreHref}
           {basePath}
           <Link
-            href={`${basePath}${onViewMoreHref}`}
+            href={onViewMoreHref}
             className="inline-flex w-full items-center justify-center rounded-sm bg-gray-900 text-white py-2.5 px-5 text-sm font-semibold hover:bg-gray-800 transition-colors"
           >
             View More
