@@ -5,6 +5,7 @@ import Image from "next/image";
 import Quote from "@/components/Quote";
 import FeaturedHolidaysSection from "@/components/FeaturedHolidaysSection";
 import InfoSection from "@/components/InfoSection";
+import ChatbotMain from "@/components/ChatbotMain";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -13,7 +14,7 @@ export default function SriLankaPage() {
     <>
       <section
         id="home"
-        className="relative h-screen md:h-[1100px]"
+        className="relative h-screen md:h-[900px]"
       >
         <Image
           src={`${basePath}/banners/image13.png`}
@@ -22,27 +23,27 @@ export default function SriLankaPage() {
           className="object-cover object-center"
         />
         <div className="absolute z-0 inset-0 bg-black opacity-50"></div>
-        <div className="container h-full w-full px-5 mx-auto flex flex-col md:flex-row items-center justify-center md:justify-start text-white text-center]">
+        <div className="container h-full w-full px-5 md:pt-[150px] mx-auto flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start text-white text-center]">
           <div className="z-10 w-full md:w-1/2 md:flex md:flex-col md:gap-8">
-            <h2 className="font-medium text-5xl">
+            <h2 className="font-medium text-3xl line-clamp-2 text-center md:text-left mb-5">
               Luxury Holidays to Sri Lanka
               & the Maldives Best
               Price Guaranteed!
             </h2>
-            <div className="h-[280px]">
+            <div className="min-h-[280px]">
               <video
                 src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 controls
                 autoPlay
                 loop
                 muted
-                className="mx-5 rounded-2xl"
+                className="rounded-2xl"
               />
             </div>
             <Quote />
           </div>
           <div className="z-10 md:w-1/2 md:block pl-16">
-            
+            <ChatbotMain chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} open={true}/>
           </div>
         </div>
       </section>

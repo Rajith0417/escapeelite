@@ -110,10 +110,11 @@ interface Message {
 
 interface ChatbotProps {
     chatbotId: string;
+    open?: boolean;
 }
 
 // const Chatbot: React.FC = () => {
-function ChatbotMain({ chatbotId }: ChatbotProps) {
+function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [options, setOptions] = useState<string[]>([]);
@@ -195,6 +196,14 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
         scrollToBottom();
     }, [messages, isLoading]);
 
+    useEffect(() => {
+        if (open) {
+            const isDesktop = window.innerWidth >= 768;
+            setIsOpen(isDesktop);
+        }
+
+    }, [open]);
+
     const toggleChat = () => {
         setIsOpen(!isOpen);
     };
@@ -238,7 +247,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                 const isCompleted = data.nextQuestion.isComplete;
                 setCurrentQuestion(q);
                 setIsCompleted(isCompleted);
-                q.longText.split("\\n").map(line =>{
+                q.longText.split("\\n").map(line => {
                     line.trim();
                     console.log(line);
                     setMessages((prev) => [...prev, { sender: "bot", text: line }]);
@@ -790,12 +799,12 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
     );
 
     return (
-        <div className={`fixed bottom-6 md:bottom-6 right-6 md:right-6 ${isOpen ? "left-6 md:left-1/2" : ""} z-50`}>
+        <div>
             {!isOpen && (
                 <>
                     <button
                         onClick={toggleChat}
-                        className="w-[60px] h-[60px] md:w-[100px] md:h-[100px] cursor-pointer rounded-full shadow-lg transition-all duration-200 hover:scale-105 relative flex items-center justify-center bg-white"
+                        className="absolute right-0 bottom-0 w-[60px] h-[60px] md:w-[100px] md:h-[100px] cursor-pointer rounded-full shadow-lg transition-all duration-200 hover:scale-105 flex items-center justify-center bg-white"
                     >
                         <div className="relative w-[52px] h-[52px] md:w-[80px] md:h-[80px] rounded-full overflow-hidden">
                             <Image
@@ -822,7 +831,8 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                             height={0}
                             className="h-8 w-auto object-cover"
                         />
-                        <button
+
+                        {!open && <button
                             onClick={toggleChat}
                             className="text-gray-400 hover:text-gray-600 transition-colors"
                         >
@@ -834,6 +844,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                                 className="cursor-pointer"
                             />
                         </button>
+                        }
                     </div>
 
                     {/* Chat messages */}

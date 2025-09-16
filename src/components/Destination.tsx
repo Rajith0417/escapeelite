@@ -17,10 +17,10 @@ export default function Destination() {
       <div className="container py-16 mx-auto px-5 md:px-0">
         <div className="absolute inset-0 bg-black/60 pointer-events-none"></div>
         <div className="relative container mx-auto flex flex-col gap-6">
-          <h2 className="text-4xl md:text-4xl font-medium mb-4 text-white">
+          <h2 className="text-3xl md:text-4xl font-medium mb-4 text-white">
             BEST DESTINATION 2025
           </h2>
-          <p className="text-white text-xl font-normal">
+          <p className="text-white text-md font-normal">
             The roots of Escape Elite Sri Lanka lie in our passion to showcase
             the beauty of miraculous Sri Lanka to the world. Its rich culture,
             exotic sandy beaches, wildlife, rainforests, astonishing hills of

@@ -44,13 +44,13 @@ export default function HolidayCardDetails({
         </h3>
 
         {/* Description - fixed height with line clamp */}
-        <p className="text-gray-600 leading-6 mb-5 md:mb-4 line-clamp-3 min-h-[4.5rem] flex-shrink-0">
+        <p className="text-gray-600 leading-6 mb-5 md:mb-4 line-clamp-2 min-h-[4.5rem] flex-shrink-0">
           {description}
         </p>
 
         {/* Meta row - fixed height */}
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-gray-700 text-[15px] mb-4 flex-shrink-0">
-          <div className="flex items-center gap-2">
+        <div className="font-poppins flex flex-wrap items-center gap-x-1 gap-y-3 text-gray-700 text-[10px] mb-4 flex-shrink-0">
+          <div className="flex items-center gap-1">
             <Image
               src={`${basePath}/icons/calender.svg`}
               alt="duration"
@@ -59,7 +59,7 @@ export default function HolidayCardDetails({
             />
             <span>{duration}</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <Image 
               src={`${basePath}/icons/time.svg`}
               alt="season" 
@@ -67,14 +67,14 @@ export default function HolidayCardDetails({
               height={18} />
             <span>{season}</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <Image 
               src={`${basePath}/icons/user.svg`}
               alt="price" 
               width={18} 
               height={18} />
             <span className="font-normal">{price}</span>
-            <span className="text-gray-500 text-sm">(Per person)</span>
+            <span className="text-gray-500 text-[9px]">(Per person)</span>
           </div>
         </div>
 

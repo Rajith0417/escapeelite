@@ -449,7 +449,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
         <button
           onClick={handleSubmit}
           disabled={isLoading}
-          className="text-xl font-normal px-6 py-2.5 bg-white text-blue-400 rounded-full border border-blue-400 hover:bg-blue-50 disabled:opacity-50"
+          className="text-md font-normal px-6 py-2.5 bg-white text-blue-400 rounded-full border border-blue-400 hover:bg-blue-50 disabled:opacity-50"
         >
           {isLoading ? "..." : "Submit"}
         </button>
@@ -558,7 +558,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
               value={formData[field.id] || ""}
               onChange={(e) => handleInputChange(field.id, e.target.value)}
               placeholder={field.placeholder || ""}
-              className="text-xl font-normal placeholder-blue-400 w-full px-6 py-2.5 bg-white text-blue-400 rounded-[100px] border border-blue-400 focus:outline-0"
+              className="text-md font-normal placeholder-blue-400 w-full px-6 py-2.5 bg-white text-blue-400 rounded-[100px] border border-blue-400 focus:outline-0"
               aria-invalid={!!errors[field.id]}
               aria-describedby={errors[field.id] ? `${field.id}-error` : undefined}
             />
@@ -573,7 +573,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
         <button
           onClick={handleSubmit}
           disabled={isLoading}
-          className="text-xl font-normal px-6 py-2.5 bg-white text-blue-400 rounded-[100px] border border-blue-400 disabled:hidden"
+          className="text-md font-normal px-6 py-2.5 bg-white text-blue-400 rounded-[100px] border border-blue-400 disabled:hidden"
         >
           {isLoading ? "..." : "Submit"}
         </button>
@@ -592,13 +592,13 @@ function Chatbot ({chatbotId}:ChatbotProps){
           min={getMinDate()}
           max={getMaxDate()}
           disabled={isLoading}
-          className="text-xl font-normal min-w-1/2 flex-1 px-6 py-2.5 bg-bg-white text-blue-400 rounded-full border border-blue-400  focus:border-blue-400 disabled:bg-gray-100"
+          className="text-md font-normal min-w-1/2 flex-1 px-6 py-2.5 bg-bg-white text-blue-400 rounded-full border border-blue-400  focus:border-blue-400 disabled:bg-gray-100"
           aria-label="Select date"
         />
         <button
           onClick={handleDateSubmit}
           disabled={!selectedDate || isLoading}
-          className="text-xl font-normal px-6 py-2.5 bg-white text-blue-400 rounded-full border border-blue-400 disabled:hidden"
+          className="text-md font-normal px-6 py-2.5 bg-white text-blue-400 rounded-full border border-blue-400 disabled:hidden"
         >
           {isLoading ? "..." : "Select"}
         </button>
@@ -631,7 +631,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
             value={selectedDropdown}
             onChange={(e) => setSelectedDropdown(e.target.value)}
             disabled={isLoading}
-            className="text-xl font-normal flex-1 border text-blue-400 border-blue-400 rounded-[100px] px-6 py-2.5 focus-visible:border-[1px] focus:outline-0 focus:border-blue-400 disabled:bg-gray-100"
+            className="text-md font-normal flex-1 border text-blue-400 border-blue-400 rounded-[100px] px-6 py-2.5 focus-visible:border-[1px] focus:outline-0 focus:border-blue-400 disabled:bg-gray-100"
             aria-label="Select from dropdown"
           >
             <option value="">Select an option</option>
@@ -644,7 +644,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
           <button
             onClick={handleDropdownSubmit}
             disabled={!selectedDropdown || isLoading}
-            className="text-xl font-normal px-4 py-2 border border-blue-400 bg-white text-blue-400 rounded-[100px] hover:outline-0 disabled:hidden"
+            className="text-md font-normal px-4 py-2 border border-blue-400 bg-white text-blue-400 rounded-[100px] hover:outline-0 disabled:hidden"
           >
             {isLoading ? "..." : "Submit"}
           </button>
@@ -665,7 +665,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
           key={idx}
           onClick={() => sendAnswer(opt)}
           disabled={isLoading}
-          className="font-normal text-xl px-6 py-2.5 bg-bg-white text-blue-400 rounded-full border border-blue-400 transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
+          className="font-normal text-md px-6 py-2.5 bg-bg-white text-blue-400 rounded-full border border-blue-400 transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
         >
           {opt}
         </button>
@@ -793,7 +793,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
             sendAnswer(payload);
           }}
           disabled={isLoading}
-          className="text-xl font-normal px-6 py-2.5 border border-blue-400 text-blue-400 rounded-[100px] hover:border-blue-400 disabled:hidden"
+          className="text-md font-normal px-6 py-2.5 border border-blue-400 text-blue-400 rounded-[100px] hover:border-blue-400 disabled:hidden"
         >
           {isLoading ? "..." : "Submit"}
         </button>
@@ -816,7 +816,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
         <button
           onClick={handleSubmit}
           disabled={!input.trim() || isLoading}
-          className="text-xl font-normal px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:hidden"
+          className="text-md font-normal px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 disabled:hidden"
         >
           {isLoading ? "..." : "Send"}
         </button>
@@ -855,7 +855,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
                   height={10}
                   className="w-10 h-10 rounded-full"
                 />
-                <div className=" text-xl font-normal bg-[#E5E5E5] text-gray-800 px-4 py-2 rounded-2xl max-w-[75%]">
+                <div className=" text-md font-normal bg-[#E5E5E5] text-gray-800 px-4 py-2 rounded-2xl max-w-[75%]">
                   {message.text}
                 </div>
               </div>
@@ -868,7 +868,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
                   height={10}
                   className="w-10 h-10 rounded-full"
                 />
-                <div className="text-xl font-normal bg-[#E5E5E5] text-blue-400 px-6 py-2 rounded-2xl max-w-[75%]">
+                <div className="text-md font-normal bg-[#E5E5E5] text-blue-400 px-6 py-2 rounded-2xl max-w-[75%]">
                   {message.text}
                 </div>
               </div>

@@ -20,8 +20,8 @@ export default function SriLankaPage() {
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="w-full text-center">
-              <h2 className="font-medium text-4xl mb-10">Journey through Sri Lanka’s living tapestry</h2>
-              <p className="font-normal text-xl">
+              <h2 className="font-medium text-3xl mb-10">Journey through Sri Lanka’s living tapestry</h2>
+              <p className="font-normal text-md">
                 You can now start planning your holiday to Sri Lanka with our
                 experienced care. We specialise in family holidays, nature and
                 wildlife holidays, honeymoon holidays, cultural holidays,
@@ -32,7 +32,16 @@ export default function SriLankaPage() {
                 reviews we get.
               </p>
             </div>
-            <div><Chatbot chatbotId={"cda93067-397c-404b-8130-c2e68c403508"} /></div>
+            <div>
+              <video
+                src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                controls
+                autoPlay
+                loop
+                muted
+                className="mx-5 w-[calc(100%-40px)] rounded-2xl"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -42,9 +51,9 @@ export default function SriLankaPage() {
         selectedOption="All Holidays"
         onDropdownChange={(val) => console.log(val)}
       />
-      <TestimonialSection/>
-      <MoreDetails/>
-      <AttractionsSection/>
+      <TestimonialSection />
+      <MoreDetails />
+      <AttractionsSection />
     </>
   );
 }

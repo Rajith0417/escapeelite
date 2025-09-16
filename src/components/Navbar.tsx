@@ -65,7 +65,9 @@ export default function Navbar() {
 
   return (
     <nav className="bg-transparent fixed w-full z-60 backdrop-blur-[20px]">
+      <div className="absolute z-0 inset-0 bg-black opacity-50"></div>
       <div className="relative container mx-auto flex justify-between items-center py-4 px-6 border-b-1 border-white border-solid">
+        
         <Link href={`${basePath}/landing-page`}>
           <Image
             src={`${basePath}/logo.png`}

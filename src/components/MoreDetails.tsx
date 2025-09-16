@@ -28,7 +28,7 @@ const moreDetails = [
 
 export default function MoreDetails() {
   return (
-    <section className="py-24">
+    <section className="py-20">
       <div className="container mx-auto px-5 md:px-0 flex flex-col gap-10 md:flex-row  md:gap-16 md:mx-auto md:justify-between">
         {moreDetails.map((s, index) => (
           <div key={index} className="flex flex-col items-center text-center">
@@ -39,8 +39,8 @@ export default function MoreDetails() {
               height={84}
               className="h-20 mb-6"
             />
-            <p className="font-extrabold text-2xl">{s.title}</p>
-            <p className="font-medium text-xl">{s.more}</p>
+            <p className="font-extrabold text-xl mb-3">{s.title}</p>
+            <p className="font-medium text-md">{s.more}</p>
           </div>
         ))}
       </div>

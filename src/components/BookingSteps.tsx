@@ -26,7 +26,7 @@ const steps = [
 export default function BookingSteps() {
   return (
     <section className="py-16 text-center">
-      <h2 className="text-5xl font-medium mb-24 text-gray-800">
+      <h2 className="text-3xl font-medium mb-18 text-gray-800">
         Booking Your Travel With Us Is Easy
       </h2>
       <div className="grid md:grid-cols-3 gap-8 container mx-auto px-5 md:px-0">

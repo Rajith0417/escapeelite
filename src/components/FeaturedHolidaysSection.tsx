@@ -80,7 +80,7 @@ export default function FeaturedHolidaysSection() {
   return (
     <section className="w-full py-16">
       <div className="container mx-auto px-5 md:px-0">
-        <h2 className="text-center text-5xl font-medium mb-12 text-gray-800">
+        <h2 className="text-center text-3xl font-medium text-gray-800">
           Featured holidays
         </h2>
         <div className="w-full relative md:flex items-center min-h-[400px] hidden">
@@ -99,7 +99,7 @@ export default function FeaturedHolidaysSection() {
               slideShadows: false // remove side shadows
             }}
             modules={[EffectCoverflow]}
-            className="w-full max-w-4xl"
+            className="w-full max-w-6xl"
           >
             {holidays.map((holiday, index) => (
               <SwiperSlide 
