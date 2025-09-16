@@ -3,6 +3,7 @@
 import React, { JSX, ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import RoomSelection from "./chatbot/RoomSelection";
+import PriceCards from "./chatbot/PriceCards";
 
 // Types for API response
 interface Answer {
@@ -67,16 +68,39 @@ interface Question {
     answers?: Answer[];
 }
 
+interface Variation {
+    name: string;
+    estimatedPrice: number;
+    isDefault: boolean;
+}
+
+interface FullEstimation {
+    estimatedPrice: number;
+    currency: string;
+    //   companyId: string;
+    //   breakdown: VariationBreakdown;
+    //   countryInfo: CountryInfo;
+    //   numberOfNights: number;
+    variations: Variation[];
+    selectedVariation: Variation;
+}
+
+interface EstimationPrice {
+    priceText: string;
+    fullEstimation: FullEstimation;
+}
+
 interface ApiResponse {
     sessionId: string;
-    nextQuestion?: {
-        question: Question;
-        isComplete?: boolean;
+    nextQuestion: {
+        question?: Question | null;
+        isComplete: boolean;
     };
     questionnaireConfig?: {
         welcomeMessage?: string;
         endingMessage?: string;
     };
+    estimationPrice?: EstimationPrice;
 }
 
 interface Message {
@@ -95,6 +119,8 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
     const [options, setOptions] = useState<string[]>([]);
     const [sessionId, setSessionId] = useState<string | null>(null);
     const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
+    const [currentEstimation, setCurrentEstimation] = useState<EstimationPrice | null>(null);
+    const [isCompleted, setIsCompleted] = useState<boolean>(false);
     const [input, setInput] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedDropdown, setSelectedDropdown] = useState("");
@@ -148,9 +174,11 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                 }
 
                 // Show first question
-                if (data.nextQuestion?.question) {
-                    const q = data.nextQuestion.question;
+                if (!data.nextQuestion.isComplete && data.nextQuestion.question) {
+                    const q = data.nextQuestion?.question;
+                    const isCompleted = data.nextQuestion.isComplete;
                     setCurrentQuestion(q);
+                    setIsCompleted(isCompleted);
                     setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
                     setOptions(q.answers?.map((a) => a.answer) ?? []);
                 }
@@ -205,10 +233,17 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
             const data: ApiResponse = await res.json();
             console.log("Response API:", data);
 
-            if (data.nextQuestion?.question) {
+            if (!data.nextQuestion?.isComplete && data.nextQuestion?.question) {
                 const q = data.nextQuestion.question;
+                const isCompleted = data.nextQuestion.isComplete;
                 setCurrentQuestion(q);
-                setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
+                setIsCompleted(isCompleted);
+                q.longText.split("\\n").map(line =>{
+                    line.trim();
+                    console.log(line);
+                    setMessages((prev) => [...prev, { sender: "bot", text: line }]);
+                })
+
                 setOptions(q.answers?.map((a) => a.answer) ?? []);
 
                 // Reset all input states when new question arrives
@@ -224,6 +259,14 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     },
                 ]);
                 setCurrentQuestion(null);
+            } else {
+                console.log("else");
+
+                const estimate = data.estimationPrice;
+                if (estimate) {
+                    setCurrentEstimation(estimate);
+                }
+                console.log(currentEstimation);
             }
         } catch (err) {
             console.error("Response error:", err);
@@ -309,33 +352,54 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
 
     // Render input based on question type
     const renderQuestionInput = (): JSX.Element | null => {
-        if (!currentQuestion) return null;
+        // if (!currentQuestion) return null;
+        if (!isCompleted) {
+            console.log("if 2");
+            console.log(currentQuestion);
 
-        switch (currentQuestion.questionType) {
-            case "DATE_PICKER":
-                return renderDatePicker();
 
-            case "DROP_DOWN":
-            case "SELECT":
-                return renderDropdown();
+            switch (currentQuestion?.questionType) {
+                case "DATE_PICKER":
+                    return renderDatePicker();
 
-            case "MCQ_SINGLE_CHOICE":
-            case "MCQ_MULTIPLE_CHOICE":
-                if (options.length > 0) {
-                    return renderChipOptions();
-                }
-                return renderTextInput();
-            case "MULTI_SLIDER":
-                return <MultiSliderComponent />;
-            case "MULTIPLE_FREE_FORM_TEXT":
-                return <MultipleFreeFormText />;
-            case "ROOM_SELECTION":
-                // return roomSelection();
-                return <RoomSelection  onSubmit={(payload) => sendAnswer(payload)} isLoading={isLoading}/>;
-            default:
-                return renderTextInput();
+                case "DROP_DOWN":
+                case "SELECT":
+                    return renderDropdown();
+
+                case "MCQ_SINGLE_CHOICE":
+                case "MCQ_MULTIPLE_CHOICE":
+                    if (options.length > 0) {
+                        return renderChipOptions();
+                    }
+                    return renderTextInput();
+                case "MULTI_SLIDER":
+                    return <MultiSliderComponent />;
+                case "MULTIPLE_FREE_FORM_TEXT":
+                    return <MultipleFreeFormText />;
+                case "ROOM_SELECTION":
+                    return <RoomSelection onSubmit={(payload) => sendAnswer(payload)} isLoading={isLoading} />;
+                default:
+                    return renderTextInput();
                 // return null;
+            }
+        } else {
+            console.log("else 2");
+
+            if (currentEstimation) {
+                return <PriceCards
+                    selectedName={currentEstimation.fullEstimation.selectedVariation.name}
+                    currency={currentEstimation?.fullEstimation.currency}
+                    variations={currentEstimation?.fullEstimation.variations.map(v => ({
+                        name: v.name,
+                        estimatedPrice: v.estimatedPrice,
+                        isDefault: v.isDefault
+                    }))}
+                    onSelect={(name) => console.log("User clicked:", name)}
+                />
+            }
+            return null;
         }
+
     };
 
     // Render multi slider
@@ -417,11 +481,19 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
         const handleSubmit = () => {
             if (validateSliders()) {
                 // Format the answer as an array of objects with slider labels and values
-                const answer = sliders.map((slider) => ({
-                    [slider.shortText]: sliderValues[slider.id] || 0
-                }));
+                // const answer = sliders.map((slider) => ({
+                //     [slider.shortText]: sliderValues[slider.id] || 0
+                // }));
 
-                sendAnswer(JSON.stringify(answer));
+                // sendAnswer(JSON.stringify(answer));
+                const formattedAnswer = sliders
+                    .map(slider => {
+                        const value = sliderValues[slider.id] || 0;
+                        return `${slider.shortText}: ${value}/${slider.maxValue}`;
+                    })
+                    .join(', ');
+                // Send that string to the bot
+                sendAnswer(formattedAnswer);
             }
         };
 
@@ -460,7 +532,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                 <button
                     onClick={handleSubmit}
                     disabled={isLoading}
-                    className="font-normal text-xl px-6 py-2.5 bg-white text-black rounded-full border border-white hover:bg-blue-50 disabled:opacity-50"
+                    className="font-normal text-md px-6 py-2.5 bg-white text-black rounded-full border border-white hover:bg-blue-50 disabled:opacity-50"
                 >
                     {isLoading ? "..." : "Submit"}
                 </button>
@@ -547,12 +619,21 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
         const handleSubmit = () => {
             if (validateForm()) {
                 // Format the answer as an object with field labels and values
-                const answer: Record<string, string> = {};
-                textFields.forEach((field) => {
-                    answer[field.label] = formData[field.id] || "";
-                });
+                // const answer: Record<string, string> = {};
+                // textFields.forEach((field) => {
+                //     answer[field.label] = formData[field.id] || "";
+                // });
 
-                sendAnswer(JSON.stringify(answer));
+                // sendAnswer(JSON.stringify(answer));
+                const formattedAnswer = textFields
+                    .map((field) => {
+                        const value = formData[field.id] || "";
+                        return `${field.label}: ${value}`;
+                    })
+                    .join(", ");
+
+                sendAnswer(formattedAnswer);
+
             }
         };
 
@@ -569,7 +650,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                             value={formData[field.id] || ""}
                             onChange={(e) => handleInputChange(field.id, e.target.value)}
                             placeholder={field.placeholder || ""}
-                            className="text-xl font-normal w-full px-6 py-2.5 bg-transparent text-white rounded-[100px] border border-white focus:outline-0 placeholder-white"
+                            className="text-md font-normal w-full px-6 py-2.5 bg-transparent text-white rounded-[100px] border border-white focus:outline-0 placeholder-white"
                             aria-invalid={!!errors[field.id]}
                             aria-describedby={errors[field.id] ? `${field.id}-error` : undefined}
                         />
@@ -584,7 +665,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                 <button
                     onClick={handleSubmit}
                     disabled={isLoading}
-                    className="font-normal text-xl px-6 py-2.5 bg-white text-black rounded-[100px] border border-white disabled:hidden"
+                    className="font-normal text-md px-6 py-2.5 bg-white text-black rounded-[100px] border border-white disabled:hidden"
                 >
                     {isLoading ? "..." : "Submit"}
                 </button>
@@ -603,13 +684,13 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     min={getMinDate()}
                     max={getMaxDate()}
                     disabled={isLoading}
-                    className="text-xl font-normal min-w-1/2 flex-1 px-6 py-2.5 bg-bg-white text-white rounded-full border border-white  focus:border-white disabled:hidden placeholder-white"
+                    className="text-md font-normal min-w-1/2 flex-1 px-6 py-2.5 bg-bg-white text-white rounded-full border border-white  focus:border-white disabled:hidden placeholder-white"
                     aria-label="Select date"
                 />
                 <button
                     onClick={handleDateSubmit}
                     disabled={!selectedDate || isLoading}
-                    className="font-normal text-xl px-6 py-2.5 bg-white text-black rounded-full border border-white disabled:hidden"
+                    className="font-normal text-md px-6 py-2.5 bg-white text-black rounded-full border border-white disabled:hidden"
                 >
                     {isLoading ? "..." : "Select"}
                 </button>
@@ -642,7 +723,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                         value={selectedDropdown}
                         onChange={(e) => setSelectedDropdown(e.target.value)}
                         disabled={isLoading}
-                        className="text-xl font-normal flex-1 border text-white border-white rounded-[100px] px-6 py-2.5 focus-visible:border-[1px] focus:outline-0 focus:border-white disabled:bg-gray-100"
+                        className="text-md font-normal flex-1 border text-white border-white rounded-[100px] px-6 py-2.5 focus-visible:border-[1px] focus:outline-0 focus:border-white disabled:bg-gray-100"
                         aria-label="Select from dropdown"
                     >
                         <option value="">Select an option</option>
@@ -655,7 +736,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     <button
                         onClick={handleDropdownSubmit}
                         disabled={!selectedDropdown || isLoading}
-                        className="font-normal text-xl px-4 py-2 border border-white bg-white text-black rounded-[100px] hover:outline-0 disabled:hidden"
+                        className="font-normal text-md px-4 py-2 border border-white bg-white text-black rounded-[100px] hover:outline-0 disabled:hidden"
                     >
                         {isLoading ? "..." : "Submit"}
                     </button>
@@ -676,141 +757,13 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     key={idx}
                     onClick={() => sendAnswer(opt)}
                     disabled={isLoading}
-                    className="text-start px-6 py-2.5 bg-transparent text-white rounded-full border border-white font-normal text-xl transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed disabled:text-gray-500"
+                    className="font-poppins text-start px-6 py-2.5 bg-transparent text-white rounded-full border border-white font-normal text-md transition-colors disabled:bg-gray-100 disabled:cursor-not-allowed disabled:hidden"
                 >
                     {opt}
                 </button>
             ))}
         </div> : null
     );
-
-    //Render room selection
-    // const roomSelection = (): JSX.Element | null => {
-    //     const updateRoom = (
-    //         index: number,
-    //         field: "adults" | "children",
-    //         value: number
-    //     ) => {
-    //         setRooms((prev) => {
-    //             const updated = [...prev];
-    //             updated[index][field] = Math.max(0, value); // no negatives
-    //             if (field === "children") {
-    //                 updated[index].childAges = Array(value).fill(0);
-    //             }
-    //             return updated;
-    //         });
-    //     };
-
-    //     const updateChildAge = (roomIdx: number, childIdx: number, age: number) => {
-    //         setRooms((prev) => {
-    //             const updated = [...prev];
-    //             updated[roomIdx].childAges[childIdx] = age;
-    //             return updated;
-    //         });
-    //     };
-
-    //     const totalOccupants = rooms.reduce(
-    //         (acc, r) => acc + r.adults + r.children,
-    //         0
-    //     );
-
-    //     return (
-    //         !isLoading ? <div className="p-3 space-y-4">
-    //             <p>Number of Rooms (1-10):</p>
-    //             {rooms.map((room, idx) => (
-    //                 <div
-    //                     key={idx}
-    //                     className="p-3 rounded-lg space-y-3 shadow-sm"
-    //                 >
-    //                     <p className="font-semibold">Room {idx + 1}</p>
-
-    //                     {/* Adults */}
-    //                     <div className="flex flex-row items-center space-x-2">
-    //                         <span className="flex-1">Adults</span>
-    //                         <div className="w-[145px] flex gap-6 px-6 py-3 items-center border border-white rounded-[100px]">
-    //                             <button
-    //                                 onClick={() => updateRoom(idx, "adults", room.adults - 1)}
-    //                                 className="flex justify-center items-center w-5 h-5 bg-white border border-white text-white rounded-[100%]"
-    //                             >
-    //                                 -
-    //                             </button>
-    //                             <span className="text-white">{room.adults}</span>
-    //                             <button
-    //                                 onClick={() => updateRoom(idx, "adults", room.adults + 1)}
-    //                                 className="flex justify-center items-center w-5 h-5 bg-blue-400 border border-white text-white rounded-[100%]"
-    //                             >
-    //                                 +
-    //                             </button>
-    //                         </div>
-
-    //                     </div>
-
-    //                     {/* Children */}
-    //                     <div className="flex items-center space-x-2">
-    //                         <span className="flex-1">Children</span>
-    //                         <div className="w-[145px] flex gap-6 px-6 py-3 items-center border border-white rounded-[100px]">
-    //                             <button
-    //                                 onClick={() => updateRoom(idx, "children", room.children - 1)}
-    //                                 className="flex justify-center items-center w-5 h-5 bg-white border border-white text-white rounded-[100%]"
-    //                             >
-    //                                 -
-    //                             </button>
-    //                             <span>{room.children}</span>
-    //                             <button
-    //                                 onClick={() => updateRoom(idx, "children", room.children + 1)}
-    //                                 className="flex justify-center items-center w-5 h-5 bg-blue-400 border border-white text-white rounded-[100%]"
-    //                             >
-    //                                 +
-    //                             </button>
-    //                         </div>
-
-    //                     </div>
-
-    //                     {/* Child Ages */}
-    //                     {room.children > 0 && (
-    //                         <div className="flex items-center">
-    //                             <span className="flex-1 text-sm font-medium">Child Ages</span>
-    //                             {room.childAges.map((age, cIdx) => (
-    //                                 <select
-    //                                     key={cIdx}
-    //                                     value={age}
-    //                                     onChange={(e) =>
-    //                                         updateChildAge(idx, cIdx, parseInt(e.target.value))
-    //                                     }
-    //                                     className="w-[145px] border border-white rounded-[100px] px-6 py-3 focus:outline-0"
-    //                                 >
-    //                                     <option value={0}>-</option>
-    //                                     {Array.from({ length: 17 }, (_, i) => (
-    //                                         <option key={i + 1} value={i + 1}>
-    //                                             {i + 1}
-    //                                         </option>
-    //                                     ))}
-    //                                 </select>
-    //                             ))}
-    //                         </div>
-    //                     )}
-    //                 </div>
-    //             ))}
-
-    //             {/* Summary */}
-    //             <p className="text-sm text-gray-600">
-    //                 Total occupants: {totalOccupants}
-    //             </p>
-
-    //             {/* Submit */}
-    //             <button
-    //                 onClick={() => {
-    //                     const payload = JSON.stringify(rooms);
-    //                     sendAnswer(payload);
-    //                 }}
-    //                 disabled={isLoading}
-    //                 className="font-normal text-xl px-6 py-2.5 border bg-white border-white text-black rounded-[100px] hover:border-white disabled:hidden"
-    //             >
-    //                 {isLoading ? "..." : "Submit"}
-    //             </button>
-    //         </div> : null
-    //     );
-    // };
 
     // Render text input (fallback)
     const renderTextInput = (): JSX.Element | null => (
@@ -822,12 +775,12 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                     onKeyPress={handleKeyPress}
                     placeholder={getInputPlaceholder()}
                     disabled={isLoading}
-                    className="text-xl font-normal flex-1 border border-white text-white rounded-full px-4 py-2 focus:outline-0 disabled:hidden placeholder-white"
+                    className="text-md font-normal flex-1 border border-white text-white rounded-full px-4 py-2 focus:outline-0 disabled:hidden placeholder-white"
                 />
                 <button
                     onClick={handleSubmit}
                     disabled={!input.trim() || isLoading}
-                    className="font-normal text-xl px-4 py-2 bg-white text-black rounded-full disabled:hidden"
+                    className="font-normal text-md px-4 py-2 bg-white text-black rounded-full disabled:hidden"
                 >
                     {isLoading ? "..." : "Submit"}
                 </button>
@@ -837,14 +790,14 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
     );
 
     return (
-        <div className={`fixed bottom-6 md:bottom-16 right-6 md:right-16 ${isOpen ? "left-6 md:left-1/2" : ""} z-50`}>
+        <div className={`fixed bottom-6 md:bottom-6 right-6 md:right-6 ${isOpen ? "left-6 md:left-1/2" : ""} z-50`}>
             {!isOpen && (
                 <>
                     <button
                         onClick={toggleChat}
-                        className="w-[60px] h-[60px] md:w-[120px] md:h-[120px] cursor-pointer rounded-full shadow-lg transition-all duration-200 hover:scale-105 relative flex items-center justify-center bg-white"
+                        className="w-[60px] h-[60px] md:w-[100px] md:h-[100px] cursor-pointer rounded-full shadow-lg transition-all duration-200 hover:scale-105 relative flex items-center justify-center bg-white"
                     >
-                        <div className="relative w-[52px] h-[52px] md:w-[100px] md:h-[100px] rounded-full overflow-hidden">
+                        <div className="relative w-[52px] h-[52px] md:w-[80px] md:h-[80px] rounded-full overflow-hidden">
                             <Image
                                 src={`${basePath}/images/user.png`}
                                 alt="chatbot"
@@ -853,7 +806,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                             />
                         </div>
                     </button>
-                    <div className="shadow-lg absolute bottom-[30px] right-[70px] md:bottom-[60px] md:right-[130px] translate-y-1/2 px-4 py-3 font-normal text-xs md:text-xl rounded-full bg-white whitespace-nowrap">
+                    <div className="shadow-lg absolute bottom-[30px] right-[70px] md:bottom-[50px] md:right-[120px] translate-y-1/2 px-4 py-3 font-normal text-xs md:text-lg rounded-full bg-white whitespace-nowrap">
                         Get Your Holiday Quote in 2 Minutes
                     </div>
                 </>
@@ -892,7 +845,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                                     }`}
                             >
                                 {message.sender === "bot" ? (
-                                    <div className="flex items-start gap-2">
+                                    <div className="flex items-start gap-2 w-full">
                                         <Image
                                             src={`${basePath}/images/user.png`}
                                             alt={"chatbot"}
@@ -900,12 +853,12 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                                             height={10}
                                             className="w-10 h-10 rounded-full"
                                         />
-                                        <div className="font-poppins bg-white text-gray-900 whitespace-pre-line px-4 py-4 rounded-2xl max-w-[75%] text-xl font-normal">
+                                        <div className="font-poppins bg-white text-gray-900 whitespace-break-spaces px-4 py-4 rounded-2xl max-w-[75%] text-md font-normal">
                                             {message.text.replace(/\\n/g, '\n')}
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="flex items-start gap-2 flex-row-reverse">
+                                    <div className="flex items-start gap-2 flex-row-reverse w-full">
                                         <Image
                                             src={`${basePath}/images/user.png`}
                                             alt={"chatbot"}
@@ -913,7 +866,7 @@ function ChatbotMain({ chatbotId }: ChatbotProps) {
                                             height={10}
                                             className="w-10 h-10 rounded-full"
                                         />
-                                        <div className="bg-white font-poppins border-white border whitespace-pre-line text-blue-400 px-6 py-2 rounded-2xl max-w-[75%] text-xl font-normal">
+                                        <div className="bg-white font-poppins border-white border whitespace-pre-line text-blue-400 px-6 py-2 rounded-2xl max-w-[75%] text-md font-normal">
                                             {message.text.replace(/\\n/g, '\n')}
                                         </div>
                                     </div>

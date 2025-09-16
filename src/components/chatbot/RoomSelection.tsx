@@ -8,21 +8,37 @@ interface Room {
 }
 
 interface RoomSelectionProps {
-  onSubmit: (payload: string) => void;
-  isLoading: boolean;
-  isPage?: boolean;
+    onSubmit: (payload: string) => void;
+    isLoading: boolean;
+    isPage?: boolean;
 }
 
 // const RoomSelection: React.FC<RoomSelectionProps> = ({ onSubmit }) => {
-function RoomSelection({ onSubmit, isLoading, isPage=false }: RoomSelectionProps) {
+function RoomSelection({ onSubmit, isLoading, isPage = false }: RoomSelectionProps) {
     const [rooms, setRooms] = useState<Room[]>([
         { adults: 2, children: 0, childAges: [] },
     ]);
 
+    //     const handleSubmit = () => {
+    //     const payload = JSON.stringify(rooms);
+    //     onSubmit(payload); // ✅ send data to parent
+    //   }; 
+
     const handleSubmit = () => {
-    const payload = JSON.stringify(rooms);
-    onSubmit(payload); // ✅ send data to parent
-  }; 
+        const formatted = rooms
+            .map((room, idx) => {
+                const adultText = `${room.adults} adult${room.adults !== 1 ? "s" : ""}`;
+                const childText =
+                    room.children > 0
+                        ? `${room.children} child${room.children !== 1 ? "ren" : ""} with children aged ${room.childAges.join(", ")}`
+                        : "0 children";
+                return `Room ${idx + 1}: ${adultText}, ${childText}`;
+            })
+            .join(", ");
+
+        onSubmit(formatted); // send nicely formatted string to parent
+    };
+
 
     const handleRoomCountChange = (count: number) => {
         const newRooms: Room[] = [];
@@ -49,7 +65,7 @@ function RoomSelection({ onSubmit, isLoading, isPage=false }: RoomSelectionProps
         });
     };
 
-    const updateChildAge = (roomIdx: number, childIdx: number, age: number ) => {
+    const updateChildAge = (roomIdx: number, childIdx: number, age: number) => {
         setRooms((prev) => {
             const updated = [...prev];
             updated[roomIdx].childAges[childIdx] = age;
@@ -62,14 +78,14 @@ function RoomSelection({ onSubmit, isLoading, isPage=false }: RoomSelectionProps
     // };
 
     return (
-        !isLoading && <div className={`p-6 ${isPage ? 'text-black' : 'text-white'} rounded-xl space-y-6 w-full`}>
+        !isLoading && <div className={`p-6 ${isPage ? 'text-black' : 'text-white'} rounded-xl space-y-6 w-full font-poppins`}>
             {/* Room Count */}
-            <div className="space-y-2 w-[255px] text-xl font-normal">
+            <div className="space-y-2 w-[255px] text-md font-normal">
                 <label className="block">Number of Rooms (1-10):</label>
                 <select
                     value={rooms.length}
                     onChange={(e) => handleRoomCountChange(Number(e.target.value))}
-                    className={`${isPage ? 'border-black' : 'border-white'} w-full px-4 py-2 rounded-full border bg-transparent focus:outline-none`}
+                    className={`${isPage ? 'border-black' : 'border-white'} w-full px-4 py-2 rounded-full text-md border bg-transparent focus:outline-none`}
                 >
                     {Array.from({ length: 10 }, (_, i) => (
                         <option key={i + 1} value={i + 1}>
@@ -82,11 +98,11 @@ function RoomSelection({ onSubmit, isLoading, isPage=false }: RoomSelectionProps
             {/* Room sections */}
             {rooms.map((room, idx) => (
                 <div key={idx} className="space-y-6 flex items-baseline">
-                    <p className="font-normal text-xl w-24">Room {idx + 1}</p>
+                    <p className="font-normal text-md w-24">Room {idx + 1}</p>
 
                     <div className="flex flex-col gap-5">
                         {/* Adults */}
-                        <div className="flex items-center justify-between font-normal text-xl">
+                        <div className="flex items-center justify-between font-normal text-md">
                             <span className="w-24">Adults</span>
                             <div className={`${isPage ? 'border-black' : 'border-white'} w-[160px] flex items-center gap-6 px-4 py-2 border rounded-full`}>
                                 <button
@@ -106,7 +122,7 @@ function RoomSelection({ onSubmit, isLoading, isPage=false }: RoomSelectionProps
                         </div>
 
                         {/* Children */}
-                        <div className="flex items-center justify-between font-normal text-xl">
+                        <div className="flex items-center justify-between font-normal text-md">
                             <span className="w-24">Children</span>
                             <div className={`${isPage ? 'border-black' : 'border-white'} w-[160px] flex items-center gap-6 px-4 py-2 border rounded-full`}>
                                 <button
@@ -129,13 +145,13 @@ function RoomSelection({ onSubmit, isLoading, isPage=false }: RoomSelectionProps
                         {room.children > 0 &&
                             room.childAges.map((age, cIdx) => (
                                 <div key={cIdx} className="flex items-center justify-between">
-                                    <span className="w-24 font-normal text-xl">Child {String(cIdx + 1).padStart(2, "0")}</span>
+                                    <span className="w-24 font-normal text-md">Child {String(cIdx + 1).padStart(2, "0")}</span>
                                     <select
                                         value={age}
                                         onChange={(e) =>
                                             updateChildAge(idx, cIdx, Number(e.target.value))
                                         }
-                                        className={`${isPage ? 'text-black' : 'text-white'} w-[160px] px-4 py-2 rounded-full border font-normal text-xl bg-transparent focus:outline-none`}
+                                        className={`${isPage ? 'text-black' : 'text-white'} w-[160px] px-4 py-2 rounded-full border font-normal text-md bg-transparent focus:outline-none`}
                                     >
                                         <option value={0}>-</option>
                                         {Array.from({ length: 17 }, (_, i) => (
@@ -153,7 +169,7 @@ function RoomSelection({ onSubmit, isLoading, isPage=false }: RoomSelectionProps
             {/* Submit */}
             <button
                 onClick={handleSubmit}
-                className={`${isPage ? 'border-blue-400' : 'border-white'} border w-auto px-6 py-3 bg-white text-gray-900 rounded-full font-normal text-xl`}
+                className={`${isPage ? 'border-blue-400' : 'border-white'} border w-auto px-6 py-3 bg-white text-gray-900 rounded-full font-normal text-md`}
             >
                 Submit
             </button>
