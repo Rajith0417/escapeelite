@@ -14,7 +14,7 @@ function Pill({ children, onClick }: PillProps) {
   console.log("inside pill "+children);
   
   return (
-    <span className="font-inter inline-block rounded-full bg-[#EFF7FF] font-medium px-3 py-1 text-xs text-black"
+    <span className="font-inter inline-block rounded-full bg-[#EFF7FF] font-medium px-3 py-1 text-xs text-gray-900"
       onClick={onClick}
       >
       {children}

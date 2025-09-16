@@ -24,7 +24,7 @@ export default function HolidayCardDetails({
   onViewMoreHref,
 }: HolidayCardDetailsProps) {
   return (
-    <article className="m-0.5 md:m-0 flex flex-col h-full rounded-xl bg-white md:shadow-lg ring-1 ring-black/5 overflow-hidden">
+    <article className="font-poppins m-0.5 md:m-0 flex flex-col h-full rounded-xl bg-white md:shadow-lg ring-1 ring-black/5 overflow-hidden">
       {/* Top image - fixed height */}
       <div className="relative w-full flex-shrink-0">
         <Image
@@ -39,12 +39,12 @@ export default function HolidayCardDetails({
       {/* Content - flex to fill remaining space */}
       <div className="flex flex-col flex-1 p-6 md:p-5">
         {/* Title - fixed height with line clamp */}
-        <h3 className="text-xl leading-7 font-normal text-gray-900 mb-4 line-clamp-2 min-h-[3.5rem]">
+        <h3 className="text-xl leading-7 font-semibold text-gray-900 mb-4 line-clamp-2 min-h-[3.5rem]">
           {title}
         </h3>
 
         {/* Description - fixed height with line clamp */}
-        <p className="text-gray-600 leading-6 mb-5 md:mb-4 line-clamp-2 min-h-[4.5rem] flex-shrink-0">
+        <p className="text-[14px] font-normal text-gray-600 leading-6 mb-5 md:mb-4 line-clamp-2 min-h-[4.5rem] flex-shrink-0">
           {description}
         </p>
 

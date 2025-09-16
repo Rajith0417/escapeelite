@@ -42,7 +42,7 @@ export default function AccommodationCard({
       </div>
 
       {/* Content section */}
-      <div className="p-6 flex-1 flex flex-col justify-between">
+      <div className="font-poppins p-6 flex-1 flex flex-col justify-between">
         {/* Star rating */}
         <div className="flex items-center mb-5">
           {[...Array(5)].map((_, index) => (
@@ -60,7 +60,7 @@ export default function AccommodationCard({
         </div>
 
         {/* Title */}
-        <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 leading-tight">
+        <h3 className="text-xl font-semibold text-gray-900 mb-3 leading-tight">
           {title}
         </h3>
 
@@ -73,10 +73,10 @@ export default function AccommodationCard({
         <div className="flex items-center justify-between">
           <a
             href={onViewDetailsHref}
-            className="text-gray-500 text-sm hover:text-gray-700 transition-colors flex items-center gap-2"
+            className="text-blue-400 text-xs hover:text-blue-500 transition-colors flex items-center gap-2"
           >
             Click to view details
-            <Image src={`${basePath}/icons/arrowGray.svg`} alt={""} width={24} height={24} className="block"/>
+            <Image src={`${basePath}/icons/arrowBlue.svg`} alt={""} width={12} height={12} className="block"/>
           </a>
         </div>
       </div>

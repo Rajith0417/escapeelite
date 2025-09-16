@@ -71,7 +71,7 @@ export default function ItineraryDayCard({
 
 
   return (
-    <article className="m-0.5 md:m-0 rounded-xl ring-1 ring-gray-200 bg-white overflow-hidden">
+    <article className="font-inter m-0.5 md:m-0 rounded-xl ring-1 ring-gray-200 bg-white overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 px-5 py-8">
         {/* Left image */}
         <div className="relative aspect-[4/3] md:aspect-auto md:h-[200px] rounded-lg overflow-hidden">
@@ -98,7 +98,7 @@ export default function ItineraryDayCard({
           <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 md:gap-4">
             {/* Attractions */}
             <div className="col-span-1 lg:col-span-2">
-              <h4 className="text-base lg:text-xs font-semibold text-gray-500 mb-2">
+              <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
                 Attractions
               </h4>
               <div className="flex flex-wrap gap-2 px-5 py-4 rounded-lg xl:ring-1 ring-gray-200 items-start md:items-center text-center">
@@ -110,7 +110,7 @@ export default function ItineraryDayCard({
 
             {/* Accommodation */}
             <div className="col-span-1 lg:col-span-3 text-center">
-              <h4 className="text-base lg:text-xs font-semibold text-gray-500 mb-2">
+              <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
                 Accommodation
               </h4>
               <div className="hidden lg:col-span-2 xl:grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -138,7 +138,7 @@ export default function ItineraryDayCard({
 
             {/* Transportation */}
             <div className="col-span-1 lg:col-span-2">
-              <h4 className="text-base lg:text-xs font-semibold text-gray-500 mb-2">
+              <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
                 Transportation
               </h4>
               <div className="space-y-3 flex flex-col rounded-lg xl:ring-1 ring-gray-200">

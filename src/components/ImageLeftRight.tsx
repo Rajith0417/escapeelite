@@ -11,7 +11,7 @@ interface ImageLeftRightProps {
 
 function ImageLeftRight({img, alt, title, paragraph, format}: ImageLeftRightProps) {
   return (
-    <div className={`flex gap-6 items-center mb-8 flex-col ${format === "right" ? "md:flex-row" : "md:flex-row-reverse"} border border-[#ECEBEB] md:border-none rounded-lg md:rounded-none`}>
+    <div className={`text-poppins flex gap-6 items-center mb-8 flex-col ${format === "right" ? "md:flex-row" : "md:flex-row-reverse"} border border-[#ECEBEB] md:border-none rounded-lg md:rounded-none`}>
         <div className="relative w-full  md:w-1/2 xl:w-[624px] aspect-[12/7]">
         <Image
             src={img}
@@ -21,8 +21,8 @@ function ImageLeftRight({img, alt, title, paragraph, format}: ImageLeftRightProp
         />
         </div>
         <div className='flex-1 p-4 md:p-0'>
-            <h3 className='font-semibold text-[32px] mb-8 text-gray-900'>{title}</h3>
-            <p className='text-base font-normal text-gray-700'>{paragraph}</p>
+            <h3 className='font-semibold text-xl mb-8 text-gray-900 uppercase'>{title}</h3>
+            <p className='text-md font-normal text-gray-700'>{paragraph}</p>
         </div>
     </div>
   )

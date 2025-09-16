@@ -25,7 +25,7 @@ function AttractionCard(children: AttractionCardProps) {
         <h4 className="font-semibold text-xl">{children.title}</h4>
         <hr className="my-4" />
         <p className="font-medium text-sm line-clamp-3">{children.paragraph}</p>
-        <a href="Read More" className="font-semibold block text-base mt-4">Read More
+        <a href="Read More" className="font-semibold block text-[14px] mt-4">Read More
           <Image
             src={`${basePath}/icons/arrowRight.svg`}
             alt={children.title}

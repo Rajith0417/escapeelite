@@ -5,6 +5,8 @@ import Image from "next/image";
 import TestimonialSection from "@/components/TestimonialSection";
 import Chatbot from "@/components/Chatbot";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export default function Contact() {
   return (
     <>
@@ -22,7 +24,7 @@ export default function Contact() {
             </div>
             <div className="w-full flex flex-col gap-12">
               <div className="flex items-start gap-5">
-                <Image src={"/icons/map.svg"} alt={""} width={24} height={24}/>
+                <Image src={`${basePath}/icons/map.svg`} alt={""} width={24} height={24}/>
                 <div>
                   <h3 className="text-2xl font-normal text-gray-900">
                     Location
@@ -41,7 +43,7 @@ export default function Contact() {
                 </div>
               </div>
               <div className="flex items-start gap-5">
-                <Image src={"/icons/send.svg"} alt={""} width={24} height={24}/>
+                <Image src={`${basePath}/icons/send.svg`} alt={""} width={24} height={24}/>
                 <div>
                   <h3 className="text-2xl font-normal text-gray-900">Email</h3>
                   <p className="mt-1 text-base font-normal">
@@ -55,7 +57,7 @@ export default function Contact() {
                 </div>
               </div>
               <div className="flex items-start gap-5">
-                <Image src={"/icons/call.svg"} alt={""} width={24} height={24}/>
+                <Image src={`${basePath}/icons/call.svg`} alt={""} width={24} height={24}/>
                 <div>
                   <h3 className="text-xl font-normal text-gray-900">Phone</h3>
                   <p className="mt-1 text-base font-normal">
