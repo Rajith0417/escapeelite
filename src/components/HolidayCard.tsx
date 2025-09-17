@@ -26,7 +26,7 @@ function HolidayCard({id, img, title, location}: HolidayCardProps) {
         <div className="flex items-center justify-center space-x-2 mb-1">
           <p className="text-lg font-semibold">{title}</p>
           <Link 
-            href={`${basePath}/sri-lanka/${id}`} 
+            href={`/sri-lanka/${id}`} 
             className="hover:scale-110 transition-transform">
             <Image
               src={`${basePath}/icons/arrowBlue.svg`}
