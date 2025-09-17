@@ -73,7 +73,7 @@ export default function AccommodationCard({
         {/* CTA link */}
         <div className="flex items-center justify-between">
           <Link
-            href={`${basePath}${onViewDetailsHref}`}
+            href={`${onViewDetailsHref}`}
             className="text-blue-400 text-xs hover:text-blue-500 transition-colors flex items-center gap-2"
           >
             Click to view details
