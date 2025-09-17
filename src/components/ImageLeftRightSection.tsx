@@ -109,18 +109,18 @@ export default function ImageLeftRightSection() {
     <section className="py-16">
       <div className="container mx-auto px-5 md:px-0">
         <div className="hidden md:block">
-            {currentContents.map((content, index) => (
-                <ImageLeftRight
-                    key={index}
-                    img={`${basePath}${content.image}`}
-                    alt={content.alt}
-                    title={content.title}
-                    paragraph={content.paragraph}
-                    format={index % 2 === 0 ? "right" : "left"}
-                />
-            ))}
+          {currentContents.map((content, index) => (
+            <ImageLeftRight
+              key={index}
+              img={`${basePath}${content.image}`}
+              alt={content.alt}
+              title={content.title}
+              paragraph={content.paragraph}
+              format={index % 2 === 0 ? "right" : "left"}
+            />
+          ))}
         </div>
-        
+
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="mt-12 hidden md:block">
@@ -132,33 +132,33 @@ export default function ImageLeftRightSection() {
           </div>
         )}
         <div className="block md:hidden">
-        <Swiper
-                slidesPerView={1}
-                spaceBetween={30}
-                loop={true}
-                // pagination={{
-                // clickable: true,
-                // }}
-                navigation={true}
-                modules={[Navigation]}
-                className="mySwiper"
-            >
-                {contents.map((content, index) => (
-                <SwiperSlide
-                    key={index}
-                    className=" rounded-xl md:shadow-lg transition overflow-hidden"
-                >
-                    <ImageLeftRight
-                        key={index}
-                        img={content.image}
-                        alt={content.alt}
-                        title={content.title}
-                        paragraph={content.paragraph}
-                        format="right"
-                    />
-                </SwiperSlide>
-                ))}
-            </Swiper>
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={30}
+            loop={true}
+            // pagination={{
+            // clickable: true,
+            // }}
+            navigation={true}
+            modules={[Navigation]}
+            className="mySwiper"
+          >
+            {contents.map((content, index) => (
+              <SwiperSlide
+                key={index}
+                className=" rounded-xl md:shadow-lg transition overflow-hidden"
+              >
+                <ImageLeftRight
+                  key={index}
+                  img={content.image}
+                  alt={content.alt}
+                  title={content.title}
+                  paragraph={content.paragraph}
+                  format="right"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
