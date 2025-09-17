@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image";
+import Link from "next/link";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -71,13 +72,13 @@ export default function AccommodationCard({
 
         {/* CTA link */}
         <div className="flex items-center justify-between">
-          <a
-            href={onViewDetailsHref}
+          <Link
+            href={`${basePath}${onViewDetailsHref}`}
             className="text-blue-400 text-xs hover:text-blue-500 transition-colors flex items-center gap-2"
           >
             Click to view details
             <Image src={`${basePath}/icons/arrowBlue.svg`} alt={""} width={12} height={12} className="block"/>
-          </a>
+          </Link>
         </div>
       </div>
     </article>
