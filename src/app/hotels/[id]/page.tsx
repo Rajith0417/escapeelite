@@ -43,8 +43,8 @@ export default async function HotelPage({ params }: HotelPageProps) {
         rating={3}
         fullScreen={false}
       />
-      <section>
-        <div className="container mx-auto px-4 py-16">
+      <section className='py-16'>
+        <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="w-full">
               <h1 className="text-2xl font-bold">Hotel ID: {id}</h1>
@@ -56,8 +56,8 @@ export default async function HotelPage({ params }: HotelPageProps) {
           </div>
         </div>
       </section>
-      <section>
-        <div className="container mx-auto px-4 py-16">
+      <section className='py-16'>
+        <div className="container mx-auto px-4">
           <div className="grid grid-col-1 md:grid-cols-5 gap-10 items-start">
             <div className="col-span-1 md:col-span-3">
               <SelectedHotelTabSection/>

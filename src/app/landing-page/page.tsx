@@ -23,14 +23,14 @@ export default function SriLankaPage() {
           className="object-cover object-center"
         />
         <div className="absolute z-0 inset-0 bg-black opacity-50"></div>
-        <div className="container h-full w-full px-5 md:pt-[150px] mx-auto flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start text-white text-center]">
+        <div className="container h-full w-full px-5 pt-[60px] md:pt-[150px] mx-auto flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start text-white text-center]">
           <div className="z-10 w-full md:w-1/2 md:flex md:flex-col md:gap-8">
-            <h2 className="font-medium text-3xl line-clamp-2 text-center md:text-left mb-5">
+            <h2 className="font-medium text-xl md:text-3xl line-clamp-2 text-center md:text-left mb-5">
               Luxury Holidays to Sri Lanka
               & the Maldives Best
               Price Guaranteed!
             </h2>
-            <div className="min-h-[280px]">
+            <div className="min-h-[200px] mb-5 md:mb-0">
               <video
                 src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 controls

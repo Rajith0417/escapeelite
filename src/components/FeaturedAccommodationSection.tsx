@@ -336,7 +336,7 @@ export default function FeaturedAccommodationSection() {
         <div className="container mx-auto px-5 md:px-0">
           {/* Section Heading */}
           <div className="text-center mb-12">
-            <h2 className="text-xl md:text-3xl font-medium text-gray-900 mb-4">
+            <h2 className="text-3xl font-medium text-gray-900 mb-4">
               Featured Accommodation
             </h2>
             {/* <p className="text-gray-600 max-w-2xl mx-auto">

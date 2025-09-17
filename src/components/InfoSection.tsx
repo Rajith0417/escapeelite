@@ -18,7 +18,7 @@ export default function InfoSection() {
   return (
     <section className="py-16">
       <div className="container px-5 mx-auto flex flex-col-reverse items-center justify-between gap-6 md: md:px-auto md:flex-row">
-        <div className="flex-1 text-gray-800 leading-relaxed uppercase text-lg font-normal tracking-wide text-center md:text-left">
+        <div className="flex-1 text-gray-800 leading-relaxed uppercase text-md md:text-lg font-normal tracking-wide text-center md:text-left">
           <p>
             {content.paragraph}
           </p>

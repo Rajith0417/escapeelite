@@ -71,3 +71,7 @@ body {
 .swiper-button-prev, .swiper-button-next {
   @apply shadow-lg shadow-gray-400;
 }
+
+section + section {
+  padding-bottom: 0;
+}

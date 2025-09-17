@@ -5,7 +5,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 function Quote() {
   return (
-    <div className="font-inter bg-white text-black flex mx-5 md:mx-0 flex-row gap-2 pr-12 relative border-solid border-2 border-[#5E95CD] rounded-[50px] py-5 pl-3">
+    <div className="font-inter bg-white text-black flex mx-0 flex-row gap-2 pr-3 md:pr-12 relative border-solid border-2 border-[#5E95CD] rounded-[50px] py-5 pl-3">
       <div className="w-[60px] h-[60px] overflow-hidden flex-shrink-0">
         <Image
           src={`${basePath}/icons/quote.svg`}
