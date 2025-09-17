@@ -68,7 +68,7 @@ export default function Navbar() {
       <div className="absolute z-0 inset-0 bg-black opacity-50"></div>
       <div className="relative container mx-auto flex justify-between items-center py-4 px-6 border-b-1 border-white border-solid">
         
-        <Link href={`/landing-page`}>
+        <Link href={`/landing-page`}> {/* this is correct no need basePath */}
           <Image
             src={`${basePath}/logo.png`}
             alt="Escape Elite"
