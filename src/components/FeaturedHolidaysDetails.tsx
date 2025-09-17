@@ -112,10 +112,10 @@ export default function FeaturedHolidaysDetails({
   onDropdownChange,
 }: FeaturedHolidaysDetailsProps) {
   return (
-    <section className="py-14">
+    <section className="py-16">
       <div className="container mx-auto px-5 md:px-0">
         {/* Header row */}
-        <div className="flex items-center justify-between mb-14">
+        <div className="flex items-center justify-between mb-12">
           <h2 className="text-3xl md:text-3xl text-center md:text-left font-semibold text-gray-900">
             {heading}
           </h2>

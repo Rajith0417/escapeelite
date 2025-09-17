@@ -17,7 +17,7 @@ export default function Contact() {
         paragraph="Chat with our AI assistant to get instant help with your travel planning, or connect directly with our travel experts for personalized service."
       />
       <section>
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="w-full">
               <Chatbot chatbotId={"58257f11-ec99-4301-a358-35fddcc6cf15"} />

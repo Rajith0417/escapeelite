@@ -332,10 +332,10 @@ export default function FeaturedAccommodationSection() {
         </div>
       </section>
       {/* Featured Accommodation Section */}
-      <section id="resorts" className="py-14">
+      <section id="resorts" className="py-16">
         <div className="container mx-auto px-5 md:px-0">
           {/* Section Heading */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-xl md:text-3xl font-medium text-gray-900 mb-4">
               Featured Accommodation
             </h2>

@@ -17,10 +17,10 @@ export default function SriLankaPage() {
         titleMobile="Explore Sri Lanka Your Way"
       />
       <section>
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="w-full text-center">
-              <h2 className="font-medium text-3xl mb-10">Journey through Sri Lanka’s living tapestry</h2>
+              <h2 className="font-medium text-3xl mb-12">Journey through Sri Lanka’s living tapestry</h2>
               <p className="font-normal text-md">
                 You can now start planning your holiday to Sri Lanka with our
                 experienced care. We specialise in family holidays, nature and

@@ -28,7 +28,7 @@ const moreDetails = [
 
 export default function MoreDetails() {
   return (
-    <section className="py-20">
+    <section className="py-16">
       <div className="container mx-auto px-5 md:px-0 flex flex-col gap-10 md:flex-row  md:gap-16 md:mx-auto md:justify-between">
         {moreDetails.map((s, index) => (
           <div key={index} className="flex flex-col items-center text-center">
