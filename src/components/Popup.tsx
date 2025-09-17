@@ -2,6 +2,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 interface PopupProps {
     children: React.ReactNode;
     isOpen: boolean;
@@ -34,7 +36,7 @@ function Popup({children, isOpen, onClose}: PopupProps) {
               className="text-gray-900 rounded-lg absolute top-5 right-5"
             >
               <Image
-                src="/icons/close-b.svg"
+                src={`${basePath}/icons/close-b.svg`}
                 alt="Escape Elite"
                 width={24}
                 height={24}
