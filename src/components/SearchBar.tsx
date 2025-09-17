@@ -41,7 +41,7 @@ export default function SearchBar({
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="h-12 block w-full pl-10 pr-3 py-3 rounded-md bg-[#F3F4F6] text-gray-800 placeholder-gray-800 focus:outline-none"
           placeholder={placeholder}
         />
       </div>

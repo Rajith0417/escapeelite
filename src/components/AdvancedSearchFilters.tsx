@@ -40,48 +40,48 @@ export default function AdvancedSearchFilters({
   };
 
   return (
-    // <section className="bg-white py-8 px-5 md:px-0">
-      <div className="container p-5 rounded-[8px] mx-auto shadow-[0_4px_20px_0_rgba(0,0,0,0.08)]">
+    <section className=" py-8 md:py-0 px-5 md:px-0 rounded-none">
+      <div className="mx-auto px-5 shadow-[0_4px_20px_0_rgba(0,0,0,0.08)] container p-5 rounded-[8px] gap-6 grid grid-cols-0 grid-rows-6 [grid-template-areas:'input'_'country'_'location'_'type'_'rating'_'button'] md:grid-cols-4 md:grid-rows-2 md:[grid-template-areas:'input_input_input_button'_'country_location_type_rating']">
         {/* Main Search Bar */}
-        <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <SearchBar
-            placeholder="Search destination..."
-            onSearch={onSearch}
-            className="lg:col-span-3"
-          />
-          <button className="lg:col-span-1 bg-blue-400 text-white rounded-lg px-4 py-2">
-            Search
-          </button>
-        </div>
-
+        <SearchBar
+          placeholder="Search destination..."
+          onSearch={onSearch}
+          className="[grid-area:input]"
+        />
         {/* Filter Dropdowns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <FilterDropdown
-            label="Country"
-            options={filterOptions.countries}
-            value={filters.country}
-            onSelect={(value) => handleFilterChange("country", value)}
-          />
-          <FilterDropdown
-            label="Location"
-            options={filterOptions.locations}
-            value={filters.location}
-            onSelect={(value) => handleFilterChange("location", value)}
-          />
-          <FilterDropdown
-            label="Type"
-            options={filterOptions.types}
-            value={filters.type}
-            onSelect={(value) => handleFilterChange("type", value)}
-          />
-          <FilterDropdown
-            label="Rating"
-            options={filterOptions.ratings}
-            value={filters.rating}
-            onSelect={(value) => handleFilterChange("rating", value)}
-          />
-        </div>
+        <FilterDropdown
+          label="Country"
+          options={filterOptions.countries}
+          value={filters.country}
+          onSelect={(value) => handleFilterChange("country", value)}
+          className="[grid-area:country]"
+        />
+        <FilterDropdown
+          label="Location"
+          options={filterOptions.locations}
+          value={filters.location}
+          onSelect={(value) => handleFilterChange("location", value)}
+          className="[grid-area:location]"
+        />
+        <FilterDropdown
+          label="Type"
+          options={filterOptions.types}
+          value={filters.type}
+          onSelect={(value) => handleFilterChange("type", value)}
+          className="[grid-area:type]"
+        />
+        <FilterDropdown
+          label="Rating"
+          options={filterOptions.ratings}
+          value={filters.rating}
+          onSelect={(value) => handleFilterChange("rating", value)}
+          className="[grid-area:rating]"
+        />
+
+        <button className="h-12 [grid-area:button] bg-blue-400 text-white rounded-md px-4 py-3">
+          Search
+        </button>
       </div>
-    // </section>
+    </section>
   );
 } 

@@ -1,7 +1,9 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface AttractionCardProps {
+  id: number;
   img: string;
   title: string;
   link: string;
@@ -25,15 +27,19 @@ function AttractionCard(children: AttractionCardProps) {
         <h4 className="font-semibold text-xl">{children.title}</h4>
         <hr className="my-4" />
         <p className="font-medium text-sm line-clamp-3">{children.paragraph}</p>
-        <a href="Read More" className="font-semibold block text-[14px] mt-4">Read More
+        <Link 
+          href={`/sri-lanka/${children.id}`} 
+          className="font-semibold block text-[14px] mt-4"
+        >
+          Read More
           <Image
             src={`${basePath}/icons/arrowRight.svg`}
             alt={children.title}
-            width={24}
-            height={24}
+            width={18}
+            height={18}
             className="ml-0.5 inline"
           />
-        </a>
+        </Link>
       </div>
     </div>
   );

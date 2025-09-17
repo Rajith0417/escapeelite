@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 
 const attractions = [
   {
+    id: 1,
     title: "Galle Sri Lanka",
     link: "",
     img: "/banners/image7.png",
@@ -15,6 +16,7 @@ const attractions = [
       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
   },
   {
+    id: 2,
     title: "Colombo",
     link: "",
     img: "/banners/image8.png",
@@ -22,6 +24,7 @@ const attractions = [
       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
   },
   {
+    id: 3,
     title: "Kandy Sri Lanka",
     link: "",
     img: "/banners/image10.png",
@@ -63,7 +66,7 @@ export default function AttractionsSection() {
                 key={index}
                 className=" rounded-xl shadow hover:shadow-lg transition overflow-hidden"
               >
-                <AttractionCard img={a.img} title={a.title} link={a.link} paragraph={a.paragraph}/>
+                <AttractionCard id={a.id} img={a.img} title={a.title} link={a.link} paragraph={a.paragraph}/>
               </SwiperSlide>
             ))}
             <SwiperSlide>Slide 1</SwiperSlide>
