@@ -114,7 +114,7 @@ interface ChatbotProps {
 }
 
 // const Chatbot: React.FC = () => {
-function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
+function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
     const [options, setOptions] = useState<string[]>([]);
@@ -122,6 +122,7 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
     const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
     const [currentEstimation, setCurrentEstimation] = useState<EstimationPrice | null>(null);
     const [isCompleted, setIsCompleted] = useState<boolean>(false);
+    const [isMobile, setIsMobile] = useState<boolean>(false)
     const [input, setInput] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedDropdown, setSelectedDropdown] = useState("");
@@ -200,6 +201,7 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
         if (open) {
             const isDesktop = window.innerWidth >= 768;
             setIsOpen(isDesktop);
+            setIsMobile(!isDesktop);
         }
 
     }, [open]);
@@ -802,7 +804,8 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
     );
 
     return (
-        <div>
+        
+        <div className={`${isMobile ? "fixed bottom-6 md:bottom-6 right-6 md:right-6 left-6 md:left-1/2 z-60" : ""}}`}>
             {!isOpen && (
                 <>
                     <button
@@ -835,7 +838,7 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
                             className="h-8 w-auto object-cover"
                         />
 
-                        {!open && <button
+                        {(!open || isMobile) && <button
                             onClick={toggleChat}
                             className="text-gray-400 hover:text-gray-600 transition-colors"
                         >
@@ -925,4 +928,4 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
     );
 };
 
-export default ChatbotMain;
+export default ChatbotLanding;

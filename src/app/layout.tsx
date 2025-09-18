@@ -24,6 +24,7 @@ const montserrat = Montserrat({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const hideChatbot = pathname === '/landing-page';
+  
   return (
     <html lang="en" className={`${sora.variable} ${montserrat.variable}`}>
       <body className="flex flex-col min-h-screen">
