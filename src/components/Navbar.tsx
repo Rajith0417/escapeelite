@@ -88,7 +88,7 @@ export default function Navbar() {
         </button>
 
         {/* Mobile Menu */}
-        <ul className={`${isMobileMenuOpen ? "flex" : "hidden"} flex-col absolute right-5 top-12 bg-black/60 backdrop-blur-[20px] rounded-lg lg:hidden space-y-0 font-medium min-w-[200px]`}>
+        <ul className={`${isMobileMenuOpen ? "flex" : "hidden"} flex-col absolute right-5 top-12 bg-black/80 backdrop-blur-[20px] rounded-lg lg:hidden space-y-0 font-medium min-w-[200px] font-poppins`}>
           <li className="px-3 py-4">
             <Link
               onClick={handleMobileMenuClick}
@@ -168,7 +168,7 @@ export default function Navbar() {
         </ul>
 
         {/* Desktop Menu */}
-        <ul className="hidden lg:flex space-x-6 font-medium">
+        <ul className="font-poppins uppercase hidden lg:flex space-x-6 font-normal">
           <li><Link href="/" className="block text-white p-2 border-b-2 border-solid border-transparent hover:border-white">Home</Link></li>
           <li className="relative" ref={desktopDropdownRef}>
             <button
