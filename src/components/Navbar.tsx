@@ -101,7 +101,7 @@ export default function Navbar() {
           <li className="relative px-3 py-4" ref={mobileDropdownRef}>
             <button
               onClick={handleMobileDestinationsClick}
-              className="text-white p-0 border-b-2 border-solid border-transparent hover:border-white flex items-center gap-1 w-full text-left"
+              className="uppercase text-white p-0 border-b-2 border-solid border-transparent hover:border-white flex items-center gap-1 w-full text-left"
             >
               Destinations
               <svg
@@ -173,7 +173,7 @@ export default function Navbar() {
           <li className="relative" ref={desktopDropdownRef}>
             <button
               onClick={handleDesktopDestinationsClick}
-              className="text-white p-2 border-b-2 border-solid border-transparent hover:border-white flex items-center gap-1"
+              className="text-white p-2 border-b-2 border-solid border-transparent hover:border-white flex items-center gap-1 uppercase"
             >
               Destinations
               <svg

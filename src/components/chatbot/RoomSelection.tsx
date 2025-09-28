@@ -1,4 +1,5 @@
 "use client"
+import { log } from "console";
 import React, { useState } from "react";
 
 interface Room {
@@ -55,7 +56,8 @@ function RoomSelection({ onSubmit, isLoading, isPage = false }: RoomSelectionPro
     ) => {
         setRooms((prev) => {
             const updated = [...prev];
-            const newValue = Math.max(0, value);
+            // const newValue = Math.max(0, value);
+            const newValue = Math.min(Math.max(0, value), 3);
             updated[index][field] = newValue;
 
             if (field === "children") {
@@ -119,6 +121,7 @@ function RoomSelection({ onSubmit, isLoading, isPage = false }: RoomSelectionPro
                                     +
                                 </button>
                             </div>
+                            <span className="ml-10 italic text-sm">Max 3</span>
                         </div>
 
                         {/* Children */}
@@ -139,6 +142,7 @@ function RoomSelection({ onSubmit, isLoading, isPage = false }: RoomSelectionPro
                                     +
                                 </button>
                             </div>
+                            <span className="ml-10 italic text-sm">Max 3</span>
                         </div>
 
                         {/* Child Ages */}

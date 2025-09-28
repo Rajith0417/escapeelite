@@ -1,11 +1,68 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
+declare global {
+  interface Window {
+    tidioChatApi?: {
+      open: () => void;
+      on: (event: string, callback: () => void) => void;
+    };
+  }
+}
+
 function ActionButtons() {
+
+  const phone = "+442038921812";
+  const tidioKey = "<your-public-key>";
+
+  useEffect(() => {
+    // Inject Tidio script dynamically if not already loaded
+    if (!document.getElementById("tidio-script")) {
+      const s = document.createElement("script");
+      s.id = "tidio-script";
+      s.src = `//code.tidio.co/${tidioKey}.js`;
+      s.async = true;
+      document.body.appendChild(s);
+    }
+
+    // Optional: listen for when Tidio is ready
+    const checkReady = () => {
+      window.tidioChatApi?.on("ready", () => {
+        console.log("Tidio widget ready");
+      });
+    };
+
+    // If script is already loaded, call immediately
+    if (window.tidioChatApi) {
+      checkReady();
+    } else {
+      // Otherwise, poll until tidioChatApi exists
+      const interval = setInterval(() => {
+        if (window.tidioChatApi) {
+          clearInterval(interval);
+          checkReady();
+        }
+      }, 500);
+    }
+  }, [tidioKey]);
+
+  const handleDirectCall = () => {
+    window.location.href = `tel:${phone}`;
+  };
+
+  const handleWhatsAppCall = () => {
+    // opens WhatsApp voice call screen if the app is installed
+    window.location.href = `whatsapp://call?phone=${phone}`;
+  };
+
+  const handleTidioMessage = () => {
+    window.tidioChatApi?.open();
+  };
+
   return (
     <div
       className="
@@ -20,7 +77,9 @@ function ActionButtons() {
       "
     >
       {/* Phone button */}
-      <button className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
+      <button
+        onClick={handleDirectCall}
+        className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
         <Image
           src={`${basePath}/icons/call.svg`}
           alt={"call"}
@@ -30,7 +89,9 @@ function ActionButtons() {
       </button>
 
       {/* Chat button */}
-      <button className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
+      <button
+        onClick={handleTidioMessage}
+        className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
         <Image
           src={`${basePath}/icons/chat.svg`}
           alt={"chat"}
@@ -40,7 +101,9 @@ function ActionButtons() {
       </button>
 
       {/* WhatsApp button */}
-      <button className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
+      <button
+        onClick={handleWhatsAppCall}
+        className="w-14 h-14 rounded-br-lg rounded-tr-lg md:rounded-br-none md:rounded-tr-none md:rounded-bl-lg md:rounded-tl-lg bg-[rgba(0,0,0,0.5)] md:bg-white shadow-lg flex items-center justify-center hover:scale-110 transition">
         <Image
           src={`${basePath}/icons/whatsapp.svg`}
           alt={"whatsapp"}

@@ -4,6 +4,7 @@ import React, { JSX, ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import RoomSelection from "./chatbot/RoomSelection";
 import PriceCards from "./chatbot/PriceCards";
+import Thankyou from "./chatbot/Thankyou";
 
 // Types for API response
 interface Answer {
@@ -137,6 +138,8 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
         },
     ]);
     const messagesContainerRef = useRef<HTMLDivElement>(null);
+    const dateInputRef = useRef<HTMLInputElement>(null);
+    
     const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
     const START_URL =
@@ -144,6 +147,24 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
     const RESPONSE_URL =
         "https://d5ulwibf6e.execute-api.ap-south-1.amazonaws.com/prod/api/v1/user-responses";
 
+    const phone = "+442038921812";
+
+    const handleDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+            setSelectedDate(e.target.value);
+        };
+    
+        const formatDisplayedDate = () => {
+            return selectedDate ? selectedDate : 'yyyy-mm-dd';
+        };
+    
+        const handleContainerClick = () => {
+            if (dateInputRef.current) {
+                // Check for showPicker support before calling it
+                if (dateInputRef.current.showPicker) {
+                    dateInputRef.current.showPicker();
+                }
+            }
+        };
 
     // Initial request when chatbot loads
     useEffect(() => {
@@ -176,13 +197,16 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
                 }
 
                 // Show first question
-                if (!data.nextQuestion.isComplete && data.nextQuestion.question) {
-                    const q = data.nextQuestion?.question;
+                if (data.nextQuestion) {
+                    const q = data.nextQuestion?.question ?? null;
                     const isCompleted = data.nextQuestion.isComplete;
                     setCurrentQuestion(q);
                     setIsCompleted(isCompleted);
-                    setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
-                    setOptions(q.answers?.map((a) => a.answer) ?? []);
+                    if (q) {
+                        setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
+                        setOptions(q.answers?.map((a) => a.answer) ?? []);
+                    }
+
                 }
             } catch (err) {
                 console.error("Start error:", err);
@@ -216,6 +240,15 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
         }
     };
 
+    const isCallingOptions = (option: string) => {
+        if (option == "Whatsapp") {
+            handleWhatsAppCall();
+        } else if (option == "Direct Call") {
+            handleDirectCall();
+        } else
+            return;
+    }
+
     // Send answer to /user-responses
     const sendAnswer = async (answer: string): Promise<void> => {
         if (!sessionId || !currentQuestion) return;
@@ -226,6 +259,8 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
         // Add user message
         setMessages((prev) => [...prev, { sender: "user", text: answer }]);
         setOptions([]);
+
+        isCallingOptions(answer);
 
         const body = {
             questionId: currentQuestion.PK,
@@ -244,19 +279,22 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
             const data: ApiResponse = await res.json();
             console.log("Response API:", data);
 
-            if (!data.nextQuestion?.isComplete && data.nextQuestion?.question) {
-                const q = data.nextQuestion.question;
+            if (data.nextQuestion) {
+                const q = data.nextQuestion?.question ?? null;
                 const isCompleted = data.nextQuestion.isComplete;
                 setCurrentQuestion(q);
                 setIsCompleted(isCompleted);
-                q.longText.split("\\n").map(line => {
-                    line.trim();
-                    console.log(line);
-                    setMessages((prev) => [...prev, { sender: "bot", text: line }]);
-                })
+                console.log("this is l ine 264 " + isCompleted);
 
-                setOptions(q.answers?.map((a) => a.answer) ?? []);
+                if (q) {
+                    q.longText.split("\\n").map(line => {
+                        line.trim();
+                        console.log(line);
+                        setMessages((prev) => [...prev, { sender: "bot", text: line }]);
+                    })
 
+                    setOptions(q.answers?.map((a) => a.answer) ?? []);
+                }
                 // Reset all input states when new question arrives
                 setSelectedDate("");
                 setSelectedDropdown("");
@@ -356,6 +394,15 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
         return "";
     };
 
+    const handleDirectCall = () => {
+        window.location.href = `tel:${phone}`;
+    };
+
+    const handleWhatsAppCall = () => {
+        // opens WhatsApp voice call screen if the app is installed
+        window.location.href = `whatsapp://call?phone=${phone}`;
+    };
+
     // Get appropriate placeholder text
     const getInputPlaceholder = (): string => {
         return "Type your message...";
@@ -383,7 +430,8 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
                     if (options.length > 0) {
                         return renderChipOptions();
                     }
-                    return renderTextInput();
+                    // return renderTextInput();
+                    return null
                 case "MULTI_SLIDER":
                     return <MultiSliderComponent />;
                 case "MULTIPLE_FREE_FORM_TEXT":
@@ -411,7 +459,8 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
                     onSelect={(name) => console.log("User clicked:", name)}
                 />
             }
-            return null;
+            // return null;
+            return <Thankyou/>;
         }
 
     };
@@ -433,7 +482,7 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
         }, [currentQuestion]);
 
         if (!currentQuestion?.responseDomain?.sliders) {
-            return <div>No sliders configured</div>;
+            return <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">No sliders configured</p>;
         }
 
         const sliders = currentQuestion.responseDomain.sliders;
@@ -572,7 +621,7 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
 
         // Early return after hooks
         if (!currentQuestion?.responseDomain?.textFields) {
-            return <div>No form fields configured</div>;
+            return <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">No form fields configured</p>;
         }
 
         const textFields = currentQuestion.responseDomain.textFields;
@@ -689,37 +738,49 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
 
     // Render date picker
     const renderDatePicker = (): JSX.Element | null => (
-        !isLoading ? <div className="p-3 pl-[50px]">
-            <div className="flex flex-col gap-3 items-start space-x-2">
-                <input
-                    type="date"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    min={getMinDate()}
-                    max={getMaxDate()}
-                    disabled={isLoading}
-                    className="text-md font-normal min-w-1/2 flex-1 px-6 py-2.5 bg-bg-white text-white rounded-full border border-white  focus:border-white disabled:hidden placeholder-white"
-                    aria-label="Select date"
-                />
-                <button
-                    onClick={handleDateSubmit}
-                    disabled={!selectedDate || isLoading}
-                    className="font-normal text-md px-6 py-2.5 bg-white text-black rounded-full border border-white disabled:hidden"
-                >
-                    {isLoading ? "..." : "Select"}
-                </button>
-            </div>
-            {currentQuestion?.responseDomain?.validation?.minDate && (
-                <p className="text-xs text-white mt-1">
-                    Minimum date:{" "}
-                    {formatDateForDisplay(
-                        currentQuestion.responseDomain.validation.minDate
-                    )}
-                </p>
-            )}
-            {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
-        </div> : null
-    );
+            !isLoading ? <div className="p-3 pl-[50px]">
+                <div className="flex flex-col gap-3 items-start space-x-2">
+                    <div
+                        className="relative flex min-w-1/2 flex-1 items-center justify-between rounded-full border border-white px-6 py-2.5 text-white cursor-pointer"
+                        onClick={handleContainerClick}
+                    >
+                        <span
+                            className={`text-md font-normal ${selectedDate ? 'text-white' : 'text-white'}`}
+                            aria-label="Displayed date"
+                        >
+                            {formatDisplayedDate()}
+                        </span>
+                        <input
+                            type="date"
+                            ref={dateInputRef} // Add the ref here
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            min={getMinDate()}
+                            max={getMaxDate()}
+                            disabled={isLoading}
+                            className="absolute inset-0 z-10 w-full h-full opacity-0 cursor-pointer"
+                            aria-label="Select date"
+                        />
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="pointer-events-none">
+                            {/* SVG path data for your calendar icon */}
+                            <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M16 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M8 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <path d="M3 10H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+    
+                    </div>
+                    <button
+                        onClick={handleDateSubmit}
+                        disabled={!selectedDate || isLoading}
+                        className="font-normal text-md px-6 py-2.5 bg-white text-black rounded-full border border-white disabled:hidden"
+                    >
+                        {isLoading ? "..." : "Select"}
+                    </button>
+                </div>
+                {error && <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">{error}</p>}
+            </div> : null
+        );
 
     // Render dropdown
     const renderDropdown = (): JSX.Element => {
@@ -737,7 +798,7 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
                         value={selectedDropdown}
                         onChange={(e) => setSelectedDropdown(e.target.value)}
                         disabled={isLoading}
-                        className="text-md font-normal flex-1 border text-white border-white rounded-[100px] px-6 py-2.5 focus-visible:border-[1px] focus:outline-0 focus:border-white disabled:bg-gray-100"
+                        className="w-3/4 text-md font-normal flex-1 border text-white border-white rounded-[100px] px-6 py-2.5 focus-visible:border-[1px] focus:outline-0 focus:border-white disabled:bg-gray-100"
                         aria-label="Select from dropdown"
                     >
                         <option value="">Select an option</option>
@@ -758,7 +819,7 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
                 {currentQuestion?.responseDomain?.validation?.required && (
                     <p className="text-xs text-white mt-1">This field is required</p>
                 )}
-                {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+                {error && <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">{error}</p>}
             </div> : <div></div>
         );
     };
@@ -799,7 +860,7 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
                     {isLoading ? "..." : "Submit"}
                 </button>
             </div>
-            {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+            {error && <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">{error}</p>}
         </div>
     );
 

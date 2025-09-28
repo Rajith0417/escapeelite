@@ -3,6 +3,8 @@
 import React, { JSX, ReactNode, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import RoomSelection from "./chatbot/RoomSelection";
+import PriceCards from "./chatbot/PriceCards";
+import Thankyou from "./chatbot/Thankyou";
 
 // Types for API response
 interface Answer {
@@ -67,16 +69,39 @@ interface Question {
   answers?: Answer[];
 }
 
+interface Variation {
+  name: string;
+  estimatedPrice: number;
+  isDefault: boolean;
+}
+
+interface FullEstimation {
+  estimatedPrice: number;
+  currency: string;
+  //   companyId: string;
+  //   breakdown: VariationBreakdown;
+  //   countryInfo: CountryInfo;
+  //   numberOfNights: number;
+  variations: Variation[];
+  selectedVariation: Variation;
+}
+
+interface EstimationPrice {
+  priceText: string;
+  fullEstimation: FullEstimation;
+}
+
 interface ApiResponse {
   sessionId: string;
-  nextQuestion?: {
-    question: Question;
-    isComplete?: boolean;
+  nextQuestion: {
+    question?: Question | null;
+    isComplete: boolean;
   };
   questionnaireConfig?: {
     welcomeMessage?: string;
     endingMessage?: string;
   };
+  estimationPrice?: EstimationPrice;
 }
 
 interface Message {
@@ -86,14 +111,17 @@ interface Message {
 
 interface ChatbotProps {
   chatbotId: string;
+  open?: boolean;
 }
 
 // const Chatbot: React.FC = () => {
-function Chatbot ({chatbotId}:ChatbotProps){
+function Chatbot({ chatbotId }: ChatbotProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [options, setOptions] = useState<string[]>([]);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
+  const [currentEstimation, setCurrentEstimation] = useState<EstimationPrice | null>(null);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [input, setInput] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedDropdown, setSelectedDropdown] = useState("");
@@ -108,12 +136,33 @@ function Chatbot ({chatbotId}:ChatbotProps){
     },
   ]);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const dateInputRef = useRef<HTMLInputElement>(null);
+
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
   const START_URL =
     "https://d5ulwibf6e.execute-api.ap-south-1.amazonaws.com/prod/api/v1/questionnaires/start";
   const RESPONSE_URL =
     "https://d5ulwibf6e.execute-api.ap-south-1.amazonaws.com/prod/api/v1/user-responses";
+
+  const phone = "+442038921812";
+
+  const handleDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+          setSelectedDate(e.target.value);
+      };
+  
+      const formatDisplayedDate = () => {
+          return selectedDate ? selectedDate : 'yyyy-mm-dd';
+      };
+  
+      const handleContainerClick = () => {
+          if (dateInputRef.current) {
+              // Check for showPicker support before calling it
+              if (dateInputRef.current.showPicker) {
+                  dateInputRef.current.showPicker();
+              }
+          }
+      };
 
   // Initial request when chatbot loads
   useEffect(() => {
@@ -146,11 +195,14 @@ function Chatbot ({chatbotId}:ChatbotProps){
         }
 
         // Show first question
-        if (data.nextQuestion?.question) {
+        if (data.nextQuestion) {
           const q = data.nextQuestion.question;
-          setCurrentQuestion(q);
-          setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
-          setOptions(q.answers?.map((a) => a.answer) ?? []);
+          if (q) {
+            setCurrentQuestion(q);
+            setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
+            setOptions(q.answers?.map((a) => a.answer) ?? []);
+          }
+
         }
       } catch (err) {
         console.error("Start error:", err);
@@ -199,12 +251,22 @@ function Chatbot ({chatbotId}:ChatbotProps){
       const data: ApiResponse = await res.json();
       console.log("Response API:", data);
 
-      if (data.nextQuestion?.question) {
-        const q = data.nextQuestion.question;
+      if (data.nextQuestion) {
+        const q = data.nextQuestion?.question ?? null;
+        const isCompleted = data.nextQuestion.isComplete;
         setCurrentQuestion(q);
-        setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
-        setOptions(q.answers?.map((a) => a.answer) ?? []);
+        setIsCompleted(isCompleted);
+        console.log("this is l ine 264 " + isCompleted);
 
+        if (q) {
+          q.longText.split("\\n").map(line => {
+            line.trim();
+            console.log(line);
+            setMessages((prev) => [...prev, { sender: "bot", text: line }]);
+          })
+
+          setOptions(q.answers?.map((a) => a.answer) ?? []);
+        }
         // Reset all input states when new question arrives
         setSelectedDate("");
         setSelectedDropdown("");
@@ -298,33 +360,59 @@ function Chatbot ({chatbotId}:ChatbotProps){
 
   // Render input based on question type
   const renderQuestionInput = (): JSX.Element | null => {
-    if (!currentQuestion) return null;
+    // if (!currentQuestion) return null;
+    console.log("===0=== " + isCompleted)
+    if (!isCompleted) {
+      console.log("if 2");
+      console.log(currentQuestion?.shortText);
+      console.log(options);
 
-    switch (currentQuestion.questionType) {
-      case "DATE_PICKER":
-        return renderDatePicker();
 
-      case "DROP_DOWN":
-      case "SELECT":
-        return renderDropdown();
+      switch (currentQuestion?.questionType) {
+        case "DATE_PICKER":
+          return renderDatePicker();
 
-      case "MCQ_SINGLE_CHOICE":
-      case "MCQ_MULTIPLE_CHOICE":
-        if (options.length > 0) {
-          return renderChipOptions();
-        }
-        return renderTextInput();
-      case "MULTI_SLIDER":
-        return <MultiSliderComponent />;
-      case "MULTIPLE_FREE_FORM_TEXT":
-        return <MultipleFreeFormText />;
-      case "ROOM_SELECTION":
-        // return roomSelection();
-      return <RoomSelection  onSubmit={(payload) => sendAnswer(payload)} isLoading={isLoading} isPage={true}/>;
-      default:
-        // return renderTextInput();
-        return null;
+        case "DROP_DOWN":
+        case "SELECT":
+          return renderDropdown();
+
+        case "MCQ_SINGLE_CHOICE":
+        case "MCQ_MULTIPLE_CHOICE":
+          if (options.length > 0) {
+            return renderChipOptions();
+          }
+          // return renderTextInput();
+          return null
+        case "MULTI_SLIDER":
+          return <MultiSliderComponent />;
+        case "MULTIPLE_FREE_FORM_TEXT":
+          return <MultipleFreeFormText />;
+        case "ROOM_SELECTION":
+          return <RoomSelection onSubmit={(payload) => sendAnswer(payload)} isLoading={isLoading} />;
+        default:
+          // return renderTextInput();
+          return null;
+      }
+    } else {
+      console.log("else 2");
+
+      if (currentEstimation) {
+        console.log("current estimation");
+
+        return <PriceCards
+          selectedName={currentEstimation.fullEstimation.selectedVariation.name}
+          currency={currentEstimation?.fullEstimation.currency}
+          variations={currentEstimation?.fullEstimation.variations.map(v => ({
+            name: v.name,
+            estimatedPrice: v.estimatedPrice,
+            isDefault: v.isDefault
+          }))}
+          onSelect={(name) => console.log("User clicked:", name)}
+        />
+      }
+      return <Thankyou />;
     }
+
   };
 
   // Render multi slider
@@ -345,6 +433,8 @@ function Chatbot ({chatbotId}:ChatbotProps){
 
     if (!currentQuestion?.responseDomain?.sliders) {
       return <div>No sliders configured</div>;
+      return <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">No form fields configured</p>;
+      
     }
 
     const sliders = currentQuestion.responseDomain.sliders;
@@ -475,7 +565,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
 
     // Early return after hooks
     if (!currentQuestion?.responseDomain?.textFields) {
-      return <div>No form fields configured</div>;
+      return <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">No sliders configured</p>;
     }
 
     const textFields = currentQuestion.responseDomain.textFields;
@@ -535,13 +625,21 @@ function Chatbot ({chatbotId}:ChatbotProps){
 
     const handleSubmit = () => {
       if (validateForm()) {
-        // Format the answer as an object with field labels and values
-        const answer: Record<string, string> = {};
-        textFields.forEach((field) => {
-          answer[field.label] = formData[field.id] || "";
-        });
+        // // Format the answer as an object with field labels and values
+        // const answer: Record<string, string> = {};
+        // textFields.forEach((field) => {
+        //   answer[field.label] = formData[field.id] || "";
+        // });
 
-        sendAnswer(JSON.stringify(answer));
+        // sendAnswer(JSON.stringify(answer));
+        const formattedAnswer = textFields
+          .map((field) => {
+            const value = formData[field.id] || "";
+            return `${field.label}: ${value}`;
+          })
+          .join(", ");
+
+        sendAnswer(formattedAnswer)
       }
     };
 
@@ -592,7 +690,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
           min={getMinDate()}
           max={getMaxDate()}
           disabled={isLoading}
-          className="text-md font-normal min-w-1/2 flex-1 px-6 py-2.5 bg-bg-white text-blue-400 rounded-full border border-blue-400  focus:border-blue-400 disabled:bg-gray-100"
+          className="text-md font-normal min-w-1/2 flex-1 px-6 py-2.5 text-blue-400 rounded-full border border-blue-400  focus:border-blue-400 disabled:bg-gray-100"
           aria-label="Select date"
         />
         <button
@@ -603,15 +701,15 @@ function Chatbot ({chatbotId}:ChatbotProps){
           {isLoading ? "..." : "Select"}
         </button>
       </div>
-      {currentQuestion?.responseDomain?.validation?.minDate && (
+      {/* {currentQuestion?.responseDomain?.validation?.minDate && (
         <p className="text-xs text-gray-500 mt-1">
           Minimum date:{" "}
           {formatDateForDisplay(
             currentQuestion.responseDomain.validation.minDate
           )}
         </p>
-      )}
-      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+      )} */}
+      {error && <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">{error}</p>}
     </div>
   );
 
@@ -652,14 +750,14 @@ function Chatbot ({chatbotId}:ChatbotProps){
         {currentQuestion?.responseDomain?.validation?.required && (
           <p className="text-xs text-gray-500 mt-1">This field is required</p>
         )}
-        {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+        {error && <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">{error}</p>}
       </div>
     );
   };
 
   // Render chip-style options (MCQ)
   const renderChipOptions = (): JSX.Element => (
-    <div className="p-3 flex flex-wrap gap-2 bg-white">
+    <div className="p-3 pl-[50px] flex flex-wrap flex-col gap-3 items-start">
       {options.map((opt, idx) => (
         <button
           key={idx}
@@ -821,7 +919,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
           {isLoading ? "..." : "Send"}
         </button>
       </div>
-      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+      {error && <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">{error}</p>}
     </div>
   );
 
@@ -847,7 +945,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
               }`}
           >
             {message.sender === "bot" ? (
-              <div className="flex items-start gap-2">
+              <div className="flex items-start gap-2 w-full">
                 <Image
                   src={`${basePath}/images/user.png`}
                   alt={"chatbot"}
@@ -860,7 +958,7 @@ function Chatbot ({chatbotId}:ChatbotProps){
                 </div>
               </div>
             ) : (
-              <div className="flex items-start gap-2 flex-row-reverse">
+              <div className="flex items-start gap-2 flex-row-reverse w-full">
                 <Image
                   src={`${basePath}/images/user.png`}
                   alt={"chatbot"}
