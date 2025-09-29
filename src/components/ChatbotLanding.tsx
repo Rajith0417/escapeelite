@@ -139,7 +139,7 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
     ]);
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const dateInputRef = useRef<HTMLInputElement>(null);
-    
+
     const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
     const START_URL =
@@ -150,72 +150,72 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
     const phone = "+442038921812";
 
     const handleDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-            setSelectedDate(e.target.value);
-        };
-    
-        const formatDisplayedDate = () => {
-            return selectedDate ? selectedDate : 'yyyy-mm-dd';
-        };
-    
-        const handleContainerClick = () => {
-            if (dateInputRef.current) {
-                // Check for showPicker support before calling it
-                if (dateInputRef.current.showPicker) {
-                    dateInputRef.current.showPicker();
-                }
+        setSelectedDate(e.target.value);
+    };
+
+    const formatDisplayedDate = () => {
+        return selectedDate ? selectedDate : 'yyyy-mm-dd';
+    };
+
+    const handleContainerClick = () => {
+        if (dateInputRef.current) {
+            // Check for showPicker support before calling it
+            if (dateInputRef.current.showPicker) {
+                dateInputRef.current.showPicker();
             }
-        };
+        }
+    };
 
     // Initial request when chatbot loads
     useEffect(() => {
-        const startChat = async (): Promise<void> => {
-            try {
-                const res = await fetch(START_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        questionnaireId: chatbotId,
-                        message: "Hello and welcome to Escape Elite!",
-                    }),
-                });
-                // MAIN_QUESTIONNAIRE : f9abbd99-4a16-4ff1-953b-b80bed2f8b28
-                // CONTACT_US : 58257f11-ec99-4301-a358-35fddcc6cf15
-                // HOTELS_&_RESORTS : b91db0d7-e9b2-4432-bc19-0c90f894f407
-                // SRI_LANKA : cda93067-397c-404b-8130-c2e68c403508
-                // MALDIVES : 3ea784df-e474-407d-928a-16f021bfa767
-
-                const data: ApiResponse = await res.json();
-                console.log("Start API:", data);
-
-                setSessionId(data.sessionId);
-
-                // Show welcome message if available
-                if (data.questionnaireConfig?.welcomeMessage) {
-                    setMessages([
-                        { sender: "bot", text: data.questionnaireConfig.welcomeMessage },
-                    ]);
-                }
-
-                // Show first question
-                if (data.nextQuestion) {
-                    const q = data.nextQuestion?.question ?? null;
-                    const isCompleted = data.nextQuestion.isComplete;
-                    setCurrentQuestion(q);
-                    setIsCompleted(isCompleted);
-                    if (q) {
-                        setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
-                        setOptions(q.answers?.map((a) => a.answer) ?? []);
-                    }
-
-                }
-            } catch (err) {
-                console.error("Start error:", err);
-                setError("Failed to start chat. Please refresh and try again.");
-            }
-        };
-
         startChat();
     }, []);
+
+    const startChat = async (): Promise<void> => {
+        try {
+            const res = await fetch(START_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    questionnaireId: chatbotId,
+                    message: "Hello and welcome to Escape Elite!",
+                }),
+            });
+            // MAIN_QUESTIONNAIRE : f9abbd99-4a16-4ff1-953b-b80bed2f8b28
+            // CONTACT_US : 58257f11-ec99-4301-a358-35fddcc6cf15
+            // HOTELS_&_RESORTS : b91db0d7-e9b2-4432-bc19-0c90f894f407
+            // SRI_LANKA : cda93067-397c-404b-8130-c2e68c403508
+            // MALDIVES : 3ea784df-e474-407d-928a-16f021bfa767
+
+            const data: ApiResponse = await res.json();
+            console.log("Start API:", data);
+
+            setSessionId(data.sessionId);
+
+            // Show welcome message if available
+            if (data.questionnaireConfig?.welcomeMessage) {
+                setMessages([
+                    { sender: "bot", text: data.questionnaireConfig.welcomeMessage },
+                ]);
+            }
+
+            // Show first question
+            if (data.nextQuestion) {
+                const q = data.nextQuestion?.question ?? null;
+                const isCompleted = data.nextQuestion.isComplete;
+                setCurrentQuestion(q);
+                setIsCompleted(isCompleted);
+                if (q) {
+                    setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
+                    setOptions(q.answers?.map((a) => a.answer) ?? []);
+                }
+
+            }
+        } catch (err) {
+            console.error("Start error:", err);
+            setError("Failed to start chat. Please refresh and try again.");
+        }
+    };
 
     useEffect(() => {
         scrollToBottom();
@@ -411,7 +411,7 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
     // Render input based on question type
     const renderQuestionInput = (): JSX.Element | null => {
         // if (!currentQuestion) return null;
-        console.log("====== "+isCompleted)
+        console.log("====== " + isCompleted)
         if (!isCompleted) {
             console.log("if 2");
             console.log(currentQuestion);
@@ -447,7 +447,7 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
 
             if (currentEstimation) {
                 console.log("current estimation");
-                
+
                 return <PriceCards
                     selectedName={currentEstimation.fullEstimation.selectedVariation.name}
                     currency={currentEstimation?.fullEstimation.currency}
@@ -460,7 +460,7 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
                 />
             }
             // return null;
-            return <Thankyou/>;
+            return <Thankyou />;
         }
 
     };
@@ -738,49 +738,49 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
 
     // Render date picker
     const renderDatePicker = (): JSX.Element | null => (
-            !isLoading ? <div className="p-3 pl-[50px]">
-                <div className="flex flex-col gap-3 items-start space-x-2">
-                    <div
-                        className="relative flex min-w-1/2 flex-1 items-center justify-between rounded-full border border-white px-6 py-2.5 text-white cursor-pointer"
-                        onClick={handleContainerClick}
+        !isLoading ? <div className="p-3 pl-[50px]">
+            <div className="flex flex-col gap-3 items-start space-x-2">
+                <div
+                    className="relative flex min-w-1/2 flex-1 items-center justify-between rounded-full border border-white px-6 py-2.5 text-white cursor-pointer"
+                    onClick={handleContainerClick}
+                >
+                    <span
+                        className={`text-md font-normal ${selectedDate ? 'text-white' : 'text-white'}`}
+                        aria-label="Displayed date"
                     >
-                        <span
-                            className={`text-md font-normal ${selectedDate ? 'text-white' : 'text-white'}`}
-                            aria-label="Displayed date"
-                        >
-                            {formatDisplayedDate()}
-                        </span>
-                        <input
-                            type="date"
-                            ref={dateInputRef} // Add the ref here
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            min={getMinDate()}
-                            max={getMaxDate()}
-                            disabled={isLoading}
-                            className="absolute inset-0 z-10 w-full h-full opacity-0 cursor-pointer"
-                            aria-label="Select date"
-                        />
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="pointer-events-none">
-                            {/* SVG path data for your calendar icon */}
-                            <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M16 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M8 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M3 10H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-    
-                    </div>
-                    <button
-                        onClick={handleDateSubmit}
-                        disabled={!selectedDate || isLoading}
-                        className="font-normal text-md px-6 py-2.5 bg-white text-black rounded-full border border-white disabled:hidden"
-                    >
-                        {isLoading ? "..." : "Select"}
-                    </button>
+                        {formatDisplayedDate()}
+                    </span>
+                    <input
+                        type="date"
+                        ref={dateInputRef} // Add the ref here
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                        min={getMinDate()}
+                        max={getMaxDate()}
+                        disabled={isLoading}
+                        className="absolute inset-0 z-10 w-full h-full opacity-0 cursor-pointer"
+                        aria-label="Select date"
+                    />
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="pointer-events-none">
+                        {/* SVG path data for your calendar icon */}
+                        <path d="M19 4H5C3.89543 4 3 4.89543 3 6V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V6C21 4.89543 20.1046 4 19 4Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M16 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M8 2V6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M3 10H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+
                 </div>
-                {error && <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">{error}</p>}
-            </div> : null
-        );
+                <button
+                    onClick={handleDateSubmit}
+                    disabled={!selectedDate || isLoading}
+                    className="font-normal text-md px-6 py-2.5 bg-white text-black rounded-full border border-white disabled:hidden"
+                >
+                    {isLoading ? "..." : "Select"}
+                </button>
+            </div>
+            {error && <p className="px-4 py-2 rounded-lg bg-red-100 text-red-800 text-sm">{error}</p>}
+        </div> : null
+    );
 
     // Render dropdown
     const renderDropdown = (): JSX.Element => {
@@ -865,7 +865,7 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
     );
 
     return (
-        
+
         <div className={`${isMobile ? "fixed bottom-6 md:bottom-6 right-6 md:right-6 left-6 md:left-1/2 z-60" : ""}}`}>
             {!isOpen && (
                 <>
@@ -898,7 +898,9 @@ function ChatbotLanding({ chatbotId, open = false }: ChatbotProps) {
                             height={0}
                             className="h-8 w-auto object-cover"
                         />
-
+                        <button onClick={startChat} className="px-4 py-2 bg-transparent text-white rounded-xl border border-white">
+                            Restart Chat
+                        </button>
                         {(!open || isMobile) && <button
                             onClick={toggleChat}
                             className="text-gray-400 hover:text-gray-600 transition-colors"

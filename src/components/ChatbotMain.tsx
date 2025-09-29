@@ -136,6 +136,7 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
             childAges: [] as number[],
         },
     ]);
+
     const messagesContainerRef = useRef<HTMLDivElement>(null);
     const dateInputRef = useRef<HTMLInputElement>(null);
 
@@ -168,54 +169,54 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
 
     // Initial request when chatbot loads
     useEffect(() => {
-        const startChat = async (): Promise<void> => {
-            try {
-                const res = await fetch(START_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        questionnaireId: chatbotId,
-                        message: "Hello and welcome to Escape Elite!",
-                    }),
-                });
-                // MAIN_QUESTIONNAIRE : f9abbd99-4a16-4ff1-953b-b80bed2f8b28
-                // CONTACT_US : 58257f11-ec99-4301-a358-35fddcc6cf15
-                // HOTELS_&_RESORTS : b91db0d7-e9b2-4432-bc19-0c90f894f407
-                // SRI_LANKA : cda93067-397c-404b-8130-c2e68c403508
-                // MALDIVES : 3ea784df-e474-407d-928a-16f021bfa767
-
-                const data: ApiResponse = await res.json();
-                console.log("Start API:", data);
-
-                setSessionId(data.sessionId);
-
-                // Show welcome message if available
-                if (data.questionnaireConfig?.welcomeMessage) {
-                    setMessages([
-                        { sender: "bot", text: data.questionnaireConfig.welcomeMessage },
-                    ]);
-                }
-
-                // Show first question
-                if (data.nextQuestion) {
-                    const q = data.nextQuestion?.question ?? null;
-                    const isCompleted = data.nextQuestion.isComplete;
-                    setCurrentQuestion(q);
-                    setIsCompleted(isCompleted);
-                    if (q) {
-                        setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
-                        setOptions(q.answers?.map((a) => a.answer) ?? []);
-                    }
-
-                }
-            } catch (err) {
-                console.error("Start error:", err);
-                setError("Failed to start chat. Please refresh and try again.");
-            }
-        };
-
         startChat();
     }, []);
+
+    const startChat = async (): Promise<void> => {
+        try {
+            const res = await fetch(START_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    questionnaireId: chatbotId,
+                    message: "Hello and welcome to Escape Elite!",
+                }),
+            });
+            // MAIN_QUESTIONNAIRE : f9abbd99-4a16-4ff1-953b-b80bed2f8b28
+            // CONTACT_US : 58257f11-ec99-4301-a358-35fddcc6cf15
+            // HOTELS_&_RESORTS : b91db0d7-e9b2-4432-bc19-0c90f894f407
+            // SRI_LANKA : cda93067-397c-404b-8130-c2e68c403508
+            // MALDIVES : 3ea784df-e474-407d-928a-16f021bfa767
+
+            const data: ApiResponse = await res.json();
+            console.log("Start API:", data);
+
+            setSessionId(data.sessionId);
+
+            // Show welcome message if available
+            if (data.questionnaireConfig?.welcomeMessage) {
+                setMessages([
+                    { sender: "bot", text: data.questionnaireConfig.welcomeMessage },
+                ]);
+            }
+
+            // Show first question
+            if (data.nextQuestion) {
+                const q = data.nextQuestion?.question ?? null;
+                const isCompleted = data.nextQuestion.isComplete;
+                setCurrentQuestion(q);
+                setIsCompleted(isCompleted);
+                if (q) {
+                    setMessages((prev) => [...prev, { sender: "bot", text: q.longText }]);
+                    setOptions(q.answers?.map((a) => a.answer) ?? []);
+                }
+
+            }
+        } catch (err) {
+            console.error("Start error:", err);
+            setError("Failed to start chat. Please refresh and try again.");
+        }
+    };
 
     useEffect(() => {
         scrollToBottom();
@@ -901,7 +902,9 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
                             height={0}
                             className="h-8 w-auto object-cover"
                         />
-
+                        <button onClick={startChat} className="px-4 py-2 bg-transparent text-white rounded-xl border border-white">
+                            Restart Chat
+                        </button>
                         {!open && <button
                             onClick={toggleChat}
                             className="text-gray-400 hover:text-gray-600 transition-colors"
