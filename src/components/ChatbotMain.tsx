@@ -808,7 +808,7 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
                     >
                         <option value="">Select an option</option>
                         {dropdownOptions.map((option, idx) => (
-                            <option key={idx} value={option}>
+                            <option key={idx} value={option} className="bg-black text-white">
                                 {option}
                             </option>
                         ))}
