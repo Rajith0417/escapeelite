@@ -383,10 +383,10 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
         if (currentQuestion?.responseDomain?.validation?.minDate) {
             return currentQuestion.responseDomain.validation.minDate;
         }
-        // return new Date().toISOString().split("T")[0];
-        const date = new Date();
-        date.setMonth(date.getMonth() - 1);
-        return date.toISOString().split('T')[0];
+        return new Date().toISOString().split("T")[0];
+        // const date = new Date();
+        // date.setMonth(date.getMonth());
+        // return date.toISOString().split('T')[0];
     };
 
     // Get maximum date for date picker
@@ -394,8 +394,8 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
         if (currentQuestion?.responseDomain?.validation?.maxDate) {
             return currentQuestion.responseDomain.validation.maxDate;
         }
-        // return "";
-        return new Date().toISOString().split('T')[0];
+        return "";
+        // return new Date().toISOString().split('T')[0];
     };
 
     const handleDirectCall = () => {
