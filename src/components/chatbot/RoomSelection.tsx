@@ -99,12 +99,12 @@ function RoomSelection({ onSubmit, isLoading, isPage = false }: RoomSelectionPro
 
             {/* Room sections */}
             {rooms.map((room, idx) => (
-                <div key={idx} className="space-y-6 flex items-baseline">
+                <div key={idx} className="space-y-6 flex flex-col md:flex-row items-baseline">
                     <p className="font-normal text-md w-24">Room {idx + 1}</p>
 
                     <div className="flex flex-col gap-5">
                         {/* Adults */}
-                        <div className="flex items-center justify-between font-normal text-md">
+                        <div className="flex flex-col md:flex-row items-start md:items-center justify-between font-normal text-md">
                             <span className="w-24">Adults</span>
                             <div className={`${isPage ? 'border-black' : 'border-white'} w-[160px] flex items-center gap-6 px-4 py-2 border rounded-full`}>
                                 <button
@@ -125,7 +125,7 @@ function RoomSelection({ onSubmit, isLoading, isPage = false }: RoomSelectionPro
                         </div>
 
                         {/* Children */}
-                        <div className="flex items-center justify-between font-normal text-md">
+                        <div className="flex flex-col md:flex-row items-start md:items-center justify-between font-normal text-md">
                             <span className="w-24">Children</span>
                             <div className={`${isPage ? 'border-black' : 'border-white'} w-[160px] flex items-center gap-6 px-4 py-2 border rounded-full`}>
                                 <button
