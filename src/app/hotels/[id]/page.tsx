@@ -4,7 +4,8 @@ import Hero from '@/components/Hero';
 import ImageGallery from '@/components/ImageGallery';
 // import ItinerarySection from '@/components/ItinerarySection';
 import SelectedHotelTabSection from '@/components/SelectedHotelTabSection';
-import Chatbot from '@/components/Chatbot';
+// import Chatbot from '@/components/Chatbot';
+import ChatbotWrapper from '@/components/chatbot/ChatbotWrapper';
 
 interface HotelPageProps {
   params: Promise<{ id: string }>; // 👈 async in Next.js 15
@@ -51,7 +52,8 @@ export default async function HotelPage({ params }: HotelPageProps) {
               <ImageGallery/>
             </div>
             <div>
-              <Chatbot chatbotId={'b91db0d7-e9b2-4432-bc19-0c90f894f407'} />
+              {/* <Chatbot chatbotId={'b91db0d7-e9b2-4432-bc19-0c90f894f407'} /> */}
+              <ChatbotWrapper chatbotId="b91db0d7-e9b2-4432-bc19-0c90f894f407"/>
             </div>
           </div>
         </div>

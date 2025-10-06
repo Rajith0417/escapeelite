@@ -1,9 +1,11 @@
+'use client'
 // import ChatbotPage from "@/components/ChatbotPage";
 import Hero from "@/components/Hero";
 import React from "react";
 import Image from "next/image";
 import TestimonialSection from "@/components/TestimonialSection";
-import Chatbot from "@/components/Chatbot";
+// import Chatbot from "@/components/Chatbot";
+import ChatbotWrapper from "@/components/chatbot/ChatbotWrapper";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -20,7 +22,8 @@ export default function Contact() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="w-full">
-              <Chatbot chatbotId={"58257f11-ec99-4301-a358-35fddcc6cf15"} />
+              {/* <Chatbot chatbotId={"58257f11-ec99-4301-a358-35fddcc6cf15"} /> */}
+              <ChatbotWrapper chatbotId="58257f11-ec99-4301-a358-35fddcc6cf15"/>
             </div>
             <div className="w-full flex flex-col gap-12">
               <div className="flex items-start gap-5">

@@ -5,7 +5,8 @@ import Image from "next/image";
 import Quote from "@/components/Quote";
 import FeaturedHolidaysSection from "@/components/FeaturedHolidaysSection";
 import InfoSection from "@/components/InfoSection";
-import ChatbotLanding from "@/components/ChatbotLanding";
+// import ChatbotLanding from "@/components/ChatbotLanding";
+import ChatbotWrapper from "@/components/chatbot/ChatbotWrapper";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -43,7 +44,8 @@ export default function SriLankaPage() {
             <Quote />
           </div>
           <div className="z-10 md:w-1/2 md:block pl-16">
-            <ChatbotLanding chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} open={true}/>
+            {/* <ChatbotLanding chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} open={true}/> */}
+            <ChatbotWrapper chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} open={true}/>
           </div>
           {/* <div className={`fixed bottom-6 md:bottom-6 right-6 md:right-6 left-6 md:left-1/2 z-60`}>
             <ChatbotMain chatbotId={'f9abbd99-4a16-4ff1-953b-b80bed2f8b28'} open={false} />

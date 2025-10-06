@@ -38,7 +38,7 @@ export default async function HotelPage({ params }: HotelPageProps) {
                         </div>
                         <div className="w-full">
                             {/* <Chatbot chatbotId={"cda93067-397c-404b-8130-c2e68c403508"}/> */}
-                            <ChatbotWrapper chatbotId="cda93067-397c-404b-8130-c2e68c403508"/>
+                            <ChatbotWrapper chatbotId="3ea784df-e474-407d-928a-16f021bfa767"/>
                         </div>
                     </div>
                 </div>
