@@ -51,10 +51,10 @@ export default async function HotelPage({ params }: HotelPageProps) {
               <h1 className="text-2xl font-bold">Hotel ID: {id}</h1>
               <ImageGallery/>
             </div>
-            <div>
+            {/* <div> */}
               {/* <Chatbot chatbotId={'b91db0d7-e9b2-4432-bc19-0c90f894f407'} /> */}
               <ChatbotWrapper chatbotId="b91db0d7-e9b2-4432-bc19-0c90f894f407"/>
-            </div>
+            {/* </div> */}
           </div>
         </div>
       </section>

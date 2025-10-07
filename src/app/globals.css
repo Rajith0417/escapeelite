@@ -75,6 +75,31 @@ body {
 section + section {
   padding-bottom: 0;
 }
+#chat-widget-container .va-travel-chat-toggle-button {
+  background-color: white;
+  color: black;
+  right: 120px;
+  bottom: 1.75rem;
+}
+#chat-widget-container .va-travel-chat-toggle-button svg{
+  display: none;
+}
+#chat-widget-container .va-travel-chat-toggle-button::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 100px;
+  background: red;
+  background-image: url("../../public/images/user.png");
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  right: -110px;
+  top: 50%;
+  transform: translate(0px, -50%);
+  border-radius: 100%;
+  border: white 5px solid;
+}
 #my-chat-container .va-travel-chat-window {
   border-radius: 16px !important;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
@@ -122,9 +147,16 @@ section + section {
 #chat-widget-container .va-travel-chat-messages-container {
   border-bottom-left-radius: 12px !important;
   border-bottom-right-radius: 12px !important;
+  flex: 1 !important;
+  max-height: 100% !important;
 }
 #chat-widget-container .va-travel-chat-messages-container {
   background-color: rgba(0, 0, 0, 0.6);
+}
+.va-travel-chat-messages-container .va-travel-bot-message-group .va-travel-bot-default-avatar{
+  background-image: url("../../public/images/user.png");
+  background-position: center;
+  background-size: cover;
 }
 .va-travel-chat-messages-container .va-travel-bot-message-group .va-travel-bot-message{
   background-color: #e5e5e5;
@@ -132,6 +164,7 @@ section + section {
   width: fit-content;
   border-radius: 16px;
   padding: 6px 14px;
+  color: #1f2937;
 }
 #chat-widget-container .va-travel-chat-messages-container .va-travel-bot-message-group .va-travel-bot-message{
   background-color: white;

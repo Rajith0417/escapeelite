@@ -43,7 +43,7 @@ export default function SriLankaPage() {
             </div>
             <Quote />
           </div>
-          <div className="z-10 md:w-1/2 md:block pl-16">
+          <div className="z-10 md:w-1/2 md:block pl-16 h-[calc(100vh-150px)]">
             {/* <ChatbotLanding chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} open={true}/> */}
             <ChatbotWrapper chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} open={true}/>
           </div>
