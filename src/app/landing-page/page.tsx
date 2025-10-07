@@ -7,6 +7,7 @@ import FeaturedHolidaysSection from "@/components/FeaturedHolidaysSection";
 import InfoSection from "@/components/InfoSection";
 // import ChatbotLanding from "@/components/ChatbotLanding";
 import ChatbotWrapper from "@/components/chatbot/ChatbotWrapper";
+import ChatbotWrapperLanding from "@/components/ChatbotWrapperLanding";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -24,7 +25,7 @@ export default function SriLankaPage() {
           className="object-cover object-center"
         />
         <div className="absolute z-0 inset-0 bg-black opacity-50"></div>
-        <div className="container h-full w-full px-5 pt-[60px] md:pt-[150px] mx-auto flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start text-white text-center]">
+        <div className="container h-full w-full px-5 md:px-0 pt-[120px] md:pt-[150px] mx-auto flex flex-col md:flex-row items-center md:items-start justify-center md:justify-start text-white text-center]">
           <div className="z-10 w-full md:w-1/2 md:flex md:flex-col md:gap-8">
             <h2 className="font-medium text-xl md:text-3xl line-clamp-2 text-center md:text-left mb-5">
               Luxury Holidays to Sri Lanka
@@ -43,10 +44,11 @@ export default function SriLankaPage() {
             </div>
             <Quote />
           </div>
-          <div className="z-10 md:w-1/2 md:block pl-16 h-[calc(100vh-150px)]">
+          <div className="z-10 md:w-1/2 md:block pl-16 h-full overflow-scroll" id="landing">
             {/* <ChatbotLanding chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} open={true}/> */}
-            <ChatbotWrapper chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} open={true}/>
+            <ChatbotWrapperLanding chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"}/>
           </div>
+
           {/* <div className={`fixed bottom-6 md:bottom-6 right-6 md:right-6 left-6 md:left-1/2 z-60`}>
             <ChatbotMain chatbotId={'f9abbd99-4a16-4ff1-953b-b80bed2f8b28'} open={false} />
           </div> */}

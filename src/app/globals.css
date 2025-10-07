@@ -75,6 +75,13 @@ body {
 section + section {
   padding-bottom: 0;
 }
+#landing #chat-widget-container .va-travel-chat-window.embedded-chat-window {
+  top: 0;
+}
+#landing #chat-widget-container .va-travel-chat-window.embedded-chat-window .va-travel-chat-messages-container {
+ height: calc(100vh - 200px) !important;
+ max-height: calc(100vh - 200px) !important;
+}
 #chat-widget-container .va-travel-chat-toggle-button {
   background-color: white;
   color: black;
@@ -110,6 +117,10 @@ section + section {
   background: transparent;
   backdrop-filter: blur(5px);
   top: 5em;
+  border-radius: 16px !important;
+  border: none;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
 }
 #chat-widget-container .va-travel-chat-widget-container {
   z-index: 1;
