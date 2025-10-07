@@ -1,18 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-sora: 'Sora', sans-serif;
-  --font-montserrat: 'Montserrat', sans-serif;
-  --font-inter: 'Inter', sans-serif;
-  --font-poppins: 'Poppins' , sans-serif;
+  --font-sora: "Sora", sans-serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
 }
 
 @theme inline {
@@ -50,7 +49,7 @@ body {
 }
 
 .font-poppins {
-  font-family: var(--font-poppins)
+  font-family: var(--font-poppins);
 }
 
 .swiper-button-next,
@@ -65,10 +64,11 @@ body {
 .swiper-button-prev::after {
   font-size: 10px !important;
   font-weight: bold;
-  color: #38424B;
+  color: #38424b;
 }
 
-.swiper-button-prev, .swiper-button-next {
+.swiper-button-prev,
+.swiper-button-next {
   @apply shadow-lg shadow-gray-400;
 }
 
@@ -78,32 +78,33 @@ section + section {
 #chat-widget-container .va-travel-chat-toggle-button {
   background-color: white;
   color: black;
-  right: 120px;
+  right: 80px;
   bottom: 1.75rem;
 }
-#chat-widget-container .va-travel-chat-toggle-button svg{
+#chat-widget-container .va-travel-chat-toggle-button svg {
   display: none;
 }
 #chat-widget-container .va-travel-chat-toggle-button::after {
   content: "";
   display: block;
-  width: 100px;
-  height: 100px;
-  background: red;
+  width: 60px;
+  height: 60px;
   background-image: url("../../public/images/user.png");
   background-position: center;
   background-size: cover;
   position: absolute;
-  right: -110px;
+  right: -70px;
   top: 50%;
   transform: translate(0px, -50%);
   border-radius: 100%;
   border: white 5px solid;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
 }
 #my-chat-container .va-travel-chat-window {
   border-radius: 16px !important;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-            0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+    0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
 }
 #chat-widget-container .va-travel-chat-window {
   background: transparent;
@@ -116,11 +117,13 @@ section + section {
 #chat-widget-container .va-travel-chat-window .va-travel-chat-window-inner {
   height: 100%;
 }
-#chat-widget-container .va-travel-chat-window .va-travel-chat-messages-container {
+#chat-widget-container
+  .va-travel-chat-window
+  .va-travel-chat-messages-container {
   flex: 1;
 }
 #my-chat-container .va-travel-chat-header,
-#chat-widget-container .va-travel-chat-header{
+#chat-widget-container .va-travel-chat-header {
   border-top-left-radius: 12px !important;
   border-top-right-radius: 12px !important;
   background-color: #38424b !important;
@@ -135,13 +138,12 @@ section + section {
   display: none;
 }
 #my-chat-container .va-travel-chat-logo,
-#chat-widget-container .va-travel-chat-logo{
+#chat-widget-container .va-travel-chat-logo {
   width: fit-content !important;
   height: 30px !important;
   border: none !important;
   border-radius: 0 !important;
 }
-
 
 #my-chat-container .va-travel-chat-messages-container,
 #chat-widget-container .va-travel-chat-messages-container {
@@ -153,12 +155,16 @@ section + section {
 #chat-widget-container .va-travel-chat-messages-container {
   background-color: rgba(0, 0, 0, 0.6);
 }
-.va-travel-chat-messages-container .va-travel-bot-message-group .va-travel-bot-default-avatar{
+.va-travel-chat-messages-container
+  .va-travel-bot-message-group
+  .va-travel-bot-default-avatar {
   background-image: url("../../public/images/user.png");
   background-position: center;
   background-size: cover;
 }
-.va-travel-chat-messages-container .va-travel-bot-message-group .va-travel-bot-message{
+.va-travel-chat-messages-container
+  .va-travel-bot-message-group
+  .va-travel-bot-message {
   background-color: #e5e5e5;
   max-width: 75%;
   width: fit-content;
@@ -166,44 +172,86 @@ section + section {
   padding: 6px 14px;
   color: #1f2937;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-bot-message-group .va-travel-bot-message{
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-bot-message-group
+  .va-travel-bot-message {
   background-color: white;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-question-text,
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-question-text-multiline{
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-question-text,
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-question-text-multiline {
   background-color: #e5e5e5;
   max-width: 75%;
   width: fit-content;
   border: none;
   border-radius: 16px;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-question-text,
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-question-text-multiline{
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-question-text,
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-question-text-multiline {
   background-color: white;
   max-width: 75%;
   width: fit-content;
   border: none;
   border-radius: 16px;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-chat-form{
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-chat-form {
   gap: 0;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-choice-button,
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-date-input,
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-chat-submit-button,
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-dropdown-select{
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-choice-button,
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-date-input,
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-chat-submit-button,
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-dropdown-select {
   background: white;
-  color:#5E95CD;
-  border: solid 1px #5E95CD;
+  color: #5e95cd;
+  border: solid 1px #5e95cd;
   width: fit-content;
   border-radius: 100px;
   padding: 6px 14px;
   min-width: 200px;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-choice-button,
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-date-input,
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-chat-submit-button,
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-dropdown-select{
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-choice-button,
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-date-input,
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-chat-submit-button,
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-dropdown-select {
   background: transparent;
   color: white;
   border: solid 1px white;
@@ -211,33 +259,69 @@ section + section {
   border-radius: 100px;
   padding: 6px 14px;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container,
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container {
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container,
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container {
   background-color: transparent;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container {
-  border: solid 1px #5E95CD;
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container {
+  border: solid 1px #5e95cd;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container {
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container {
   color: white;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-count-section,
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-count-section {
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-count-section,
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-count-section {
   display: flex;
   flex-direction: column;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-rooms-list,
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-rooms-list {
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-rooms-list,
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-rooms-list {
   max-height: unset;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-count-input{
-  border: solid 1px #5E95CD;
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-count-input {
+  border: solid 1px #5e95cd;
   width: 150px;
   padding: 6px 14px;
   border-radius: 16px;
   background-color: transparent;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-count-input{
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-count-input {
   border: solid 1px white;
   width: 150px;
   padding: 6px 14px;
@@ -245,95 +329,207 @@ section + section {
   background-color: transparent;
   color: white;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card{
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card {
   background-color: transparent;
   box-shadow: none;
-  border: solid 1px #5E95CD;
+  border: solid 1px #5e95cd;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card {
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card {
   background-color: transparent;
   box-shadow: none;
   border: solid 1px white;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-room-header,
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-room-header{
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-room-header,
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-room-header {
   margin-bottom: 14px;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-occupant-control,
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-occupant-control{
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-occupant-control,
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-occupant-control {
   flex-direction: row;
   gap: 10px;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-occupant-control .va-travel-occupant-label{
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-occupant-control
+  .va-travel-occupant-label {
   width: 100px;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-occupant-counter {
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-occupant-counter {
   border: none;
   width: fit-content;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-counter-button {
-  border: solid 1px #5E95CD;
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-counter-button {
+  border: solid 1px #5e95cd;
   border-radius: 100%;
-  background-color: #5E95CD;
+  background-color: #5e95cd;
   color: white;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-counter-button:first-child {
-  border: solid 1px #5E95CD;
-  color: #5E95CD;
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-counter-button:first-child {
+  border: solid 1px #5e95cd;
+  color: #5e95cd;
   background-color: transparent;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-counter-button {
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-counter-button {
   border: solid 1px #ffffff;
   color: rgba(0, 0, 0, 0.6);
   background-color: white;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-counter-button:first-child {
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-counter-button:first-child {
   border: solid 1px white;
   color: white;
   background-color: transparent;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-max-capacity {
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-max-capacity {
   color: white;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-counter-value {
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-counter-value {
   background-color: transparent;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-counter-value {
-  color: #5E95CD;
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-counter-value {
+  color: #5e95cd;
 }
 /* child ages */
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-child-ages {
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-child-ages {
   background-color: transparent;
   border: none;
   padding: 0;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-child-ages label {
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-child-ages
+  label {
   display: none;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-child-ages .va-travel-child-age-dropdowns .va-travel-child-age-row{
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-child-ages
+  .va-travel-child-age-dropdowns
+  .va-travel-child-age-row {
   gap: 10px;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-child-ages .va-travel-child-age-dropdowns .va-travel-child-number{
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-child-ages
+  .va-travel-child-age-dropdowns
+  .va-travel-child-number {
   font-size: 16px;
   font-weight: normal;
   color: #1f2937;
   width: 100px;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-child-ages .va-travel-child-age-dropdowns .va-travel-child-number{
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-child-ages
+  .va-travel-child-age-dropdowns
+  .va-travel-child-number {
   font-size: 16px;
   font-weight: normal;
   color: white;
   width: 100px;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-child-ages .va-travel-child-age-dropdowns .va-travel-child-age-select{
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-child-ages
+  .va-travel-child-age-dropdowns
+  .va-travel-child-age-select {
   width: 150px;
   flex-grow: unset;
-  border: solid 1px #5E95CD;
-  color: #5E95CD;
+  border: solid 1px #5e95cd;
+  color: #5e95cd;
   border-radius: 100px;
   padding: 6px 14px;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-child-ages .va-travel-child-age-dropdowns .va-travel-child-age-select{
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-child-ages
+  .va-travel-child-age-dropdowns
+  .va-travel-child-age-select {
   width: 150px;
   flex-grow: unset;
   border: solid 1px white;
@@ -342,72 +538,141 @@ section + section {
   padding: 6px 14px;
   background-color: transparent;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-child-ages .va-travel-child-age-dropdowns .va-travel-no-children-message{
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-child-ages
+  .va-travel-child-age-dropdowns
+  .va-travel-no-children-message {
   background-color: transparent;
   text-align: left;
   padding: 0;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-child-ages .va-travel-child-age-dropdowns .va-travel-no-children-message{
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-child-ages
+  .va-travel-child-age-dropdowns
+  .va-travel-no-children-message {
   color: white;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-room-selection-container .va-travel-room-card .va-travel-room-capacity-info{
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-room-selection-container
+  .va-travel-room-card
+  .va-travel-room-capacity-info {
   border: none;
   background-color: transparent;
 }
 
-.va-travel-chat-messages-container .va-travel-user-message-container .va-travel-user-message{
+.va-travel-chat-messages-container
+  .va-travel-user-message-container
+  .va-travel-user-message {
   background-color: #e5e5e5;
-  color:#5E95CD;
+  color: #5e95cd;
   width: fit-content;
   padding: 6px 14px;
   border-radius: 16px;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-user-message-container .va-travel-user-message{
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-user-message-container
+  .va-travel-user-message {
   background-color: white;
-  color:#5E95CD;
+  color: #5e95cd;
 }
-#my-chat-container .va-travel-chat-messages-container .va-travel-user-message-container .va-travel-edit-button {
-  color:#5E95CD;
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-user-message-container
+  .va-travel-edit-button {
+  color: #5e95cd;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-user-message-container .va-travel-edit-button {
-  background-color:white;
-  color:#5E95CD;
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-user-message-container
+  .va-travel-edit-button {
+  background-color: white;
+  color: #5e95cd;
 }
 
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-slider-container .va-travel-slider-title{
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-slider-container
+  .va-travel-slider-title {
   color: white;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-slider-container .va-travel-slider-value{
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-slider-container
+  .va-travel-slider-value {
   display: none;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-slider-container input{
-  color:#5E95CD;
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-slider-container
+  input {
+  color: #5e95cd;
   background-color: white;
   border: solid 1px #e5e5e5;
   border-radius: 50px;
   accent-color: unset;
   -webkit-appearance: none;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-slider-container .va-travel-slider-labels{
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-slider-container
+  .va-travel-slider-labels {
   color: white;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-text-field-container label{
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-text-field-container
+  label {
   display: none;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-text-field-container .va-travel-chat-textarea{
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-text-field-container
+  .va-travel-chat-textarea {
   background-color: transparent;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-text-field-container .va-travel-chat-textarea{
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-text-field-container
+  .va-travel-chat-textarea {
   color: white;
 }
-.va-travel-chat-messages-container .va-travel-current-question .va-travel-text-field-container .va-travel-chat-textarea::placeholder {
+.va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-text-field-container
+  .va-travel-chat-textarea::placeholder {
   opacity: 1;
   color: #1f2937;
 }
-#chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-text-field-container .va-travel-chat-textarea::placeholder {
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-text-field-container
+  .va-travel-chat-textarea::placeholder {
   opacity: 1;
   color: white;
 }
-.va-travel-chat-messages-container .va-travel-questionnaire-end{
+.va-travel-chat-messages-container .va-travel-questionnaire-end {
   background: white;
+}
+
+@media (min-width: 600px) {
+  #chat-widget-container .va-travel-chat-toggle-button {
+    right: 120px;
+  }
+  #chat-widget-container .va-travel-chat-toggle-button::after {
+    width: 100px;
+    height: 100px;
+    right: -110px;
+  }
 }
