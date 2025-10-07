@@ -198,6 +198,7 @@ section + section {
   width: fit-content;
   border-radius: 100px;
   padding: 6px 14px;
+  min-width: 200px;
 }
 #chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-choice-button,
 #chat-widget-container .va-travel-chat-messages-container .va-travel-current-question .va-travel-date-input,
