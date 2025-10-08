@@ -248,6 +248,13 @@ section + section {
   padding: 6px 14px;
   min-width: 200px;
 }
+#my-chat-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-dropdown-select option {
+    color: white;
+    background-color: transparent;
+  }
 #chat-widget-container
   .va-travel-chat-messages-container
   .va-travel-current-question
@@ -271,6 +278,13 @@ section + section {
   border-radius: 100px;
   padding: 6px 14px;
 }
+#chat-widget-container
+  .va-travel-chat-messages-container
+  .va-travel-current-question
+  .va-travel-dropdown-select option {
+    color: white;
+    background-color: transparent;
+  }
 #my-chat-container
   .va-travel-chat-messages-container
   .va-travel-current-question
