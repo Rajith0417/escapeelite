@@ -113,7 +113,7 @@ export default function FeaturedHolidaysDetails({
 }: FeaturedHolidaysDetailsProps) {
   return (
     <section className="py-16">
-      <div className="container mx-auto px-5 md:px-0">
+      <div className="container mx-auto px-5">
         {/* Header row */}
         <div className="flex items-center justify-between mb-12">
           <h2 className="text-3xl md:text-3xl text-center md:text-left font-medium text-gray-900">

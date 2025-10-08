@@ -79,7 +79,7 @@ const holidays = [
 export default function FeaturedHolidaysSection() {
   return (
     <section className="w-full py-16">
-      <div className="container mx-auto px-5 md:px-0">
+      <div className="container mx-auto px-5">
         <h2 className="text-center text-3xl font-medium text-gray-800 mb-12 md:mb-0">
           Featured holidays
         </h2>

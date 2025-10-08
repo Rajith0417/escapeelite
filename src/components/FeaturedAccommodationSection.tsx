@@ -333,7 +333,7 @@ export default function FeaturedAccommodationSection() {
       </section>
       {/* Featured Accommodation Section */}
       <section id="resorts" className="py-16">
-        <div className="container mx-auto px-5 md:px-0">
+        <div className="container mx-auto px-5">
           {/* Section Heading */}
           <div className="text-center mb-12">
             <h2 className="text-3xl font-medium text-gray-900 mb-4">

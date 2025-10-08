@@ -107,7 +107,7 @@ export default function ImageLeftRightSection() {
 
   return (
     <section className="py-16">
-      <div className="container mx-auto px-5 md:px-0">
+      <div className="container mx-auto px-5">
         <div className="hidden md:block">
           {currentContents.map((content, index) => (
             <ImageLeftRight

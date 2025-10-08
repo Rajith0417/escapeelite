@@ -192,7 +192,7 @@ export default function ItinerarySection() {
 
   return (
     <section className="py-16">
-      <div className="container mx-auto px-5 md:px-0">
+      <div className="container mx-auto px-5">
         <ItineraryTabs tabs={tabs} />
       </div>
     </section>
