@@ -26,10 +26,10 @@ const steps = [
 export default function BookingSteps() {
   return (
     <section className="py-16 text-center">
-      <h2 className="text-3xl font-medium mb-12 text-gray-900">
+      <h2 className="text-3xl font-medium mb-12 text-gray-900 px-5">
         Booking Your Travel With Us Is Easy
       </h2>
-      <div className="grid md:grid-cols-3 gap-8 container mx-auto px-5 md:px-0">
+      <div className="grid md:grid-cols-3 gap-8 container mx-auto px-5">
         {steps.map((s, index) => (
           <div key={index} className="border-solid border border-[#ECECEC] rounded-xl p-6 flex flex-col items-center bg-[#EFF7FF]">
             <Image

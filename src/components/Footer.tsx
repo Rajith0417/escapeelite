@@ -111,7 +111,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               {/* Facebook */}
               <a
-                href="#"
+                href="Facebook – https://web.facebook.com/vianilondon/"
                 className="w-8 h-8 flex items-center justify-center hover:bg-blue-700 transition-colors"
               >
                 <Image
@@ -125,7 +125,7 @@ export default function Footer() {
 
               {/* Instagram */}
               <a
-                href="#"
+                href="Facebook – https://web.facebook.com/vianilondon/"
                 className="w-8 h-8 flex items-center justify-center hover:bg-pink-700 transition-colors"
               >
                 <Image
@@ -139,7 +139,7 @@ export default function Footer() {
 
               {/* LinkedIn */}
               <a
-                href="#"
+                href="https://www.linkedin.com/company/viani-london"
                 className="w-8 h-8 flex items-center justify-center hover:bg-blue-800 transition-colors"
               >
                 <Image
@@ -153,7 +153,7 @@ export default function Footer() {
 
               {/* YouTube */}
               <a
-                href="#"
+                href="https://www.youtube.com/channel/UC4ZGytjnOaUzvxCTDUVo6hg"
                 className="w-8 h-8 flex items-center justify-center hover:bg-red-700 transition-colors"
               >
                 <Image
