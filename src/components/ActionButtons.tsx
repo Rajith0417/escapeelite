@@ -74,6 +74,7 @@ function ActionButtons() {
         md:right-0 md:left-auto
         flex flex-col gap-4
         z-50
+        h-fit
       "
     >
       {/* Phone button */}

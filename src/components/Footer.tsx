@@ -111,7 +111,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               {/* Facebook */}
               <a
-                href="Facebook – https://web.facebook.com/vianilondon/"
+                href="https://web.facebook.com/vianilondon/"
                 className="w-8 h-8 flex items-center justify-center hover:bg-blue-700 transition-colors"
               >
                 <Image
