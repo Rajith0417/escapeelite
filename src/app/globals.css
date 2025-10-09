@@ -253,7 +253,7 @@ section + section {
   .va-travel-current-question
   .va-travel-dropdown-select option {
     color: white;
-    background-color: transparent;
+    background-color: black;
   }
 #chat-widget-container
   .va-travel-chat-messages-container
@@ -283,7 +283,7 @@ section + section {
   .va-travel-current-question
   .va-travel-dropdown-select option {
     color: white;
-    background-color: transparent;
+    background-color: black;
   }
 #my-chat-container
   .va-travel-chat-messages-container
