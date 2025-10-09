@@ -42,7 +42,7 @@ export default function SriLankaPage() {
                 className="rounded-2xl"
               />
             </div>
-            <Quote />
+            {/* <Quote /> */}
           </div>
           <div className="z-10 md:w-1/2 md:block pl-16 h-full overflow-scroll" id="landing">
             {/* <ChatbotLanding chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} open={true}/> */}
