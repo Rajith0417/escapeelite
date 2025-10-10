@@ -17,7 +17,7 @@ function HolidayCard({id, img, title, location}: HolidayCardProps) {
     <div className="relative w-full h-64 rounded-xl overflow-hidden">
       <div className="absolute top-0 left-0 z-10 w-full h-full bg-gradient-to-b from-transparent via-black/30 to-black"></div>
       <Image
-        src={`${basePath}${img}`}
+        src={img}
         alt={title}
         fill
         className="object-cover rounded-xl"
