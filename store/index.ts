@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-// import featuredPackagesReducer from "./slices/featuredPackagesSlice";
 import featuredHolidaysReducer from "./slices/featuredHolidays";
 import testimonialReducer from "./slices/testimonials";
+import popularAttractionsReducer from "./slices/popularAttractions";
+import attractionsDetailsReducer from "./slices/attractionsDetails";
 
 export const store = configureStore({
   reducer: {
-    // featuredPackages: featuredPackagesReducer,
     featuredHolidays: featuredHolidaysReducer,
     testimonials: testimonialReducer,
+    popularAttractions: popularAttractionsReducer,
+    attractionsDetails: attractionsDetailsReducer,
   },
 });
 

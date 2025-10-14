@@ -7,6 +7,10 @@ import SelectedHotelTabSection from '@/components/SelectedHotelTabSection';
 // import Chatbot from '@/components/Chatbot';
 import ChatbotWrapper from '@/components/chatbot/ChatbotWrapper';
 
+// import { useEffect } from "react";
+// import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+// import { fetchPopularAttractions } from "../../../../store/slices/popularAttractionsDetails";
+
 interface HotelPageProps {
   params: Promise<{ id: string }>; // 👈 async in Next.js 15
 }

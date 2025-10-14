@@ -31,7 +31,7 @@ export default function SelectedHotelTabSection() {
             <video
               src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
               controls
-              autoPlay
+              // autoPlay
               loop
               muted
               className="mx-5 w-3/4 rounded-2xl"
@@ -56,7 +56,7 @@ export default function SelectedHotelTabSection() {
           <video
             src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
             controls
-            autoPlay
+            // autoPlay
             loop
             muted
             className="mx-5 w-3/4 rounded-2xl"

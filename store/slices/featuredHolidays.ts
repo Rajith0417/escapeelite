@@ -12,7 +12,9 @@ export const fetchFeaturedHolidays = createAsyncThunk(
   "featuredHolidays/fetch",
   async () => {
     const res = await fetch("https://www.localhost/projects/escapeelite.com/api/featured-holidays.php");
-    return await res.json();
+    const data = await res.json();
+    // assuming your PHP API returns { success: true, data: [...] }
+    return data.data;
   }
 );
 

@@ -14,7 +14,7 @@ interface ImageLeftRightProps {
 function ImageLeftRight({img, alt, title, paragraph, format}: ImageLeftRightProps) {
   return (
     <div className={`text-poppins flex gap-6 items-center mb-8 flex-col ${format === "right" ? "md:flex-row" : "md:flex-row-reverse"} border border-[#ECEBEB] md:border-none rounded-lg md:rounded-none`}>
-        <div className="relative w-full  md:w-1/2 xl:w-[624px] aspect-[12/7]">
+        <div className="relative w-full  md:w-2/5 xl:w-[624px] aspect-[12/7]">
         <Image
             src={`${basePath}${img}`}
             alt={alt}

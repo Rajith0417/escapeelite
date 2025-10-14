@@ -1,6 +1,6 @@
 "use client";
 
-import Chatbot from "@/components/Chatbot";
+// import Chatbot from "@/components/Chatbot";
 import FeaturedHolidaysDetails from "@/components/FeaturedHolidaysDetails";
 import Hero from "@/components/Hero";
 import MoreDetails from "@/components/MoreDetails";
@@ -36,7 +36,7 @@ export default function MaldivesPage() {
               <video
                 src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 controls
-                autoPlay
+                // autoPlay
                 loop
                 muted
                 className="mx-5 w-[calc(100%-40px)] rounded-2xl"

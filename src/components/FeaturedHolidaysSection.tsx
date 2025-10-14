@@ -9,78 +9,6 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchFeaturedHolidays } from "../../store/slices/featuredHolidays";
 
-
-// const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
-// const holidays = [
-//   {
-//     id:1,
-//     title: "3 Star Holidays",
-//     location: "Maldives",
-//     img: "/banners/image1.png",
-//   },
-//   {
-//     id:2,
-//     title: "Ancient Holidays",
-//     location: "Sri Lanka",
-//     img: "/banners/image2.png",
-//   },
-//   {
-//     id:3,
-//     title: "Beach Holidays",
-//     location: "Sri Lanka",
-//     img: "/banners/image3.png",
-//   },
-//   {
-//     id:4,
-//     title: "Nature Holidays",
-//     location: "Sri Lanka",
-//     img: "/banners/image4.png",
-//   },
-//   {
-//     id:5,
-//     title: "5 Star Holidays",
-//     location: "Maldives",
-//     img: "/banners/image5.png",
-//   },
-//   {
-//     id:6,
-//     title: "Beach Holidays",
-//     location: "Sri Lanka",
-//     img: "/banners/image6.jpg",
-//   },
-//   {
-//     id:7,
-//     title: "Nature Holidays",
-//     location: "Sri Lanka",
-//     img: "/banners/image7.png",
-//   },
-//   {
-//     id:8,
-//     title: "5 Star Holidays",
-//     location: "Maldives",
-//     img: "/banners/image8.png",
-//   },
-//   {
-//     id:9,
-//     title: "Beach Holidays",
-//     location: "Sri Lanka",
-//     img: "/banners/image9.png",
-//   },
-//   {
-//     id:10,
-//     title: "Nature Holidays",
-//     location: "Sri Lanka",
-//     img: "/banners/image10.png",
-//   },
-//   {
-//     id:11,
-//     title: "5 Star Holidays",
-//     location: "Maldives",
-//     img: "/banners/image11.png",
-//   },
-// ];
-
 export default function FeaturedHolidaysSection() {
 
   const dispatch = useAppDispatch();
@@ -92,9 +20,6 @@ export default function FeaturedHolidaysSection() {
 
   if (status === "loading") return <p>Loading...</p>;
   if (status === "failed") return <p>Error: {error}</p>;
-
-  console.log(data);
-  
 
   return (
     <section className="w-full py-16">
@@ -108,8 +33,8 @@ export default function FeaturedHolidaysSection() {
             grabCursor={true}
             centeredSlides={true}
             slidesPerView={4}
-            initialSlide={3}  
-            loop={true} 
+            initialSlide={3}
+            loop={true}
             coverflowEffect={{
               rotate: 6,        // how much the slides rotate
               stretch: 10,        // spacing between slides
@@ -120,8 +45,8 @@ export default function FeaturedHolidaysSection() {
             modules={[EffectCoverflow]}
             className="w-full max-w-6xl"
           >
-            {data.map((holiday, index) => (
-              <SwiperSlide 
+            {Array.isArray(data) && data?.map((holiday, index) => (
+              <SwiperSlide
                 className="rounded-xl p-1 text-center bg-white"
                 key={index}
               >
@@ -147,7 +72,7 @@ export default function FeaturedHolidaysSection() {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            {data.map((holiday, index) => (
+            {Array.isArray(data) && data.map((holiday, index) => (
               <SwiperSlide key={index}>
                 <HolidayCard
                   id={holiday.id}

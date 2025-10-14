@@ -8,6 +8,7 @@ import InfoSection from "@/components/InfoSection";
 // import ChatbotLanding from "@/components/ChatbotLanding";
 import ChatbotWrapper from "@/components/chatbot/ChatbotWrapper";
 import ChatbotWrapperLanding from "@/components/ChatbotWrapperLanding";
+import TestimonialSection from "@/components/TestimonialSection";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
@@ -36,17 +37,20 @@ export default function SriLankaPage() {
               <video
                 src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 controls
-                autoPlay
+                // autoPlay
                 loop
                 muted
                 className="rounded-2xl"
               />
             </div>
-            {/* <Quote /> */}
+            {/* <TestimonialSection/> */}
+            <div className="w-full">
+              <TestimonialSection />
+            </div>
           </div>
           <div className="z-10 md:w-1/2 md:block pl-16 h-full overflow-scroll" id="landing">
             {/* <ChatbotLanding chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} open={true}/> */}
-            <ChatbotWrapperLanding chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"}/>
+            <ChatbotWrapperLanding chatbotId={"f9abbd99-4a16-4ff1-953b-b80bed2f8b28"} />
           </div>
 
           {/* <div className={`fixed bottom-6 md:bottom-6 right-6 md:right-6 left-6 md:left-1/2 z-60`}>
@@ -54,8 +58,8 @@ export default function SriLankaPage() {
           </div> */}
         </div>
       </section>
-      <InfoSection/>
-      <FeaturedHolidaysSection/>
+      <InfoSection />
+      <FeaturedHolidaysSection />
     </>
   );
 }

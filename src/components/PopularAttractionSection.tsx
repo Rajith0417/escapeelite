@@ -3,37 +3,52 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation, Pagination } from "swiper/modules";
-import AttractionCard from "./PopularAttractionCard";
+import PopularAttractionCard from "./PopularAttractionCard";
 import "swiper/css/navigation";
 
-const attractions = [
-  {
-    id: 1,
-    title: "Galle Sri Lanka",
-    link: "",
-    img: "/banners/image7.png",
-    paragraph:
-      "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
-  },
-  {
-    id: 2,
-    title: "Colombo",
-    link: "",
-    img: "/banners/image8.png",
-    paragraph:
-      "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
-  },
-  {
-    id: 3,
-    title: "Kandy Sri Lanka",
-    link: "",
-    img: "/banners/image10.png",
-    paragraph:
-      "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
-  },
-];
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { fetchPopularAttractions } from "../../store/slices/popularAttractions";
+
+// const attractions = [
+//   {
+//     id: 1,
+//     title: "Galle Sri Lanka",
+//     link: "",
+//     img: "/banners/image7.png",
+//     paragraph:
+//       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
+//   },
+//   {
+//     id: 2,
+//     title: "Colombo",
+//     link: "",
+//     img: "/banners/image8.png",
+//     paragraph:
+//       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
+//   },
+//   {
+//     id: 3,
+//     title: "Kandy Sri Lanka",
+//     link: "",
+//     img: "/banners/image10.png",
+//     paragraph:
+//       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
+//   },
+// ];
 
 export default function AttractionsSection() {
+
+  const dispatch = useAppDispatch();
+  const { data, status, error } = useAppSelector((state) => state.popularAttractions);
+
+  useEffect(() => {
+    dispatch(fetchPopularAttractions());
+  }, [dispatch]);
+
+  if (status === "loading") return <p>Loading...</p>;
+  if (status === "failed") return <p>Error: {error}</p>;
+
   return (
     <section id="attractions" className="py-16">
       <div className="container text-center mx-auto px-5 md:px-0">
@@ -61,20 +76,21 @@ export default function AttractionsSection() {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            {attractions.map((a, index) => (
+            {Array.isArray(data) && data.map((attraction, index) => (
               <SwiperSlide
                 key={index}
                 className=" rounded-xl shadow hover:shadow-lg transition overflow-hidden"
               >
-                <AttractionCard id={a.id} img={a.img} title={a.title} link={a.link} paragraph={a.paragraph}/>
+                <PopularAttractionCard
+                  id={attraction.id}
+                  img={attraction.image} 
+                  title={attraction.heading} 
+                  link={attraction.url} 
+                  paragraph={attraction.description} 
+                  country={attraction.country} 
+                />
               </SwiperSlide>
             ))}
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-            <SwiperSlide>Slide 5</SwiperSlide>
-            <SwiperSlide>Slide 6</SwiperSlide>
           </Swiper>
         </div>
       </div>
