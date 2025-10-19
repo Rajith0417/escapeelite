@@ -3,14 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+// const imageBaseUrl = "https://www.escapeelite.com/admin/assets/images/package_thumbnails/";
 
 interface HolidayCardDetailsProps {
   imageSrc: string;
   title: string;
   description: string;
-  duration: string; // e.g., "12 days"
+  duration: number; // e.g., "12 days"
   season: string; // e.g., "Jan-Jun | Oct-Dec"
-  price: string; // e.g., "£1,440.00"
+  price: number; // e.g., "£1,440.00"
   onViewMoreHref: string;
 }
 
@@ -28,11 +29,11 @@ export default function HolidayCardDetails({
       {/* Top image - fixed height */}
       <div className="relative w-full flex-shrink-0">
         <Image
-          src={`${basePath}${imageSrc}`}
+          src={imageSrc}
           alt={title}
           width={0}
           height={0}
-          className="object-cover rounded-t-3xl w-full h-56"
+          className="object-cover rounded-t-xl w-full h-56"
         />
       </div>
 
@@ -57,7 +58,7 @@ export default function HolidayCardDetails({
               width={18}
               height={18}
             />
-            <span>{duration}</span>
+            <span>{duration} days</span>
           </div>
           <div className="flex items-center gap-1">
             <Image 
@@ -73,6 +74,7 @@ export default function HolidayCardDetails({
               alt="price" 
               width={18} 
               height={18} />
+            &pound;
             <span className="font-normal">{price}</span>
             <span className="text-gray-500 text-[9px]">(Per person)</span>
           </div>

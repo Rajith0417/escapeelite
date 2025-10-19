@@ -10,9 +10,10 @@ interface HolidayCardProps {
   img: string;
   title: string;
   location: string;
+  country: string;
 }
 
-function HolidayCard({id, img, title, location}: HolidayCardProps) {
+function HolidayCard({id, img, title, location, country}: HolidayCardProps) {
   return (
     <div className="relative w-full h-64 rounded-xl overflow-hidden">
       <div className="absolute top-0 left-0 z-10 w-full h-full bg-gradient-to-b from-transparent via-black/30 to-black"></div>
@@ -26,7 +27,7 @@ function HolidayCard({id, img, title, location}: HolidayCardProps) {
         <div className="flex items-center justify-center space-x-2 mb-1">
           <p className="text-lg font-semibold">{title}</p>
           <Link 
-            href={`/sri-lanka/${id}`} 
+            href={`/${country}/${id}`} 
             className="hover:scale-110 transition-transform">
             <Image
               src={`${basePath}/icons/arrowBlue.svg`}

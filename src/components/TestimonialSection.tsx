@@ -88,7 +88,7 @@ export default function TestimonialSection() {
   if (status === "loading") return <p>Loading...</p>;
   if (status === "failed") return <p>Error: {error}</p>;
 
-  console.log(data);
+  // console.log(data);
 
   return (
     // <section className="pt-16 pb-32 md:py-16">

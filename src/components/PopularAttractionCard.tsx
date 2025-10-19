@@ -6,7 +6,7 @@ interface AttractionCardProps {
   id: number;
   img: string;
   title: string;
-  link: string;
+  // link: string;
   paragraph: string;
   country: string;
 }
@@ -17,7 +17,7 @@ function AttractionCard(children: AttractionCardProps) {
   return (
     <div className="relative w-full aspect-square">
       <Image
-        src={`https://www.escapeelite.com/admin/assets/images/attraction_images/${children.img}`}
+        src={children.img}
         alt={children.title || "Popular attraction image"}
         fill
         className="object-cover"

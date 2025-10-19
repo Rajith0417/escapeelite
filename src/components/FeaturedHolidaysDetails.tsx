@@ -5,112 +5,39 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 
-interface HolidayItem {
-  id: number;
-  imageSrc: string;
-  title: string;
-  description: string;
-  duration: string;
-  season: string;
-  price: string;
-}
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { fetchFeaturedHolidaysDetails } from "../../store/slices/featuredHolidaysDetails";
 
 type FeaturedHolidaysDetailsProps = {
   heading?: string;
   dropdownOptions?: string[];
   selectedOption?: string;
+  country?: string;
   onDropdownChange?: (value: string) => void;
 };
-
-const dummyHolidays: HolidayItem[] = [
-  {
-    id: 1,
-    imageSrc: "/banners/image6.jpg",
-    title: "Nature & Wildlife Tours",
-    description:
-      "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
-    duration: "12 days",
-    season: "Jan-Jun | Sep-Dec",
-    price: "£1,440.00",
-  },
-  {
-    id: 2,
-    imageSrc: "/banners/image9.png",
-    title: "Yala wildlife, Sigiriya, Central Hills & South beach",
-    description:
-      "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay central hills & south coast beach  central hills & south coast beach ",
-    duration: "12 days",
-    season: "Jan-Jun | Oct-Dec",
-    price: "£1,440.00",
-  },
-  {
-    id: 3,
-    imageSrc: "/banners/image8.png",
-    title: "South Coast Beach Explorer",
-    description:
-      "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
-    duration: "12 days",
-    season: "Jan-Jun | Sep-Dec",
-    price: "£1,440.00",
-  },
-  {
-    id: 4,
-    imageSrc: "/banners/image1.png",
-    title: "Wilpattu wildlife, Ancient Sri Lanka & Central Hills",
-    description:
-      "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
-    duration: "12 days",
-    season: "Jan-Dec",
-    price: "£1,440.00",
-  },
-  {
-    id: 5,
-    imageSrc: "/banners/image6.jpg",
-    title: "Nature & Wildlife Tours",
-    description:
-      "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
-    duration: "12 days",
-    season: "Jan-Jun | Sep-Dec",
-    price: "£1,440.00",
-  },
-  {
-    id: 6,
-    imageSrc: "/banners/image9.png",
-    title: "Yala wildlife, Sigiriya, Central Hills & South beach",
-    description:
-      "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay central hills & south coast beach  central hills & south coast beach ",
-    duration: "12 days",
-    season: "Jan-Jun | Oct-Dec",
-    price: "£1,440.00",
-  },
-  {
-    id: 7,
-    imageSrc: "/banners/image8.png",
-    title: "South Coast Beach Explorer",
-    description:
-      "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
-    duration: "12 days",
-    season: "Jan-Jun | Sep-Dec",
-    price: "£1,440.00",
-  },
-  {
-    id: 8,
-    imageSrc: "/banners/image1.png",
-    title: "Wilpattu wildlife, Ancient Sri Lanka & Central Hills",
-    description:
-      "Holidays to Sri Lanka with wildlife, culture, central hills & south coast beach stay",
-    duration: "12 days",
-    season: "Jan-Dec",
-    price: "£1,440.00",
-  },
-];
 
 export default function FeaturedHolidaysDetails({
   heading = "Featured holidays to SRI LANKA",
   dropdownOptions = ["All Holidays", "Wildlife", "Beaches", "Cultural"],
+  country = "maldives",
   selectedOption,
   onDropdownChange,
 }: FeaturedHolidaysDetailsProps) {
+
+  const dispatch = useAppDispatch();
+  const { data, status, error } = useAppSelector((state) => state.featuresHolidaysDetails);
+
+  useEffect(() => {
+    dispatch(fetchFeaturedHolidaysDetails(country));
+  }, [dispatch]);
+
+  if (status === "loading") return <p>Loading...</p>;
+  if (status === "failed") return <p>Error: {error}</p>;
+
+  console.log("featured holidays details");
+  console.log(data);
+
   return (
     <section className="py-16">
       <div className="container mx-auto px-5">
@@ -165,17 +92,17 @@ export default function FeaturedHolidaysDetails({
           modules={[Pagination, Navigation]}
           className="featured-holidays-swiper123 !p-1"
         >
-          {dummyHolidays.map((h, index) => (
+          {data && data.map((fhd, index) => (
             <SwiperSlide key={index} className="!h-auto">
               <div className="h-full">
                 <HolidayCardDetails
-                  imageSrc={h.imageSrc}
-                  title={h.title}
-                  description={h.description}
-                  duration={h.duration}
-                  season={h.season}
-                  price={h.price}
-                  onViewMoreHref={`/sri-lanka/${h.id}`}
+                  imageSrc={fhd.image}
+                  title={fhd.package_name}
+                  description={fhd.package_description}
+                  duration={fhd.no_of_days}
+                  season={fhd.best_times}
+                  price={fhd.price_starting_from}
+                  onViewMoreHref={`/${country}/${fhd.id}`}
                 />
               </div>
             </SwiperSlide>

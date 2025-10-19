@@ -18,7 +18,7 @@ interface ImageLeftRightSectionProps {
 }
 
 // const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-const imageBaseUrl = "https://www.escapeelite.com/admin/assets/images/attraction_detail_images/";
+// const imageBaseUrl = "https://www.escapeelite.com/admin/assets/images/attraction_detail_images/";
 // const fallbackImage = "https://www.escapeelite.com/admin/assets/img/faces/face-0.jpg";
 
 export default function ImageLeftRightSection({contents}: ImageLeftRightSectionProps) {
@@ -34,8 +34,7 @@ export default function ImageLeftRightSection({contents}: ImageLeftRightSectionP
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    console.log(page);
-    
+    // console.log(page);
   };
 
   return (
@@ -45,7 +44,7 @@ export default function ImageLeftRightSection({contents}: ImageLeftRightSectionP
           {currentContents.map((content, index) => (
             <ImageLeftRight
               key={index}
-              img={`${imageBaseUrl}${content.image}`}
+              img={content.image}
               alt={content.heading}
               title={content.heading}
               paragraph={content.description}

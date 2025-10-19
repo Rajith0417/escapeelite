@@ -13,7 +13,7 @@ interface AttractionPageProps {
   params: { id: string };
 }
 
-const imageBaseUrl = "https://www.escapeelite.com/admin/assets/images/attraction_images/";
+// const imageBaseUrl = "https://www.escapeelite.com/admin/assets/images/attraction_images/";
 // const fallbackImage = "https://www.escapeelite.com/admin/assets/img/faces/face-0.jpg";
 /**
  * Client Component responsible for Redux state management and data fetching.
@@ -62,7 +62,7 @@ export default function AttractionsWrapper({ params }: AttractionPageProps) {
   return (
     <>
       <Hero
-        image={`${imageBaseUrl}${attractionData.image}`}
+        image={attractionData.image}
         // Access properties directly from attractionData
         titleDesktop={attractionData.heading} 
         titleMobile={attractionData.heading}

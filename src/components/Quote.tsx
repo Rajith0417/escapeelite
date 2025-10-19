@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-const imageBaseUrl = "https://www.escapeelite.com/admin/assets/images/testimonial_images";
-const fallbackImage = "https://www.escapeelite.com/admin/assets/img/faces/face-0.jpg";
+const fallbackImage = process.env.NEXT_PUBLIC_FALLBACK_IMAGE || "";
 
 interface QuoteProps {
   image: string;
@@ -15,7 +13,7 @@ interface QuoteProps {
 function Quote({ image, text, name, location }: QuoteProps) {
   // ✅ Use full image path safely
   const [imgSrc, setImgSrc] = useState(
-    image ? `${imageBaseUrl}/${image}` : fallbackImage
+    image ? image : fallbackImage
   );
 
   return (
@@ -23,7 +21,7 @@ function Quote({ image, text, name, location }: QuoteProps) {
       {/* Quote icon */}
       <div className="w-[60px] h-[60px] overflow-hidden flex-shrink-0">
         <Image
-          src={`${basePath}/icons/quote.svg`}
+          src={`/icons/quote.svg`}
           alt="quote"
           width={66}
           height={60}

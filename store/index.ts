@@ -3,6 +3,7 @@ import featuredHolidaysReducer from "./slices/featuredHolidays";
 import testimonialReducer from "./slices/testimonials";
 import popularAttractionsReducer from "./slices/popularAttractions";
 import attractionsDetailsReducer from "./slices/attractionsDetails";
+import featuredHolidaysDetailsReducer from "./slices/featuredHolidaysDetails"
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     testimonials: testimonialReducer,
     popularAttractions: popularAttractionsReducer,
     attractionsDetails: attractionsDetailsReducer,
+    featuresHolidaysDetails: featuredHolidaysDetailsReducer,
   },
 });
 

@@ -5,7 +5,7 @@ interface FeaturedHoliday {
   category_name: string
   country_name: string
   image: string
-  url: string
+  country_slug: string
 }
 
 export const fetchFeaturedHolidays = createAsyncThunk(

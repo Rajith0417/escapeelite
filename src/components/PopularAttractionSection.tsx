@@ -5,49 +5,41 @@ import "swiper/css";
 import { Navigation, Pagination } from "swiper/modules";
 import PopularAttractionCard from "./PopularAttractionCard";
 import "swiper/css/navigation";
+import "swiper/css/pagination"; // Import pagination CSS for the dots
 
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchPopularAttractions } from "../../store/slices/popularAttractions";
 
-// const attractions = [
-//   {
-//     id: 1,
-//     title: "Galle Sri Lanka",
-//     link: "",
-//     img: "/banners/image7.png",
-//     paragraph:
-//       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
-//   },
-//   {
-//     id: 2,
-//     title: "Colombo",
-//     link: "",
-//     img: "/banners/image8.png",
-//     paragraph:
-//       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
-//   },
-//   {
-//     id: 3,
-//     title: "Kandy Sri Lanka",
-//     link: "",
-//     img: "/banners/image10.png",
-//     paragraph:
-//       "Colombo is in an exciting phase in its history. There is a sense of renewed ambition now that peace has been restored to Sri Lanka, but it remains a compact, manageable ...",
-//   },
-// ];
+type AttractionProps = {
+  country?: string; // Optional country slug passed as a prop
+};
 
-export default function AttractionsSection() {
+export default function AttractionsSection({ country }: AttractionProps) {
 
   const dispatch = useAppDispatch();
-  const { data, status, error } = useAppSelector((state) => state.popularAttractions);
+  // Destructure data, status, and error from the Redux store
+  const { data: attractions, status, error } = useAppSelector((state) => state.popularAttractions);
+  
+  // Define the default page to fetch for this carousel section
+  const PAGE_TO_FETCH = 1; 
 
   useEffect(() => {
-    dispatch(fetchPopularAttractions());
-  }, [dispatch]);
+    // Dispatch the thunk with an object containing the country and page
+    // The country is optional (default undefined if not passed), and the page is fixed at 1
+    dispatch(
+      fetchPopularAttractions({ 
+        country: country, 
+        page: PAGE_TO_FETCH // Always fetch the first page for the carousel
+      })
+    );
+    
+    // The fetch is triggered whenever the component mounts or the country prop changes.
+  }, [dispatch, country]); // Removed the old `data` dependency which could cause infinite loops
 
-  if (status === "loading") return <p>Loading...</p>;
-  if (status === "failed") return <p>Error: {error}</p>;
+  if (status === "loading") return <p className="text-center py-8">Loading popular attractions...</p>;
+  if (status === "failed") return <p className="text-center py-8 text-red-500">Error: {error}</p>;
+  if (attractions.length === 0) return null; // Or a message indicating no attractions found
 
   return (
     <section id="attractions" className="py-16">
@@ -57,7 +49,7 @@ export default function AttractionsSection() {
           <Swiper
             slidesPerView={3}
             spaceBetween={30}
-            loop={true}
+            loop={true} // Note: Be cautious with `loop: true` if you only load one page of data.
             pagination={{
               clickable: true,
             }}
@@ -76,18 +68,22 @@ export default function AttractionsSection() {
             modules={[Pagination, Navigation]}
             className="mySwiper"
           >
-            {Array.isArray(data) && data.map((attraction, index) => (
+            {/* Map over the attractions array from the Redux store */}
+            {Array.isArray(attractions) && attractions.map((attraction, index) => (
               <SwiperSlide
-                key={index}
+                // Using attraction.id as key is safer than index if data is stable
+                key={attraction.id} 
                 className=" rounded-xl shadow hover:shadow-lg transition overflow-hidden"
               >
                 <PopularAttractionCard
                   id={attraction.id}
-                  img={attraction.image} 
-                  title={attraction.heading} 
-                  link={attraction.url} 
-                  paragraph={attraction.description} 
-                  country={attraction.country} 
+                  img={attraction.image}
+                  title={attraction.heading} // Assumed 'heading' maps to 'title'
+                  // If your API doesn't return a 'url', you'll need to compute it here or in the card component.
+                  // For now, I'll remove it or assume it's part of the Attraction interface.
+                  // link={attraction.url} 
+                  paragraph={attraction.description}
+                  country={attraction.country}
                 />
               </SwiperSlide>
             ))}

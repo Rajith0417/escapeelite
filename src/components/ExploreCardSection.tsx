@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import ExploreCard from "./ExploreCard";
 import Pagination from "./Pagination";
 import { Navigation } from "swiper/modules";
@@ -7,116 +7,85 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function ExploreCardSection() {
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { fetchPopularAttractions } from "../../store/slices/popularAttractions";
+
+// Define the component props to accept an optional country slug
+interface ExploreCardSectionProps {
+  selectedCountrySlug?: string; // Optional prop for filtering by country
+}
+
+export default function ExploreCardSection({ selectedCountrySlug }: ExploreCardSectionProps) {
+  // We manage the current page in the component's local state
   const [currentPage, setCurrentPage] = useState(1);
-  const cards = [
-    {
-      id: 1,
-      name: "Ancient City of Sigiriya",
-      description:
-        "A spectacular rock fortress and palace ruin surrounded by extensive gardens",
-      image: "images/sigiriya.jpg", // You'll need to add this image
-    },
-    {
-      id: 2,
-      name: "Sacred City of Kandy",
-      description:
-        "Home to the Temple of the Tooth Relic, one of Buddhism's most sacred sites",
-      image: "images/kandy.jpg", // You'll need to add this image
-    },
-    {
-      id: 3,
-      name: "Old Town of Galle",
-      description:
-        "A fortified city built by European colonists in South and Southeast Asia",
-      image: "images/galle.jpg", // You'll need to add this image
-    },
-    {
-      id: 4,
-      name: "Golden Temple of Dambulla",
-      description:
-        "A well-preserved cave temple complex with Buddhist mural paintings and statues",
-      image: "images/dambulla.jpg", // You'll need to add this image
-    },
-    {
-      id: 5,
-      name: "Sinharaja Forest Reserve",
-      description:
-        "The country's last viable area of primary tropical rainforest with endemic wildlife",
-      image: "images/sinharaja.jpg", // You'll need to add this image
-    },
-    {
-      id: 6,
-      name: "Ancient City of Polonnaruwa",
-      description:
-        "The medieval capital with well-preserved ruins of beautiful gardens and monuments",
-      image: "images/polonnaruwa.jpg", // You'll need to add this image
-    },
-    {
-      id: 7,
-      name: "Sacred City of Anuradhapura",
-      description:
-        "One of the ancient capitals of Sri Lanka, famous for its well-preserved ruins",
-      image: "images/anuradhapura.jpg", // You'll need to add this image
-    },
-    {
-      id: 8,
-      name: "Central Highlands of Sri Lanka",
-      description:
-        "A region of montane rainforests with an exceptionally rich biodiversity",
-      image: "images/highland.jpg", // You'll need to add this image
-    },
-    {
-      id: 9,
-      name: "Ancient City of Sigiriya",
-      description:
-        "A spectacular rock fortress and palace ruin surrounded by extensive gardens",
-      image: "images/sigiriya.jpg", // You'll need to add this image
-    },
-    {
-      id: 10,
-      name: "Sacred City of Kandy",
-      description:
-        "Home to the Temple of the Tooth Relic, one of Buddhism's most sacred sites",
-      image: "images/kandy.jpg", // You'll need to add this image
-    },
-    {
-      id: 11,
-      name: "Old Town of Galle",
-      description:
-        "A fortified city built by European colonists in South and Southeast Asia",
-      image: "images/galle.jpg", // You'll need to add this image
-    },
-  ];
 
-  const itemsPerPage = 9;
+  const dispatch = useAppDispatch();
+  // Destructure data and pagination info from the Redux store
+  const { data: attractions, pagination, status, error } = useAppSelector((state) => state.popularAttractions);
+  /**
+   * 1. API Call (useEffect)
+   * This effect runs when the component mounts, or when currentPage or selectedCountrySlug changes.
+   */
+  useEffect(() => {
+    // Dispatch the thunk with the current page and country filter
+    dispatch(
+      fetchPopularAttractions({ 
+        page: currentPage, 
+        country: selectedCountrySlug 
+      })
+    );
+    
+    // Note: The dependency array ensures a new fetch happens on page or country change
+  }, [dispatch, currentPage, selectedCountrySlug]);
 
-  // Calculate pagination
-  const totalPages = Math.ceil(cards.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentCards = cards.slice(startIndex, endIndex);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  /**
+   * 2. Page Change Handler
+   * This function updates the local state, which in turn triggers the useEffect above
+   * to fetch the new data.
+   */
+  const handlePageChange = useCallback((page: number) => {
+    // Only update if the page is different and within bounds (optional check)
+    if (page !== currentPage) {
+      setCurrentPage(page);
+      // NOTE: The data fetch is handled by the useEffect watching currentPage
+      window.scrollTo(0, 0); // Optional: Scroll to top on page change for better UX
+    }
+  }, [currentPage]);
+  
+  // ----------------------------------------------------
+  // Render Logic
+  // ----------------------------------------------------
+
+  if (status === "loading" && attractions.length === 0) return <p className="text-center py-16">Loading attractions...</p>;
+  if (status === "failed") return <p className="text-center py-16 text-red-500">Error fetching data: {error}</p>;
+  if (attractions.length === 0 && status === "succeeded") return <p className="text-center py-16">No attractions found for this selection.</p>;
+
+  // Use the pagination data from the Redux store
+  const totalPages = pagination?.total_pages || 1;
+  const currentTotalItems = attractions.length; // Items on the current page
 
   return (
     <section className='py-16'>
       <div className="container mx-auto px-4">
+        
+        {/* --- Desktop View (Grid) --- */}
         <div className="hidden md:block">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-between gap-6">
-            {currentCards.map((card) => (
+            {/* The component now maps over the attractions array from the Redux store (which is the single page data) */}
+            {attractions.map((card) => (
               <ExploreCard
                 key={card.id}
                 id={card.id}
-                name={card.name}
+                // Assuming 'heading' from the store corresponds to 'name' in the component
+                name={card.heading} 
                 description={card.description}
                 image={card.image}
               />
             ))}
           </div>
-          {/* Pagination */}
+          
+          {/* Pagination Component */}
           {totalPages > 1 && (
             <div className="mt-12 hidden md:block">
               <Pagination
@@ -127,19 +96,21 @@ export default function ExploreCardSection() {
             </div>
           )}
         </div>
+        
+        {/* --- Mobile View (Swiper) --- */}
         <div className="block md:hidden">
           <Swiper
             slidesPerView={1}
             spaceBetween={30}
-            loop={true}
-            // pagination={{
-            // clickable: true,
-            // }}
+            // Pagination is usually not needed when data is paginated by the API,
+            // as you only have the current page's data. If you need navigation,
+            // you might want to consider fetching all pages or using infinite scroll.
+            // For now, we'll keep the current page's data in the swiper.
             navigation={true}
             modules={[Navigation]}
             className="mySwiper"
           >
-            {cards.map((card, index) => (
+            {attractions.map((card, index) => (
               <SwiperSlide
                 key={index}
                 className=" rounded-xl shadow hover:shadow-lg transition overflow-hidden"
@@ -147,7 +118,7 @@ export default function ExploreCardSection() {
                 <ExploreCard
                   key={card.id}
                   id={card.id}
-                  name={card.name}
+                  name={card.heading}
                   description={card.description}
                   image={card.image}
                 />

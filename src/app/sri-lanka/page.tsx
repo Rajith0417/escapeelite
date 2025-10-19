@@ -36,24 +36,41 @@ export default function SriLankaPage() {
               <video
                 src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                 controls
-                autoPlay
+                // autoPlay
                 loop
                 muted
-                className="mx-5 w-[calc(100%-40px)] rounded-2xl"
+                className="w-full rounded-2xl"
               />
             </div>
           </div>
         </div>
       </section>
       <FeaturedHolidaysDetails
-        heading="Featured holidays to SL"
+        heading="Featured holidays to Sri Lanka"
         dropdownOptions={["All Holidays", "Honeymoon", "Family", "Luxury"]}
         selectedOption="All Holidays"
+        country="sri-lanka"
         onDropdownChange={(val) => console.log(val)}
       />
-      <TestimonialSection />
+      <section>
+        <div className="container pt-16 px-5 mx-auto text-center gap-8 flex items-center flex-col md:flex-row">
+          <div className="w-full md:w-1/2">
+            <video
+              src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+              controls
+              // autoPlay
+              loop
+              muted
+              className="w-full rounded-2xl"
+            />
+          </div>
+          <div className="w-full md:w-1/2">
+            <TestimonialSection />
+          </div>
+        </div>
+      </section>
       <MoreDetails />
-      <AttractionsSection />
+      <AttractionsSection country={"sri-lanka"} />
     </>
   );
 }
