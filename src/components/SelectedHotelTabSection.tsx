@@ -1,8 +1,27 @@
 import React from "react";
 import ItineraryTabs, { TabItem } from "./ItineraryTabs";
 import TourMap from "./TourMap";
+import parse from 'html-react-parser';
 
-export default function SelectedHotelTabSection() {
+interface TabSectionProps {
+  description?: string;
+  video?: string;
+  location?: Location;
+}
+
+interface Location {
+  latitude: number;
+  longitude: number;
+}
+
+export default function SelectedHotelTabSection({ description, video, location }: TabSectionProps) {
+  console.log("-0-0-0-");
+  console.log(video);
+
+  const hasVideo = Boolean(video && video.trim() !== "");
+  console.log("has video ="+hasVideo);
+  
+
   const tabs: TabItem[] = [
     {
       id: "description",
@@ -10,60 +29,54 @@ export default function SelectedHotelTabSection() {
       content: (
         <>
           <p className="font-normal text-lg mb-10 mt-6">
-            Heritance Kandalama is an architectural masterpiece by Geoffrey
-            Bawa, built overlooking the eighth wonder of the world - the rock
-            fortress of Sigiriya. The hotel sits at the heart of the cultural
-            triangle of Sri Lanka, close to five UNESCO World Heritage Sites.
-            The unpaved road through the jungle gives no clue to what to expect
-            - there are no views of the hotel on the horizon. Then suddenly, as
-            you drive up a ramp, a cave-like entrance appears. And even as you
-            step into another world of minimalist white pillars and cool curving
-            corridors, enormous boulders intrude, and birdsong hangs in the air.
-            The theme continues throughout the hotel. Heritance Kandalama is
-            shaped like the outspread wings of a bird, following the line of the
-            cliff from which it seems to emerge. The hotel is a staggering 1 km
-            from end to end, and rises up seven floors, yet appears to be a
-            perfectly natural extension of the mountainside. The flat roof and
-            timber pillars support a screen of vegetation that attracts local
-            wildlife.
+            {description && parse(description)}
           </p>
-          <div className="w-full text-center flex justify-center">
-            <video
-              src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-              controls
-              // autoPlay
-              loop
-              muted
+          {hasVideo && <div className="w-full text-center flex justify-center">
+            <iframe
+              width="560"
+              height="315"
+              src={video}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
               className="mx-5 w-3/4 rounded-2xl"
             />
-          </div>
+          </div>}
           <div className="py-4 mt-20">
             <TourMap
               markers={[
-                { lat: 6.9271, lng: 79.8612 },
-                { lat: 7.957, lng: 80.7603 },
+                // { lat: 6.9271, lng: 79.8612 },
+                location!,
+                // { lat: 7.957, lng: 80.7603 },
               ]}
             />
           </div>
         </>
       ),
     },
-    {
-      id: "video",
-      title: "Video",
-      content: (
-        <div className="w-full text-center flex justify-center mt-6">
-          <video
-            src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-            controls
-            // autoPlay
-            loop
-            muted
-            className="mx-5 w-3/4 rounded-2xl"
-          />
-        </div>
-      ),
-    },
+    ...(hasVideo
+      ? [
+          {
+            id: "video",
+            title: "Video",
+            content: (
+              <div className="w-full text-center flex justify-center mt-6">
+                <iframe
+                  width="560"
+                  height="315"
+                  src={video!}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="mx-5 w-3/4 rounded-2xl"
+                />
+              </div>
+            ),
+          },
+        ]
+      : []),
     {
       id: "map",
       title: "Map",
@@ -71,8 +84,9 @@ export default function SelectedHotelTabSection() {
         <div className="py-4 mt-6">
           <TourMap
             markers={[
-              { lat: 6.9271, lng: 79.8612 },
-              { lat: 7.957, lng: 80.7603 },
+              // { lat: 6.9271, lng: 79.8612 },
+              location!,
+              // { lat: 7.957, lng: 80.7603 },
             ]}
           />
         </div>
@@ -80,5 +94,8 @@ export default function SelectedHotelTabSection() {
     },
   ];
 
-  return <ItineraryTabs tabs={tabs} />;
+  // 👇 If there's no video, set "description" as the initial tab
+  return (
+    <ItineraryTabs tabs={tabs} initialTabId={hasVideo ? "video" : "description"} />
+  );
 }

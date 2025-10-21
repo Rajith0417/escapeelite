@@ -14,6 +14,17 @@ interface AttractionDetails {
   image: string;
   details: Details[];
 }
+interface AttractionsState {
+  data: AttractionDetails | null;
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null;
+}
+
+const initialState: AttractionsState = {
+  data: null,
+  status: "idle",
+  error: null,
+};
 
 export const fetchAttractionsDetails = createAsyncThunk(
   "attractionsDetails/fetch",
@@ -29,19 +40,6 @@ export const fetchAttractionsDetails = createAsyncThunk(
     return data.data;
   }
 );
-
-
-interface AttractionsState {
-  data: AttractionDetails | null;
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | null;
-}
-
-const initialState: AttractionsState = {
-  data: null,
-  status: "idle",
-  error: null,
-};
 
 const AttractionsDetailsSlice = createSlice({
   name: "attractionsDetails/fetch",

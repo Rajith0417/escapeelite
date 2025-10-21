@@ -19,7 +19,7 @@ export default function ItineraryTabs({ tabs, initialTabId }: ItineraryTabsProps
     <div className="w-full">
       {/* Header */}
       <div className="flex items-center justify-around gap-0 rounded-3xl bg-[#F3F4F6] p-2.5 mb-4">
-        {tabs.map((t) => {
+        {tabs && tabs.map((t) => {
           const isActive = t.id === active;
           return (
             <button

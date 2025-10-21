@@ -1,13 +1,13 @@
 "use client";
 
 interface Marker {
-  lat: number;
-  lng: number;
+  latitude: number;
+  longitude: number;
   label?: string;
 }
 
 interface TourMapProps {
-  center?: { lat: number; lng: number };
+  center?: { latitude: number; longitude: number };
   zoom?: number;
   // For simplicity we render an embed centered around the first marker
   markers?: Marker[];
@@ -15,13 +15,13 @@ interface TourMapProps {
 }
 
 export default function TourMap({
-  center = { lat: 6.9271, lng: 79.8612 }, // Colombo
-  zoom = 7,
+  center = { latitude: 6.9271, longitude: 79.8612 }, // Colombo
+  zoom = 11,
   markers = [],
   className = "",
 }: TourMapProps) {
   const mapCenter = markers[0] ? markers[0] : center;
-  const q = `${mapCenter.lat},${mapCenter.lng}`;
+  const q = `${mapCenter.latitude},${mapCenter.longitude}`;
   const src = `https://www.google.com/maps?q=${encodeURIComponent(q)}&z=${zoom}&output=embed`;
 
   return (

@@ -9,75 +9,6 @@ import { fetchTestimonials } from "../../store/slices/testimonials";
 
 export default function TestimonialSection() {
 
-  // const holidays = [
-  //   {
-  //     id: 1,
-  //     title: "3 Star Holidays",
-  //     location: "Maldives",
-  //     img: "/banners/image1.png",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Ancient Holidays",
-  //     location: "Sri Lanka",
-  //     img: "/banners/image2.png",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Beach Holidays",
-  //     location: "Sri Lanka",
-  //     img: "/banners/image3.png",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Nature Holidays",
-  //     location: "Sri Lanka",
-  //     img: "/banners/image4.png",
-  //   },
-  //   {
-  //     id: 5,
-  //     title: "5 Star Holidays",
-  //     location: "Maldives",
-  //     img: "/banners/image5.png",
-  //   },
-  //   {
-  //     id: 6,
-  //     title: "Beach Holidays",
-  //     location: "Sri Lanka",
-  //     img: "/banners/image6.jpg",
-  //   },
-  //   {
-  //     id: 7,
-  //     title: "Nature Holidays",
-  //     location: "Sri Lanka",
-  //     img: "/banners/image7.png",
-  //   },
-  //   {
-  //     id: 8,
-  //     title: "5 Star Holidays",
-  //     location: "Maldives",
-  //     img: "/banners/image8.png",
-  //   },
-  //   {
-  //     id: 9,
-  //     title: "Beach Holidays",
-  //     location: "Sri Lanka",
-  //     img: "/banners/image9.png",
-  //   },
-  //   {
-  //     id: 10,
-  //     title: "Nature Holidays",
-  //     location: "Sri Lanka",
-  //     img: "/banners/image10.png",
-  //   },
-  //   {
-  //     id: 11,
-  //     title: "5 Star Holidays",
-  //     location: "Maldives",
-  //     img: "/banners/image11.png",
-  //   },
-  // ];
-
   const dispatch = useAppDispatch();
   const { data, status, error } = useAppSelector((state) => state.testimonials);
 
@@ -118,7 +49,7 @@ export default function TestimonialSection() {
             }}
             pagination={{ clickable: true }}
             navigation={false}
-            modules={[Pagination, Navigation, Autoplay, EffectFade]}
+            modules={[Navigation, Autoplay, EffectFade]}
             className="mySwiper"
           >
             {data.map((quot, index) => (

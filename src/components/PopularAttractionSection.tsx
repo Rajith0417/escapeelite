@@ -2,7 +2,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import PopularAttractionCard from "./PopularAttractionCard";
 import "swiper/css/navigation";
 import "swiper/css/pagination"; // Import pagination CSS for the dots
@@ -19,7 +19,7 @@ export default function AttractionsSection({ country }: AttractionProps) {
 
   const dispatch = useAppDispatch();
   // Destructure data, status, and error from the Redux store
-  const { data: attractions, status, error } = useAppSelector((state) => state.popularAttractions);
+  const { data: data, status, error } = useAppSelector((state) => state.popularAttractions);
   
   // Define the default page to fetch for this carousel section
   const PAGE_TO_FETCH = 1; 
@@ -39,7 +39,7 @@ export default function AttractionsSection({ country }: AttractionProps) {
 
   if (status === "loading") return <p className="text-center py-8">Loading popular attractions...</p>;
   if (status === "failed") return <p className="text-center py-8 text-red-500">Error: {error}</p>;
-  if (attractions.length === 0) return null; // Or a message indicating no attractions found
+  if (data.length === 0) return null; // Or a message indicating no attractions found
 
   return (
     <section id="attractions" className="py-16">
@@ -65,11 +65,11 @@ export default function AttractionsSection({ country }: AttractionProps) {
                 slidesPerView: 3, // ✅ desktop
               },
             }}
-            modules={[Pagination, Navigation]}
+            modules={[Navigation]}
             className="mySwiper"
           >
             {/* Map over the attractions array from the Redux store */}
-            {Array.isArray(attractions) && attractions.map((attraction, index) => (
+            {Array.isArray(data) && data.map((attraction, index) => (
               <SwiperSlide
                 // Using attraction.id as key is safer than index if data is stable
                 key={attraction.id} 

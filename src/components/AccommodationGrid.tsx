@@ -8,15 +8,16 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css/navigation";
 
 interface Accommodation {
-  id: string;
-  imageSrc: string;
-  title: string;
-  description: string;
-  rating: number;
-  tag: string;
-  country: string;
-  location: string;
-  type: string;
+  id: number
+  name: string
+  slug: string
+  description_preview: string
+  star_rating: number
+  category_name: string
+  category_slug: string
+  country_slug: string
+  image_url: string
+  detail_url: string
 }
 
 interface AccommodationGridProps {
@@ -24,22 +25,19 @@ interface AccommodationGridProps {
   className?: string;
 }
 
-export default function AccommodationGrid({
-  accommodations,
-  className = "",
-}: AccommodationGridProps) {
+export default function AccommodationGrid({ accommodations, className = ""}: AccommodationGridProps) {
   return (
     <>
     <div className={`hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${className}`}>
       {accommodations.map((accommodation) => (
         <AccommodationCard
           key={accommodation.id}
-          imageSrc={accommodation.imageSrc}
-          title={accommodation.title}
-          description={accommodation.description}
-          rating={accommodation.rating}
-          tag={accommodation.tag}
-          onViewDetailsHref={`hotels/${accommodation.id}`}
+          imageSrc={accommodation.image_url}
+          title={accommodation.name}
+          description={accommodation.description_preview}
+          rating={accommodation.star_rating}
+          tag={accommodation.category_name}
+          onViewDetailsHref={`hotels/${accommodation.slug}`}
         />
       ))}
     </div>
@@ -73,11 +71,11 @@ export default function AccommodationGrid({
               >
                 <AccommodationCard
                   key={accommodation.id}
-                  imageSrc={accommodation.imageSrc}
-                  title={accommodation.title}
-                  description={accommodation.description}
-                  rating={accommodation.rating}
-                  tag={accommodation.tag}
+                  imageSrc={accommodation.image_url}
+                  title={accommodation.name}
+                  description={accommodation.description_preview}
+                  rating={accommodation.star_rating}
+                  tag={accommodation.category_name}
                   onViewDetailsHref={`/hotels/${accommodation.id}`}
                 />
               </SwiperSlide>

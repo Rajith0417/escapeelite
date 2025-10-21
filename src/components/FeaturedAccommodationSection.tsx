@@ -1,336 +1,136 @@
 "use client";
-import { useState, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import AdvancedSearchFilters from "./AdvancedSearchFilters";
 import AccommodationGrid from "./AccommodationGrid";
 import Pagination from "./Pagination";
 
-interface Accommodation {
-  id: string;
-  imageSrc: string;
-  title: string;
-  description: string;
-  rating: number;
-  tag: string;
-  country: string;
-  location: string;
-  type: string;
+import { useAppDispatch, useAppSelector } from "../../store/hooks"; // ⬅️ IMPORT RootState
+import { fetchAccommodations } from "../../store/slices/accommodations";
+
+// --- Interfaces for Component Props (Simplified) ---
+interface AccommodationGridItem {
+  id: number
+  name: string
+  slug: string
+  description_preview: string
+  star_rating: number
+  category_name: string
+  category_slug: string
+  country_slug: string
+  image_url: string
+  detail_url: string
+}
+interface country {
+  name: string,
+  slug: string,
 }
 
-interface FilterValues {
-  country: string;
-  location: string;
-  type: string;
-  rating: string;
+interface location {
+  id: number,
+  name: string
 }
 
-// Dummy data
-const dummyAccommodations: Accommodation[] = [
-  {
-    id: "1",
-    imageSrc: "/banners/image5.png",
-    title: "HERITANCE KANDALAMA",
-    description:
-      "Heritance Kandalama Is An Architectural Masterpiece By Geoffrey Bawa, Built Overlooking The Eight...",
-    rating: 5,
-    tag: "Hotel & Resort",
-    country: "Sri Lanka",
-    location: "Kandy",
-    type: "Hotel & Resort",
-  },
-  {
-    id: "2",
-    imageSrc: "/banners/image6.jpg",
-    title: "HOLIDAY ISLAND",
-    description:
-      "Experience luxury and comfort at Holiday Island Resort, featuring stunning ocean views and world-class amenities.",
-    rating: 4,
-    tag: "Beach Resort",
-    country: "Sri Lanka",
-    location: "Galle",
-    type: "Beach Resort",
-  },
-  {
-    id: "3",
-    imageSrc: "/banners/image7.png",
-    title: "THE KINGSBURY",
-    description:
-      "Located in the heart of Colombo, The Kingsbury offers premium accommodation with city skyline views.",
-    rating: 5,
-    tag: "Hotel & Resort",
-    country: "Sri Lanka",
-    location: "Colombo",
-    type: "Hotel & Resort",
-  },
-  {
-    id: "4",
-    imageSrc: "/banners/image8.png",
-    title: "SIGIRIYA VILLAGE",
-    description:
-      "Immerse yourself in the cultural heritage of Sri Lanka at this boutique hotel near the ancient Sigiriya rock.",
-    rating: 4,
-    tag: "Boutique Hotel",
-    country: "Sri Lanka",
-    location: "Sigiriya",
-    type: "Boutique Hotel",
-  },
-  {
-    id: "5",
-    imageSrc: "/banners/image9.png",
-    title: "YALA SAFARI LODGE",
-    description:
-      "Experience wildlife up close at this luxury lodge located near Yala National Park.",
-    rating: 5,
-    tag: "Hotel & Resort",
-    country: "Sri Lanka",
-    location: "Yala",
-    type: "Hotel & Resort",
-  },
-  {
-    id: "6",
-    imageSrc: "/banners/image1.png",
-    title: "ANURADHAPURA HERITAGE",
-    description:
-      "Discover ancient Sri Lankan history at this heritage hotel in the sacred city of Anuradhapura.",
-    rating: 4,
-    tag: "Boutique Hotel",
-    country: "Sri Lanka",
-    location: "Anuradhapura",
-    type: "Boutique Hotel",
-  },
-  {
-    id: "7",
-    imageSrc: "/banners/image2.png",
-    title: "COLOMBO MARINA",
-    description:
-      "Modern luxury hotel with marina views, perfect for business and leisure travelers.",
-    rating: 5,
-    tag: "Hotel & Resort",
-    country: "Sri Lanka",
-    location: "Colombo",
-    type: "Hotel & Resort",
-  },
-  {
-    id: "8",
-    imageSrc: "/banners/image3.png",
-    title: "KANDY HILLS RETREAT",
-    description:
-      "Peaceful mountain retreat offering panoramic views of the Kandy hills and tea plantations.",
-    rating: 4,
-    tag: "Boutique Hotel",
-    country: "Sri Lanka",
-    location: "Kandy",
-    type: "Boutique Hotel",
-  },
-  {
-    id: "9",
-    imageSrc: "/banners/image4.png",
-    title: "GALLE FORT SUITES",
-    description:
-      "Historic accommodation within the UNESCO World Heritage Galle Fort, blending heritage with luxury.",
-    rating: 5,
-    tag: "Boutique Hotel",
-    country: "Sri Lanka",
-    location: "Galle",
-    type: "Boutique Hotel",
-  },
-  {
-    id: "10",
-    imageSrc: "/banners/image3.png",
-    title: "KANDY HILLS RETREAT",
-    description:
-      "Peaceful mountain retreat offering panoramic views of the Kandy hills and tea plantations.",
-    rating: 4,
-    tag: "Boutique Hotel",
-    country: "Sri Lanka",
-    location: "Kandy",
-    type: "Boutique Hotel",
-  },
-  {
-    id: "11",
-    imageSrc: "/banners/image5.png",
-    title: "HERITANCE KANDALAMA",
-    description:
-      "Heritance Kandalama Is An Architectural Masterpiece By Geoffrey Bawa, Built Overlooking The Eight...",
-    rating: 5,
-    tag: "Hotel & Resort",
-    country: "Sri Lanka",
-    location: "Kandy",
-    type: "Hotel & Resort",
-  },
-  {
-    id: "12",
-    imageSrc: "/banners/image6.jpg",
-    title: "HOLIDAY ISLAND",
-    description:
-      "Experience luxury and comfort at Holiday Island Resort, featuring stunning ocean views and world-class amenities.",
-    rating: 4,
-    tag: "Beach Resort",
-    country: "Sri Lanka",
-    location: "Galle",
-    type: "Beach Resort",
-  },
-  {
-    id: "13",
-    imageSrc: "/banners/image7.png",
-    title: "THE KINGSBURY",
-    description:
-      "Located in the heart of Colombo, The Kingsbury offers premium accommodation with city skyline views.",
-    rating: 5,
-    tag: "Hotel & Resort",
-    country: "Sri Lanka",
-    location: "Colombo",
-    type: "Hotel & Resort",
-  },
-  {
-    id: "14",
-    imageSrc: "/banners/image8.png",
-    title: "SIGIRIYA VILLAGE",
-    description:
-      "Immerse yourself in the cultural heritage of Sri Lanka at this boutique hotel near the ancient Sigiriya rock.",
-    rating: 4,
-    tag: "Boutique Hotel",
-    country: "Sri Lanka",
-    location: "Sigiriya",
-    type: "Boutique Hotel",
-  },
-  {
-    id: "15",
-    imageSrc: "/banners/image9.png",
-    title: "YALA SAFARI LODGE",
-    description:
-      "Experience wildlife up close at this luxury lodge located near Yala National Park.",
-    rating: 5,
-    tag: "Hotel & Resort",
-    country: "Sri Lanka",
-    location: "Yala",
-    type: "Hotel & Resort",
-  },
-  {
-    id: "16",
-    imageSrc: "/banners/image1.png",
-    title: "ANURADHAPURA HERITAGE",
-    description:
-      "Discover ancient Sri Lankan history at this heritage hotel in the sacred city of Anuradhapura.",
-    rating: 4,
-    tag: "Boutique Hotel",
-    country: "Sri Lanka",
-    location: "Anuradhapura",
-    type: "Boutique Hotel",
-  },
-  {
-    id: "17",
-    imageSrc: "/banners/image2.png",
-    title: "COLOMBO MARINA",
-    description:
-      "Modern luxury hotel with marina views, perfect for business and leisure travelers.",
-    rating: 5,
-    tag: "Hotel & Resort",
-    country: "Sri Lanka",
-    location: "Colombo",
-    type: "Hotel & Resort",
-  },
-  {
-    id: "18",
-    imageSrc: "/banners/image3.png",
-    title: "KANDY HILLS RETREAT",
-    description:
-      "Peaceful mountain retreat offering panoramic views of the Kandy hills and tea plantations.",
-    rating: 4,
-    tag: "Boutique Hotel",
-    country: "Sri Lanka",
-    location: "Kandy",
-    type: "Boutique Hotel",
-  },
-  {
-    id: "19",
-    imageSrc: "/banners/image4.png",
-    title: "GALLE FORT SUITES",
-    description:
-      "Historic accommodation within the UNESCO World Heritage Galle Fort, blending heritage with luxury.",
-    rating: 5,
-    tag: "Boutique Hotel",
-    country: "Sri Lanka",
-    location: "Galle",
-    type: "Boutique Hotel",
-  },
-];
+interface type {
+  name: string,
+  slug: string
+}
+
+interface filter_options {
+  countries: country[],
+  locations: location[],
+  types: type[],
+  ratings: []
+}
+
+interface AccommodationData {
+  data: AccommodationGridItem[],
+  filter_options: filter_options
+}
+
+// Interface for API parameters
+interface FilterApiValues {
+  country: string; // maps to API 'country' slug
+  city: string;    // maps to API 'city' ID (location)
+  acc: string;     // maps to API 'acc' (accommodation type slug)
+  star: string;    // maps to API 'star' rating
+}
+
 
 export default function FeaturedAccommodationSection() {
+
+  const dispatch = useAppDispatch();
+  const { data, status, error } = useAppSelector((state) => state.accommodations);
+  
+  // 1. State for Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filters, setFilters] = useState<FilterValues>({
-    country: "",
-    location: "",
-    type: "",
-    rating: "",
-  });
+  const ITEMS_PER_PAGE = 9; // Set your desired items per page
 
-  const itemsPerPage = 9;
+  // 2. Initial Data Fetch (Runs once on mount)
+  useEffect(() => {
+    dispatch(fetchAccommodations());
+  }, [dispatch]);
 
-  // Filter accommodations based on search and filters
-  const filteredAccommodations = useMemo(() => {
-    return dummyAccommodations.filter((accommodation) => {
-      const matchesSearch =
-        searchQuery === "" ||
-        accommodation.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        accommodation.description
-          .toLowerCase()
-          .includes(searchQuery.toLowerCase());
+  // 3. Pagination Logic using useMemo for efficiency
+  const allAccommodations = data?.data || [];
+  const totalItems = allAccommodations.length;
+  
+  // Calculate total pages
+  const totalPages = useMemo(() => {
+    return Math.ceil(totalItems / ITEMS_PER_PAGE);
+  }, [totalItems]);
 
-      const matchesCountry =
-        filters.country === "" || accommodation.country === filters.country;
-      const matchesLocation =
-        filters.location === "" || accommodation.location === filters.location;
-      const matchesType =
-        filters.type === "" || accommodation.type === filters.type;
-      const matchesRating =
-        filters.rating === "" ||
-        accommodation.rating === parseInt(filters.rating.split(" ")[0]);
+  // Determine the subset of data for the current page
+  const currentItems = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return allAccommodations.slice(startIndex, endIndex);
+  }, [allAccommodations, currentPage]);
 
-      return (
-        matchesSearch &&
-        matchesCountry &&
-        matchesLocation &&
-        matchesType &&
-        matchesRating
-      );
-    });
-  }, [searchQuery, filters]);
+  const currentItemsCount = currentItems.length;
 
-  // Calculate pagination
-  const totalPages = Math.ceil(filteredAccommodations.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentAccommodations = filteredAccommodations.slice(
-    startIndex,
-    endIndex
-  );
+  // 4. Page Change Handler
+  const handlePageChange = useCallback((page: number) => {
+    // Ensure the page number is valid
+    if (page >= 1 && page <= totalPages) {
+        setCurrentPage(page);
+        // Optional: Scroll to the top of the grid when changing pages
+        const gridElement = document.getElementById('accommodation-grid');
+        if (gridElement) {
+            gridElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+  }, [totalPages]);
+  
+  // Reset page to 1 if the filter results change (or totalItems changes)
+  // This is crucial if you later add the AdvancedSearchFilters back.
+  useEffect(() => {
+      setCurrentPage(1);
+  }, [totalItems]);
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    setCurrentPage(1); // Reset to first page when searching
-  };
+  if (status === "loading") return <p>Loading...</p>;
+  if (status === "failed") return <p>Error: {error}</p>;
 
-  const handleFilterChange = (newFilters: FilterValues) => {
-    setFilters(newFilters);
-    setCurrentPage(1); // Reset to first page when filtering
-  };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  // console.log(data); // Kept for debugging if needed
 
   return (
     <>
       <section className="bg-gray-800 relative md:h-0 md:mb-24">
         {/* Advanced Search Filters */}
         <div className="z-10 bg-white md:w-3/4 md:absolute md:rounded-md md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2">
-          <AdvancedSearchFilters
-            onSearch={handleSearch}
-            onFilterChange={handleFilterChange}
-          />
+          {/* Pass filter options and current values down */}
+          {data &&<AdvancedSearchFilters
+            // onSearch={handleSearch}
+            // onFilterChange={handleFilterChange}
+            // // Passing the current filter values to keep the dropdowns synced
+            // initialFilters={filters}
+            // // Passing the dynamic options fetched from the API
+            filterOptions={data.filter_options} // Use a more specific type if available
+          />}
         </div>
       </section>
+      
+      {/* --- */}
+
       {/* Featured Accommodation Section */}
       <section id="resorts" className="py-16">
         <div className="container mx-auto px-5">
@@ -339,34 +139,31 @@ export default function FeaturedAccommodationSection() {
             <h2 className="text-3xl font-medium text-gray-900 mb-4">
               Featured Accommodation
             </h2>
-            {/* <p className="text-gray-600 max-w-2xl mx-auto">
-              Discover our handpicked selection of premium accommodations across
-              Sri Lanka
-            </p> */}
           </div>
 
-          {/* Results count */}
+          {/* Results count (FIXED) */}
           {/* <div className="mb-6">
             <p className="text-gray-600">
-              Showing {filteredAccommodations.length} of{" "}
-              {dummyAccommodations.length} accommodations
+              Showing <span className="font-bold">{currentItemsCount}</span> accommodations on this page. Total found: <span className="font-bold">{totalItems}</span>
             </p>
           </div> */}
 
-          {/* Accommodation Grid */}
-          {currentAccommodations.length > 0 ? (
-            <AccommodationGrid accommodations={currentAccommodations} />
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">
-                No accommodations found matching your criteria.
-              </p>
-            </div>
-          )}
+          {/* Accommodation Grid (FIXED: Using currentItems) */}
+          <div id="accommodation-grid"> {/* Added ID for optional smooth scroll */}
+            {currentItems.length > 0 ? (
+              <AccommodationGrid accommodations={currentItems} />
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-500 text-lg">
+                  No accommodations found matching your criteria.
+                </p>
+              </div>
+            )}
+          </div>
 
-          {/* Pagination */}
+          {/* Pagination (FIXED: Un-hidden and populated props) */}
           {totalPages > 1 && (
-            <div className="mt-12 hidden md:block">
+            <div className="mt-12"> {/* Removed 'hidden md:block' if you want it on all sizes */}
               <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
