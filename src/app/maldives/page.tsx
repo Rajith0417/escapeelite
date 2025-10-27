@@ -47,10 +47,7 @@ export default function MaldivesPage() {
       </section>
       <FeaturedHolidaysDetails
         heading="Featured holidays to Maldives"
-        dropdownOptions={["All Holidays", "Honeymoon", "Family", "Luxury"]}
-        selectedOption="All Holidays"
         country="maldives"
-        onDropdownChange={(val) => console.log(val)}
       />
       <section>
         <div className="container pt-16 px-5 mx-auto text-center gap-8 flex items-center flex-col md:flex-row">

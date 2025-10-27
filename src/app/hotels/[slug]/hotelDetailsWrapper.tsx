@@ -73,6 +73,7 @@ export default function HotelDetailsClientWrapper({ params /*, serverCategories*
                             {/* Data from Server Component (slug) is available via props */}
                             <h1 className="text-2xl font-bold">Hotel Slug: {params.slug}</h1>
                             <ImageGallery images={data?.images} />
+                            <TripAdvisorWidget code={data?.tripadvisor_code ?? ""} />
                         </div>
                         <div>
                             <ChatbotWrapper chatbotId="b91db0d7-e9b2-4432-bc19-0c90f894f407" />
@@ -85,8 +86,6 @@ export default function HotelDetailsClientWrapper({ params /*, serverCategories*
                     <div className="grid grid-col-1 md:grid-cols-5 gap-10 items-start">
                         <div className="col-span-1 md:col-span-3">
                             <SelectedHotelTabSection description={data?.description} video={data?.youtube_url_id} location={data?.location}/>
-                            <TripAdvisorWidget code={data?.tripadvisor_code ?? ""} />
-
                         </div>
                         <div className="col-span-1 md:col-span-2">
                             {/* If you passed serverCategories, you could use them here: */}

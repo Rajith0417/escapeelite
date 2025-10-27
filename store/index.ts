@@ -6,6 +6,7 @@ import attractionsDetailsReducer from "./slices/attractionsDetails";
 import featuredHolidaysDetailsReducer from "./slices/featuredHolidaysDetails";
 import accommodationsReducer  from "./slices/accommodations";
 import hotelDetailsReducer from "./slices/hotelDetails";
+import itineraryReducer from "./slices/itineraries";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     featuresHolidaysDetails: featuredHolidaysDetailsReducer,
     accommodations: accommodationsReducer,
     hotelDetails: hotelDetailsReducer,
+    itineraries: itineraryReducer,
   },
 });
 

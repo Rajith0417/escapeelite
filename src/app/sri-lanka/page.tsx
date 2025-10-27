@@ -47,10 +47,7 @@ export default function SriLankaPage() {
       </section>
       <FeaturedHolidaysDetails
         heading="Featured holidays to Sri Lanka"
-        dropdownOptions={["All Holidays", "Honeymoon", "Family", "Luxury"]}
-        selectedOption="All Holidays"
         country="sri-lanka"
-        onDropdownChange={(val) => console.log(val)}
       />
       <section>
         <div className="container pt-16 px-5 mx-auto text-center gap-8 flex items-center flex-col md:flex-row">

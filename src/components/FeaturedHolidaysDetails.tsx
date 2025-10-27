@@ -138,7 +138,7 @@ export default function FeaturedHolidaysDetails({
                     duration={fhd.no_of_days}
                     season={fhd.best_times}
                     price={fhd.price_starting_from}
-                    onViewMoreHref={`/${country}/${fhd.package_slug}`} // Use package_slug for better URLs
+                    onViewMoreHref={`itineraries?country=${country}&category=${fhd.pkg_category_slug}&packageSlug=${fhd.package_slug}`} // Use package_slug for better URLs
                   />
                 </div>
               </SwiperSlide>

@@ -5,62 +5,115 @@ import ItineraryDayCard from "./ItineraryDayCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 
-export default function ItinerarySection() {
-  const days = [
-    {
-      dayNumber: 1,
-      city: "COLOMBO",
-      imageSrc: "/banners/image10.png",
-      attractions: [
-        "Gangaramaya Buddhist Temple",
-        "Independence Square",
-        "Shopping in Colombo",
-      ],
-      accommodation: {
-        Superior: ["Ramada Colombo", "Global Towers", "Cinnamon Red Colombo"],
-        Deluxe: ["Galle Face Hotel", "The Kingsbury", "Marineo Beach"],
-        Luxury: ["Uga Residence", "Tintagel", "Jetwing Colombo 7"],
-      },
-      transportation: [
-        {
-          title: "Personal vehicle & driver",
-          subtitle: "Transfer: 35 minutes",
-          note: "INCLUDED IN PRICE",
-          icon: "car",
-        },
-      ],
-    },
-    {
-      dayNumber: 2,
-      city: "SIGIRIYA",
-      imageSrc: "/banners/image7.png",
-      attractions: [
-        "Sacred city of Anuradhapura",
-        "Sigiriya Rock Fortress",
-        "Ancient City of Polonnaruwa",
-        "Pidurangala Monastery",
-      ],
-      accommodation: {
-        Superior: ["Ramada Colombo", "Global Towers", "Cinnamon Red Colombo"],
-        Deluxe: ["Galle Face Hotel", "The Kingsbury", "Marineo Beach"],
-        Luxury: ["Uga Residence", "Tintagel", "Jetwing Colombo 7"],
-      },
-      transportation: [
-        {
-          title: "Personal vehicle & driver",
-          subtitle: "Transfer: 3.5 hours",
-          note: "INCLUDED IN PRICE",
-          icon: "car",
-        },
-        {
-          title: "Sea Plane / Air Taxi",
-          subtitle: "Transfer: 35 minutes",
-          note: "EXCLUDED IN PRICE",
-          icon: "plane",
-        },
-      ],
-    },
-  ];
+export interface Itinerary {
+  group_id: number
+  days: number[]
+  cities: string[]
+  options: Option[]
+}
+
+export interface Option {
+  option_id: number
+  description: string
+  over_night_stay: string
+  images: string[]
+  attractions: Attraction[]
+  transport_options: TransportOption[]
+  accommodations: accommodations
+}
+
+export interface accommodations {
+  "2": hotelDetails[]
+  "3": hotelDetails[]
+  "4": hotelDetails[]
+}
+
+export interface hotelDetails {
+  name: string
+  category_id: number
+  hotel_id: number
+}
+
+// export interface Image2 {
+//   itinerary_image_path: string
+// }
+
+export interface Attraction {
+  attraction_detail_id: number
+  attraction_detail_heading: string
+}
+
+export interface TransportOption {
+  transportation_name: string
+  transportation_logo: string
+  transportation_image: string
+  transportation_description: string
+  transfer_time?: string
+  include_in_price?: number
+  show_to_front?: number
+}
+
+interface ItinerarySectionProps {
+  itineraries?: Itinerary[];
+  mapData?: string;
+}
+
+export default function ItinerarySection({ itineraries, mapData }: ItinerarySectionProps) {
+  // const days = [
+  //   {
+  //     dayNumber: 1,
+  //     city: "COLOMBO",
+  //     imageSrc: "/banners/image10.png",
+  //     attractions: [
+  //       "Gangaramaya Buddhist Temple",
+  //       "Independence Square",
+  //       "Shopping in Colombo",
+  //     ],
+  //     accommodation: {
+  //       Superior: ["Ramada Colombo", "Global Towers", "Cinnamon Red Colombo"],
+  //       Deluxe: ["Galle Face Hotel", "The Kingsbury", "Marineo Beach"],
+  //       Luxury: ["Uga Residence", "Tintagel", "Jetwing Colombo 7"],
+  //     },
+  //     transportation: [
+  //       {
+  //         title: "Personal vehicle & driver",
+  //         subtitle: "Transfer: 35 minutes",
+  //         note: "INCLUDED IN PRICE",
+  //         icon: "car",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     dayNumber: 2,
+  //     city: "SIGIRIYA",
+  //     imageSrc: "/banners/image7.png",
+  //     attractions: [
+  //       "Sacred city of Anuradhapura",
+  //       "Sigiriya Rock Fortress",
+  //       "Ancient City of Polonnaruwa",
+  //       "Pidurangala Monastery",
+  //     ],
+  //     accommodation: {
+  //       Superior: ["Ramada Colombo", "Global Towers", "Cinnamon Red Colombo"],
+  //       Deluxe: ["Galle Face Hotel", "The Kingsbury", "Marineo Beach"],
+  //       Luxury: ["Uga Residence", "Tintagel", "Jetwing Colombo 7"],
+  //     },
+  //     transportation: [
+  //       {
+  //         title: "Personal vehicle & driver",
+  //         subtitle: "Transfer: 3.5 hours",
+  //         note: "INCLUDED IN PRICE",
+  //         icon: "car",
+  //       },
+  //       {
+  //         title: "Sea Plane / Air Taxi",
+  //         subtitle: "Transfer: 35 minutes",
+  //         note: "EXCLUDED IN PRICE",
+  //         icon: "plane",
+  //       },
+  //     ],
+  //   },
+  // ];
 
   const tabs: TabItem[] = [
     {
@@ -68,12 +121,16 @@ export default function ItinerarySection() {
       title: "Tour Map",
       content: (
         <div className="py-4">
-          <TourMap
+          {/* <TourMap
             markers={[
               { lat: 6.9271, lng: 79.8612 },
               { lat: 7.957, lng: 80.7603 },
             ]}
-          />
+          /> */}
+          <iframe
+            src={mapData}
+            width="800" height="450" loading="lazy"
+            title="Itinerary map"></iframe>
         </div>
       ),
     },
@@ -83,8 +140,8 @@ export default function ItinerarySection() {
       content: (
         <>
           <div className="hidden md:block space-y-4">
-            {days.map((d) => (
-              <ItineraryDayCard key={d.dayNumber} {...d} />
+            {itineraries && itineraries.map((itinerary, index)=>(
+              <ItineraryDayCard key={index} dayNumber={itinerary.days} city={itinerary.cities} options={itinerary.options}/>
             ))}
           </div>
           <div className="block md:hidden space-y-4">
@@ -99,9 +156,9 @@ export default function ItinerarySection() {
               modules={[Pagination, Navigation]}
               className="mySwiper"
             >
-              {days.map((day, index) => (
+              {itineraries && itineraries.map((itinerary, index)=>(
                 <SwiperSlide key={index}>
-                  <ItineraryDayCard key={index} {...day} />
+                  <ItineraryDayCard key={index} dayNumber={itinerary.days} city={itinerary.cities} options={itinerary.options}/>
                 </SwiperSlide>
               ))}
             </Swiper>
