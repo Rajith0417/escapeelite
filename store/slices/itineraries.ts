@@ -76,6 +76,8 @@ export interface hotelDetails {
 export interface Attraction {
   attraction_detail_id: number
   attraction_detail_heading: string
+  attraction_detail_description: string
+  attraction_detail_image_path: string
 }
 
 export interface TransportOption {
@@ -99,11 +101,11 @@ export const fetchItineraries = createAsyncThunk(
   "itineraries/fetch",
   async ({country, packageSlug, category}: ItinerariesProp) => {
     const res = await fetch(`https://www.localhost/projects/escapeelite.com/api/itineraries.php?country=${country}&packageSlug=${packageSlug}&category=${category}`);
-    console.log("-----0-----");
+    // console.log("-----0-----");
     // console.log(`https://www.localhost/projects/escapeelite.com/api/itineraries.php?country=${country}&packageSlug=${packageSlug}&category=${category}`);
     const data = await res.json();
     // assuming your PHP API returns { success: true, data: [...] }
-    console.log(data.data);
+    // console.log(data.data);
     
     return data.data;
   }

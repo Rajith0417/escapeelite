@@ -10,7 +10,7 @@ interface Testimonial {
 export const fetchTestimonials = createAsyncThunk(
   "testimonials/fetch",
   async () => {
-    const res = await fetch("https://www.localhost/projects/escapeelite.com/api/testimonials.php");
+    const res = await fetch("https://www.escapeinsrilanka.com/api/testimonials.php");
     const data = await res.json();
     // assuming your PHP API returns { success: true, data: [...] }
     return data.data;

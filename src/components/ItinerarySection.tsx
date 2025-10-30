@@ -41,6 +41,8 @@ export interface hotelDetails {
 export interface Attraction {
   attraction_detail_id: number
   attraction_detail_heading: string
+  attraction_detail_description: string
+  attraction_detail_image_path: string
 }
 
 export interface TransportOption {
@@ -141,7 +143,12 @@ export default function ItinerarySection({ itineraries, mapData }: ItinerarySect
         <>
           <div className="hidden md:block space-y-4">
             {itineraries && itineraries.map((itinerary, index)=>(
-              <ItineraryDayCard key={index} dayNumber={itinerary.days} city={itinerary.cities} options={itinerary.options}/>
+              <ItineraryDayCard 
+                key={index} 
+                dayNumber={itinerary.days} 
+                city={itinerary.cities} 
+                options={itinerary.options}
+              />
             ))}
           </div>
           <div className="block md:hidden space-y-4">

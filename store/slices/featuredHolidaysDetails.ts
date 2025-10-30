@@ -45,6 +45,11 @@ interface country {
   resort_only: string;
 }
 
+interface HolidayDetailsProp {
+  country: string;
+  category_slug?: string;
+}
+
 interface FeaturedHolidaysData {
   country_data: country; // You can make this more specific if needed
   packages: HolidayPackage[];
@@ -64,12 +69,14 @@ interface FeaturedHolidaysDetailsState {
 
 export const fetchFeaturedHolidaysDetails = createAsyncThunk(
   "featuredHolidaysDetails/fetch",
-  async (country: string) => {
-    // console.log("Fetching country:", country);
-    // console.log(`https://www.localhost/projects/escapeelite.com/api/featured-holidays-details.php?country=${country}`);
-    const res = await fetch(
-      `https://www.localhost/projects/escapeelite.com/api/featured-holidays-details.php?country=${country}`
-    );
+  async ({ country, category_slug }: HolidayDetailsProp) => {
+    const url = `https://www.localhost/projects/escapeelite.com/api/featured-holidays-details.php?country=${country}${
+      category_slug ? `&category_slug=${category_slug}` : ""
+    }`;
+    console.log("-----feature holiday details");
+    console.log(url);
+
+    const res = await fetch(url);
     const data = await res.json();
     // console.log("Fetched data--:", data);
     return data;
@@ -84,10 +91,10 @@ interface AttractionsState {
 
 const initialState: FeaturedHolidaysDetailsState = {
   data: null,
-  
+
   // ✅ ADD THIS: Initialize the new property as an empty array or null
   featuredCategories: [], // Initialize as an empty array for safer mapping
-  
+
   status: "idle",
   error: null,
 };

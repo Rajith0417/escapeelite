@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 interface FeaturedHoliday {
   id: number
   category_name: string
+  category_slug: string
   country_name: string
   image: string
   country_slug: string

@@ -5,117 +5,75 @@ import Popup from "./Popup";
 import Pill from "./Pill";
 import { useState } from "react";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 interface ItineraryDayCardProps {
   dayNumber: number[];
   city: string[];
   options: Option[];
-  // imageSrc: string;
-  // attractions?: string[];
-  // accommodation?: {
-  //   Superior: string[];
-  //   Deluxe: string[];
-  //   Luxury: string[];
-};
-// transportation?: Array<{
-//   title: string;
-//   subtitle?: string;
-//   note?: string;
-//   included?: boolean;
-//   icon?: string;
-// }>;
-// }
+}
 
 export interface Option {
-  option_id: number
-  description: string
-  over_night_stay: string
+  option_id: number;
+  description: string;
+  over_night_stay: string;
   images: string[];
-  attractions: Attraction[]
-  transport_options: TransportOption[]
-  accommodations: accommodations
+  attractions: Attraction[];
+  transport_options: TransportOption[];
+  accommodations: accommodations;
 }
 
 export interface accommodations {
-  "2": hotelDetails[]
-  "3": hotelDetails[]
-  "4": hotelDetails[]
+  "2": hotelDetails[];
+  "3": hotelDetails[];
+  "4": hotelDetails[];
 }
 
 export interface hotelDetails {
-  name: string
-  category_id: number
-  hotel_id: number
+  name: string;
+  category_id: number;
+  hotel_id: number;
 }
-
-// export interface Image2 {
-//   // itinerary_image_path: string
-// }
 
 export interface Attraction {
   attraction_detail_id: number
   attraction_detail_heading: string
+  attraction_detail_description: string
+  attraction_detail_image_path: string
 }
 
 export interface TransportOption {
-  transportation_name: string
-  transportation_logo: string
-  transportation_image: string
-  transportation_description: string
-  transfer_time?: string
-  include_in_price?: number
-  show_to_front?: number
+  transportation_name: string;
+  transportation_logo: string;
+  transportation_image: string;
+  transportation_description: string;
+  transfer_time?: string;
+  include_in_price?: number;
+  show_to_front?: number;
 }
-
-// function Pill({ children }: { children: React.ReactNode }) {
-//   return (
-//     <span className="font-inter inline-block rounded-full bg-[#EFF7FF] font-medium px-3 py-1 text-xs text-black">
-//       {children}
-//     </span>
-//   );
-// }
 
 export default function ItineraryDayCard({
   dayNumber,
   city,
-  // imageSrc,
-  // attractions,
-  // accommodation,
-  // transportation,
-  options
+  options,
 }: ItineraryDayCardProps) {
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [selectedAccommodation, setSelectedAccommodation] = useState("");
-  console.log("909090---");
+  const [popupData, setPopupData] = useState<{
+    title: string;
+    description: string;
+    image?: string;
+  } | null>(null);
 
-  console.log(options);
-
-
-  const handlePillClick = (accommodationName: string) => {
-    console.log("handle pill click " + accommodationName);
-
-    setSelectedAccommodation(accommodationName);
+  const handlePopupOpen = (title: string, description: string, image?: string) => {
+    setPopupData({ title, description, image });
     setIsPopupOpen(true);
   };
 
   const innerTabsItems: TabItem[] = (["Superior", "Deluxe", "Luxury"] as const).map(
     (tier) => ({
-      id: tier,              // unique id for the tab
-      title: tier,           // tab label (Superior, Deluxe, Luxury)
-      content: (
-        <>
-          <div className="py-4 flex flex-col items-start md:items-center gap-2">
-            {/* {accommodation[tier].map((name, idx) => (
-          <Pill key={idx} onClick={() => handlePillClick(name)}>{name}</Pill>
-        ))} */}
-          </div>
-        </>
-      ),
+      id: tier,
+      title: tier,
+      content: <div className="py-4 flex flex-col items-center gap-2"></div>,
     })
   );
-
 
   return (
     <article className="font-inter m-0.5 md:m-0 rounded-xl ring-1 ring-gray-200 bg-white overflow-hidden">
@@ -130,6 +88,7 @@ export default function ItineraryDayCard({
             priority
           />
         </div>
+
         {/* Right content */}
         <div className="flex flex-col gap-4">
           {/* Header */}
@@ -138,44 +97,70 @@ export default function ItineraryDayCard({
               DAY {String(dayNumber).padStart(2, "0")}
             </span>
             <h3 className="text-lg md:text-2xl font-semibold text-gray-900">
-              {city.map((c, i) => (
-                <span key={i}>{c}</span>
-              ))}
+              {city.join(", ")}
             </h3>
           </div>
 
+          {/* Loop through options */}
           {options.map((option, index) => (
             <div key={index} className="grid grid-cols-1 lg:grid-cols-7 gap-8 md:gap-4">
               {/* Attractions */}
-              <div className="col-span-1 lg:col-span-2">
+              {option.attractions?.length > 0 && <div className="col-span-1 lg:col-span-2">
                 <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
                   Attractions
                 </h4>
-                <div className="flex flex-wrap gap-2 px-5 py-4 rounded-lg xl:ring-1 ring-gray-200 items-start md:items-center text-center">
+                <div className="flex flex-wrap gap-2 px-5 py-4 rounded-lg xl:ring-1 ring-gray-200 justify-center">
                   {option.attractions.map((a, i) => (
-                    <Pill key={i} onClick={() => handlePillClick(a.attraction_detail_heading)}>{a.attraction_detail_heading}</Pill>
+                    <div
+                      key={i}
+                      className="font-inter inline-block rounded-full bg-[#EFF7FF] font-medium px-3 py-1 text-xs text-gray-900 cursor-pointer"
+                      onClick={() =>
+                        handlePopupOpen(
+                          a.attraction_detail_heading,
+                          a.attraction_detail_description,
+                          a.attraction_detail_image_path
+                        )
+                      }
+                    >{a.attraction_detail_heading}</div>
                   ))}
                 </div>
-              </div>
+              </div>}
 
               {/* Accommodation */}
-              <div className="col-span-1 lg:col-span-3 text-center">
+              {(option.accommodations[2]?.length > 0 && 
+                option.accommodations[3]?.length > 0 && 
+                option.accommodations[4]?.length > 0)  && 
+              (<div className="col-span-1 lg:col-span-3 text-center">
                 <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
                   Accommodation
                 </h4>
                 <div className="hidden lg:col-span-2 xl:grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {(["Superior", "Deluxe", "Luxury"] as const).map((tier) => (
-                    <div
-                      key={tier}
-                      className="rounded-lg ring-1 ring-gray-200 p-2"
-                    >
+                  {(
+                    [
+                      { label: "Superior", key: "2" },
+                      { label: "Deluxe", key: "3" },
+                      { label: "Luxury", key: "4" },
+                    ] as const
+                  ).map(({ label, key }) => (
+                    <div key={label} className="rounded-lg ring-1 ring-gray-200 p-2">
                       <div className="text-center text-[14px] font-medium text-blue-400 mb-2">
-                        {tier}
+                        {label}
                       </div>
-                      <div className="flex flex-col items-start md:items-center gap-2">
-                        {/* {accommodation[tier].map((name, idx) => (
-                        <Pill key={idx} onClick={() => handlePillClick(name)}>{name}</Pill>
-                      ))} */}
+                      <div className="flex flex-col items-center gap-2">
+                        {option.accommodations[key]?.map((hotel, idx) => (
+                          <Pill
+                            key={idx}
+                            onClick={() =>
+                              handlePopupOpen(
+                                hotel.name,
+                                `Hotel Category: ${label}`,
+                                "/default-hotel.jpg"
+                              )
+                            }
+                          >
+                            {hotel.name}
+                          </Pill>
+                        ))}
                       </div>
                     </div>
                   ))}
@@ -184,50 +169,78 @@ export default function ItineraryDayCard({
                 <div className="block xl:hidden">
                   <ItineraryInnerTabs tabs={innerTabsItems} />
                 </div>
-              </div>
+              </div>)}
 
               {/* Transportation */}
-              <div className="col-span-1 lg:col-span-2">
+              {option.transport_options?.length > 0 && <div className="col-span-1 lg:col-span-2">
                 <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
                   Transportation
                 </h4>
                 <div className="space-y-3 flex flex-col rounded-lg xl:ring-1 ring-gray-200">
                   {option.transport_options.map((t, i) => (
-                  <div
-                    key={i}
-                    className=" p-3 flex items-start gap-3 m-0"
-                  >
-                    <div className="shrink-0 mt-0.5 w-12 h-12 flex justify-center items-center bg-[#EFF7FF] rounded-full">
-                      <Image
-                        src={`${basePath}/icons/${t.transportation_logo}`}
-                        alt="{t.icon}"
-                        width={24}
-                        height={24}
-                      />
+                    <div
+                      key={i}
+                      className="p-3 flex items-start gap-3 cursor-pointer hover:bg-gray-50"
+                      onClick={() =>
+                        handlePopupOpen(
+                          t.transportation_name,
+                          t.transportation_description,
+                          t.transportation_image
+                        )
+                      }
+                    >
+                      <div className="shrink-0 mt-0.5 w-12 h-12 flex justify-center items-center bg-[#EFF7FF] rounded-full">
+                        <Image
+                          src={t.transportation_logo}
+                          alt={t.transportation_name}
+                          width={30}
+                          height={30}
+                        />
+                      </div>
+                      <div className="text-xs text-gray-700">
+                        <div className="font-semibold">{t.transportation_name}</div>
+                        {t.transfer_time && (
+                          <div className="text-gray-500">{t.transfer_time}</div>
+                        )}
+                        {t.transportation_description && (
+                          <div className="text-[10px] text-blue-400">
+                            {t.include_in_price == 1 ? (
+                              <span>(INCLUDED IN PRICE)</span>
+                            ) : (
+                              <span>(EXCLUDED FROM PRICE)</span>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                    <div className="text-xs text-gray-700">
-                      <div className="font-semibold">{t.transportation_name}</div>
-                      {t.transfer_time && (
-                        <div className="text-gray-500">{t.transfer_time}</div>
-                      )}
-                      {t.transportation_description && (
-                        <div className="text-[10px] text-blue-400">
-                          {t.include_in_price}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                  ))}
                 </div>
-              </div>
+              </div>}
             </div>
           ))}
-
         </div>
       </div>
+
+      {/* Popup */}
       <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
-        <h2 className="text-xl font-bold mb-4">Accommodation Details</h2>
-        <p className="text-gray-700">{selectedAccommodation}</p>
+        {popupData && (
+          <div className="text-center">
+            <h2 className="text-left text-xl font-bold mb-3">{popupData.title}</h2>
+            <div className="flex gap-5 items-center">
+              {popupData.image && (
+                <div className="w-1/3 h-48 relative mb-3">
+                  <Image
+                    src={popupData.image}
+                    alt={popupData.title}
+                    fill
+                    className="object-cover rounded-lg"
+                  />
+                </div>
+              )}
+              <p className="text-gray-700 w-2/3 text-left">{popupData.description}</p>
+            </div>
+          </div>
+        )}
       </Popup>
     </article>
   );

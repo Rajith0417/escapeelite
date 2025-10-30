@@ -18,8 +18,8 @@ export default function FeaturedHolidaysSection() {
     dispatch(fetchFeaturedHolidays());
   }, [dispatch]);
 
-  console.log("featured holidays");
-  console.log(data);
+  // console.log("featured holidays");
+  // console.log(data);
   
 
   if (status === "loading") return <p>Loading...</p>;
@@ -58,6 +58,7 @@ export default function FeaturedHolidaysSection() {
                   id={holiday.id}
                   img={holiday.image}
                   title={holiday.category_name}
+                  slug={holiday.category_slug}
                   location={holiday.country_name}
                   country = {holiday.country_slug}
                 />
@@ -83,6 +84,7 @@ export default function FeaturedHolidaysSection() {
                   id={holiday.id}
                   img={holiday.image}
                   title={holiday.category_name}
+                  slug={holiday.country_slug}
                   location={holiday.country_name}
                   country = {holiday.country_slug}
                 />

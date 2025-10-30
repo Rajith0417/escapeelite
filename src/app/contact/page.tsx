@@ -23,11 +23,11 @@ export default function Contact() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="w-full">
               {/* <Chatbot chatbotId={"58257f11-ec99-4301-a358-35fddcc6cf15"} /> */}
-              <ChatbotWrapper chatbotId="58257f11-ec99-4301-a358-35fddcc6cf15"/>
+              <ChatbotWrapper chatbotId="58257f11-ec99-4301-a358-35fddcc6cf15" />
             </div>
             <div className="w-full flex flex-col gap-12">
               <div className="flex items-start gap-5">
-                <Image src={`${basePath}/icons/map.svg`} alt={""} width={24} height={24}/>
+                <Image src={`${basePath}/icons/map.svg`} alt={""} width={24} height={24} />
                 <div>
                   <h3 className="text-2xl font-normal text-gray-900">
                     Location
@@ -46,7 +46,7 @@ export default function Contact() {
                 </div>
               </div>
               <div className="flex items-start gap-5">
-                <Image src={`${basePath}/icons/send.svg`} alt={""} width={24} height={24}/>
+                <Image src={`${basePath}/icons/send.svg`} alt={""} width={24} height={24} />
                 <div>
                   <h3 className="text-2xl font-normal text-gray-900">Email</h3>
                   <p className="mt-1 text-base font-normal">
@@ -60,7 +60,7 @@ export default function Contact() {
                 </div>
               </div>
               <div className="flex items-start gap-5">
-                <Image src={`${basePath}/icons/call.svg`} alt={""} width={24} height={24}/>
+                <Image src={`${basePath}/icons/call.svg`} alt={""} width={24} height={24} />
                 <div>
                   <h3 className="text-xl font-normal text-gray-900">Phone</h3>
                   <p className="mt-1 text-base font-normal">
@@ -74,7 +74,23 @@ export default function Contact() {
           </div>
         </div>
       </section>
-      <TestimonialSection/>
+      <section>
+        <div className="container pt-16 px-5 mx-auto text-center gap-8 flex items-center flex-col md:flex-row">
+          <div className="w-full md:w-1/2">
+            <iframe
+              className="w-full rounded-2xl aspect-video"
+              src="https://www.youtube.com/embed/sChXehSYd4k?autoplay=1&mute=1&loop=1&playlist=sChXehSYd4k"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+          <div className="w-full md:w-1/2">
+            <TestimonialSection />
+          </div>
+        </div>
+      </section>
     </>
   );
 }

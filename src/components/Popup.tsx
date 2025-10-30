@@ -1,53 +1,58 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from "react";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+import React, { useEffect, useRef } from "react";
 
 interface PopupProps {
-    children: React.ReactNode;
-    isOpen: boolean;
-    onClose: () => void;
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
 }
 
-function Popup({children, isOpen, onClose}: PopupProps) {
-  console.log("inside popup");
-  
+export default function Popup({ isOpen, onClose, children }: PopupProps) {
+  const popupRef = useRef<HTMLDivElement>(null);
+
+  // Close when clicking outside the popup
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      {/* Open Button */}
-      {/* <button
-        onClick={() => setIsOpen(true)}
-        className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+      <div
+        ref={popupRef}
+        className="bg-white rounded-lg p-6 max-w-2xl w-full shadow-xl relative"
       >
-        Open Popup
-      </button> */}
-
-      {/* Popup Overlay */}
-      {isOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          {/* Popup Box */}
-          <div className="bg-white rounded-xl shadow-lg p-6 w-80 relative">
-            {children}
-            <button
-              onClick={() => onClose()}
-              className="text-gray-900 rounded-lg absolute top-5 right-5"
-            >
-              <Image
-                src={`${basePath}/icons/close-b.svg`}
-                alt="Escape Elite"
-                width={24}
-                height={24}
-                className="cursor-pointer"
-              />
-            </button>
-          </div>
-        </div>
-      )}
+        {/* Optional close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-400 hover:text-gray-700"
+          aria-label="Close popup"
+        >
+          ✕
+        </button>
+        {children}
+      </div>
     </div>
   );
 }
-
-export default Popup;

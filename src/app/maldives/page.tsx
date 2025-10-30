@@ -33,32 +33,31 @@ export default function MaldivesPage() {
               </p>
             </div>
             <div>
-              <video
-                src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                controls
-                // autoPlay
-                loop
-                muted
-                className="w-full rounded-2xl"
+              <iframe
+                className="w-full rounded-2xl aspect-video"
+                src="https://www.youtube.com/embed/sChXehSYd4k?autoplay=1&mute=1&loop=1&playlist=sChXehSYd4k"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
               />
             </div>
           </div>
         </div>
       </section>
       <FeaturedHolidaysDetails
-        heading="Featured holidays to Maldives"
         country="maldives"
       />
       <section>
         <div className="container pt-16 px-5 mx-auto text-center gap-8 flex items-center flex-col md:flex-row">
           <div className="w-full md:w-1/2">
-            <video
-              src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-              controls
-              // autoPlay
-              loop
-              muted
-              className="w-full rounded-2xl"
+            <iframe
+              className="w-full rounded-2xl aspect-video"
+              src="https://www.youtube.com/embed/sChXehSYd4k?autoplay=1&mute=1&loop=1&playlist=sChXehSYd4k"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
             />
           </div>
           <div className="w-full md:w-1/2">
@@ -67,7 +66,7 @@ export default function MaldivesPage() {
         </div>
       </section>
       <MoreDetails />
-      <AttractionsSection country={"maldives"}/>
+      <AttractionsSection country={"maldives"} />
     </>
   );
 }

@@ -30,8 +30,8 @@ export default function ItineraryWrapper({ country, packageSlug, category }: Iti
   if (status === "loading") return <p>Loading...</p>;
   if (status === "failed") return <p>Error: {error}</p>;
 
-  console.log("-0-0-0-");
-  console.log("Fetched data:", data);
+  // console.log("-0-0-0-");
+  // console.log("Fetched data:", data);
 
   return (
     <>

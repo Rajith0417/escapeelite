@@ -8,6 +8,7 @@ import "swiper/css/navigation";
 
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchFeaturedHolidaysDetails } from "../../store/slices/featuredHolidaysDetails";
+import FeaturedHolidaysSection from "./FeaturedHolidaysSection";
 
 // Define the interface for a category item based on your API response
 interface PackageCategory {
@@ -16,36 +17,53 @@ interface PackageCategory {
     pkg_category_slug: string;
 }
 
+export interface FeaturedHolidaysDetails {
+  id: number;
+  package_slug: string;
+  package_name: string;
+  package_description: string;
+  price_starting_from: number;
+  package_category_id: number;
+  package_order: number;
+  pkg_category_slug: string;
+  no_of_nights: number;
+  no_of_days: number;
+  image: string;
+  attractions: string[];
+  best_times: string;
+}
+interface PackageCategory {
+  id: number;
+  pkg_category_name: string;
+  pkg_category_slug: string;
+}
+
 // Update component props - we no longer need dropdownOptions as props
 type FeaturedHolidaysDetailsProps = {
-  heading?: string;
-  country: string; // Made country mandatory for data fetching
+  category_slug?: string;
+  country: string;
 };
 
-export default function FeaturedHolidaysDetails({
-  heading = "Featured Holidays", // Default heading is fine
-  country, // The country for fetching data
-}: FeaturedHolidaysDetailsProps) {
+export default function FeaturedHolidaysDetails({country, category_slug}: FeaturedHolidaysDetailsProps) {
 
-  const dispatch = useAppDispatch();
-  const { data, status, error, featuredCategories } = useAppSelector((state) => state.featuresHolidaysDetails);
+  // const dispatch = useAppDispatch();
+  // const { data, status, error, featuredCategories } = useAppSelector((state) => state.featuresHolidaysDetails);
   
-  // State to manage the selected category slug (e.g., '4-star-holidays')
-  // Initialize with 'all' or a sensible default that represents "All Holidays"
+  // // State to manage the selected category slug (e.g., '4-star-holidays')
+  // // Initialize with 'all' or a sensible default that represents "All Holidays"
   const [selectedSlug, setSelectedSlug] = useState<string>('all'); 
 
-  // Determine the display name for the heading
-  const countryName = useMemo(() => 
-    data?.country_data?.country_name || country.toUpperCase(), 
-  [data?.country_data?.country_name, country]);
-
-  // The main fetch effect. This will run on mount and when the country changes.
-  useEffect(() => {
-    // Note: The thunk might need modification if it currently only accepts 'country'.
-    // Assuming you update the thunk to accept an object or just the country slug.
-    dispatch(fetchFeaturedHolidaysDetails(country));
-  }, [dispatch, country]);
-  
+const dispatch = useAppDispatch();
+      const { data, status, error, featuredCategories } = useAppSelector((state) => state.featuresHolidaysDetails);
+      console.log(data);
+      console.log("-0-0--");
+      
+      useEffect(() => {
+        dispatch(fetchFeaturedHolidaysDetails({
+          country, 
+          category_slug
+        }));
+      }, [dispatch, country, category_slug]);
   
   // Create the full list of dropdown options, starting with "All Holidays"
   const dropdownOptions = useMemo(() => {
@@ -59,19 +77,19 @@ export default function FeaturedHolidaysDetails({
   // Filter the data based on the selected category slug
   const filteredData = useMemo(() => {
     // If 'all' is selected, or if data is not an array, return all packages
-    if (selectedSlug === 'all' || !data?.packages || !Array.isArray(data.packages)) {
-      return data?.packages || [];
+    if (selectedSlug === 'all' || !data || !Array.isArray(data)) {
+      return data || [];
     }
     // Filter packages by the selected category slug
-    return data.packages.filter(pkg => pkg.pkg_category_slug === selectedSlug);
-  }, [data?.packages, selectedSlug]);
+    return data.filter(pkg => pkg.pkg_category_slug === selectedSlug);
+  }, [data, selectedSlug]);
 
   // -------------------------
   // LOADING / ERROR STATES
   // -------------------------
 
   if (status === "loading") return <p className="text-center py-16">Loading featured holidays...</p>;
-  if (status === "failed") return <p className="text-center py-16 text-red-500">Error: {error}</p>;
+  if (status === "failed") return <p className="text-center py-16 text-red-500">Error: {status}</p>;
 
   // -------------------------
   // RENDER
@@ -83,7 +101,7 @@ export default function FeaturedHolidaysDetails({
         {/* Header row */}
         <div className="flex items-center justify-between mb-12">
           <h2 className="text-3xl md:text-3xl text-center md:text-left font-medium text-gray-900">
-            {heading.replace('SRI LANKA', countryName)}
+            {data && data.packages[0].package_name}
           </h2>
           <div className="hidden md:block">
             <select
@@ -103,12 +121,11 @@ export default function FeaturedHolidaysDetails({
           </div>
         </div>
         
-        {filteredData.length === 0 && status === "succeeded" && (
+        {data && data.packages.length === 0 && status === "succeeded" && (
             <p className="text-center text-gray-600">No holidays found for this category.</p>
         )}
 
-        {/* Swiper carousel */}
-        {filteredData.length > 0 && (
+        {data && data.packages.length > 0 && (
           <Swiper
             slidesPerView={1}
             spaceBetween={24}
@@ -127,8 +144,7 @@ export default function FeaturedHolidaysDetails({
             modules={[Navigation]}
             className="featured-holidays-swiper123 !p-1"
           >
-            {/* Map over the filtered data */}
-            {filteredData.map((fhd, index) => (
+            {data.packages.map((fhd, index) => (
               <SwiperSlide key={fhd.id} className="!h-auto"> 
                 <div className="h-full">
                   <HolidayCardDetails
@@ -138,7 +154,7 @@ export default function FeaturedHolidaysDetails({
                     duration={fhd.no_of_days}
                     season={fhd.best_times}
                     price={fhd.price_starting_from}
-                    onViewMoreHref={`itineraries?country=${country}&category=${fhd.pkg_category_slug}&packageSlug=${fhd.package_slug}`} // Use package_slug for better URLs
+                    onViewMoreHref={`itineraries/${country}/${fhd.pkg_category_slug}/${fhd.package_slug}`} 
                   />
                 </div>
               </SwiperSlide>

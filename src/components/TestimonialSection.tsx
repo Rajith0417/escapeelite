@@ -55,7 +55,7 @@ export default function TestimonialSection() {
             {data.map((quot, index) => (
               <SwiperSlide
                 key={index}
-                className="rounded-xl p-1 text-center bg-white pb-14"
+                className="rounded-xl p-1 text-center pb-14"
               >
                 <Quote
                   image={quot.image}

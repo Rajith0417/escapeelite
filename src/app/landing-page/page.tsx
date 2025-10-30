@@ -34,14 +34,14 @@ export default function SriLankaPage() {
               Price Guaranteed!
             </h2>
             <div className="min-h-[200px] mb-5 md:mb-0">
-              <video
-                src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                controls
-                // autoPlay
-                loop
-                muted
-                className="rounded-2xl"
-              />
+              <iframe
+              className="w-full rounded-2xl aspect-video"
+              src="https://www.youtube.com/embed/sChXehSYd4k?autoplay=1&mute=1&loop=1&playlist=sChXehSYd4k"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+            />
             </div>
             {/* <TestimonialSection/> */}
             <div className="w-full">

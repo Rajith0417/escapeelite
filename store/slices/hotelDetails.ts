@@ -86,7 +86,7 @@ export const fetchHotelDetails = createAsyncThunk(
     // console.log("-0-0-0------");
     // console.log(`https://www.localhost/projects/escapeelite.com/api/hotel-details.php/${slug}`);
     
-    const res = await fetch(`https://www.localhost/projects/escapeelite.com/api/hotel-details.php/${slug}`);
+    const res = await fetch(`https://www.escapeinsrilanka.com/api/hotel-details.php/${slug}`);
     const data = await res.json();
     // assuming your PHP API returns { success: true, data: [...] }
     console.log(data);
