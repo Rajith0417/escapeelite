@@ -3,8 +3,8 @@ import type { NextConfig } from "next";
 const isProd = process.env.NODE_ENV === 'production'
 
 const nextConfig: NextConfig = {
-  // output: 'export', // 👈 enables static export
-  basePath: isProd ? '/' : '',
+  // output: 'export', // enables static export if needed
+  basePath: "", // never use '/' 
   images: {
     unoptimized: true, // required for static export
   },
@@ -14,3 +14,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
