@@ -1,21 +1,13 @@
 import ItineraryWrapper from "./ItineraryWrapper";
 
 interface ItineraryPageProps {
-  searchParams: { 
-    country: string; 
-    packageSlug: string;
-    category: string; 
+  params: {
+    slug: string[]; // catch-all route
   };
 }
 
-
-// export async function generateStaticParams() {
-//   const hotelIds = ["1", "2", "3"];
-//   return hotelIds.map((id) => ({ id }));
-// }
-
-export default async function ItineraryPage({ searchParams }: ItineraryPageProps) {
-  const { country, packageSlug, category } = searchParams;
+export default function ItineraryPage({ params }: ItineraryPageProps) {
+  const [country, category, packageSlug = ""] = params.slug;
 
   return <ItineraryWrapper country={country} category={category} packageSlug={packageSlug} />;
 }
