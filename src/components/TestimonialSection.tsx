@@ -17,7 +17,7 @@ export default function TestimonialSection() {
   }, [dispatch]);
 
   if (status === "loading") return <p>Loading...</p>;
-  if (status === "failed") return <p>Error: {error}</p>;
+  if (status === "failed") return <p>Error--: {error}</p>;
 
   // console.log(data);
 

@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export interface FeaturedHolidaysDetails {
   id: number;
   package_slug: string;
@@ -42,7 +44,7 @@ interface HolidayPackage {
 interface country {
   id: number;
   country_name: string;
-  resort_only: string;
+  // resort_only: string;
 }
 
 interface HolidayDetailsProp {

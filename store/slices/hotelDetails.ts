@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export interface Hotel {
   id: string
   slug: string
@@ -32,7 +34,7 @@ export interface Country {
   id: string
   name: string
   slug: string
-  resort_only: boolean
+  // resort_only: boolean
 }
 
 export interface Location {
@@ -83,12 +85,14 @@ export interface Airline {
 export const fetchHotelDetails = createAsyncThunk(
   "hotelDetails/fetch",
   async (slug: string) => {
-    // console.log("-0-0-0------");
-    // console.log(`https://www.localhost/projects/escapeelite.com/api/hotel-details.php/${slug}`);
+    console.log("-0-0-0------hotel details url");
+    console.log(`https://www.localhost/projects/escapeelite.com/api/hotel-details.php/${slug}`);
     
-    const res = await fetch(`https://www.escapeinsrilanka.com/api/hotel-details.php/${slug}`);
+    const res = await fetch(`https://www.localhost/projects/escapeelite.com/api/hotel-details.php/${slug}`);
     const data = await res.json();
     // assuming your PHP API returns { success: true, data: [...] }
+    console.log("hotel data");
+    
     console.log(data);
     return data.data;
   }

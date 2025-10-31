@@ -154,7 +154,7 @@ const dispatch = useAppDispatch();
                     duration={fhd.no_of_days}
                     season={fhd.best_times}
                     price={fhd.price_starting_from}
-                    onViewMoreHref={`itineraries/${country}/${fhd.pkg_category_slug}/${fhd.package_slug}`} 
+                    onViewMoreHref={`/itineraries/${country}/${fhd.pkg_category_slug}/${fhd.package_slug}`} 
                   />
                 </div>
               </SwiperSlide>

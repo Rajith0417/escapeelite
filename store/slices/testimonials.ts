@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 interface Testimonial {
   description: string;
   customer: string;
@@ -10,7 +12,7 @@ interface Testimonial {
 export const fetchTestimonials = createAsyncThunk(
   "testimonials/fetch",
   async () => {
-    const res = await fetch("https://www.escapeinsrilanka.com/api/testimonials.php");
+    const res = await fetch(`https://www.escapeinsrilanka.com/api/testimonials.php`);
     const data = await res.json();
     // assuming your PHP API returns { success: true, data: [...] }
     return data.data;

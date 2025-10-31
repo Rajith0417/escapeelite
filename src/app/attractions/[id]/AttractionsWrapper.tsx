@@ -68,7 +68,9 @@ export default function AttractionsWrapper({ params }: AttractionPageProps) {
         titleMobile={attractionData.heading}
         paragraph={attractionData.description}
       />
-      <h1 className="text-2xl font-bold">Attraction ID: {id}</h1>
+      {/* <h1 className="text-2xl font-bold">Attraction ID: {id}</h1> */}
+
+      
       {/* Assuming your ImageLeftRightSection expects the full attractionData object, 
         you can uncomment the line below.
       */}

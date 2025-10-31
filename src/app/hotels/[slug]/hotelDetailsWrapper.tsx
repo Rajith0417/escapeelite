@@ -25,8 +25,8 @@ export default function HotelDetailsClientWrapper({ params /*, serverCategories*
     // 1. Hooks MUST be used inside this client component
     const dispatch = useAppDispatch();
     const { data, status, error } = useAppSelector((state) => state.hotelDetails);
-    console.log("----");
-    console.log(data?.youtube_url_id);
+    console.log("---- hotel details wrapper");
+    console.log(data);
     
 
     // 2. Lifecycle hooks run here
@@ -71,7 +71,9 @@ export default function HotelDetailsClientWrapper({ params /*, serverCategories*
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <div className="w-full">
                             {/* Data from Server Component (slug) is available via props */}
-                            <h1 className="text-2xl font-bold">Hotel Slug: {params.slug}</h1>
+                            {/* <h1 className="text-2xl font-bold">Hotel Slug: {params.slug}</h1> */}
+
+
                             <ImageGallery images={data?.images} />
                             <TripAdvisorWidget code={data?.tripadvisor_code ?? ""} />
                         </div>

@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 export interface ItineraryData {
   id: number
   package_name: string
@@ -22,7 +24,7 @@ export interface Category {
 export interface Country {
   country_name: string
   country_slug: string
-  resort_only: number
+  // resort_only: number
 }
 
 export interface BasisTypes {
