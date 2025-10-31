@@ -1,12 +1,13 @@
 import ItineraryWrapper from "./ItineraryWrapper";
 
 interface ItineraryPageProps {
-  searchParams: Promise<{ 
+  searchParams: { 
     country: string; 
     packageSlug: string;
-    category: string 
-}>;
+    category: string; 
+  };
 }
+
 
 // export async function generateStaticParams() {
 //   const hotelIds = ["1", "2", "3"];
@@ -14,7 +15,7 @@ interface ItineraryPageProps {
 // }
 
 export default async function ItineraryPage({ searchParams }: ItineraryPageProps) {
-  const { country, packageSlug, category } = await searchParams;
+  const { country, packageSlug, category } = searchParams;
 
   return <ItineraryWrapper country={country} category={category} packageSlug={packageSlug} />;
 }
