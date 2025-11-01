@@ -55,8 +55,8 @@ export default function FeaturedHolidaysDetails({country, category_slug}: Featur
 
 const dispatch = useAppDispatch();
       const { data, status, error, featuredCategories } = useAppSelector((state) => state.featuresHolidaysDetails);
-      console.log(data);
-      console.log("-0-0--");
+      // console.log(data);
+      // console.log("-0-0--");
       
       useEffect(() => {
         dispatch(fetchFeaturedHolidaysDetails({
@@ -154,7 +154,7 @@ const dispatch = useAppDispatch();
                     duration={fhd.no_of_days}
                     season={fhd.best_times}
                     price={fhd.price_starting_from}
-                    onViewMoreHref={`/itineraries/${country}/${fhd.pkg_category_slug}/${fhd.package_slug}`} 
+                    onViewMoreHref={`/itineraries?country=${country}&category=${fhd.pkg_category_slug}&package_slug=${fhd.package_slug}`} 
                   />
                 </div>
               </SwiperSlide>

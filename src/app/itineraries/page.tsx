@@ -10,20 +10,24 @@ function ItineraryContent() {
 
   const country = searchParams.get("country") ?? "";
   const category = searchParams.get("category") ?? "";
-  const packageSlug = searchParams.get("packageSlug") ?? "";
+  const packageSlug = searchParams.get("package_slug") ?? "";
+  // console.log(searchParams.size);
+
 
   return (
     <>
-      <ItineraryWrapper
-        country={country}
-        category={category}
-        packageSlug={packageSlug}
-      />
-
-      <ItinerariesWrapper
-        country={country}
-        category_slug={category}
-      />
+      {searchParams.size == 3 ? (
+        <ItineraryWrapper
+          country={country}
+          category={category}
+          packageSlug={packageSlug}
+        />
+      ) : (
+        <ItinerariesWrapper
+          country={country}
+          category_slug={category}
+        />
+      )}
     </>
   );
 }
