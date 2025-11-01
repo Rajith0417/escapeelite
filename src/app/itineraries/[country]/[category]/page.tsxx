@@ -1,0 +1,21 @@
+// import ItinerariesWrapper from "./ItinerariesWrapper";
+
+// interface ItineraryPageProps {
+//   params: {
+//     country: string;
+//     category: string;
+//   };
+// }
+
+// // Mark the page as async
+// export default async function ItinerariesPage({ params }: ItineraryPageProps) {
+//   // Await params (Next.js may provide them asynchronously)
+//   const { country, category = "" } = await params;
+
+//   return (
+//     <ItinerariesWrapper
+//       country={country}
+//       category_slug={category}
+//     />
+//   );
+// }

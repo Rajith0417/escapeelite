@@ -1,0 +1,47 @@
+// import ItineraryWrapper from "../ItineraryWrapper";
+// import ItinerariesWrapper from "../ItinerariesWrapper";
+
+// // src/app/itineraries/[...slug]/page.tsx
+// import { notFound } from 'next/navigation'; // Recommended for handling missing routes
+
+// interface ItineraryPageProps {
+//   // It's highly recommended to type params as a Promise in Next.js 15+
+//   params: Promise<{ slug: string[] }>;
+// }
+
+// // Make the component async and await params
+// export default async function ItineraryPage({ params }: ItineraryPageProps) {
+//   // 1. Await params to get the resolved object
+//   const awaitedParams = await params;
+  
+//   // 2. Access the slug property from the awaited object
+//   const [country = "", category = "", packageSlug = ""] = awaitedParams.slug; 
+
+//   // Alternatively, you could destructure directly:
+//   // const { slug } = await params;
+//   // const [country = "", category = "", packageSlug = ""] = slug;
+
+
+//   // Use the awaited variable in your logic
+//   return (
+//     <div>
+//       {awaitedParams.slug.length === 3 ? ( 
+//         <ItineraryWrapper
+//           country={country}
+//           category={category}
+//           packageSlug={packageSlug}
+//         />
+//       ) : awaitedParams.slug.length === 2 ? (
+//         // Example for a 2-segment path like /itineraries/maldives/3-star-holidays
+//         <ItinerariesWrapper
+//           country={country}
+//           category_slug={category}
+//         />
+//       ) : (
+//         // Handle cases where the slug array length is unexpected (e.g., 0, 1, or > 3)
+//         // Using Next.js's notFound() is the idiomatic way for 404
+//         notFound()
+//       )}
+//     </div>
+//   );
+// }

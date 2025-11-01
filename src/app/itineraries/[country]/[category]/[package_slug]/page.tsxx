@@ -1,0 +1,28 @@
+// import ItineraryWrapper from "./ItineraryWrapper";
+
+// interface ItineraryPageProps {
+//   params: {
+//     country: string;
+//     category: string;
+//     package_slug: string;
+//   };
+// }
+
+// // export default async function ItinerariesPage({ params }: ItineraryPageProps) {
+// //   // Await params, cast to the expected type
+// //   const { country, category = "", package_slug = "" } = (await params) as ItineraryPageProps["params"];
+// export default function Page({
+//   params,
+// }: {
+//   params: { country: string; category: string; package_slug: string };
+// }) {
+//   console.log(params);
+
+//   return (
+//     <ItineraryWrapper
+//       country={params.country}
+//       category={params.category}
+//       packageSlug={params.package_slug}
+//     />
+//   );
+// }

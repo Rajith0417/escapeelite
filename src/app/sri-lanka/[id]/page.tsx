@@ -46,7 +46,6 @@ export default function SriLankaPage() {
         </div>
       </section>
       <FeaturedHolidaysDetails
-        heading="Featured holidays to Sri Lanka"
         country="sri-lanka"
       />
       <section>

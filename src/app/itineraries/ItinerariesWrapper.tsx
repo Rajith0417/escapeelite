@@ -5,10 +5,7 @@ import Hero from "@/components/Hero";
 import MoreDetails from "@/components/MoreDetails";
 import AttractionsSection from "@/components/PopularAttractionSection";
 import TestimonialSection from "@/components/TestimonialSection";
-import React, { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { fetchFeaturedHolidaysDetails } from "../../../store/slices/featuredHolidaysDetails";
-
+import React from "react";
 interface ItinerariesWrapperProps {
   country: string;
   category_slug?: string;
@@ -18,17 +15,6 @@ export default function ItinerariesWrapper({
   country,
   category_slug,
 }: ItinerariesWrapperProps) {
-  // const dispatch = useAppDispatch();
-  //   const { data, status, error, featuredCategories } = useAppSelector((state) => state.featuresHolidaysDetails);
-  //   console.log(data);
-  //   console.log("-0-0--");
-
-  //   useEffect(() => {
-  //     dispatch(fetchFeaturedHolidaysDetails({
-  //       country,
-  //       category_slug
-  //     }));
-  //   }, [dispatch, country, category_slug]);
 
   return (
     <>

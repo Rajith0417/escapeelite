@@ -1,20 +1,37 @@
+"use client";
+
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import ItineraryWrapper from "./ItineraryWrapper";
+import ItinerariesWrapper from "./ItinerariesWrapper";
 
-interface ItineraryPageProps {
-  params: {
-    slug: string[]; // matches [...slug]
-  };
-}
+function ItineraryContent() {
+  const searchParams = useSearchParams();
 
-export default function ItineraryPage({ params }: ItineraryPageProps) {
-  const [country, category, packageSlug = ""] = params.slug;
+  const country = searchParams.get("country") ?? "";
+  const category = searchParams.get("category") ?? "";
+  const packageSlug = searchParams.get("packageSlug") ?? "";
 
   return (
-    <ItineraryWrapper
-      country={country}
-      category={category}
-      packageSlug={packageSlug}
-    />
+    <>
+      <ItineraryWrapper
+        country={country}
+        category={category}
+        packageSlug={packageSlug}
+      />
+
+      <ItinerariesWrapper
+        country={country}
+        category_slug={category}
+      />
+    </>
   );
 }
 
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading itineraries...</div>}>
+      <ItineraryContent />
+    </Suspense>
+  );
+}
