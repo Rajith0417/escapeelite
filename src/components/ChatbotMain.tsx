@@ -165,8 +165,6 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
             }
         }
     };
-
-
     // Initial request when chatbot loads
     useEffect(() => {
         startChat();
@@ -420,8 +418,6 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
             console.log("if 2");
             console.log(currentQuestion?.shortText);
             console.log(options);
-
-
             switch (currentQuestion?.questionType) {
                 case "DATE_PICKER":
                     return renderDatePicker();
@@ -879,7 +875,7 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
                     >
                         <div className="relative w-[52px] h-[52px] md:w-[80px] md:h-[80px] rounded-full overflow-hidden">
                             <Image
-                                src={`${basePath}/images/user.png`}
+                                src={`/images/user.png`}
                                 alt="chatbot"
                                 fill
                                 className="object-cover"
@@ -896,7 +892,7 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
                     {/* Header */}
                     <div className="bg-[#38424B] px-4 py-3 flex items-center justify-between">
                         <Image
-                            src={`${basePath}/logo.png`}
+                            src={`/logo.png`}
                             alt="Escape Elite"
                             width={50}
                             height={0}
@@ -910,7 +906,7 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
                             className="text-gray-400 hover:text-gray-600 transition-colors"
                         >
                             <Image
-                                src={`${basePath}/icons/close-w.svg`}
+                                src={`/icons/close-w.svg`}
                                 alt="Escape Elite"
                                 width={24}
                                 height={24}
@@ -931,7 +927,7 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
                                 {message.sender === "bot" ? (
                                     <div className="flex items-start gap-2 w-full">
                                         <Image
-                                            src={`${basePath}/images/user.png`}
+                                            src={`/images/user.png`}
                                             alt={"chatbot"}
                                             width={10}
                                             height={10}
@@ -944,7 +940,7 @@ function ChatbotMain({ chatbotId, open = false }: ChatbotProps) {
                                 ) : (
                                     <div className="flex items-start gap-2 flex-row-reverse w-full">
                                         <Image
-                                            src={`${basePath}/images/user.png`}
+                                            src={`/images/user.png`}
                                             alt={"chatbot"}
                                             width={10}
                                             height={10}

@@ -57,7 +57,7 @@ const initialState: AccommodationsState = {
 export const fetchAccommodations = createAsyncThunk(
   "accommodations/fetch",
   async () => {
-    const res = await fetch(`https://www.localhost/projects/escapeelite.com/api/accommodations.php?`);
+    const res = await fetch(`https://www.escapeinsrilanka.com/api/accommodations.php?`);
     const data: AccommodationData = await res.json();
     console.log("Fetched data:", data);
     return data;

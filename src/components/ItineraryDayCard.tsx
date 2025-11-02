@@ -4,7 +4,6 @@ import ItineraryInnerTabs, { TabItem } from "./ItineraryInnerTabs";
 import Popup from "./Popup";
 import Pill from "./Pill";
 import { useState } from "react";
-
 interface ItineraryDayCardProps {
   dayNumber: number[];
   city: string[];

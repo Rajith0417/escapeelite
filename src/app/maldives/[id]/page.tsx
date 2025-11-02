@@ -3,9 +3,6 @@ import ChatbotWrapper from "@/components/chatbot/ChatbotWrapper";
 import Hero from "@/components/Hero";
 import ImageGallery from "@/components/ImageGallery";
 import ItinerarySection from "@/components/ItinerarySection";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 interface HotelPageProps {
     params: Promise<{ id: string }>; // 👈 async in Next.js 15
 }

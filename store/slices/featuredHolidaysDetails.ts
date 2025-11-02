@@ -72,11 +72,9 @@ interface FeaturedHolidaysDetailsState {
 export const fetchFeaturedHolidaysDetails = createAsyncThunk(
   "featuredHolidaysDetails/fetch",
   async ({ country, category_slug }: HolidayDetailsProp) => {
-    const url = `https://www.localhost/projects/escapeelite.com/api/featured-holidays-details.php?country=${country}${
+    const url = `https://www.escapeinsrilanka.com/api/featured-holidays-details.php?country=${country}${
       category_slug ? `&category_slug=${category_slug}` : ""
     }`;
-    console.log("-----feature holiday details");
-    console.log(url);
 
     const res = await fetch(url);
     const data = await res.json();

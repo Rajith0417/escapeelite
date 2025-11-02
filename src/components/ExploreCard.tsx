@@ -8,9 +8,6 @@ interface ExploreCardProps {
   description: string;
   image: string;
 }
-
-const basePath = process.env.NODE_ENV === "production" ? "/escapeelite" : "";
-
 function ExploreCard({ id, name, description, image }: ExploreCardProps) {
   return (
     <div className="text-poppins flex flex-col w-full bg-white rounded-lg md:shadow-lg overflow-hidden border border-[#ECEBEB]">
@@ -29,7 +26,7 @@ function ExploreCard({ id, name, description, image }: ExploreCardProps) {
           href={`/attractions/${id}`}> {/* this is correct no need basePath */}
           <span>Explore More</span>
           <Image
-            src={`${basePath}/icons/arrowBlue.svg`}
+            src={`/icons/arrowBlue.svg`}
             alt=""
             width={12}
             height={12}

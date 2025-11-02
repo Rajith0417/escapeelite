@@ -1,8 +1,5 @@
 import React from 'react'
 import Image from "next/image";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 interface ImageLeftRightProps {
     img: string,
     alt: string,
@@ -16,7 +13,7 @@ function ImageLeftRight({img, alt, title, paragraph, format}: ImageLeftRightProp
     <div className={`text-poppins flex gap-6 items-center mb-8 flex-col ${format === "right" ? "md:flex-row" : "md:flex-row-reverse"} border border-[#ECEBEB] md:border-none rounded-lg md:rounded-none`}>
         <div className="relative w-full  md:w-2/5 xl:w-[624px] aspect-[12/7]">
         <Image
-            src={`${basePath}${img}`}
+            src={`${img}`}
             alt={alt}
             fill
             className="object-cover"

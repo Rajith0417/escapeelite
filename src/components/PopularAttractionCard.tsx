@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 interface AttractionCardProps {
   id: number;
   img: string;
@@ -10,9 +12,6 @@ interface AttractionCardProps {
   paragraph: string;
   country: string;
 }
-
-const basePath = process.env.NODE_ENV === "production" ? "/escapeelite" : "";
-
 function AttractionCard(children: AttractionCardProps) {
   return (
     <div className="relative w-full aspect-square">

@@ -75,7 +75,7 @@ export const fetchPopularAttractions = createAsyncThunk(
     }
 
     // Construct the final URL
-    const baseUrl = 'https://www.localhost/projects/escapeelite.com/api/popular-attractions.php';
+    const baseUrl = 'https://www.escapeinsrilanka.com/api/popular-attractions.php';
     const finalUrl = `${baseUrl}?${queryParams.toString()}`;
 
     try {

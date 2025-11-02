@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 interface heroProps {
   image: string;
   titleDesktop?: string;
@@ -20,7 +19,7 @@ export default function Hero({image, titleDesktop, titleMobile, paragraph, ratin
       className={`relative ${fullScreen ? "h-screen" : "h-[306px] md:h-[700px]"}`}
     >
       <Image
-        src={`${basePath}${image}`}
+        src={`${image}`}
         alt=""
         fill
         className="object-cover object-center"

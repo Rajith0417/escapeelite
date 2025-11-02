@@ -1,8 +1,5 @@
 // components/InfoSection.tsx
 import Image from "next/image";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 interface infoSectionProps {
   image?: string;
   paragraph?: string;
@@ -25,7 +22,7 @@ export default function InfoSection() {
         </div>
         <div className="flex-1 relative">
           <Image
-            src={`${basePath}${content.image}`}
+            src={`${content.image}`}
             alt="Tea plantations"
             width={600}
             height={400}

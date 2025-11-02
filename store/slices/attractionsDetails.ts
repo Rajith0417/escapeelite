@@ -31,9 +31,6 @@ const initialState: AttractionsState = {
 export const fetchAttractionsDetails = createAsyncThunk(
   "attractionsDetails/fetch",
   async (id: string) => {
-    // console.log("Fetching ID:", id);
-    // console.log(`https://www.localhost/projects/escapeelite.com/api/attractions-details.php?id=${id}`);
-    
     const res = await fetch(
       `https://www.escapeinsrilanka.com/api/attractions-details.php?id=${id}`
     );

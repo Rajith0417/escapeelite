@@ -85,10 +85,7 @@ export interface Airline {
 export const fetchHotelDetails = createAsyncThunk(
   "hotelDetails/fetch",
   async (slug: string) => {
-    console.log("-0-0-0------hotel details url");
-    console.log(`https://www.localhost/projects/escapeelite.com/api/hotel-details.php/${slug}`);
-    
-    const res = await fetch(`https://www.localhost/projects/escapeelite.com/api/hotel-details.php/${slug}`);
+    const res = await fetch(`https://www.escapeinsrilanka.com/api/hotel-details.php/${slug}`);
     const data = await res.json();
     // assuming your PHP API returns { success: true, data: [...] }
     console.log("hotel data");

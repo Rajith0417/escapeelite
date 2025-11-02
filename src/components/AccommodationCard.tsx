@@ -2,9 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 interface AccommodationCardProps {
   imageSrc: string;
   title: string;
@@ -27,7 +24,7 @@ export default function AccommodationCard({
       {/* Image section with overlay tag */}
       <div className="relative w-full h-64 md:h-[276px]">
         <Image
-          src={`${basePath}${imageSrc}`}
+          src={`${imageSrc}`}
           alt={title}
           fill
           priority
@@ -77,7 +74,7 @@ export default function AccommodationCard({
             className="text-blue-400 text-xs hover:text-blue-500 transition-colors flex items-center gap-2"
           >
             Click to view details
-            <Image src={`${basePath}/icons/arrowBlue.svg`} alt={""} width={12} height={12} className="block"/>
+            <Image src={`/icons/arrowBlue.svg`} alt={""} width={12} height={12} className="block"/>
           </Link>
         </div>
       </div>

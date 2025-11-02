@@ -2,9 +2,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 export default function Navbar() {
   const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -70,7 +67,7 @@ export default function Navbar() {
         
         <Link href={`/landing-page`}> {/* this is correct no need basePath */}
           <Image
-            src={`${basePath}/logo.png`}
+            src={`/logo.png`}
             alt="Escape Elite"
             width={50}
             height={0}
@@ -79,7 +76,7 @@ export default function Navbar() {
 
         <button className="lg:hidden" onClick={handleMobileMenuToggle}>
           <Image
-            src={`${basePath}/icons/hamberger.svg`}
+            src={`/icons/hamberger.svg`}
             alt="Escape Elite"
             width={50}
             height={0}

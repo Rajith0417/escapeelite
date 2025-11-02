@@ -1,8 +1,5 @@
 import React from "react";
 import Image from "next/image";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 const moreDetails = [
   {
     icon: "/icons/sl.svg",
@@ -33,7 +30,7 @@ export default function MoreDetails() {
         {moreDetails.map((s, index) => (
           <div key={index} className="flex flex-col items-center text-center">
             <Image
-              src={`${basePath}${s.icon}`}
+              src={`${s.icon}`}
               alt=""
               width={84}
               height={84}

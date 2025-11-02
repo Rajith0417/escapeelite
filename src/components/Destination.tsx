@@ -1,15 +1,12 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 export default function Destination() {
   return (
     <section className="relative text-center overflow-hidden pt-16">
       <div className="relative">
 <Image
-        src={`${basePath}/banners/image6.jpg`}
+        src={`/banners/image6.jpg`}
         alt=""
         width={0}
         height={0}

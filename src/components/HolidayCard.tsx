@@ -2,9 +2,6 @@
  import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-
 interface HolidayCardProps {
   id: number;
   img: string;
@@ -31,7 +28,7 @@ function HolidayCard({id, img, title, slug, location, country}: HolidayCardProps
             href={`itineraries?country=${country}&category=${slug}`} 
             className="hover:scale-110 transition-transform">
             <Image
-              src={`${basePath}/icons/arrowBlue.svg`}
+              src={`/icons/arrowBlue.svg`}
               alt="View details"
               width={20}
               height={20}

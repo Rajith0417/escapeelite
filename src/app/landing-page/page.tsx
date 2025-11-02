@@ -20,7 +20,7 @@ export default function SriLankaPage() {
         className="relative h-screen md:h-[900px]"
       >
         <Image
-          src={`${basePath}/banners/image13.png`}
+          src={`/banners/image13.png`}
           alt=""
           fill
           className="object-cover object-center"

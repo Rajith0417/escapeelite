@@ -53,7 +53,7 @@ export default function HolidayCardDetails({
         <div className="font-poppins flex flex-wrap items-center gap-x-1 gap-y-3 text-gray-700 text-[10px] mb-4 flex-shrink-0">
           <div className="flex items-center gap-1">
             <Image
-              src={`${basePath}/icons/calender.svg`}
+              src={`/icons/calender.svg`}
               alt="duration"
               width={18}
               height={18}
@@ -62,7 +62,7 @@ export default function HolidayCardDetails({
           </div>
           <div className="flex items-center gap-1">
             <Image 
-              src={`${basePath}/icons/time.svg`}
+              src={`/icons/time.svg`}
               alt="season" 
               width={18} 
               height={18} />
@@ -70,7 +70,7 @@ export default function HolidayCardDetails({
           </div>
           <div className="flex items-center gap-1">
             <Image 
-              src={`${basePath}/icons/user.svg`}
+              src={`/icons/user.svg`}
               alt="price" 
               width={18} 
               height={18} />
