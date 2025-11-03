@@ -3,7 +3,11 @@ import Image from "next/image";
 import ItineraryInnerTabs, { TabItem } from "./ItineraryInnerTabs";
 import Popup from "./Popup";
 import Pill from "./Pill";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../..//store"; // <-- adjust paths to your store
+import { fetchHotelDetails } from "../../store/slices/hotelDetails";
+
 interface ItineraryDayCardProps {
   dayNumber: number[];
   city: string[];
@@ -17,26 +21,27 @@ export interface Option {
   images: string[];
   attractions: Attraction[];
   transport_options: TransportOption[];
-  accommodations: accommodations;
+  accommodations: Accommodations;
 }
 
-export interface accommodations {
-  "2": hotelDetails[];
-  "3": hotelDetails[];
-  "4": hotelDetails[];
+export interface Accommodations {
+  "2": HotelDetails[];
+  "3": HotelDetails[];
+  "4": HotelDetails[];
 }
 
-export interface hotelDetails {
+export interface HotelDetails {
   name: string;
   category_id: number;
   hotel_id: number;
+  slug: string;
 }
 
 export interface Attraction {
-  attraction_detail_id: number
-  attraction_detail_heading: string
-  attraction_detail_description: string
-  attraction_detail_image_path: string
+  attraction_detail_id: number;
+  attraction_detail_heading: string;
+  attraction_detail_description: string;
+  attraction_detail_image_path: string;
 }
 
 export interface TransportOption {
@@ -54,16 +59,34 @@ export default function ItineraryDayCard({
   city,
   options,
 }: ItineraryDayCardProps) {
+  const dispatch = useDispatch<AppDispatch>();
+  const { data: hotelData, status: hotelStatus } = useSelector(
+    (state: RootState) => state.hotelDetails
+  );
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isSecondPopupOpen, setIsSecondPopupOpen] = useState(false);
   const [popupData, setPopupData] = useState<{
     title: string;
     description: string;
     image?: string;
   } | null>(null);
+  const [selectedHotelSlug, setSelectedHotelSlug] = useState<string | null>(null);
 
   const handlePopupOpen = (title: string, description: string, image?: string) => {
     setPopupData({ title, description, image });
     setIsPopupOpen(true);
+    setIsSecondPopupOpen(false);
+  };
+
+  const handleHotelClick = async (hotelSlug: string) => {
+    setSelectedHotelSlug(hotelSlug);
+    setIsPopupOpen(false);
+    setIsSecondPopupOpen(true);
+
+    // Dispatch Redux thunk to fetch hotel details
+    // Assuming API expects slug, but if you have slug in hotel data use that.
+    dispatch(fetchHotelDetails(String(hotelSlug)));
   };
 
   const innerTabsItems: TabItem[] = (["Superior", "Deluxe", "Luxury"] as const).map(
@@ -104,123 +127,122 @@ export default function ItineraryDayCard({
           {options.map((option, index) => (
             <div key={index} className="grid grid-cols-1 lg:grid-cols-7 gap-8 md:gap-4">
               {/* Attractions */}
-              {option.attractions?.length > 0 && <div className="col-span-1 lg:col-span-2">
-                <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
-                  Attractions
-                </h4>
-                <div className="flex flex-wrap gap-2 px-5 py-4 rounded-lg xl:ring-1 ring-gray-200 justify-center">
-                  {option.attractions.map((a, i) => (
-                    <div
-                      key={i}
-                      className="font-inter inline-block rounded-full bg-[#EFF7FF] font-medium px-3 py-1 text-xs text-gray-900 cursor-pointer"
-                      onClick={() =>
-                        handlePopupOpen(
-                          a.attraction_detail_heading,
-                          a.attraction_detail_description,
-                          a.attraction_detail_image_path
-                        )
-                      }
-                    >{a.attraction_detail_heading}</div>
-                  ))}
+              {option.attractions?.length > 0 && (
+                <div className="col-span-1 lg:col-span-2">
+                  <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
+                    Attractions
+                  </h4>
+                  <div className="flex flex-wrap gap-2 px-5 py-4 rounded-lg xl:ring-1 ring-gray-200 justify-center">
+                    {option.attractions.map((a, i) => (
+                      <div
+                        key={i}
+                        className="font-inter inline-block rounded-full bg-[#EFF7FF] font-medium px-3 py-1 text-xs text-gray-900 cursor-pointer"
+                        onClick={() =>
+                          handlePopupOpen(
+                            a.attraction_detail_heading,
+                            a.attraction_detail_description,
+                            a.attraction_detail_image_path
+                          )
+                        }
+                      >
+                        {a.attraction_detail_heading}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>}
+              )}
 
               {/* Accommodation */}
-              {(option.accommodations[2]?.length > 0 && 
-                option.accommodations[3]?.length > 0 && 
-                option.accommodations[4]?.length > 0)  && 
-              (<div className="col-span-1 lg:col-span-3 text-center">
-                <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
-                  Accommodation
-                </h4>
-                <div className="hidden lg:col-span-2 xl:grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  {(
-                    [
-                      { label: "Superior", key: "2" },
-                      { label: "Deluxe", key: "3" },
-                      { label: "Luxury", key: "4" },
-                    ] as const
-                  ).map(({ label, key }) => (
-                    <div key={label} className="rounded-lg ring-1 ring-gray-200 p-2">
-                      <div className="text-center text-[14px] font-medium text-blue-400 mb-2">
-                        {label}
+              {option.accommodations["2"]?.length > 0 && (
+                <div className="col-span-1 lg:col-span-3 text-center">
+                  <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
+                    Accommodation
+                  </h4>
+                  <div className="hidden lg:col-span-2 xl:grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    {(
+                      [
+                        { label: "Superior", key: "2" },
+                        { label: "Deluxe", key: "3" },
+                        { label: "Luxury", key: "4" },
+                      ] as const
+                    ).map(({ label, key }) => (
+                      <div key={label} className="rounded-lg ring-1 ring-gray-200 p-2">
+                        <div className="text-center text-[14px] font-medium text-blue-400 mb-2">
+                          {label}
+                        </div>
+                        <div className="flex flex-col items-center gap-2">
+                          {option.accommodations[key]?.map((hotel, idx) => (
+                            <Pill
+                              key={idx}
+                              onClick={() => handleHotelClick(hotel.slug)}
+                            >
+                              {hotel.name}
+                            </Pill>
+                          ))}
+                        </div>
                       </div>
-                      <div className="flex flex-col items-center gap-2">
-                        {option.accommodations[key]?.map((hotel, idx) => (
-                          <Pill
-                            key={idx}
-                            onClick={() =>
-                              handlePopupOpen(
-                                hotel.name,
-                                `Hotel Category: ${label}`,
-                                "/default-hotel.jpg"
-                              )
-                            }
-                          >
-                            {hotel.name}
-                          </Pill>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
 
-                <div className="block xl:hidden">
-                  <ItineraryInnerTabs tabs={innerTabsItems} />
+                  <div className="block xl:hidden">
+                    <ItineraryInnerTabs tabs={innerTabsItems} />
+                  </div>
                 </div>
-              </div>)}
+              )}
 
               {/* Transportation */}
-              {option.transport_options?.length > 0 && <div className="col-span-1 lg:col-span-2">
-                <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
-                  Transportation
-                </h4>
-                <div className="space-y-3 flex flex-col rounded-lg xl:ring-1 ring-gray-200">
-                  {option.transport_options.map((t, i) => (
-                    <div
-                      key={i}
-                      className="p-3 flex items-start gap-3 cursor-pointer hover:bg-gray-50"
-                      onClick={() =>
-                        handlePopupOpen(
-                          t.transportation_name,
-                          t.transportation_description,
-                          t.transportation_image
-                        )
-                      }
-                    >
-                      <div className="shrink-0 mt-0.5 w-12 h-12 flex justify-center items-center bg-[#EFF7FF] rounded-full">
-                        <Image
-                          src={t.transportation_logo}
-                          alt={t.transportation_name}
-                          width={30}
-                          height={30}
-                        />
+              {option.transport_options?.length > 0 && (
+                <div className="col-span-1 lg:col-span-2">
+                  <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
+                    Transportation
+                  </h4>
+                  <div className="space-y-3 flex flex-col rounded-lg xl:ring-1 ring-gray-200">
+                    {option.transport_options.map((t, i) => (
+                      <div
+                        key={i}
+                        className="p-3 flex items-start gap-3 cursor-pointer hover:bg-gray-50"
+                        onClick={() =>
+                          handlePopupOpen(
+                            t.transportation_name,
+                            t.transportation_description,
+                            t.transportation_image
+                          )
+                        }
+                      >
+                        <div className="shrink-0 mt-0.5 w-12 h-12 flex justify-center items-center bg-[#EFF7FF] rounded-full">
+                          <Image
+                            src={t.transportation_logo}
+                            alt={t.transportation_name}
+                            width={30}
+                            height={30}
+                          />
+                        </div>
+                        <div className="text-xs text-gray-700">
+                          <div className="font-semibold">{t.transportation_name}</div>
+                          {t.transfer_time && (
+                            <div className="text-gray-500">{t.transfer_time}</div>
+                          )}
+                          {t.transportation_description && (
+                            <div className="text-[10px] text-blue-400">
+                              {t.include_in_price == 1 ? (
+                                <span>(INCLUDED IN PRICE)</span>
+                              ) : (
+                                <span>(EXCLUDED FROM PRICE)</span>
+                              )}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                      <div className="text-xs text-gray-700">
-                        <div className="font-semibold">{t.transportation_name}</div>
-                        {t.transfer_time && (
-                          <div className="text-gray-500">{t.transfer_time}</div>
-                        )}
-                        {t.transportation_description && (
-                          <div className="text-[10px] text-blue-400">
-                            {t.include_in_price == 1 ? (
-                              <span>(INCLUDED IN PRICE)</span>
-                            ) : (
-                              <span>(EXCLUDED FROM PRICE)</span>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>}
+              )}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Popup */}
+      {/* Popup for Attractions / Transport */}
       <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
         {popupData && (
           <div className="text-center">
@@ -237,6 +259,33 @@ export default function ItineraryDayCard({
                 </div>
               )}
               <p className="text-gray-700 w-2/3 text-left">{popupData.description}</p>
+            </div>
+          </div>
+        )}
+      </Popup>
+
+      {/* Secondary popup for hotel details */}
+      <Popup isOpen={isSecondPopupOpen} onClose={() => setIsSecondPopupOpen(false)}>
+        {hotelStatus === "loading" && <p>Loading hotel details...</p>}
+        {hotelStatus === "failed" && <p>Failed to load hotel details.</p>}
+        {hotelStatus === "succeeded" && hotelData && (
+          <div>
+            <h2 className="text-xl font-bold mb-2">{hotelData.name}</h2>
+            <p className="text-sm text-gray-600 mb-3">{hotelData.description}</p>
+            <p className="text-sm text-gray-500 mb-2">
+              ⭐ {hotelData.star_rating} Star Hotel
+            </p>
+            <div className="grid grid-cols-2 gap-2">
+              {hotelData.images?.slice(0, 4).map((img, i) => (
+                <div key={i} className="relative w-full h-32">
+                  <Image
+                    src={img}
+                    alt={hotelData.name}
+                    fill
+                    className="object-cover rounded-md"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         )}

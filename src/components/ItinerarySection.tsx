@@ -32,6 +32,7 @@ export interface hotelDetails {
   name: string
   category_id: number
   hotel_id: number
+  slug: string
 }
 
 // export interface Image2 {
@@ -61,61 +62,6 @@ interface ItinerarySectionProps {
 }
 
 export default function ItinerarySection({ itineraries, mapData }: ItinerarySectionProps) {
-  // const days = [
-  //   {
-  //     dayNumber: 1,
-  //     city: "COLOMBO",
-  //     imageSrc: "/banners/image10.png",
-  //     attractions: [
-  //       "Gangaramaya Buddhist Temple",
-  //       "Independence Square",
-  //       "Shopping in Colombo",
-  //     ],
-  //     accommodation: {
-  //       Superior: ["Ramada Colombo", "Global Towers", "Cinnamon Red Colombo"],
-  //       Deluxe: ["Galle Face Hotel", "The Kingsbury", "Marineo Beach"],
-  //       Luxury: ["Uga Residence", "Tintagel", "Jetwing Colombo 7"],
-  //     },
-  //     transportation: [
-  //       {
-  //         title: "Personal vehicle & driver",
-  //         subtitle: "Transfer: 35 minutes",
-  //         note: "INCLUDED IN PRICE",
-  //         icon: "car",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     dayNumber: 2,
-  //     city: "SIGIRIYA",
-  //     imageSrc: "/banners/image7.png",
-  //     attractions: [
-  //       "Sacred city of Anuradhapura",
-  //       "Sigiriya Rock Fortress",
-  //       "Ancient City of Polonnaruwa",
-  //       "Pidurangala Monastery",
-  //     ],
-  //     accommodation: {
-  //       Superior: ["Ramada Colombo", "Global Towers", "Cinnamon Red Colombo"],
-  //       Deluxe: ["Galle Face Hotel", "The Kingsbury", "Marineo Beach"],
-  //       Luxury: ["Uga Residence", "Tintagel", "Jetwing Colombo 7"],
-  //     },
-  //     transportation: [
-  //       {
-  //         title: "Personal vehicle & driver",
-  //         subtitle: "Transfer: 3.5 hours",
-  //         note: "INCLUDED IN PRICE",
-  //         icon: "car",
-  //       },
-  //       {
-  //         title: "Sea Plane / Air Taxi",
-  //         subtitle: "Transfer: 35 minutes",
-  //         note: "EXCLUDED IN PRICE",
-  //         icon: "plane",
-  //       },
-  //     ],
-  //   },
-  // ];
 
   const tabs: TabItem[] = [
     {
