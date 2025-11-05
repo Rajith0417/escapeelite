@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../..//store"; // <-- adjust paths to your store
 import { fetchHotelDetails } from "../../store/slices/hotelDetails";
+import ItineraryHotel from "./ItineraryHotel";
 
 interface ItineraryDayCardProps {
   dayNumber: number[];
@@ -269,8 +270,9 @@ export default function ItineraryDayCard({
         {hotelStatus === "loading" && <p>Loading hotel details...</p>}
         {hotelStatus === "failed" && <p>Failed to load hotel details.</p>}
         {hotelStatus === "succeeded" && hotelData && (
+          
           <div>
-            <h2 className="text-xl font-bold mb-2">{hotelData.name}</h2>
+            {/* <h2 className="text-xl font-bold mb-2">{hotelData.name}</h2>
             <p className="text-sm text-gray-600 mb-3">{hotelData.description}</p>
             <p className="text-sm text-gray-500 mb-2">
               ⭐ {hotelData.star_rating} Star Hotel
@@ -286,7 +288,14 @@ export default function ItineraryDayCard({
                   />
                 </div>
               ))}
-            </div>
+            </div> */}
+            <ItineraryHotel 
+              name={hotelData.name} 
+              star={hotelData.star_rating} 
+              photos={hotelData.images} 
+              video={hotelData.youtube_url_id} 
+              facilities={hotelData.facilities_html} 
+              map={hotelData.location}/>
           </div>
         )}
       </Popup>

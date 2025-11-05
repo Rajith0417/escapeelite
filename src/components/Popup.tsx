@@ -41,7 +41,7 @@ export default function Popup({ isOpen, onClose, children }: PopupProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div
         ref={popupRef}
-        className="bg-white rounded-lg p-6 max-w-2xl w-full shadow-xl relative"
+        className="bg-white rounded-lg p-6 w-full md:w-3/4 shadow-xl relative"
       >
         {/* Optional close button */}
         <button

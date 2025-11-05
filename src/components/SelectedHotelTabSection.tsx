@@ -40,8 +40,8 @@ const getYouTubeEmbedUrl = (url: string | undefined): string => {
 
 
 export default function SelectedHotelTabSection({ description, video, location }: TabSectionProps) {
-  console.log("-0-0-0-");
-  console.log(video);
+  // console.log("-0-0-0-");
+  // console.log(video);
 
   const hasVideo = Boolean(video && video.trim() !== "");
   console.log("has video =" + hasVideo);
@@ -66,9 +66,7 @@ export default function SelectedHotelTabSection({ description, video, location }
           <div className="py-4 mt-20">
             <TourMap
               markers={[
-                // { lat: 6.9271, lng: 79.8612 },
                 location!,
-                // { lat: 7.957, lng: 80.7603 },
               ]}
             />
           </div>

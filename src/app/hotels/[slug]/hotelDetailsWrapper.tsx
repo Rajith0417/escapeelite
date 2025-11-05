@@ -25,8 +25,8 @@ export default function HotelDetailsClientWrapper({ params /*, serverCategories*
     // 1. Hooks MUST be used inside this client component
     const dispatch = useAppDispatch();
     const { data, status, error } = useAppSelector((state) => state.hotelDetails);
-    console.log("---- hotel details wrapper");
-    console.log(data);
+    // console.log("---- hotel details wrapper");
+    // console.log(data);
     
 
     // 2. Lifecycle hooks run here
