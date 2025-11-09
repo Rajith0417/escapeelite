@@ -19,10 +19,10 @@ export interface Option {
   images: string[]
   attractions: Attraction[]
   transport_options: TransportOption[]
-  accommodations: accommodations
+  accommodations: Accommodations
 }
 
-export interface accommodations {
+export interface Accommodations {
   "2": hotelDetails[]
   "3": hotelDetails[]
   "4": hotelDetails[]
@@ -32,7 +32,7 @@ export interface hotelDetails {
   name: string
   category_id: number
   hotel_id: number
-  slug: string
+  slug?: string
 }
 
 // export interface Image2 {

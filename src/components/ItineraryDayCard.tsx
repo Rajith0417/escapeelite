@@ -35,7 +35,7 @@ export interface HotelDetails {
   name: string;
   category_id: number;
   hotel_id: number;
-  slug: string;
+  slug?: string;
 }
 
 export interface Attraction {
@@ -167,7 +167,7 @@ export default function ItineraryDayCard({
                           {option.accommodations[key]?.map((hotel, idx) => (
                             <Pill
                               key={idx}
-                              onClick={() => handleHotelClick(hotel.slug)}
+                              onClick={() => handleHotelClick(hotel.slug ?? "")}
                             >
                               {hotel.name}
                             </Pill>
