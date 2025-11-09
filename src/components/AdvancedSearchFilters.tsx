@@ -1,14 +1,14 @@
 "use client";
 import SearchBar from "./SearchBar";
 import FilterDropdown from "./FilterDropdown";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Added useEffect for state synchronization
 
 interface country {
   name: string,
   slug: string,
 }
 
-interface location {
+interface City {
   id: number,
   name: string
 }
@@ -20,55 +20,74 @@ interface type {
 
 interface rating {
   name: string,
-  id: number
+  id: string
 }
 
 interface filter_options {
   countries: country[],
-  locations: location[],
+  cities: City[],
   types: type[],
   ratings: rating[]
 }
-interface AdvancedSearchFiltersProps {
-  onSearch?: (query: string) => void;
-  onFilterChange?: (filters: FilterValues) => void;
-  filterOptions: filter_options;
-}
 
 interface FilterValues {
+  name: string;
   country: string;
-  location: string;
+  city: string;
   type: string;
   rating: string;
 }
 
-// const filterOptions = {
-//   countries: ["Sri Lanka", "Maldives", "India", "Seychelles", "Mauritius"],
-//   locations: ["Colombo", "Kandy", "Galle", "Sigiriya", "Yala", "Anuradhapura"],
-//   types: ["Hotel & Resort", "Beach Resort", "Boutique Hotel", "Villa", "Guesthouse"],
-//   ratings: ["5 Stars", "4 Stars", "3 Stars", "2 Stars", "1 Star"],
-// };
+interface AdvancedSearchFiltersProps {
+  onSearch?: (query: string) => void;
+  onFilterChange: (filters: FilterValues) => void; // ⬅️ Must be present and required!
+  onSearchClick: (filters: FilterValues) => void; // ⬅️ NEW: Required for button click
+  initialFilters: FilterValues;
+  filterOptions: filter_options;
+}
+
 
 export default function AdvancedSearchFilters({
   onSearch,
-  onFilterChange,
-  filterOptions
+  // 🛑 REMOVED onFilterChange from destructuring
+  onSearchClick, // ⬅️ Use new prop
+  filterOptions,
+  initialFilters // The filters currently APPLIED (for displaying selected state)
 }: AdvancedSearchFiltersProps) {
-  const [filters, setFilters] = useState<FilterValues>({
-    country: "",
-    location: "",
-    type: "",
-    rating: "",
-  });
+  
+  // 1. State for PENDING (local) filters
+  // Initialize with the currently applied filters from the parent
+  const [pendingFilters, setPendingFilters] = useState<FilterValues>(initialFilters);
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  // 2. Sync local state when initialFilters changes from parent (e.g., when a search is applied)
+  useEffect(() => {
+      setPendingFilters(initialFilters);
+  }, [initialFilters]);
+
+  const handleSearchQueryChange = (query: string) => {
+      setSearchQuery(query);
+      console.log(query);
+      const newFilters = { ...pendingFilters, ["name"]: query };
+      setPendingFilters(newFilters);
+  };
 
   // 👇 Track which dropdown is open
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
+  // 3. Update PENDING filters only (no API call here)
   const handleFilterChange = (key: keyof FilterValues, value: string) => {
-    const newFilters = { ...filters, [key]: value };
-    setFilters(newFilters);
-    onFilterChange?.(newFilters);
+    const newFilters = { ...pendingFilters, [key]: value };
+    setPendingFilters(newFilters);
+    // 🛑 REMOVED: onFilterChange?.(newFilters); // Immediate notification removed
   };
+
+  // 4. Handle Search Button Click
+  const handleSearchClick = () => {
+    // ⬅️ NEW: Pass the pending (local) filter state to the parent
+    onSearchClick(pendingFilters); 
+    console.log("Search button clicked. Filters sent:", pendingFilters);
+  }
 
   const toggleDropdown = (label: string) => {
     setOpenDropdown((prev) => (prev === label ? null : label));
@@ -80,15 +99,17 @@ export default function AdvancedSearchFilters({
         
         <SearchBar
           placeholder="Search destination..."
-          onSearch={onSearch}
+          query={searchQuery} // ⬅️ Pass current query
+          onQueryChange={handleSearchQueryChange} // ⬅️ New handler
+          // onSearch={onSearch} // This prop is no longer needed in the SearchBar if the main button handles the filter submit
           className="[grid-area:input]"
         />
 
-        {/* Each dropdown now receives openDropdown + toggleDropdown */}
+        {/* Use pendingFilters for onSelect, but initialFilters for the displayed value */}
         <FilterDropdown
           label="Country"
           options={filterOptions.countries}
-          value={filters.country}
+          value={pendingFilters.country} // ⬅️ Still uses APPLIED filters for display
           onSelect={(value) => handleFilterChange("country", value)}
           isOpen={openDropdown === "Country"}
           onToggle={() => toggleDropdown("Country")}
@@ -97,18 +118,18 @@ export default function AdvancedSearchFilters({
 
         <FilterDropdown
           label="Location"
-          options={filterOptions.locations}
-          value={filters.location}
-          onSelect={(value) => handleFilterChange("location", value)}
+          options={filterOptions.cities}
+          value={pendingFilters.city} // ⬅️ Still uses APPLIED filters for display
+          onSelect={(value) => handleFilterChange("city", value)}
           isOpen={openDropdown === "Location"}
           onToggle={() => toggleDropdown("Location")}
           className="[grid-area:location]"
         />
-
+        
         <FilterDropdown
           label="Type"
           options={filterOptions.types}
-          value={filters.type}
+          value={pendingFilters.type} // ⬅️ Still uses APPLIED filters for display
           onSelect={(value) => handleFilterChange("type", value)}
           isOpen={openDropdown === "Type"}
           onToggle={() => toggleDropdown("Type")}
@@ -118,14 +139,17 @@ export default function AdvancedSearchFilters({
         <FilterDropdown
           label="Rating"
           options={filterOptions.ratings}
-          value={filters.rating}
+          value={pendingFilters.rating} // ⬅️ Still uses APPLIED filters for display
           onSelect={(value) => handleFilterChange("rating", value)}
           isOpen={openDropdown === "Rating"}
           onToggle={() => toggleDropdown("Rating")}
           className="[grid-area:rating]"
         />
 
-        <button className="h-12 [grid-area:button] bg-blue-400 text-white rounded-md px-4 py-3">
+        <button 
+          className="h-12 [grid-area:button] bg-blue-400 text-white rounded-md px-4 py-3"
+          onClick={handleSearchClick} // ⬅️ NEW: Calls the handler to trigger parent filter
+        >
           Search
         </button>
       </div>

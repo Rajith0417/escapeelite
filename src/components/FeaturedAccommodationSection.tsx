@@ -4,8 +4,9 @@ import AdvancedSearchFilters from "./AdvancedSearchFilters";
 import AccommodationGrid from "./AccommodationGrid";
 import Pagination from "./Pagination";
 
-import { useAppDispatch, useAppSelector } from "../../store/hooks"; // ⬅️ IMPORT RootState
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchAccommodations } from "../../store/slices/accommodations";
+
 
 // --- Interfaces for Component Props (Simplified) ---
 interface AccommodationGridItem {
@@ -25,7 +26,7 @@ interface country {
   slug: string,
 }
 
-interface location {
+interface city {
   id: number,
   name: string
 }
@@ -35,11 +36,16 @@ interface type {
   slug: string
 }
 
+interface rating {
+  id: string;
+  name: string;
+}
+
 interface filter_options {
   countries: country[],
-  locations: location[],
+  cities: city[],
   types: type[],
-  ratings: []
+  ratings: rating[]
 }
 
 interface AccommodationData {
@@ -47,13 +53,23 @@ interface AccommodationData {
   filter_options: filter_options
 }
 
-// Interface for API parameters
-interface FilterApiValues {
-  country: string; // maps to API 'country' slug
-  city: string;    // maps to API 'city' ID (location)
-  acc: string;     // maps to API 'acc' (accommodation type slug)
-  star: string;    // maps to API 'star' rating
+// Interface for Filter State values
+interface FilterStateValues {
+  name: string;
+  country: string; 
+  city: string; 
+  type: string;     
+  rating: string;   
 }
+
+// Initial default state for filters
+const initialFilterState: FilterStateValues = {
+  name: "",
+  country: "",
+  city: "",
+  type: "",
+  rating: "",
+};
 
 
 export default function FeaturedAccommodationSection() {
@@ -61,25 +77,57 @@ export default function FeaturedAccommodationSection() {
   const dispatch = useAppDispatch();
   const { data, status, error } = useAppSelector((state) => state.accommodations);
   
-  // 1. State for Pagination
+  // 1. PENDING FILTERS: Holds the user's latest selections in the dropdowns.
+  // This state is passed down to AdvancedSearchFilters as the display value.
+  const [pendingFilters, setPendingFilters] = useState<FilterStateValues>(initialFilterState);
+
+  // 2. APPLIED FILTERS: Holds the filters used for the current API call.
+  // Only updated when the search button is clicked.
+  const [appliedFilters, setAppliedFilters] = useState<FilterStateValues>(initialFilterState);
+
+  // 3. State for Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 9; // Set your desired items per page
+  const ITEMS_PER_PAGE = 12;
 
-  // 2. Initial Data Fetch (Runs once on mount)
+  // 4. Handle Filter Change (Updates PENDING state only, no API call)
+  const handleFilterChange = useCallback((newFilters: FilterStateValues) => {
+    // 🛑 This function is now used to update the PENDING state from the dropdowns
+    setPendingFilters(newFilters);
+    console.log("Pending filters updated:", newFilters);
+  }, []);
+
+  // 5. Handle Search Button Click (Updates APPLIED state, triggering useEffect)
+  const handleSearchClick = useCallback((newFilters: FilterStateValues) => {
+    
+    // 1. Update APPLIED filter state -> Triggers the API fetch useEffect below
+    setAppliedFilters(newFilters); 
+    // 2. Ensure pending filters are in sync for immediate button click scenarios
+    setPendingFilters(newFilters);
+    console.log("Search button clicked. Applied filters set:", newFilters);
+  }, []);
+
+  // 6. Data Fetch (Runs on mount AND when APPLIED filters change)
   useEffect(() => {
-    dispatch(fetchAccommodations());
-  }, [dispatch]);
+    // This runs on mount with initialFilterState and whenever the Search button is clicked.
+    dispatch(fetchAccommodations({
+      name: appliedFilters.name,
+      country: appliedFilters.country,
+      city: appliedFilters.city, 
+      type: appliedFilters.type,
+      rating: appliedFilters.rating,
+    }));
+    console.log("Fetching accommodations with applied filters:", appliedFilters);
+    
+  }, [dispatch, appliedFilters]); // ⬅️ DEPENDENCY ARRAY updated to use appliedFilters
 
-  // 3. Pagination Logic using useMemo for efficiency
+  // --- Pagination Logic (uses data) ---
   const allAccommodations = data?.data || [];
   const totalItems = allAccommodations.length;
   
-  // Calculate total pages
   const totalPages = useMemo(() => {
     return Math.ceil(totalItems / ITEMS_PER_PAGE);
   }, [totalItems]);
 
-  // Determine the subset of data for the current page
   const currentItems = useMemo(() => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
@@ -88,12 +136,10 @@ export default function FeaturedAccommodationSection() {
 
   const currentItemsCount = currentItems.length;
 
-  // 4. Page Change Handler
+  // 7. Page Change Handler
   const handlePageChange = useCallback((page: number) => {
-    // Ensure the page number is valid
     if (page >= 1 && page <= totalPages) {
         setCurrentPage(page);
-        // Optional: Scroll to the top of the grid when changing pages
         const gridElement = document.getElementById('accommodation-grid');
         if (gridElement) {
             gridElement.scrollIntoView({ behavior: 'smooth' });
@@ -102,7 +148,6 @@ export default function FeaturedAccommodationSection() {
   }, [totalPages]);
   
   // Reset page to 1 if the filter results change (or totalItems changes)
-  // This is crucial if you later add the AdvancedSearchFilters back.
   useEffect(() => {
       setCurrentPage(1);
   }, [totalItems]);
@@ -110,29 +155,34 @@ export default function FeaturedAccommodationSection() {
   if (status === "loading") return <p>Loading...</p>;
   if (status === "failed") return <p>Error: {error}</p>;
 
-  // console.log(data); // Kept for debugging if needed
-
   return (
     <>
       <section className="bg-gray-800 relative md:h-0 md:mb-24">
         {/* Advanced Search Filters */}
         <div className="z-10 bg-white md:w-3/4 md:absolute md:rounded-md md:top-1/2 md:left-1/2 md:transform md:-translate-x-1/2 md:-translate-y-1/2">
-          {/* Pass filter options and current values down */}
-          {data &&<AdvancedSearchFilters
-            // onSearch={handleSearch}
-            // onFilterChange={handleFilterChange}
-            // // Passing the current filter values to keep the dropdowns synced
-            // initialFilters={filters}
-            // // Passing the dynamic options fetched from the API
-            filterOptions={data.filter_options} // Use a more specific type if available
+          {data && <AdvancedSearchFilters
+            // 🛑 FIX 1: Pass the PENDING filters down so dropdowns show the current selection
+            initialFilters={pendingFilters}
+            
+            // 🛑 FIX 2: Pass the handler that updates the PENDING state (on filter selection)
+            onFilterChange={handleFilterChange} 
+            
+            // 🛑 FIX 3: Pass the handler that triggers the API call (on button click)
+            onSearchClick={handleSearchClick} 
+            
+            filterOptions={{
+              countries: data.filter_options.countries,
+              cities: data.filter_options.cities,
+              types: data.filter_options.types,
+              ratings: data.filter_options.ratings,
+            }}
           />}
         </div>
       </section>
-      
-      {/* --- */}
 
       {/* Featured Accommodation Section */}
       <section id="resorts" className="py-16">
+        {/* ... (rest of the component JSX) ... */}
         <div className="container mx-auto px-5">
           {/* Section Heading */}
           <div className="text-center mb-12">
@@ -163,7 +213,7 @@ export default function FeaturedAccommodationSection() {
 
           {/* Pagination (FIXED: Un-hidden and populated props) */}
           {totalPages > 1 && (
-            <div className="mt-12"> {/* Removed 'hidden md:block' if you want it on all sizes */}
+            <div className="mt-12">
               <Pagination
                 currentPage={currentPage}
                 totalPages={totalPages}
