@@ -78,7 +78,9 @@ export const fetchFeaturedHolidaysDetails = createAsyncThunk(
 
     const res = await fetch(url);
     const data = await res.json();
-    // console.log("Fetched data--:", data);
+    console.log(url);
+    
+    console.log("Fetched data--:", data);
     return data;
   }
 );

@@ -12,9 +12,9 @@ import FeaturedHolidaysSection from "./FeaturedHolidaysSection";
 
 // Define the interface for a category item based on your API response
 interface PackageCategory {
-    id: number;
-    pkg_category_name: string;
-    pkg_category_slug: string;
+  id: number;
+  pkg_category_name: string;
+  pkg_category_slug: string;
 }
 
 export interface FeaturedHolidaysDetails {
@@ -44,27 +44,27 @@ type FeaturedHolidaysDetailsProps = {
   country: string;
 };
 
-export default function FeaturedHolidaysDetails({country, category_slug}: FeaturedHolidaysDetailsProps) {
+export default function FeaturedHolidaysDetails({ country, category_slug }: FeaturedHolidaysDetailsProps) {
 
   // const dispatch = useAppDispatch();
   // const { data, status, error, featuredCategories } = useAppSelector((state) => state.featuresHolidaysDetails);
-  
+
   // // State to manage the selected category slug (e.g., '4-star-holidays')
   // // Initialize with 'all' or a sensible default that represents "All Holidays"
-  const [selectedSlug, setSelectedSlug] = useState<string>('all'); 
+  const [selectedSlug, setSelectedSlug] = useState<string>('all');
 
-const dispatch = useAppDispatch();
-      const { data, status, error, featuredCategories } = useAppSelector((state) => state.featuresHolidaysDetails);
-      // console.log(data);
-      // console.log("-0-0--");
-      
-      useEffect(() => {
-        dispatch(fetchFeaturedHolidaysDetails({
-          country, 
-          category_slug
-        }));
-      }, [dispatch, country, category_slug]);
-  
+  const dispatch = useAppDispatch();
+  const { data, status, error, featuredCategories } = useAppSelector((state) => state.featuresHolidaysDetails);
+  // console.log(data);
+  // console.log("-0-0--");
+
+  useEffect(() => {
+    dispatch(fetchFeaturedHolidaysDetails({
+      country,
+      category_slug
+    }));
+  }, [dispatch, country, category_slug]);
+
   // Create the full list of dropdown options, starting with "All Holidays"
   const dropdownOptions = useMemo(() => {
     const options = [{ pkg_category_name: "All Holidays", pkg_category_slug: "all" } as PackageCategory];
@@ -74,14 +74,22 @@ const dispatch = useAppDispatch();
     return options;
   }, [featuredCategories]);
 
-  // Filter the data based on the selected category slug
+  // Fix 1: Correctly access the packages array from the data object
   const filteredData = useMemo(() => {
-    // If 'all' is selected, or if data is not an array, return all packages
-    if (selectedSlug === 'all' || !data || !Array.isArray(data)) {
-      return data || [];
+    // Ensure data and the packages array exist
+    const packages = data?.packages;
+    if (!packages || !Array.isArray(packages)) {
+      return []; // Return an empty array if no packages are loaded
     }
+
+    // If 'all' is selected, return all packages
+    if (selectedSlug === 'all') {
+      return packages;
+    }
+
     // Filter packages by the selected category slug
-    return data.filter(pkg => pkg.pkg_category_slug === selectedSlug);
+    // Ensure the structure matches (pkg_category_slug is on the package object)
+    return packages.filter(pkg => pkg.pkg_category_slug === selectedSlug);
   }, [data, selectedSlug]);
 
   // -------------------------
@@ -110,8 +118,8 @@ const dispatch = useAppDispatch();
               onChange={(e) => setSelectedSlug(e.target.value)} // Use local state update
             >
               {dropdownOptions.map((opt) => (
-                <option 
-                  key={opt.pkg_category_slug} 
+                <option
+                  key={opt.pkg_category_slug}
                   value={opt.pkg_category_slug}
                 >
                   {opt.pkg_category_name}
@@ -120,12 +128,12 @@ const dispatch = useAppDispatch();
             </select>
           </div>
         </div>
-        
-        {data && data.packages.length === 0 && status === "succeeded" && (
-            <p className="text-center text-gray-600">No holidays found for this category.</p>
+
+        {filteredData && filteredData.length === 0 && status === "succeeded" && (
+          <p className="text-center text-gray-600">No holidays found for this category.</p>
         )}
 
-        {data && data.packages.length > 0 && (
+        {filteredData && filteredData.length > 0 && (
           <Swiper
             slidesPerView={1}
             spaceBetween={24}
@@ -144,8 +152,8 @@ const dispatch = useAppDispatch();
             modules={[Navigation]}
             className="featured-holidays-swiper123 !p-1"
           >
-            {data.packages.map((fhd, index) => (
-              <SwiperSlide key={fhd.id} className="!h-auto"> 
+            {filteredData.map((fhd, index) => (
+              <SwiperSlide key={fhd.id} className="!h-auto">
                 <div className="h-full">
                   <HolidayCardDetails
                     imageSrc={fhd.image}
@@ -154,7 +162,7 @@ const dispatch = useAppDispatch();
                     duration={fhd.no_of_days}
                     season={fhd.best_times}
                     price={fhd.price_starting_from}
-                    onViewMoreHref={`/itineraries?country=${country}&category=${fhd.pkg_category_slug}&package_slug=${fhd.package_slug}`} 
+                    onViewMoreHref={`/itineraries?country=${country}&category=${fhd.pkg_category_slug}&package_slug=${fhd.package_slug}`}
                   />
                 </div>
               </SwiperSlide>

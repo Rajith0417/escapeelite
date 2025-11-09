@@ -30,16 +30,21 @@ interface type {
   slug: string
 }
 
+interface rating {
+  id: string;
+  name: string;
+}
+
 interface filter_options {
-  countries: country[],
-  locations: location[],
+  countries: country[], // Should be an array of country objects
+  cities: location[],   // Should be an array of location objects
   types: type[],
-  ratings: []
+  ratings: rating[]    // Should be an array of strings (or rating objects)
 }
 
 interface AccommodationData {
   data: Accommodation[],
-  filter_options: filter_options
+  filter_options: filter_options // Now correctly points to the arrays
 }
 
 interface AccommodationsState {
@@ -54,12 +59,22 @@ const initialState: AccommodationsState = {
   error: null,
 };
 
+interface FilterApiArgs {
+  name: string,
+  country: string, // These are the *values* to pass to the API
+  city: string,
+  type: string,
+  rating: string
+}
+
 export const fetchAccommodations = createAsyncThunk(
   "accommodations/fetch",
-  async () => {
-    const res = await fetch(`https://www.escapeinsrilanka.com/api/accommodations.php?`);
+  // Use the renamed argument interface
+  async ({name, country, city, type, rating}: FilterApiArgs) => { 
+    const res = await fetch(`https://www.escapeinsrilanka.com/api/accommodations.php?name=${name}&country=${country}&city=${city}&type=${type}&rating=${rating}`);
     const data: AccommodationData = await res.json();
-    console.log("Fetched data:", data);
+    console.log(`https://www.escapeinsrilanka.com/api/accommodations.php?name=${name}&country=${country}&city=${city}&type=${type}&rating=${rating}`);
+    console.log("Fetched accommodations data:", data);
     return data;
   }
 );

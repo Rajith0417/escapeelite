@@ -90,14 +90,6 @@ export default function ItineraryDayCard({
     dispatch(fetchHotelDetails(String(hotelSlug)));
   };
 
-  const innerTabsItems: TabItem[] = (["Superior", "Deluxe", "Luxury"] as const).map(
-    (tier) => ({
-      id: tier,
-      title: tier,
-      content: <div className="py-4 flex flex-col items-center gap-2"></div>,
-    })
-  );
-
   return (
     <article className="font-inter m-0.5 md:m-0 rounded-xl ring-1 ring-gray-200 bg-white overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-6 px-5 py-8">
@@ -159,7 +151,7 @@ export default function ItineraryDayCard({
                   <h4 className="text-base font-medium text-gray-800 mb-2 text-left">
                     Accommodation
                   </h4>
-                  <div className="hidden lg:col-span-2 xl:grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div className="lg:col-span-2 xl:grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {(
                       [
                         { label: "Superior", key: "2" },
@@ -183,10 +175,6 @@ export default function ItineraryDayCard({
                         </div>
                       </div>
                     ))}
-                  </div>
-
-                  <div className="block xl:hidden">
-                    <ItineraryInnerTabs tabs={innerTabsItems} />
                   </div>
                 </div>
               )}

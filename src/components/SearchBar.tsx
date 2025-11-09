@@ -3,24 +3,26 @@ import { useState } from "react";
 
 interface SearchBarProps {
   placeholder?: string;
-  onSearch?: (query: string) => void;
+  // REMOVED: onSearch? (query: string) => void;
   className?: string;
+  query: string; // ⬅️ NEW: Controlled component value
+  onQueryChange: (query: string) => void; // ⬅️ NEW: Handler for input changes
 }
 
 export default function SearchBar({
   placeholder = "Search destination...",
-  onSearch,
   className = "",
+  query, // ⬅️ Use the controlled prop
+  onQueryChange, // ⬅️ Use the new handler
 }: SearchBarProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  
+  // 🛑 REMOVED: const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    onSearch?.(searchQuery);
-  };
+  // 🛑 REMOVED: handleSearch function and <form> element
 
   return (
-    <form onSubmit={handleSearch} className={`relative ${className}`}>
+    // 🛑 Removed <form> element and onSubmit, relying on the parent button
+    <div className={`relative ${className}`}> 
       <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <svg
@@ -39,12 +41,12 @@ export default function SearchBar({
         </div>
         <input
           type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          value={query} // ⬅️ Use the controlled 'query' prop
+          onChange={(e) => onQueryChange(e.target.value)} // ⬅️ Call the new handler
           className="h-12 block w-full pl-10 pr-3 py-3 rounded-md bg-[#F3F4F6] text-gray-800 placeholder-gray-800 focus:outline-none"
           placeholder={placeholder}
         />
       </div>
-    </form>
+    </div>
   );
-} 
+}

@@ -62,7 +62,7 @@ function ItineraryHotel({ name, star, photos, video, facilities, map }: itinerar
       title: "Facilities",
       content: (
         <>
-          <p>{facilities}</p>
+          <p>{parse(facilities)}</p>
         </>
       ),
     },

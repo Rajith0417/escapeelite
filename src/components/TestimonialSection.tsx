@@ -39,12 +39,13 @@ export default function TestimonialSection() {
           <Swiper
             slidesPerView={1}
             spaceBetween={30}
-            loop={true}
+            loop={false}
             loopPreventsSliding={false} // ✅ allow continuous autoplay even with fade
             effect="fade"
             fadeEffect={{ crossFade: true }} // ✅ smoother transitions
+            onAutoplay={() => console.log("autoplay triggered")}
             autoplay={{
-              delay: 1000,
+              delay: 2000,
               disableOnInteraction: false,
             }}
             pagination={{ clickable: true }}
